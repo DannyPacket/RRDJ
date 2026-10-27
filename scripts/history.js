@@ -3,6 +3,7 @@
 // final places and champion but no games, since their scores aren't points.
 // Usage: node history.js <tab.csv> <reports.json>
 //   tab.csv: curl -sL "https://docs.google.com/spreadsheets/d/<SHEET_ID>/export?format=csv&gid=771004"
+// Also catRecords: { season: { mgr: [W, L, T] } } for categories seasons (no games are kept for those).
 // Writes reports.json.history = { games: [[season, week, a, aPts, b, bPts]], finals: { season: { mgr: place } }, champions: { season: mgr },
 //   odd: { season: { week: "long" | "short" } }, regular: { season: { mgr: place after the last regular-season week } } }
 // "odd" weeks are periods whose average score is 30% above or below that season's median week (multi-week breaks,
@@ -20,10 +21,15 @@ const rows = fs.readFileSync(csvFile, 'utf8').split(/\r?\n/).filter(Boolean).map
   out.push(cur); return out;
 }).slice(1);
 const num = s => parseFloat(String(s).replace(/,/g, ''));
-const games = [], seen = new Set(), finals = {}, lastWk = {}, regular = {};
-for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
+const games = [], seen = new Set(), finals = {}, lastWk = {}, regular = {}, catRecords = {};
+for (const [season, team, week, opp, place, , pf, pa, , cw, cl, ct, , , , type, scoring] of rows) {
   const wk = Number(week);
-  if (wk === 100) { (finals[season] = finals[season] || {})[team] = Number(place); continue; }
+  if (wk === 100) {
+    (finals[season] = finals[season] || {})[team] = Number(place);
+    // categories seasons: keep the season W-L-T for display (finishes table), never for points stats
+    if (scoring === 'Categories') (catRecords[season] = catRecords[season] || {})[team] = [Number(cw), Number(cl), Number(ct)];
+    continue;
+  }
   if ((type && type !== 'Regular') || scoring === 'Categories') continue;
   if (!opp || pf === '' || pa === '') continue;
   if (wk > (lastWk[season] || 0)) { lastWk[season] = wk; regular[season] = {}; }
@@ -44,6 +50,6 @@ for (const season of new Set(games.map(g => g[0]))) {
   for (const [w, m] of means) if (m > med * 1.3 || m < med * 0.7) (odd[season] = odd[season] || {})[w] = m > med ? "long" : "short";
 }
 const r = JSON.parse(fs.readFileSync(reportsFile, 'utf8'));
-r.history = { games, finals, champions, odd, regular };
+r.history = { games, finals, champions, odd, regular, catRecords };
 fs.writeFileSync(reportsFile, JSON.stringify(r, null, 1));
 console.log('games', games.length, '| finals', Object.keys(finals).join(', '), '| champions', JSON.stringify(champions), '| odd weeks', JSON.stringify(odd));

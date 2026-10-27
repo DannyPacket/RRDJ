@@ -222,6 +222,11 @@ ul.plain.moves { gap: 0; }
 .champs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .champ { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line); border-top: 4px solid var(--red); background: var(--board); }
 .champ.live { border-top-color: var(--blue); }
+.champ.cancelled { border-top-color: var(--muted); background: repeating-linear-gradient(135deg, var(--chip) 0 10px, var(--board) 10px 20px); }
+.champ.cancelled .champ-name { color: var(--muted); }
+.cancel-note { font-weight: 600; color: var(--ink); }
+.champ-dl.ghost dt { color: var(--muted); opacity: .6; }
+.champ-dl.ghost .bar { display: inline-block; width: 64px; height: 10px; border-radius: 5px; background: var(--line); filter: blur(1px); vertical-align: middle; }
 .champ .pos, .recd .pos { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .champ-name { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.1; }
 .champ-name .mgr { font-weight: 800; }
@@ -525,7 +530,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
   }
 
   function renderHistory(view) {
-    const H = DATA.history || {}, G = H.games || [], finals = H.finals || {}, champs = H.champions || {}, odd = H.odd || {};
+    const H = DATA.history || {}, G = H.games || [], finals = H.finals || {}, champs = H.champions || {}, odd = H.odd || {}, cat = H.catRecords || {};
     const latest = DATA.seasons[DATA.seasons.length - 1];
     const logos = latest.logos || {};
     const isOdd = g => !!(odd[g[0]] && odd[g[0]][g[1]]);
@@ -581,9 +586,17 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
     // 1. Champions
     const lastWeek = [...latest.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
-    const champCards = done.slice().reverse().map(y => {
+    const cancelled = y => h("div", { class: "champ cancelled", "aria-label": y + " season cancelled" },
+      h("span", { class: "pos" }, y),
+      h("span", { class: "champ-name" }, "No champion"),
+      h("span", { class: "small cancel-note" }, y === "2019-20" ? "Season cancelled due to the COVID-19 pandemic" : "Season cancelled"),
+      h("dl", { class: "champ-dl ghost", "aria-hidden": "true" },
+        ["Runner-up", "Third", "Best record", "Last place"].flatMap(t => [h("dt", null, t), h("dd", null, h("span", { class: "bar" }))])));
+    const champCards = seasons.filter(y => finals[y] || !live(y)).reverse().map(y => {
+      if (!finals[y]) return cancelled(y);
       const f = finals[y], byPlace = Object.entries(f).sort((a, b) => a[1] - b[1]);
-      const reg = Object.values(S[y] || {}).sort((a, b) => pct(b) - pct(a) || b.pf - a.pf)[0];
+      const reg = Object.values(S[y] || {}).sort((a, b) => pct(b) - pct(a) || b.pf - a.pf)[0]
+        || Object.entries(cat[y] || {}).map(([m, r]) => ({ m, w: r[0], l: r[1], t: r[2], gp: r[0] + r[1] + r[2], pf: 0 })).sort((a, b) => pct(b) - pct(a))[0];
       return h("div", { class: "champ" },
         h("span", { class: "pos" }, y),
         h("span", { class: "champ-name" }, who(champs[y] || byPlace[0][0])),
@@ -644,6 +657,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     // 3. Finishes by season
     const curStand = lastWeek && lastWeek.standings ? Object.fromEntries(lastWeek.standings.map(r => [r.mgr, r.rank])) : {};
     const regPlace0 = H.regular || {};
+    const recOf = (y, m) => (S[y] && S[y][m]) || (cat[y] && cat[y][m] && { w: cat[y][m][0], l: cat[y][m][1], t: cat[y][m][2] }) || null;
     const placeOf = (y, m) => finals[y] ? finals[y][m] : live(y) ? curStand[m] : (regPlace0[y] || {})[m];
     const finishTable = h("div", { class: "tablewrap" });
     const drawFinishes = () => {
@@ -653,9 +667,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       const head = (key, label, r) => h("th", { class: r ? "r" : null, "aria-sort": k === key ? (fSort.dir < 0 ? "descending" : "ascending") : null },
         h("button", { type: "button", class: "sort", onclick: () => { fSort = { key, dir: k === key ? -fSort.dir : 1 }; drawFinishes(); } }, label, k === key ? (fSort.dir < 0 ? " ▾" : " ▴") : ""));
       finishTable.replaceChildren(h("table", { class: "finishes" },
-        h("thead", null, h("tr", null, head("m", "Manager", 0), seasons.map(y => head(y, y.slice(2) + (live(y) ? "*" : finals[y] ? "" : "†"), 1)))),
+        h("thead", null, h("tr", null, head("m", "Manager", 0), seasons.map(y => head(y, y.slice(2) + (live(y) ? "*" : cat[y] ? "‡" : finals[y] ? "" : "†"), 1)))),
         h("tbody", null, rows.map(m => h("tr", null, h("td", null, who(m, true)), seasons.map(y => {
-          const p = placeOf(y, m), r = S[y] && S[y][m];
+          const p = placeOf(y, m), r = recOf(y, m);
           return h("td", { class: "r" }, p ? h("span", { class: "place p" + Math.min(p, 4) + (finals[y] ? "" : " now") }, ord(p)) : "–",
             r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "")) : null);
         }))))));
@@ -897,8 +911,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       h("div", { class: "picker" }, h("label", { for: "manager-view" }, "Manager"), mgrSel), mgrBody, foot);
     $("content").replaceChildren(
       sec("Champions", h("div", { class: "champs" }, champCards)),
-      sec("All-time standings", panel(standWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season games. Click a column to sort. High scores = weeks with the league's top score. Titles, 2nd and 3rd count final places including playoffs."))),
-      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place including playoffs, with the regular-season record under it. Click a season to see it in finishing order. * season in progress: current place. † no playoffs that year: regular-season place."))),
+      sec("All-time standings", panel(standWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season games. Click a column to sort. High scores = weeks with the league's top score. Titles, 2nd and 3rd count final places including playoffs. 2014-15 was a categories season, so it isn't counted in W-L-T, Win %, PF, PA, Net, Avg or High scores; its title, 2nd and 3rd places are."))),
+      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place including playoffs, with the regular-season record under it. Click a season to see it in finishing order. * season in progress: current place. † no playoffs that year: regular-season place. ‡ categories season: the record is matchups won and lost on categories."))),
       sec("Record book", h("div", { class: "recs" }, records),
         h("div", { class: "muted small" }, "Single-week score records leave out multi-week periods and short weeks" + (oddList.length ? ": " + oddList.join(", ") : "") + ". Season records count completed seasons only.")),
       sec("Head to head", panel(grid, detail), h("div", { class: "muted small" }, "Each square is the row manager's record against the column manager.")),
