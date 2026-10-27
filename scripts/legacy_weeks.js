@@ -42,16 +42,111 @@ if (teamsFile) for (const line of fs.readFileSync(teamsFile, 'utf8').split(/\r?\
   if (c[0] && c[1]) (teamNames[c[0]] = teamNames[c[0]] || {})[c[1]] = c[2];
 }
 
+// Week dates (week end = the Monday Yahoo applies stat corrections, minus a day), from week_dates.json next to this file
+const datesFile = require('path').join(__dirname, 'week_dates.json');
+const weekDates = fs.existsSync(datesFile) ? JSON.parse(fs.readFileSync(datesFile, 'utf8')) : {};
+const allFinals = {};
 const bySeason = {};
 for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
+  if (Number(week) === 100) (allFinals[season] = allFinals[season] || {})[team] = Number(place);
   if (fantrax.has(season) || scoring === 'Categories') continue;
-  if (type && type !== 'Regular' && type !== 'Final') continue;
-  const S = bySeason[season] = bySeason[season] || { rank: {}, games: {}, finals: {} };
+  const S = bySeason[season] = bySeason[season] || { rank: {}, games: {}, finals: {}, post: {} };
   const wk = Number(week);
+  if (type === 'Playoffs' || type === 'Consolation') {
+    if (opp && pf !== '' && pa !== '') (S.post[wk] = S.post[wk] || {})[team] = { opp, p: num(pf), q: num(pa), type };
+    continue;
+  }
+  if (type && type !== 'Regular' && type !== 'Final') continue;
   if (wk === 100) { S.finals[team] = Number(place); continue; }
   if (!opp || pf === '' || pa === '') continue;
   (S.rank[wk] = S.rank[wk] || {})[team] = Number(place);
   (S.games[wk] = S.games[wk] || {})[team] = { opp, p: num(pf), q: num(pa) };
+}
+
+const seasonIds = [...new Set([...Object.keys(teamNames), ...Object.keys(allFinals), ...Object.keys(bySeason)])].sort();
+const champOf = y => { const f = allFinals[y] || {}; return Object.keys(f).find(m => f[m] === 1) || null; };
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const md = iso => { const [, m, d] = iso.split('-').map(Number); return MON[m - 1] + ' ' + d; };
+const covers = (dw, mmdd) => { if (!dw) return false; const [a, b] = dw; const y = a.slice(0, 4), y2 = b.slice(0, 4); return [y, y2].some(Y => a <= Y + '-' + mmdd && Y + '-' + mmdd <= b); };
+const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
+// What the February break was each year (any other long winter week is the All-Star break)
+const FEB_BREAK = { '2013-14': 'Sochi Olympic', '2021-22': 'February (All-Star weekend plus the Olympic window the NHL ended up skipping)', '2024-25': '4 Nations Face-Off', '2025-26': 'Milan-Cortina Olympic' };
+const tagOf = (a, b) => {
+  const k = rel(a, b);
+  return k === 'brother vs. brother' ? ' (brother vs. brother)' : k === 'husband vs. wife' ? ' (and it\'s husband vs. wife)' : k === 'in-law' ? ' (in-law edition)'
+    : k === 'zac' ? ' (Zac vs. one of the brothers who supposedly run his account)' : '';
+};
+const recStr = x => x.w + '-' + x.l + (x.t ? '-' + x.t : '');
+
+function welcome(id, mgrs) {
+  const i = seasonIds.indexOf(id), prev = seasonIds[i - 1];
+  const prevM = prev ? Object.keys(teamNames[prev] || {}) : [];
+  const ins = prev ? mgrs.filter(m => !prevM.includes(m)) : [], outs = prev ? prevM.filter(m => !mgrs.includes(m)) : [];
+  const parts = [`Welcome to the ${id} season of Rene Rancourt's Day Job!`];
+  if (!prev) parts.push('Twelve managers, one trophy, and a long winter ahead.');
+  else if (prev === '2019-20') parts.push('Nobody lifted the trophy after the pandemic cut 2019-20 short, so the title is wide open.');
+  else if (champOf(prev)) parts.push(`${champOf(prev)} comes in as the defending champion.`);
+  if (id === '2020-21') parts.push('Hockey is back in January with a 56-game NHL schedule, so this one is a sprint.');
+  if (prev === '2014-15') parts.push('After a year of categories scoring, the league is back to points and back to 12 teams.');
+  if (ins.length === 1 && outs.length === 1) {
+    const nm = (teamNames[id] || {})[ins[0]];
+    parts.push(`Front-office news: ${ins[0]} takes over the franchise ${outs[0]} ran${nm ? ' and relocates it as ' + nm : ''}. Welcome to your rookie season.`);
+  } else {
+    const back = ins.filter(m => seasonIds.slice(0, i).some(y => (teamNames[y] || {})[m])), rookies = ins.filter(m => !back.includes(m));
+    if (back.length) parts.push(`${back.join(' and ')} ${back.length > 1 ? 'are' : 'is'} back after a year away.`);
+    if (rookies.length) parts.push(`${rookies.join(' and ')} ${rookies.length > 1 ? 'join for their rookie seasons' : 'joins for a rookie season'}.`);
+    if (outs.length && !back.length && !rookies.length) parts.push(`${outs.join(' and ')} ${outs.length > 1 ? "aren't" : "isn't"} back this year.`);
+  }
+  return parts.join(' ');
+}
+function seedsOf(standings) { return Object.fromEntries(standings.map(x => [x.mgr, x.rank])); }
+function bracketOf(S) {
+  const pw = Object.keys(S.post).map(Number).sort((a, b) => a - b);
+  const teams = new Set(); pw.forEach(w => Object.entries(S.post[w]).forEach(([m, g]) => { if (g.type === 'Playoffs') teams.add(m); }));
+  const firstPlaying = new Set(Object.entries(S.post[pw[0]] || {}).filter(([, g]) => g.type === 'Playoffs').map(([m]) => m));
+  return { pw, teams: [...teams], byes: [...teams].filter(m => !firstPlaying.has(m)) };
+}
+function playoffPicture(S, standings) {
+  const { teams, byes } = bracketOf(S), seed = seedsOf(standings);
+  const field = teams.slice().sort((a, b) => seed[a] - seed[b]);
+  const miss = standings.find(x => x.rank === field.length + 1);
+  const leader = standings[0];
+  let t = `That wraps the regular season, with ${leader.mgr} on top at ${recStr(leader)}. The ${words[field.length] || field.length}-team playoff field is set: ${field.map(m => m + ' (' + seed[m] + ')').join(', ')}.`;
+  if (byes.length) t += ` ${byes.join(' and ')} earn${byes.length > 1 ? '' : 's'} a first-round bye.`;
+  if (miss) t += ` ${miss.mgr} just misses out at ${recStr(miss)}.`;
+  return t;
+}
+function cancelledFinish(id, leader) {
+  if (id === '2019-20') return `Nobody knew it yet, but this was the last week of the season. The NHL paused on March 12, 2020, and the league never crowned a champion. ${leader.mgr} finishes on top at ${recStr(leader)}.`;
+  return `That wraps the regular season, with ${leader.mgr} on top at ${recStr(leader)}.`;
+}
+function championStory(id, S, regStandings, fin) {
+  const seed = seedsOf(regStandings), { pw } = bracketOf(S);
+  const champ = fin[0], second = fin[1], third = fin[2], reg1 = regStandings[0];
+  const rounds = ['quarterfinals', 'semifinals', 'final'];
+  const roundOf = w => rounds[rounds.length - (pw.length - pw.indexOf(w))] || 'playoffs';
+  const games = m => pw.map(w => ({ w, g: (S.post[w] || {})[m] })).filter(x => x.g && x.g.type === 'Playoffs');
+  const out = [];
+  const path = games(champ);
+  const finalG = path[path.length - 1];
+  const steps = path.map(x => 'beat ' + x.g.opp + ' (' + seed[x.g.opp] + ') in the ' + roundOf(x.w) + (x === finalG ? ', ' + f1(x.g.p) + ' to ' + f1(x.g.q) : ''));
+  const lead = seed[champ] >= 4 ? `From the No. ${seed[champ]} seed, ${champ} wins the ${id} championship!` : `${champ} wins the ${id} championship as the No. ${seed[champ]} seed!`;
+  out.push(lead + (path.length ? (path.length < pw.length ? ' After a first-round bye, ' + champ : ' ' + champ) + ' ' + (steps.length > 1 ? steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1] : steps[0]) + '.' : ''));
+  const third3 = games(third).find(x => roundOf(x.w) === 'final' && x.g.p > x.g.q);
+  out.push(`${second} settles for 2nd` + (third3 ? `, and ${third} takes 3rd by beating ${third3.g.opp} ${f1(third3.g.p)} to ${f1(third3.g.q)}.` : `, and ${third} finishes 3rd.`));
+  // biggest seed upset of the bracket
+  const ups = []; pw.forEach(w => Object.entries(S.post[w] || {}).forEach(([m, g]) => { if (g.type === 'Playoffs' && g.p > g.q && seed[m] - seed[g.opp] >= 3) ups.push({ w, m, g, gap: seed[m] - seed[g.opp] }); }));
+  const up = ups.sort((a, b) => b.gap - a.gap)[0];
+  const extra = [];
+  if (up && up.m !== champ) extra.push(`Upset of the playoffs: No. ${seed[up.m]} ${up.m} knocks off No. ${seed[up.g.opp]} ${up.g.opp} in the ${roundOf(up.w)}.`);
+  if (reg1.mgr === champ) extra.push(`${champ} did it all, winning the regular season at ${recStr(reg1)} too.`);
+  else {
+    const exit = games(reg1.mgr).find(x => x.g.p < x.g.q);
+    extra.push(`${reg1.mgr} won the regular season at ${recStr(reg1)}` + (exit ? ` but fell to ${exit.g.opp} in the ${roundOf(exit.w)}.` : ` and finishes ${ord(S.finals[reg1.mgr])}.`));
+  }
+  out.push(extra.join(' '));
+  out.push(`At the other end, ${fin[fin.length - 1]} finishes ${ord(fin.length)}. See you next season.`);
+  return out;
 }
 
 const seasonsOut = [];
@@ -93,29 +188,34 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (nextG) { const s2 = new Set(); for (const m of mgrs) if (!s2.has(m)) { s2.add(m); s2.add(nextG[m].opp); next.push([m, nextG[m].opp]); } }
 
     // Recap, written from the numbers only
-    const recap = [], kind = odd[id] && odd[id][wk];
+    const recap = [], kind = odd[id] && odd[id][wk], dw = (weekDates[id] || {})[wk];
+    const days = dw ? Math.round((Date.parse(dw[1]) - Date.parse(dw[0])) / 86400000) + 1 : 7;
+    const regWeeks = weeksNo[weeksNo.length - 1];
+    if (wk === 1) recap.push(welcome(id, mgrs));
+    let context = '';
+    if (dw && days > 8 && wk > 1 && covers(dw, '12-25')) context = `A ${words[Math.round(days / 7)] || Math.round(days / 7)}-week matchup over the holidays (${md(dw[0])} to ${md(dw[1])}). `;
+    else if (dw && days > 8 && wk > 1) {
+      const feb = dw[0].slice(5, 7) === '02' || dw[1].slice(5, 7) === '02';
+      const label = feb && FEB_BREAK[id] ? FEB_BREAK[id] : 'All-Star';
+      context = `A ${words[Math.round(days / 7)] || Math.round(days / 7)}-week matchup (${md(dw[0])} to ${md(dw[1])}) to cover the ${label} break${kind === 'long' ? ', so the numbers run big' : ''}. `;
+    } else if (covers(dw, '12-25')) context = (days < 7 || kind === 'short') ? 'Merry Christmas from the RRDJ desk. The NHL\'s holiday break makes this a short week, so the scores run low. ' : 'Christmas week around the league, and somebody found a little something extra under the tree. ';
+    else if (covers(dw, '01-01')) context = `Happy New Year! ${dw[0].slice(0, 4)} goes out and ${dw[1].slice(0, 4)} comes in. `;
+    else if (kind === 'long' && wk > 1) context = 'A multi-week period this time, so the scores run high. ';
+    else if (kind === 'short') context = 'A short week, so the scores run low. ';
     const hsG = G[hsMgr];
-    recap.push((kind === 'long' ? 'A multi-week period this time, so the scores run high. ' : kind === 'short' ? 'A short week, so the scores run low. ' : '') +
+    recap.push(context +
       `${hsMgr} posts the week's high score with ${f1(top)}` + (hsG.p > hsG.q ? ` and beats ${hsG.opp} by ${f1(hsG.p - hsG.q)}.` : hsG.p < hsG.q ? ` and somehow still loses to ${hsG.opp}, who put up ${f1(hsG.q)}.` : `, and still only ties ${hsG.opp}.`));
     const decided = matchups.filter(x => x.ap !== x.bp).map(x => ({ w: x.ap > x.bp ? x.a : x.b, l: x.ap > x.bp ? x.b : x.a, wp: Math.max(x.ap, x.bp), lp: Math.min(x.ap, x.bp), d: Math.abs(x.ap - x.bp) }));
     const close = decided.slice().sort((a, b) => a.d - b.d)[0], blow = decided.slice().sort((a, b) => b.d - a.d)[0];
     const p2 = [];
-    if (close) p2.push((close.d < 5 ? 'Photo finish: ' : 'Closest game: ') + `${close.w} edges ${close.l} ${f1(close.wp)} to ${f1(close.lp)}.`);
-    if (blow && blow !== close) p2.push(`Blowout of the week: ${blow.w} over ${blow.l} by ${f1(blow.d)}.`);
+    if (close) p2.push((close.d < 5 ? 'Photo finish' : 'Closest game') + tagOf(close.w, close.l) + `: ${close.w} edges ${close.l} ${f1(close.wp)} to ${f1(close.lp)}.`);
+    if (blow && blow !== close) p2.push('Blowout of the week' + tagOf(blow.w, blow.l) + `: ${blow.w} over ${blow.l} by ${f1(blow.d)}.`);
     if (wk > 1) {
       const up = decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 5).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l]))[0];
       if (up) p2.push(`Upset alert: ${up.w}, ${ord(prev[up.w])} coming in, knocks off ${up.l} (${ord(prev[up.l])}).`);
     }
     recap.push(p2.join(' '));
     const p3 = [];
-    const fam = decided.map(x => ({ x, k: rel(x.w, x.l) })).find(y => y.k);
-    if (fam) {
-      const { x, k } = fam;
-      p3.push(k === 'brother vs. brother' ? `Brother vs. brother goes to ${x.w}, ${f1(x.wp)} to ${f1(x.lp)}.`
-        : k === 'husband vs. wife' ? `Household bragging rights go to ${x.w} this week, ${f1(x.wp)} to ${f1(x.lp)}.`
-          : k === 'in-law' ? `In-law showdown: ${x.w} gets the better of ${x.l}, ${f1(x.wp)} to ${f1(x.lp)}.`
-            : `${x.w} beats ${x.l} ${f1(x.wp)} to ${f1(x.lp)}. Somebody check who set Zac's lineup.`);
-    }
     const hot = mgrs.map(m => ({ m, s: streakOf(m) })).filter(x => x.s.k === 'W' && x.s.n >= 3).sort((a, b) => b.s.n - a.s.n)[0];
     const cold = mgrs.map(m => ({ m, s: streakOf(m) })).filter(x => x.s.k === 'L' && x.s.n >= 3).sort((a, b) => b.s.n - a.s.n)[0];
     const snap = mgrs.map(m => ({ m, s: prevStreak(m), now: streakOf(m) })).filter(x => x.s.n >= 4 && x.now.n === 1 && x.s.k !== x.now.k && x.s.k !== 'T').sort((a, b) => b.s.n - a.s.n)[0];
@@ -125,12 +225,14 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (p3.length) recap.push(p3.join(' '));
     const leader = standings[0], bottom = standings[standings.length - 1].mgr;
     const lastWk = wk === weeksNo[weeksNo.length - 1];
-    recap.push(lastWk ? `That wraps the regular season, with ${leader.mgr} on top at ${leader.w}-${leader.l}${leader.t ? '-' + leader.t : ''}.`
+    const half = wk === Math.ceil(regWeeks / 2);
+    recap.push(lastWk ? (Object.keys(S.post).length ? playoffPicture(S, standings) : cancelledFinish(id, leader))
+      : half ? `Halfway home: ${leader.mgr} leads at ${recStr(leader)}, ${standings[1].mgr} is right behind at ${recStr(standings[1])}, and ${bottom} has work to do in last place.`
       : leader.mgr !== prevLeader && wk > 1 ? `${leader.mgr} takes over 1st at ${leader.w}-${leader.l}${leader.t ? '-' + leader.t : ''}.`
         : `${leader.mgr} leads the way at ${leader.w}-${leader.l}${leader.t ? '-' + leader.t : ''}.` + (bottom !== prevLast && wk > 1 ? ` ${bottom} drops to 12th.` : ''));
     prevLeader = leader.mgr; prevLast = bottom;
 
-    weeks.push({ week: wk, recap: recap.filter(Boolean), matchups, highScore: { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally, next });
+    weeks.push({ week: wk, start: dw ? dw[0] : undefined, end: dw ? dw[1] : undefined, days: dw ? days : undefined, recap: recap.filter(Boolean), matchups, highScore: { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally, next });
   }
 
   // Final standings (week 100)
@@ -139,11 +241,7 @@ for (const [id, S] of Object.entries(bySeason)) {
     const fin = mgrs.slice().sort((a, b) => S.finals[a] - S.finals[b]);
     const regRank = Object.fromEntries(last.standings.map(x => [x.mgr, x.rank]));
     const standings = fin.map(m => Object.assign({}, last.standings.find(x => x.mgr === m), { rank: S.finals[m], prev: regRank[m] }));
-    const top3 = fin.slice(0, 3), reg1 = last.standings[0];
-    const recap = [`${top3[0]} wins the ${id} championship. ${top3[1]} finishes 2nd and ${top3[2]} 3rd.`,
-      reg1.mgr === top3[0] ? `${reg1.mgr} did it all, winning the regular season at ${reg1.w}-${reg1.l} too.`
-        : `${reg1.mgr} won the regular season at ${reg1.w}-${reg1.l} but finishes ${ord(S.finals[reg1.mgr])} once the playoffs are done.`,
-      `At the other end, ${fin[fin.length - 1]} finishes 12th.`];
+    const recap = championStory(id, S, last.standings, fin);
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [] });
   }
   seasonsOut.push({ id, label: id, source: 'sheet', teams: teamNames[id] || {}, logos, schedule, weeks });

@@ -18,7 +18,7 @@ for (const f of fs.readdirSync(path.join(src, 'logos'))) fs.copyFileSync(path.jo
 
 const scripts = path.join(repo, 'scripts');
 fs.mkdirSync(scripts, { recursive: true });
-for (const f of ['fantrax_pull.js', 'nhl_lock.js', 'history.js', 'legacy_weeks.js', 'sync_repo.js']) {
+for (const f of ['fantrax_pull.js', 'nhl_lock.js', 'history.js', 'legacy_weeks.js', 'week_dates.json', 'sync_repo.js']) {
   const text = fs.readFileSync(path.join(__dirname, f), 'utf8').replace(/spreadsheets\/d\/[\w-]+/g, 'spreadsheets/d/<SHEET_ID>');
   fs.writeFileSync(path.join(scripts, f), text);
 }

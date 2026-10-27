@@ -668,10 +668,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2013-09-30",
+     "end": "2013-10-13",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Danny posts the week's high score with 275.0 and beats Tara by 48.0.",
-      "Closest game: Ronnie edges Nick 155.2 to 148.0. Blowout of the week: Will over Tim by 63.6.",
-      "Brother vs. brother goes to Will, 214.1 to 150.5.",
+      "Welcome to the 2013-14 season of Rene Rancourt's Day Job! Twelve managers, one trophy, and a long winter ahead.",
+      "Danny posts the week's high score with 275.0 and beats Tara by 48.0.",
+      "Closest game: Ronnie edges Nick 155.2 to 148.0. Blowout of the week (brother vs. brother): Will over Tim by 63.6.",
       "Danny leads the way at 1-0."
      ],
      "matchups": [
@@ -893,10 +896,12 @@
     },
     {
      "week": 2,
+     "start": "2013-10-14",
+     "end": "2013-10-20",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 161.4 and beats Vin by 33.7.",
-      "Closest game: Tim edges Tom 107.1 to 98.5. Blowout of the week: Jefe over Tara by 48.8.",
-      "Brother vs. brother goes to Tim, 107.1 to 98.5.",
+      "Closest game (brother vs. brother): Tim edges Tom 107.1 to 98.5. Blowout of the week: Jefe over Tara by 48.8.",
       "Danny leads the way at 2-0."
      ],
      "matchups": [
@@ -1124,10 +1129,13 @@
     },
     {
      "week": 3,
+     "start": "2013-10-21",
+     "end": "2013-10-27",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 162.5 and beats Tim by 39.4.",
-      "Photo finish: Nick edges Tom 107.5 to 104.3. Blowout of the week: Danny over Tim by 39.4.",
-      "Brother vs. brother goes to Danny, 162.5 to 123.1. Danny is rolling with 3 straight wins. Joe has dropped 3 in a row.",
+      "Photo finish: Nick edges Tom 107.5 to 104.3. Blowout of the week (brother vs. brother): Danny over Tim by 39.4.",
+      "Danny is rolling with 3 straight wins. Joe has dropped 3 in a row.",
       "Danny leads the way at 3-0. Joe drops to 12th."
      ],
      "matchups": [
@@ -1380,6 +1388,9 @@
     },
     {
      "week": 4,
+     "start": "2013-10-28",
+     "end": "2013-11-03",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 149.2 and beats Nick by 50.9.",
       "Photo finish: Tim edges Patrick 104.6 to 102.8. Blowout of the week: Danny over Nick by 50.9.",
@@ -1635,6 +1646,9 @@
     },
     {
      "week": 5,
+     "start": "2013-11-04",
+     "end": "2013-11-10",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 152.5 and beats Tom by 26.0.",
       "Photo finish: Jefe edges Will 122.0 to 120.8. Blowout of the week: Danny over Joe by 57.2.",
@@ -1910,6 +1924,9 @@
     },
     {
      "week": 6,
+     "start": "2013-11-11",
+     "end": "2013-11-17",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 150.4 and beats Vin by 5.5.",
       "Photo finish: Nick edges Tim 99.3 to 94.7. Blowout of the week: Tara over Ronnie by 30.9. Upset alert: Tom, 9th coming in, knocks off Jefe (4th).",
@@ -2177,6 +2194,9 @@
     },
     {
      "week": 7,
+     "start": "2013-11-18",
+     "end": "2013-11-24",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 144.4 and beats Tara by 10.3.",
       "Photo finish: Danny edges Jefe 111.3 to 109.4. Blowout of the week: Tim over Joe by 16.5. Upset alert: Ronnie, 10th coming in, knocks off Will (5th).",
@@ -2443,6 +2463,9 @@
     },
     {
      "week": 8,
+     "start": "2013-11-25",
+     "end": "2013-12-01",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 159.5 and beats Steve by 78.8.",
       "Closest game: Nick edges Joe 118.1 to 104.1. Blowout of the week: Danny over Steve by 78.8.",
@@ -2717,10 +2740,13 @@
     },
     {
      "week": 9,
+     "start": "2013-12-02",
+     "end": "2013-12-08",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 139.9 and beats Ronnie by 45.7.",
-      "Photo finish: Will edges Tom 110.6 to 110.1. Blowout of the week: Danny over Ronnie by 45.7. Upset alert: Patrick, 7th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Vin, 139.8 to 107.9. Danny is rolling with 9 straight wins. Joe snaps a 8-game skid. Tara has dropped 3 in a row.",
+      "Photo finish (brother vs. brother): Will edges Tom 110.6 to 110.1. Blowout of the week: Danny over Ronnie by 45.7. Upset alert: Patrick, 7th coming in, knocks off Steve (2nd).",
+      "Danny is rolling with 9 straight wins. Joe snaps a 8-game skid. Tara has dropped 3 in a row.",
       "Danny leads the way at 9-0."
      ],
      "matchups": [
@@ -2993,10 +3019,13 @@
     },
     {
      "week": 10,
+     "start": "2013-12-09",
+     "end": "2013-12-15",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 158.0 and beats Will by 23.5.",
       "Photo finish: Nick edges Jefe 140.9 to 137.1. Blowout of the week: Tara over Tom by 29.7.",
-      "Brother vs. brother goes to Danny, 158.0 to 134.5. Danny is rolling with 10 straight wins. Tom has dropped 4 in a row.",
+      "Danny is rolling with 10 straight wins. Tom has dropped 4 in a row.",
       "Danny leads the way at 10-0."
      ],
      "matchups": [
@@ -3262,11 +3291,14 @@
     },
     {
      "week": 11,
+     "start": "2013-12-16",
+     "end": "2013-12-22",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 176.3 and beats Nick by 41.7.",
-      "Closest game: Danny edges Tom 133.3 to 125.0. Blowout of the week: Jefe over Joe by 67.9. Upset alert: Tara, 10th coming in, knocks off Vin (2nd).",
-      "Brother vs. brother goes to Danny, 133.3 to 125.0. Danny is rolling with 11 straight wins. Tom has dropped 5 in a row.",
-      "Danny leads the way at 11-0."
+      "Closest game (brother vs. brother): Danny edges Tom 133.3 to 125.0. Blowout of the week: Jefe over Joe by 67.9. Upset alert: Tara, 10th coming in, knocks off Vin (2nd).",
+      "Danny is rolling with 11 straight wins. Tom has dropped 5 in a row.",
+      "Halfway home: Danny leads at 11-0, Steve is right behind at 8-3, and Joe has work to do in last place."
      ],
      "matchups": [
       {
@@ -3537,10 +3569,13 @@
     },
     {
      "week": 12,
+     "start": "2013-12-23",
+     "end": "2013-12-29",
+     "days": 7,
      "recap": [
-      "Nick posts the week's high score with 157.3 and beats Ronnie by 56.2.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Nick posts the week's high score with 157.3 and beats Ronnie by 56.2.",
       "Closest game: Vin edges Jefe 108.8 to 102.3. Blowout of the week: Nick over Ronnie by 56.2. Upset alert: Joe, 12th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Will, 122.1 to 114.7. Danny is rolling with 12 straight wins. Tom snaps a 5-game skid. Patrick has dropped 3 in a row.",
+      "Danny is rolling with 12 straight wins. Tom snaps a 5-game skid. Patrick has dropped 3 in a row.",
       "Danny leads the way at 12-0."
      ],
      "matchups": [
@@ -3813,10 +3848,13 @@
     },
     {
      "week": 13,
+     "start": "2013-12-30",
+     "end": "2014-01-05",
+     "days": 7,
      "recap": [
-      "Will posts the week's high score with 158.1 and beats Nick by 6.0.",
+      "Happy New Year! 2013 goes out and 2014 comes in. Will posts the week's high score with 158.1 and beats Nick by 6.0.",
       "Photo finish: Steve edges Vin 143.0 to 140.5. Blowout of the week: Ronnie over Joe by 82.3.",
-      "Brother vs. brother goes to Tim, 119.9 to 104.5. Danny is rolling with 13 straight wins. Patrick has dropped 4 in a row.",
+      "Danny is rolling with 13 straight wins. Patrick has dropped 4 in a row.",
       "Danny leads the way at 13-0."
      ],
      "matchups": [
@@ -4102,10 +4140,13 @@
     },
     {
      "week": 14,
+     "start": "2014-01-06",
+     "end": "2014-01-12",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 166.1 and beats Jefe by 57.9.",
       "Photo finish: Will edges Joe 113.6 to 111.4. Blowout of the week: Steve over Jefe by 57.9.",
-      "Brother vs. brother goes to Danny, 113.9 to 109.8. Danny is rolling with 14 straight wins. Patrick has dropped 5 in a row.",
+      "Danny is rolling with 14 straight wins. Patrick has dropped 5 in a row.",
       "Danny leads the way at 14-0."
      ],
      "matchups": [
@@ -4397,6 +4438,9 @@
     },
     {
      "week": 15,
+     "start": "2014-01-13",
+     "end": "2014-01-19",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 187.7 and beats Nick by 46.2.",
       "Closest game: Will edges Vin 135.8 to 117.7. Blowout of the week: Tim over Patrick by 53.2.",
@@ -4707,6 +4751,9 @@
     },
     {
      "week": 16,
+     "start": "2014-01-20",
+     "end": "2014-01-26",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 155.5 and beats Danny by 4.5.",
       "Photo finish: Tom edges Vin 94.4 to 91.4. Blowout of the week: Nick over Patrick by 47.5. Upset alert: Joe, 12th coming in, knocks off Danny (1st).",
@@ -5002,6 +5049,9 @@
     },
     {
      "week": 17,
+     "start": "2014-01-27",
+     "end": "2014-02-02",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 171.3 and beats Tom by 38.3.",
       "Photo finish: Ronnie edges Tara 145.9 to 145.6. Blowout of the week: Patrick over Joe by 53.9.",
@@ -5296,6 +5346,9 @@
     },
     {
      "week": 18,
+     "start": "2014-02-03",
+     "end": "2014-02-09",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 137.8 and beats Danny by 49.9.",
       "Photo finish: Nick edges Tara 119.9 to 119.8. Blowout of the week: Jefe over Danny by 49.9. Upset alert: Jefe, 6th coming in, knocks off Danny (1st).",
@@ -5591,8 +5644,11 @@
     },
     {
      "week": 19,
+     "start": "2014-02-10",
+     "end": "2014-03-02",
+     "days": 21,
      "recap": [
-      "Danny posts the week's high score with 127.1 and beats Steve by 46.6.",
+      "A three-week matchup (Feb 10 to Mar 2) to cover the Sochi Olympic break. Danny posts the week's high score with 127.1 and beats Steve by 46.6.",
       "Photo finish: Ronnie edges Tom 94.9 to 91.8. Blowout of the week: Danny over Steve by 46.6. Upset alert: Tara, 10th coming in, knocks off Will (3rd).",
       "Jefe is rolling with 4 straight wins. Joe has dropped 3 in a row.",
       "Danny leads the way at 17-2."
@@ -5902,10 +5958,13 @@
     },
     {
      "week": 20,
+     "start": "2014-03-03",
+     "end": "2014-03-09",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 186.9 and beats Vin by 77.7.",
       "Closest game: Steve edges Patrick 100.2 to 90.6. Blowout of the week: Jefe over Tim by 79.5. Upset alert: Ronnie, 8th coming in, knocks off Danny (1st).",
-      "Brother vs. brother goes to Nick, 186.9 to 109.2. Jefe is rolling with 5 straight wins. Joe has dropped 4 in a row.",
+      "Jefe is rolling with 5 straight wins. Joe has dropped 4 in a row.",
       "Danny leads the way at 17-3."
      ],
      "matchups": [
@@ -6228,11 +6287,14 @@
     },
     {
      "week": 21,
+     "start": "2014-03-10",
+     "end": "2014-03-16",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 180.2 and beats Will by 27.5.",
-      "Closest game: Danny edges Will 180.2 to 152.7. Blowout of the week: Tim over Steve by 43.3. Upset alert: Tim, 8th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Danny, 180.2 to 152.7. Jefe is rolling with 6 straight wins. Joe has dropped 5 in a row.",
-      "That wraps the regular season, with Danny on top at 18-3."
+      "Closest game (brother vs. brother): Danny edges Will 180.2 to 152.7. Blowout of the week: Tim over Steve by 43.3. Upset alert: Tim, 8th coming in, knocks off Steve (2nd).",
+      "Jefe is rolling with 6 straight wins. Joe has dropped 5 in a row.",
+      "That wraps the regular season, with Danny on top at 18-3. The six-team playoff field is set: Danny (1), Steve (2), Will (3), Jefe (4), Vin (5), Ronnie (6). Danny and Steve earn a first-round bye. Tim just misses out at 12-9."
      ],
      "matchups": [
       {
@@ -6531,9 +6593,10 @@
     {
      "week": 100,
      "recap": [
-      "Danny wins the 2013-14 championship. Will finishes 2nd and Jefe 3rd.",
+      "Danny wins the 2013-14 championship as the No. 1 seed! After a first-round bye, Danny beat Jefe (4) in the semifinals and beat Will (3) in the final, 126.1 to 125.6.",
+      "Will settles for 2nd, and Jefe takes 3rd by beating Steve 114.6 to 107.2.",
       "Danny did it all, winning the regular season at 18-3 too.",
-      "At the other end, Patrick finishes 12th."
+      "At the other end, Patrick finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -7458,10 +7521,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2015-10-05",
+     "end": "2015-10-18",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Joe posts the week's high score with 236.4 and beats Nick by 78.4.",
-      "Photo finish: Danny edges Tim 171.1 to 169.7. Blowout of the week: Joe over Nick by 78.4.",
-      "Brother vs. brother goes to Danny, 171.1 to 169.7.",
+      "Welcome to the 2015-16 season of Rene Rancourt's Day Job! Ronnie comes in as the defending champion. After a year of categories scoring, the league is back to points and back to 12 teams. Joe is back after a year away. Palagi joins for a rookie season.",
+      "Joe posts the week's high score with 236.4 and beats Nick by 78.4.",
+      "Photo finish (brother vs. brother): Danny edges Tim 171.1 to 169.7. Blowout of the week: Joe over Nick by 78.4.",
       "Joe leads the way at 1-0."
      ],
      "matchups": [
@@ -7683,10 +7749,12 @@
     },
     {
      "week": 2,
+     "start": "2015-10-19",
+     "end": "2015-10-25",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 134.8 and beats Jefe by 54.5.",
-      "Photo finish: Danny edges Tom 99.7 to 98.0. Blowout of the week: Steve over Jefe by 54.5.",
-      "Brother vs. brother goes to Danny, 99.7 to 98.0.",
+      "Photo finish (brother vs. brother): Danny edges Tom 99.7 to 98.0. Blowout of the week: Steve over Jefe by 54.5.",
       "Joe leads the way at 2-0. Will drops to 12th."
      ],
      "matchups": [
@@ -7914,6 +7982,9 @@
     },
     {
      "week": 3,
+     "start": "2015-10-26",
+     "end": "2015-11-01",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 135.3 and beats Tim by 47.3.",
       "Photo finish: Joe edges Will 98.4 to 95.4. Blowout of the week: Vin over Tim by 47.3. Upset alert: Tara, 11th coming in, knocks off Ronnie (3rd).",
@@ -8169,6 +8240,9 @@
     },
     {
      "week": 4,
+     "start": "2015-11-02",
+     "end": "2015-11-08",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 134.4 and beats Nick by 42.0.",
       "Photo finish: Will edges Tara 107.2 to 103.2. Blowout of the week: Tim over Ronnie by 53.3.",
@@ -8434,6 +8508,9 @@
     },
     {
      "week": 5,
+     "start": "2015-11-09",
+     "end": "2015-11-15",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 126.4 and beats Nick by 13.9.",
       "Closest game: Tara edges Tim 91.7 to 80.5. Blowout of the week: Danny over Joe by 37.6.",
@@ -8712,10 +8789,13 @@
     },
     {
      "week": 6,
+     "start": "2015-11-16",
+     "end": "2015-11-22",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 157.8 and beats Jefe by 10.7.",
-      "Photo finish: Danny edges Will 108.8 to 107.9. Blowout of the week: Nick over Vin by 25.5.",
-      "Brother vs. brother goes to Nick, 134.5 to 109.0. Steve is rolling with 6 straight wins. Tom snaps a 5-game skid. Joe has dropped 3 in a row.",
+      "Photo finish (brother vs. brother): Danny edges Will 108.8 to 107.9. Blowout of the week (brother vs. brother): Nick over Vin by 25.5.",
+      "Steve is rolling with 6 straight wins. Tom snaps a 5-game skid. Joe has dropped 3 in a row.",
       "Steve leads the way at 6-0. Will drops to 12th."
      ],
      "matchups": [
@@ -8996,6 +9076,9 @@
     },
     {
      "week": 7,
+     "start": "2015-11-23",
+     "end": "2015-11-29",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 147.7 and beats Will by 53.5.",
       "Photo finish: Tara edges Tom 96.3 to 94.9. Blowout of the week: Palagi over Will by 53.5.",
@@ -9281,6 +9364,9 @@
     },
     {
      "week": 8,
+     "start": "2015-11-30",
+     "end": "2015-12-06",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 127.8 and beats Tara by 18.3.",
       "Closest game: Steve edges Palagi 117.1 to 111.4. Blowout of the week: Joe over Ronnie by 29.1. Upset alert: Will, 12th coming in, knocks off Vin (7th).",
@@ -9558,6 +9644,9 @@
     },
     {
      "week": 9,
+     "start": "2015-12-07",
+     "end": "2015-12-13",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 152.4 and beats Tara by 66.7.",
       "Photo finish: Palagi edges Danny 88.3 to 84.9. Blowout of the week: Jefe over Tara by 66.7. Upset alert: Vin, 7th coming in, knocks off Steve (1st).",
@@ -9834,10 +9923,13 @@
     },
     {
      "week": 10,
+     "start": "2015-12-14",
+     "end": "2015-12-20",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 180.5 and beats Danny by 65.4.",
       "Closest game: Tara edges Palagi 150.1 to 143.2. Blowout of the week: Vin over Danny by 65.4. Upset alert: Tara, 10th coming in, knocks off Palagi (2nd).",
-      "Brother vs. brother goes to Will, 131.9 to 109.8. Tom is rolling with 3 straight wins. Nick has dropped 3 in a row.",
+      "Tom is rolling with 3 straight wins. Nick has dropped 3 in a row.",
       "Steve leads the way at 8-2. Tim drops to 12th."
      ],
      "matchups": [
@@ -10118,11 +10210,14 @@
     },
     {
      "week": 11,
+     "start": "2015-12-21",
+     "end": "2015-12-27",
+     "days": 7,
      "recap": [
-      "Ronnie posts the week's high score with 98.7 and beats Danny by 17.7.",
-      "Photo finish: Steve edges Tim 68.6 to 67.2. Blowout of the week: Will over Tom by 43.2. Upset alert: Vin, 7th coming in, knocks off Palagi (2nd).",
-      "Brother vs. brother goes to Will, 98.2 to 55.0. Jefe is rolling with 3 straight wins. Danny has dropped 3 in a row.",
-      "Steve leads the way at 9-2."
+      "Christmas week around the league, and somebody found a little something extra under the tree. Ronnie posts the week's high score with 98.7 and beats Danny by 17.7.",
+      "Photo finish: Steve edges Tim 68.6 to 67.2. Blowout of the week (brother vs. brother): Will over Tom by 43.2. Upset alert: Vin, 7th coming in, knocks off Palagi (2nd).",
+      "Jefe is rolling with 3 straight wins. Danny has dropped 3 in a row.",
+      "Halfway home: Steve leads at 9-2, Palagi is right behind at 7-4, and Tim has work to do in last place."
      ],
      "matchups": [
       {
@@ -10406,10 +10501,13 @@
     },
     {
      "week": 12,
+     "start": "2015-12-28",
+     "end": "2016-01-03",
+     "days": 7,
      "recap": [
-      "Joe posts the week's high score with 143.7 and beats Nick by 22.0.",
-      "Photo finish: Vin edges Tara 87.8 to 86.3. Blowout of the week: Danny over Tim by 43.9.",
-      "Brother vs. brother goes to Danny, 143.5 to 99.6. Jefe is rolling with 4 straight wins. Tim has dropped 4 in a row.",
+      "Happy New Year! 2015 goes out and 2016 comes in. Joe posts the week's high score with 143.7 and beats Nick by 22.0.",
+      "Photo finish: Vin edges Tara 87.8 to 86.3. Blowout of the week (brother vs. brother): Danny over Tim by 43.9.",
+      "Jefe is rolling with 4 straight wins. Tim has dropped 4 in a row.",
       "Steve leads the way at 10-2."
      ],
      "matchups": [
@@ -10693,10 +10791,13 @@
     },
     {
      "week": 13,
+     "start": "2016-01-04",
+     "end": "2016-01-10",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 152.5 and beats Tom by 58.9.",
-      "Photo finish: Nick edges Will 113.4 to 111.5. Blowout of the week: Danny over Tom by 58.9. Upset alert: Tara, 9th coming in, knocks off Joe (4th).",
-      "Brother vs. brother goes to Danny, 152.5 to 93.6. Jefe is rolling with 5 straight wins. Tim has dropped 5 in a row.",
+      "Photo finish: Nick edges Will 113.4 to 111.5. Blowout of the week (brother vs. brother): Danny over Tom by 58.9. Upset alert: Tara, 9th coming in, knocks off Joe (4th).",
+      "Jefe is rolling with 5 straight wins. Tim has dropped 5 in a row.",
       "Steve leads the way at 10-3."
      ],
      "matchups": [
@@ -10993,6 +11094,9 @@
     },
     {
      "week": 14,
+     "start": "2016-01-11",
+     "end": "2016-01-17",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 134.0 and beats Tim by 26.4.",
       "Photo finish: Will edges Joe 110.4 to 106.9. Blowout of the week: Tara over Ronnie by 46.9. Upset alert: Nick, 8th coming in, knocks off Steve (1st).",
@@ -11308,6 +11412,9 @@
     },
     {
      "week": 15,
+     "start": "2016-01-18",
+     "end": "2016-01-24",
+     "days": 7,
      "recap": [
       "Tara posts the week's high score with 144.5 and beats Will by 54.1.",
       "Closest game: Danny edges Nick 101.6 to 89.4. Blowout of the week: Tara over Will by 54.1.",
@@ -11635,8 +11742,11 @@
     },
     {
      "week": 16,
+     "start": "2016-01-25",
+     "end": "2016-02-07",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Palagi posts the week's high score with 171.9 and beats Nick by 24.1.",
+      "A two-week matchup (Jan 25 to Feb 7) to cover the All-Star break, so the numbers run big. Palagi posts the week's high score with 171.9 and beats Nick by 24.1.",
       "Photo finish: Joe edges Danny 143.8 to 140.0. Blowout of the week: Tim over Tara by 28.7. Upset alert: Tom, 11th coming in, knocks off Ronnie (6th).",
       "Vin is rolling with 8 straight wins. Tim snaps a 7-game skid.",
       "Palagi leads the way at 12-4."
@@ -11935,10 +12045,13 @@
     },
     {
      "week": 17,
+     "start": "2016-02-08",
+     "end": "2016-02-14",
+     "days": 7,
      "recap": [
       "Tara posts the week's high score with 175.3 and beats Steve by 68.4.",
-      "Closest game: Danny edges Will 100.6 to 88.2. Blowout of the week: Tara over Steve by 68.4. Upset alert: Tara, 8th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Vin, 132.0 to 87.8. Vin is rolling with 9 straight wins. Jefe has dropped 3 in a row.",
+      "Closest game (brother vs. brother): Danny edges Will 100.6 to 88.2. Blowout of the week: Tara over Steve by 68.4. Upset alert: Tara, 8th coming in, knocks off Steve (2nd).",
+      "Vin is rolling with 9 straight wins. Jefe has dropped 3 in a row.",
       "Palagi leads the way at 13-4."
      ],
      "matchups": [
@@ -12245,6 +12358,9 @@
     },
     {
      "week": 18,
+     "start": "2016-02-15",
+     "end": "2016-02-21",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 150.1 and beats Joe by 68.5.",
       "Closest game: Nick edges Ronnie 90.7 to 84.5. Blowout of the week: Vin over Joe by 68.5. Upset alert: Will, 11th coming in, knocks off Palagi (1st).",
@@ -12545,6 +12661,9 @@
     },
     {
      "week": 19,
+     "start": "2016-02-22",
+     "end": "2016-02-28",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 154.2 and beats Will by 35.9.",
       "Closest game: Ronnie edges Joe 85.8 to 76.1. Blowout of the week: Vin over Will by 35.9.",
@@ -12862,6 +12981,9 @@
     },
     {
      "week": 20,
+     "start": "2016-02-29",
+     "end": "2016-03-06",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 175.6 and beats Vin by 40.2.",
       "Photo finish: Ronnie edges Will 101.8 to 97.6. Blowout of the week: Danny over Palagi by 73.8.",
@@ -13179,11 +13301,14 @@
     },
     {
      "week": 21,
+     "start": "2016-03-07",
+     "end": "2016-03-13",
+     "days": 7,
      "recap": [
       "Tara posts the week's high score with 135.0 and beats Palagi by 8.6.",
       "Closest game: Tara edges Palagi 135.0 to 126.4. Blowout of the week: Steve over Ronnie by 57.8. Upset alert: Tara, 7th coming in, knocks off Palagi (2nd).",
-      "Brother vs. brother goes to Will, 104.1 to 89.7. Nick is rolling with 4 straight wins. Joe snaps a 4-game skid. Tom has dropped 4 in a row.",
-      "That wraps the regular season, with Vin on top at 15-6."
+      "Nick is rolling with 4 straight wins. Joe snaps a 4-game skid. Tom has dropped 4 in a row.",
+      "That wraps the regular season, with Vin on top at 15-6. The six-team playoff field is set: Vin (1), Palagi (2), Steve (3), Jefe (4), Danny (5), Tara (6). Palagi and Vin earn a first-round bye. Ronnie just misses out at 11-10."
      ],
      "matchups": [
       {
@@ -13465,9 +13590,10 @@
     {
      "week": 100,
      "recap": [
-      "Palagi wins the 2015-16 championship. Danny finishes 2nd and Steve 3rd.",
-      "Vin won the regular season at 15-6 but finishes 4th once the playoffs are done.",
-      "At the other end, Tom finishes 12th."
+      "Palagi wins the 2015-16 championship as the No. 2 seed! After a first-round bye, Palagi beat Steve (3) in the semifinals and beat Danny (5) in the final, 141.9 to 102.1.",
+      "Danny settles for 2nd, and Steve takes 3rd by beating Vin 135.0 to 130.4.",
+      "Upset of the playoffs: No. 5 Danny knocks off No. 1 Vin in the semifinals. Vin won the regular season at 15-6 but fell to Danny in the semifinals.",
+      "At the other end, Tom finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -14375,10 +14501,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2016-10-10",
+     "end": "2016-10-23",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Jefe posts the week's high score with 247.2 and beats Will by 60.5.",
+      "Welcome to the 2016-17 season of Rene Rancourt's Day Job! Palagi comes in as the defending champion.",
+      "Jefe posts the week's high score with 247.2 and beats Will by 60.5.",
       "Photo finish: Joe edges Ronnie 158.4 to 155.5. Blowout of the week: Jefe over Will by 60.5.",
-      "Brother vs. brother goes to Vin, 229.5 to 170.3.",
       "Jefe leads the way at 1-0."
      ],
      "matchups": [
@@ -14600,10 +14729,12 @@
     },
     {
      "week": 2,
+     "start": "2016-10-24",
+     "end": "2016-10-30",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 154.6 and beats Jefe by 12.5.",
       "Closest game: Palagi edges Danny 117.9 to 107.1. Blowout of the week: Vin over Ronnie by 34.4. Upset alert: Joe, 6th coming in, knocks off Jefe (1st).",
-      "Brother vs. brother goes to Tim, 115.9 to 103.9.",
       "Vin takes over 1st at 2-0."
      ],
      "matchups": [
@@ -14831,10 +14962,13 @@
     },
     {
      "week": 3,
+     "start": "2016-10-31",
+     "end": "2016-11-06",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 131.1 and beats Tim by 28.3.",
       "Photo finish: Tom edges Vin 123.2 to 119.2. Blowout of the week: Joe over Tim by 28.3. Upset alert: Tom, 8th coming in, knocks off Vin (1st).",
-      "Brother vs. brother goes to Danny, 110.9 to 89.2. Joe is rolling with 3 straight wins. Nick has dropped 3 in a row.",
+      "Joe is rolling with 3 straight wins. Nick has dropped 3 in a row.",
       "Joe takes over 1st at 3-0."
      ],
      "matchups": [
@@ -15085,6 +15219,9 @@
     },
     {
      "week": 4,
+     "start": "2016-11-07",
+     "end": "2016-11-13",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 141.5 and beats Will by 42.0.",
       "Photo finish: Tara edges Tom 123.3 to 118.6. Blowout of the week: Steve over Will by 42.0.",
@@ -15352,6 +15489,9 @@
     },
     {
      "week": 5,
+     "start": "2016-11-14",
+     "end": "2016-11-20",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 146.2 and beats Ronnie by 38.8.",
       "Closest game: Vin edges Tara 102.4 to 96.2. Blowout of the week: Tim over Jefe by 53.8.",
@@ -15623,10 +15763,13 @@
     },
     {
      "week": 6,
+     "start": "2016-11-21",
+     "end": "2016-11-27",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 147.1 and beats Steve by 44.9.",
-      "Closest game: Jefe edges Danny 128.0 to 116.0. Blowout of the week: Will over Tom by 49.4. Upset alert: Ronnie, 6th coming in, knocks off Steve (1st).",
-      "Brother vs. brother goes to Will, 143.5 to 94.1. Vin is rolling with 3 straight wins. Steve's 5-game win streak is over. Nick has dropped 6 in a row.",
+      "Closest game: Jefe edges Danny 128.0 to 116.0. Blowout of the week (brother vs. brother): Will over Tom by 49.4. Upset alert: Ronnie, 6th coming in, knocks off Steve (1st).",
+      "Vin is rolling with 3 straight wins. Steve's 5-game win streak is over. Nick has dropped 6 in a row.",
       "Vin takes over 1st at 5-1."
      ],
      "matchups": [
@@ -15900,10 +16043,13 @@
     },
     {
      "week": 7,
+     "start": "2016-11-28",
+     "end": "2016-12-04",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 156.4 and beats Steve by 49.7.",
       "Photo finish: Joe edges Tom 120.4 to 116.0. Blowout of the week: Jefe over Steve by 49.7. Upset alert: Jefe, 8th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Danny, 134.8 to 108.2. Vin is rolling with 4 straight wins. Nick has dropped 7 in a row.",
+      "Vin is rolling with 4 straight wins. Nick has dropped 7 in a row.",
       "Vin leads the way at 6-1."
      ],
      "matchups": [
@@ -16178,6 +16324,9 @@
     },
     {
      "week": 8,
+     "start": "2016-12-05",
+     "end": "2016-12-11",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 156.5 and beats Vin by 42.4.",
       "Closest game: Tara edges Joe 108.6 to 94.9. Blowout of the week: Will over Palagi by 67.1. Upset alert: Tara, 7th coming in, knocks off Joe (2nd).",
@@ -16467,6 +16616,9 @@
     },
     {
      "week": 9,
+     "start": "2016-12-12",
+     "end": "2016-12-18",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 136.2 and beats Will by 64.1.",
       "Photo finish: Tim edges Nick 101.1 to 98.5. Blowout of the week: Vin over Will by 64.1.",
@@ -16760,10 +16912,13 @@
     },
     {
      "week": 10,
+     "start": "2016-12-19",
+     "end": "2016-12-25",
+     "days": 7,
      "recap": [
-      "Ronnie posts the week's high score with 98.8 and beats Palagi by 32.2.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Ronnie posts the week's high score with 98.8 and beats Palagi by 32.2.",
       "Closest game: Danny edges Nick 98.5 to 90.4. Blowout of the week: Ronnie over Palagi by 32.2. Upset alert: Will, 9th coming in, knocks off Joe (3rd).",
-      "Brother vs. brother goes to Tim, 90.9 to 67.3. Jefe is rolling with 5 straight wins. Nick has dropped 10 in a row.",
+      "Jefe is rolling with 5 straight wins. Nick has dropped 10 in a row.",
       "Vin leads the way at 8-2."
      ],
      "matchups": [
@@ -17054,11 +17209,14 @@
     },
     {
      "week": 11,
+     "start": "2016-12-26",
+     "end": "2017-01-01",
+     "days": 7,
      "recap": [
-      "Tom posts the week's high score with 130.1 and beats Danny by 21.4.",
+      "Happy New Year! 2016 goes out and 2017 comes in. Tom posts the week's high score with 130.1 and beats Danny by 21.4.",
       "Closest game: Vin edges Joe 128.8 to 123.6. Blowout of the week: Nick over Steve by 33.6. Upset alert: Nick, 12th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Tom, 130.1 to 108.7. Ronnie is rolling with 6 straight wins. Nick snaps a 10-game skid. Tara has dropped 3 in a row.",
-      "Vin leads the way at 9-2."
+      "Ronnie is rolling with 6 straight wins. Nick snaps a 10-game skid. Tara has dropped 3 in a row.",
+      "Halfway home: Vin leads at 9-2, Ronnie is right behind at 8-3, and Nick has work to do in last place."
      ],
      "matchups": [
       {
@@ -17347,10 +17505,13 @@
     },
     {
      "week": 12,
+     "start": "2017-01-02",
+     "end": "2017-01-08",
+     "days": 7,
      "recap": [
       "Tom posts the week's high score with 149.6 and beats Steve by 20.4.",
       "Closest game: Will edges Jefe 88.0 to 79.1. Blowout of the week: Danny over Tara by 48.6. Upset alert: Nick, 12th coming in, knocks off Vin (1st).",
-      "Brother vs. brother goes to Nick, 106.7 to 81.4. Ronnie's 6-game win streak is over. Tara has dropped 4 in a row.",
+      "Ronnie's 6-game win streak is over. Tara has dropped 4 in a row.",
       "Vin leads the way at 9-3."
      ],
      "matchups": [
@@ -17633,10 +17794,13 @@
     },
     {
      "week": 13,
+     "start": "2017-01-09",
+     "end": "2017-01-15",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 124.8 and beats Ronnie by 26.9.",
       "Photo finish: Steve edges Tara 116.1 to 115.3. Blowout of the week: Tom over Nick by 36.7.",
-      "Brother vs. brother goes to Tim, 109.8 to 73.2. Tom is rolling with 3 straight wins. Tara has dropped 5 in a row.",
+      "Tom is rolling with 3 straight wins. Tara has dropped 5 in a row.",
       "Vin leads the way at 10-3."
      ],
      "matchups": [
@@ -17920,10 +18084,13 @@
     },
     {
      "week": 14,
+     "start": "2017-01-16",
+     "end": "2017-01-22",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 162.6 and beats Tom by 47.4.",
-      "Photo finish: Danny edges Will 93.2 to 88.3. Blowout of the week: Joe over Tim by 59.4.",
-      "Brother vs. brother goes to Danny, 93.2 to 88.3. Danny is rolling with 3 straight wins. Tara has dropped 6 in a row.",
+      "Photo finish (brother vs. brother): Danny edges Will 93.2 to 88.3. Blowout of the week: Joe over Tim by 59.4.",
+      "Danny is rolling with 3 straight wins. Tara has dropped 6 in a row.",
       "Vin leads the way at 11-3."
      ],
      "matchups": [
@@ -18220,8 +18387,11 @@
     },
     {
      "week": 15,
+     "start": "2017-01-23",
+     "end": "2017-02-05",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Danny posts the week's high score with 230.9 and beats Joe by 46.2.",
+      "A two-week matchup (Jan 23 to Feb 5) to cover the All-Star break, so the numbers run big. Danny posts the week's high score with 230.9 and beats Joe by 46.2.",
       "Closest game: Jefe edges Vin 230.5 to 222.1. Blowout of the week: Tom over Tara by 86.1. Upset alert: Nick, 12th coming in, knocks off Palagi (7th).",
       "Danny is rolling with 4 straight wins. Tara has dropped 7 in a row.",
       "Vin leads the way at 11-4."
@@ -18528,6 +18698,9 @@
     },
     {
      "week": 16,
+     "start": "2017-02-06",
+     "end": "2017-02-12",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 141.9 and beats Will by 50.7.",
       "Photo finish: Joe edges Steve 124.1 to 121.5. Blowout of the week: Danny over Ronnie by 53.6. Upset alert: Tim, 9th coming in, knocks off Jefe (3rd).",
@@ -18842,10 +19015,13 @@
     },
     {
      "week": 17,
+     "start": "2017-02-13",
+     "end": "2017-02-19",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 206.5 and beats Danny by 86.1.",
-      "Closest game: Will edges Tom 93.2 to 86.0. Blowout of the week: Jefe over Danny by 86.1.",
-      "Brother vs. brother goes to Will, 93.2 to 86.0. Danny's 5-game win streak is over. Tara has dropped 9 in a row.",
+      "Closest game (brother vs. brother): Will edges Tom 93.2 to 86.0. Blowout of the week: Jefe over Danny by 86.1.",
+      "Danny's 5-game win streak is over. Tara has dropped 9 in a row.",
       "Vin leads the way at 13-4."
      ],
      "matchups": [
@@ -19136,10 +19312,13 @@
     },
     {
      "week": 18,
+     "start": "2017-02-20",
+     "end": "2017-02-26",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 123.4 and beats Palagi by 35.4.",
       "Photo finish: Will edges Tara 108.3 to 105.2. Blowout of the week: Vin over Palagi by 35.4. Upset alert: Nick, 11th coming in, knocks off Ronnie (6th).",
-      "Brother vs. brother goes to Danny, 94.3 to 71.6. Vin is rolling with 3 straight wins. Tara has dropped 10 in a row.",
+      "Vin is rolling with 3 straight wins. Tara has dropped 10 in a row.",
       "Vin leads the way at 14-4."
      ],
      "matchups": [
@@ -19450,6 +19629,9 @@
     },
     {
      "week": 19,
+     "start": "2017-02-27",
+     "end": "2017-03-05",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 135.8 and beats Nick by 21.4.",
       "Photo finish: Ronnie edges Tom 108.6 to 104.3. Blowout of the week: Danny over Vin by 27.0. Upset alert: Tim, 10th coming in, knocks off Steve (5th).",
@@ -19759,6 +19941,9 @@
     },
     {
      "week": 20,
+     "start": "2017-03-06",
+     "end": "2017-03-12",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 169.0 and beats Steve by 108.5.",
       "Closest game: Nick edges Tim 120.5 to 109.8. Blowout of the week: Danny over Steve by 108.5.",
@@ -20071,11 +20256,14 @@
     },
     {
      "week": 21,
+     "start": "2017-03-13",
+     "end": "2017-03-19",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 154.9 and beats Joe by 38.8.",
       "Closest game: Vin edges Steve 135.8 to 126.4. Blowout of the week: Jefe over Tara by 39.8. Upset alert: Will, 9th coming in, knocks off Joe (3rd).",
-      "Brother vs. brother goes to Tom, 132.7 to 117.3. Danny is rolling with 4 straight wins. Tara has dropped 13 in a row.",
-      "That wraps the regular season, with Vin on top at 16-5."
+      "Danny is rolling with 4 straight wins. Tara has dropped 13 in a row.",
+      "That wraps the regular season, with Vin on top at 16-5. The six-team playoff field is set: Vin (1), Danny (2), Jefe (3), Joe (4), Ronnie (5), Steve (6). Danny and Vin earn a first-round bye. Tom just misses out at 10-11."
      ],
      "matchups": [
       {
@@ -20372,9 +20560,10 @@
     {
      "week": 100,
      "recap": [
-      "Jefe wins the 2016-17 championship. Vin finishes 2nd and Danny 3rd.",
-      "Vin won the regular season at 16-5 but finishes 2nd once the playoffs are done.",
-      "At the other end, Tara finishes 12th."
+      "Jefe wins the 2016-17 championship as the No. 3 seed! Jefe beat Steve (6) in the quarterfinals, beat Danny (2) in the semifinals and beat Vin (1) in the final, 112.8 to 103.9.",
+      "Vin settles for 2nd, and Danny takes 3rd by beating Ronnie 130.3 to 93.2.",
+      "Vin won the regular season at 16-5 but fell to Jefe in the final.",
+      "At the other end, Tara finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -21297,8 +21486,12 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2017-10-02",
+     "end": "2017-10-15",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Steve posts the week's high score with 239.9 and beats Joe by 84.3.",
+      "Welcome to the 2017-18 season of Rene Rancourt's Day Job! Jefe comes in as the defending champion. Front-office news: Zac takes over the franchise Tara ran and relocates it as Bite the Pillow. Welcome to your rookie season.",
+      "Steve posts the week's high score with 239.9 and beats Joe by 84.3.",
       "Closest game: Nick edges Will 235.9 to 216.7. Blowout of the week: Steve over Joe by 84.3.",
       "Steve leads the way at 1-0."
      ],
@@ -21521,10 +21714,12 @@
     },
     {
      "week": 2,
+     "start": "2017-10-16",
+     "end": "2017-10-22",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 151.2 and beats Steve by 58.2.",
       "Photo finish: Nick edges Ronnie 82.4 to 82.1. Blowout of the week: Tim over Steve by 58.2. Upset alert: Tim, 10th coming in, knocks off Steve (1st).",
-      "Brother vs. brother goes to Danny, 95.1 to 93.7.",
       "Nick takes over 1st at 2-0."
      ],
      "matchups": [
@@ -21752,10 +21947,13 @@
     },
     {
      "week": 3,
+     "start": "2017-10-23",
+     "end": "2017-10-29",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 138.6 and beats Ronnie by 24.5.",
       "Closest game: Tim edges Zac 81.6 to 70.6. Blowout of the week: Palagi over Ronnie by 24.5. Upset alert: Joe, 12th coming in, knocks off Nick (1st).",
-      "Brother vs. brother goes to Will, 77.3 to 61.4. Jefe is rolling with 3 straight wins. Tom has dropped 3 in a row.",
+      "Jefe is rolling with 3 straight wins. Tom has dropped 3 in a row.",
       "Jefe takes over 1st at 3-0."
      ],
      "matchups": [
@@ -22005,6 +22203,9 @@
     },
     {
      "week": 4,
+     "start": "2017-10-30",
+     "end": "2017-11-05",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 138.9 and beats Tim by 34.1.",
       "Photo finish: Steve edges Nick 93.9 to 89.6. Blowout of the week: Palagi over Joe by 34.6. Upset alert: Steve, 8th coming in, knocks off Nick (3rd).",
@@ -22264,10 +22465,13 @@
     },
     {
      "week": 5,
+     "start": "2017-11-06",
+     "end": "2017-11-12",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 159.0 and beats Palagi by 45.4.",
-      "Photo finish: Jefe edges Ronnie 96.2 to 95.1. Blowout of the week: Tim over Tom by 50.8. Upset alert: Zac, 12th coming in, knocks off Will (2nd).",
-      "Brother vs. brother goes to Tim, 142.9 to 92.1. Vin is rolling with 4 straight wins. Zac snaps a 4-game skid. Danny has dropped 3 in a row.",
+      "Photo finish: Jefe edges Ronnie 96.2 to 95.1. Blowout of the week (brother vs. brother): Tim over Tom by 50.8. Upset alert: Zac, 12th coming in, knocks off Will (2nd).",
+      "Vin is rolling with 4 straight wins. Zac snaps a 4-game skid. Danny has dropped 3 in a row.",
       "Vin takes over 1st at 4-1."
      ],
      "matchups": [
@@ -22529,10 +22733,13 @@
     },
     {
      "week": 6,
+     "start": "2017-11-13",
+     "end": "2017-11-19",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 145.6 and beats Palagi by 13.6.",
-      "Photo finish: Danny edges Steve 103.9 to 100.4. Blowout of the week: Tom over Will by 40.7. Upset alert: Danny, 10th coming in, knocks off Steve (4th).",
-      "Brother vs. brother goes to Tom, 117.0 to 76.3. Vin is rolling with 5 straight wins.",
+      "Photo finish: Danny edges Steve 103.9 to 100.4. Blowout of the week (brother vs. brother): Tom over Will by 40.7. Upset alert: Danny, 10th coming in, knocks off Steve (4th).",
+      "Vin is rolling with 5 straight wins.",
       "Vin leads the way at 5-1."
      ],
      "matchups": [
@@ -22787,10 +22994,13 @@
     },
     {
      "week": 7,
+     "start": "2017-11-20",
+     "end": "2017-11-26",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 185.2 and beats Palagi by 65.3.",
       "Closest game: Tom edges Ronnie 126.7 to 113.0. Blowout of the week: Nick over Palagi by 65.3.",
-      "Brother vs. brother goes to Will, 131.1 to 73.4. Vin is rolling with 6 straight wins. Palagi has dropped 3 in a row.",
+      "Vin is rolling with 6 straight wins. Palagi has dropped 3 in a row.",
       "Vin leads the way at 6-1."
      ],
      "matchups": [
@@ -23058,6 +23268,9 @@
     },
     {
      "week": 8,
+     "start": "2017-11-27",
+     "end": "2017-12-03",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 183.6 and beats Tim by 51.0.",
       "Closest game: Steve edges Zac 119.7 to 100.0. Blowout of the week: Palagi over Tim by 51.0.",
@@ -23338,10 +23551,13 @@
     },
     {
      "week": 9,
+     "start": "2017-12-04",
+     "end": "2017-12-10",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 155.3 and beats Jefe by 58.0.",
       "Photo finish: Tim edges Ronnie 125.9 to 122.6. Blowout of the week: Nick over Jefe by 58.0. Upset alert: Tom, 10th coming in, knocks off Steve (2nd).",
-      "Vin beats Zac 86.6 to 61.8. Somebody check who set Zac's lineup. Vin is rolling with 8 straight wins. Zac has dropped 4 in a row.",
+      "Vin is rolling with 8 straight wins. Zac has dropped 4 in a row.",
       "Vin leads the way at 8-1."
      ],
      "matchups": [
@@ -23626,10 +23842,13 @@
     },
     {
      "week": 10,
+     "start": "2017-12-11",
+     "end": "2017-12-17",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 140.9 and beats Ronnie by 68.8.",
       "Closest game: Vin edges Tom 111.4 to 93.1. Blowout of the week: Joe over Ronnie by 68.8.",
-      "Brother vs. brother goes to Danny, 124.8 to 90.4. Vin is rolling with 9 straight wins. Zac has dropped 5 in a row.",
+      "Vin is rolling with 9 straight wins. Zac has dropped 5 in a row.",
       "Vin leads the way at 9-1."
      ],
      "matchups": [
@@ -23912,11 +24131,14 @@
     },
     {
      "week": 11,
+     "start": "2017-12-18",
+     "end": "2017-12-24",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 161.7 and beats Joe by 73.6.",
       "Photo finish: Steve edges Ronnie 80.0 to 77.7. Blowout of the week: Tim over Joe by 73.6. Upset alert: Danny, 11th coming in, knocks off Jefe (4th).",
       "Vin is rolling with 10 straight wins. Zac snaps a 5-game skid. Ronnie has dropped 3 in a row.",
-      "Vin leads the way at 10-1."
+      "Halfway home: Vin leads at 10-1, Nick is right behind at 8-3, and Zac has work to do in last place."
      ],
      "matchups": [
       {
@@ -24199,8 +24421,11 @@
     },
     {
      "week": 12,
+     "start": "2017-12-25",
+     "end": "2017-12-31",
+     "days": 7,
      "recap": [
-      "Danny posts the week's high score with 123.0 and beats Zac by 32.8.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Danny posts the week's high score with 123.0 and beats Zac by 32.8.",
       "Photo finish: Vin edges Ronnie 103.9 to 100.6. Blowout of the week: Palagi over Tom by 45.2. Upset alert: Will, 9th coming in, knocks off Nick (2nd).",
       "Vin is rolling with 11 straight wins. Nick's 6-game win streak is over. Ronnie has dropped 4 in a row.",
       "Vin leads the way at 11-1."
@@ -24500,10 +24725,13 @@
     },
     {
      "week": 13,
+     "start": "2018-01-01",
+     "end": "2018-01-07",
+     "days": 7,
      "recap": [
-      "Tim posts the week's high score with 138.4 and beats Steve by 15.5.",
+      "Happy New Year! 2018 goes out and 2018 comes in. Tim posts the week's high score with 138.4 and beats Steve by 15.5.",
       "Photo finish: Jefe edges Zac 105.1 to 103.5. Blowout of the week: Nick over Ronnie by 41.7. Upset alert: Joe, 9th coming in, knocks off Vin (1st).",
-      "Brother vs. brother goes to Tom, 126.0 to 119.2. Tim is rolling with 3 straight wins. Vin's 11-game win streak is over. Ronnie has dropped 5 in a row.",
+      "Tim is rolling with 3 straight wins. Vin's 11-game win streak is over. Ronnie has dropped 5 in a row.",
       "Vin leads the way at 11-2."
      ],
      "matchups": [
@@ -24792,10 +25020,13 @@
     },
     {
      "week": 14,
+     "start": "2018-01-08",
+     "end": "2018-01-14",
+     "days": 7,
      "recap": [
       "A short week, so the scores run low. Ronnie posts the week's high score with 111.7 and beats Palagi by 56.2.",
       "Photo finish: Jefe edges Tom 69.3 to 64.5. Blowout of the week: Ronnie over Palagi by 56.2. Upset alert: Ronnie, 11th coming in, knocks off Palagi (4th).",
-      "Brother vs. brother goes to Danny, 75.7 to 62.7. Tim is rolling with 4 straight wins. Ronnie snaps a 5-game skid. Zac has dropped 3 in a row.",
+      "Tim is rolling with 4 straight wins. Ronnie snaps a 5-game skid. Zac has dropped 3 in a row.",
       "Vin leads the way at 12-2."
      ],
      "matchups": [
@@ -25090,6 +25321,9 @@
     },
     {
      "week": 15,
+     "start": "2018-01-15",
+     "end": "2018-01-21",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 126.9 and beats Tim by 57.8.",
       "Photo finish: Nick edges Steve 83.0 to 79.5. Blowout of the week: Danny over Ronnie by 66.8.",
@@ -25398,10 +25632,13 @@
     },
     {
      "week": 16,
+     "start": "2018-01-22",
+     "end": "2018-02-04",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Jefe posts the week's high score with 231.5 and beats Ronnie by 68.2.",
+      "A two-week matchup (Jan 22 to Feb 4) to cover the All-Star break, so the numbers run big. Jefe posts the week's high score with 231.5 and beats Ronnie by 68.2.",
       "Photo finish: Will edges Zac 182.6 to 180.5. Blowout of the week: Jefe over Ronnie by 68.2.",
-      "Brother vs. brother goes to Vin, 197.1 to 166.7. Jefe is rolling with 4 straight wins. Zac has dropped 5 in a row.",
+      "Jefe is rolling with 4 straight wins. Zac has dropped 5 in a row.",
       "Vin leads the way at 14-2."
      ],
      "matchups": [
@@ -25718,10 +25955,13 @@
     },
     {
      "week": 17,
+     "start": "2018-02-05",
+     "end": "2018-02-11",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 160.2 and beats Ronnie by 42.7.",
-      "Photo finish: Palagi edges Vin 155.9 to 155.2. Blowout of the week: Will over Tom by 54.6. Upset alert: Palagi, 7th coming in, knocks off Vin (1st).",
-      "Brother vs. brother goes to Will, 152.4 to 97.8. Jefe is rolling with 5 straight wins. Zac snaps a 5-game skid. Joe has dropped 4 in a row.",
+      "Photo finish: Palagi edges Vin 155.9 to 155.2. Blowout of the week (brother vs. brother): Will over Tom by 54.6. Upset alert: Palagi, 7th coming in, knocks off Vin (1st).",
+      "Jefe is rolling with 5 straight wins. Zac snaps a 5-game skid. Joe has dropped 4 in a row.",
       "Vin leads the way at 14-3."
      ],
      "matchups": [
@@ -26036,10 +26276,13 @@
     },
     {
      "week": 18,
+     "start": "2018-02-12",
+     "end": "2018-02-18",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 133.9 and beats Danny by 38.4.",
-      "Photo finish: Will edges Tim 123.6 to 119.1. Blowout of the week: Jefe over Steve by 41.5.",
-      "Brother vs. brother goes to Will, 123.6 to 119.1. Jefe is rolling with 6 straight wins. Joe has dropped 5 in a row.",
+      "Photo finish (brother vs. brother): Will edges Tim 123.6 to 119.1. Blowout of the week: Jefe over Steve by 41.5.",
+      "Jefe is rolling with 6 straight wins. Joe has dropped 5 in a row.",
       "Vin leads the way at 15-3."
      ],
      "matchups": [
@@ -26368,6 +26611,9 @@
     },
     {
      "week": 19,
+     "start": "2018-02-19",
+     "end": "2018-02-25",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 173.0 and beats Tom by 81.1.",
       "Closest game: Vin edges Jefe 146.4 to 129.4. Blowout of the week: Joe over Tom by 81.1. Upset alert: Zac, 12th coming in, knocks off Steve (6th).",
@@ -26695,10 +26941,13 @@
     },
     {
      "week": 20,
+     "start": "2018-02-26",
+     "end": "2018-03-04",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 151.9 and beats Ronnie by 72.6.",
       "Photo finish: Steve edges Tom 119.9 to 117.7. Blowout of the week: Tim over Ronnie by 72.6.",
-      "Vin beats Zac 149.2 to 124.2. Somebody check who set Zac's lineup. Palagi is rolling with 4 straight wins. Nick snaps a 4-game skid. Tom has dropped 5 in a row.",
+      "Palagi is rolling with 4 straight wins. Nick snaps a 4-game skid. Tom has dropped 5 in a row.",
       "Vin leads the way at 17-3."
      ],
      "matchups": [
@@ -27016,11 +27265,14 @@
     },
     {
      "week": 21,
+     "start": "2018-03-05",
+     "end": "2018-03-11",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 134.2 and beats Steve by 60.0.",
       "Photo finish: Jefe edges Palagi 101.9 to 97.6. Blowout of the week: Will over Steve by 60.0. Upset alert: Zac, 12th coming in, knocks off Nick (3rd).",
-      "Zac beats Nick 120.4 to 97.7. Somebody check who set Zac's lineup. Vin is rolling with 4 straight wins. Palagi's 4-game win streak is over. Tom has dropped 6 in a row.",
-      "That wraps the regular season, with Vin on top at 18-3."
+      "Vin is rolling with 4 straight wins. Palagi's 4-game win streak is over. Tom has dropped 6 in a row.",
+      "That wraps the regular season, with Vin on top at 18-3. The six-team playoff field is set: Vin (1), Jefe (2), Palagi (3), Tim (4), Nick (5), Steve (6). Jefe and Vin earn a first-round bye. Will just misses out at 11-10."
      ],
      "matchups": [
       {
@@ -27326,9 +27578,10 @@
     {
      "week": 100,
      "recap": [
-      "Palagi wins the 2017-18 championship. Vin finishes 2nd and Nick 3rd.",
-      "Vin won the regular season at 18-3 but finishes 2nd once the playoffs are done.",
-      "At the other end, Ronnie finishes 12th."
+      "Palagi wins the 2017-18 championship as the No. 3 seed! Palagi beat Steve (6) in the quarterfinals, beat Jefe (2) in the semifinals and beat Vin (1) in the final, 316.6 to 295.8.",
+      "Vin settles for 2nd, and Nick takes 3rd by beating Jefe 232.5 to 165.7.",
+      "Upset of the playoffs: No. 5 Nick knocks off No. 2 Jefe in the final. Vin won the regular season at 18-3 but fell to Palagi in the final.",
+      "At the other end, Ronnie finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -28230,10 +28483,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2018-10-01",
+     "end": "2018-10-14",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Danny posts the week's high score with 281.8 and beats Tim by 84.0.",
-      "Closest game: Joe edges Steve 199.2 to 178.0. Blowout of the week: Danny over Tim by 84.0.",
-      "Brother vs. brother goes to Danny, 281.8 to 197.8.",
+      "Welcome to the 2018-19 season of Rene Rancourt's Day Job! Palagi comes in as the defending champion.",
+      "Danny posts the week's high score with 281.8 and beats Tim by 84.0.",
+      "Closest game: Joe edges Steve 199.2 to 178.0. Blowout of the week (brother vs. brother): Danny over Tim by 84.0.",
       "Danny leads the way at 1-0."
      ],
      "matchups": [
@@ -28455,10 +28711,12 @@
     },
     {
      "week": 2,
+     "start": "2018-10-15",
+     "end": "2018-10-21",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 165.6 and beats Joe by 50.5.",
       "Closest game: Steve edges Tim 119.8 to 114.0. Blowout of the week: Vin over Joe by 50.5. Upset alert: Jefe, 12th coming in, knocks off Palagi (3rd).",
-      "Brother vs. brother goes to Danny, 117.6 to 102.6.",
       "Danny leads the way at 2-0. Will drops to 12th."
      ],
      "matchups": [
@@ -28686,10 +28944,13 @@
     },
     {
      "week": 3,
+     "start": "2018-10-22",
+     "end": "2018-10-28",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 160.3 and beats Vin by 39.0.",
       "Closest game: Zac edges Joe 101.0 to 89.6. Blowout of the week: Steve over Vin by 39.0. Upset alert: Jefe, 10th coming in, knocks off Danny (1st).",
-      "Brother vs. brother goes to Tim, 131.2 to 105.3. Nick is rolling with 3 straight wins. Will has dropped 3 in a row.",
+      "Nick is rolling with 3 straight wins. Will has dropped 3 in a row.",
       "Nick takes over 1st at 3-0."
      ],
      "matchups": [
@@ -28938,10 +29199,13 @@
     },
     {
      "week": 4,
+     "start": "2018-10-29",
+     "end": "2018-11-04",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 136.0 and beats Steve by 39.4.",
-      "Closest game: Joe edges Nick 98.0 to 91.0. Blowout of the week: Danny over Tom by 79.5. Upset alert: Joe, 10th coming in, knocks off Nick (1st).",
-      "Brother vs. brother goes to Danny, 134.6 to 55.1. Jefe is rolling with 3 straight wins. Will has dropped 4 in a row.",
+      "Closest game: Joe edges Nick 98.0 to 91.0. Blowout of the week (brother vs. brother): Danny over Tom by 79.5. Upset alert: Joe, 10th coming in, knocks off Nick (1st).",
+      "Jefe is rolling with 3 straight wins. Will has dropped 4 in a row.",
       "Danny takes over 1st at 3-1."
      ],
      "matchups": [
@@ -29204,10 +29468,13 @@
     },
     {
      "week": 5,
+     "start": "2018-11-05",
+     "end": "2018-11-11",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 146.6 and beats Ronnie by 27.3.",
-      "Closest game: Palagi edges Joe 122.6 to 107.0. Blowout of the week: Tom over Will by 44.1.",
-      "Zac beats Vin 138.4 to 106.0. Somebody check who set Zac's lineup. Zac is rolling with 4 straight wins. Will has dropped 5 in a row.",
+      "Closest game: Palagi edges Joe 122.6 to 107.0. Blowout of the week (brother vs. brother): Tom over Will by 44.1.",
+      "Zac is rolling with 4 straight wins. Will has dropped 5 in a row.",
       "Danny leads the way at 4-1."
      ],
      "matchups": [
@@ -29482,10 +29749,13 @@
     },
     {
      "week": 6,
+     "start": "2018-11-12",
+     "end": "2018-11-18",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 166.1 and beats Steve by 83.2.",
       "Photo finish: Ronnie edges Will 105.7 to 105.1. Blowout of the week: Palagi over Steve by 83.2.",
-      "Brother vs. brother goes to Nick, 97.8 to 79.2. Zac is rolling with 5 straight wins. Will has dropped 6 in a row.",
+      "Zac is rolling with 5 straight wins. Will has dropped 6 in a row.",
       "Danny leads the way at 5-1."
      ],
      "matchups": [
@@ -29773,10 +30043,13 @@
     },
     {
      "week": 7,
+     "start": "2018-11-19",
+     "end": "2018-11-25",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 174.9 and beats Nick by 67.6.",
-      "Photo finish: Danny edges Steve 158.8 to 156.4. Blowout of the week: Zac over Nick by 67.6. Upset alert: Vin, 11th coming in, knocks off Palagi (4th).",
-      "Zac beats Nick 174.9 to 107.3. Somebody check who set Zac's lineup. Zac is rolling with 6 straight wins. Vin snaps a 4-game skid. Will has dropped 7 in a row.",
+      "Photo finish: Danny edges Steve 158.8 to 156.4. Blowout of the week (Zac vs. one of the brothers who supposedly run his account): Zac over Nick by 67.6. Upset alert: Vin, 11th coming in, knocks off Palagi (4th).",
+      "Zac is rolling with 6 straight wins. Vin snaps a 4-game skid. Will has dropped 7 in a row.",
       "Danny leads the way at 6-1."
      ],
      "matchups": [
@@ -30058,6 +30331,9 @@
     },
     {
      "week": 8,
+     "start": "2018-11-26",
+     "end": "2018-12-02",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 156.4 and beats Tim by 54.9.",
       "Closest game: Vin edges Danny 134.3 to 123.2. Blowout of the week: Joe over Jefe by 57.0. Upset alert: Vin, 10th coming in, knocks off Danny (1st).",
@@ -30328,6 +30604,9 @@
     },
     {
      "week": 9,
+     "start": "2018-12-03",
+     "end": "2018-12-09",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 150.3 and beats Zac by 1.6.",
       "Photo finish: Danny edges Zac 150.3 to 148.7. Blowout of the week: Nick over Palagi by 27.6.",
@@ -30604,11 +30883,14 @@
     },
     {
      "week": 10,
+     "start": "2018-12-10",
+     "end": "2018-12-16",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 175.3 and beats Tom by 111.9.",
       "Photo finish: Zac edges Will 123.4 to 118.8. Blowout of the week: Steve over Tom by 111.9. Upset alert: Vin, 10th coming in, knocks off Jefe (4th).",
       "Joe is rolling with 4 straight wins. Tim has dropped 3 in a row.",
-      "Nick takes over 1st at 8-2."
+      "Halfway home: Nick leads at 8-2, Danny is right behind at 7-3, and Will has work to do in last place."
      ],
      "matchups": [
       {
@@ -30895,6 +31177,9 @@
     },
     {
      "week": 11,
+     "start": "2018-12-17",
+     "end": "2018-12-23",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 171.2 and beats Palagi by 46.7.",
       "Closest game: Tom edges Vin 134.5 to 119.5. Blowout of the week: Nick over Will by 53.5.",
@@ -31187,10 +31472,13 @@
     },
     {
      "week": 12,
+     "start": "2018-12-24",
+     "end": "2018-12-30",
+     "days": 7,
      "recap": [
-      "A short week, so the scores run low. Danny posts the week's high score with 110.0 and beats Tim by 31.2.",
-      "Photo finish: Will edges Palagi 78.5 to 73.8. Blowout of the week: Danny over Tim by 31.2. Upset alert: Tom, 11th coming in, knocks off Zac (4th).",
-      "Brother vs. brother goes to Danny, 110.0 to 78.8. Joe is rolling with 6 straight wins. Nick's 4-game win streak is over. Tim has dropped 5 in a row.",
+      "Merry Christmas from the RRDJ desk. The NHL's holiday break makes this a short week, so the scores run low. Danny posts the week's high score with 110.0 and beats Tim by 31.2.",
+      "Photo finish: Will edges Palagi 78.5 to 73.8. Blowout of the week (brother vs. brother): Danny over Tim by 31.2. Upset alert: Tom, 11th coming in, knocks off Zac (4th).",
+      "Joe is rolling with 6 straight wins. Nick's 4-game win streak is over. Tim has dropped 5 in a row.",
       "Danny takes over 1st at 9-3."
      ],
      "matchups": [
@@ -31473,10 +31761,13 @@
     },
     {
      "week": 13,
+     "start": "2018-12-31",
+     "end": "2019-01-06",
+     "days": 7,
      "recap": [
-      "Steve posts the week's high score with 165.9 and beats Tim by 53.2.",
-      "Photo finish: Joe edges Vin 158.2 to 153.3. Blowout of the week: Danny over Will by 61.9.",
-      "Brother vs. brother goes to Danny, 127.9 to 66.0. Joe is rolling with 7 straight wins. Tim has dropped 6 in a row.",
+      "Happy New Year! 2018 goes out and 2019 comes in. Steve posts the week's high score with 165.9 and beats Tim by 53.2.",
+      "Photo finish: Joe edges Vin 158.2 to 153.3. Blowout of the week (brother vs. brother): Danny over Will by 61.9.",
+      "Joe is rolling with 7 straight wins. Tim has dropped 6 in a row.",
       "Danny leads the way at 10-3."
      ],
      "matchups": [
@@ -31779,10 +32070,13 @@
     },
     {
      "week": 14,
+     "start": "2019-01-07",
+     "end": "2019-01-13",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 171.0 and beats Ronnie by 25.4.",
-      "Photo finish: Vin edges Steve 158.2 to 155.4. Blowout of the week: Tim over Will by 49.9.",
-      "Brother vs. brother goes to Tim, 134.3 to 84.4. Joe is rolling with 8 straight wins. Tim snaps a 6-game skid.",
+      "Photo finish: Vin edges Steve 158.2 to 155.4. Blowout of the week (brother vs. brother): Tim over Will by 49.9.",
+      "Joe is rolling with 8 straight wins. Tim snaps a 6-game skid.",
       "Nick takes over 1st at 11-3."
      ],
      "matchups": [
@@ -32065,10 +32359,13 @@
     },
     {
      "week": 15,
+     "start": "2019-01-14",
+     "end": "2019-01-20",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 135.4 and beats Ronnie by 12.1.",
       "Photo finish: Joe edges Nick 87.7 to 87.4. Blowout of the week: Tim over Vin by 29.5. Upset alert: Will, 12th coming in, knocks off Jefe (4th).",
-      "Brother vs. brother goes to Danny, 113.2 to 85.5. Joe is rolling with 9 straight wins. Ronnie has dropped 3 in a row.",
+      "Joe is rolling with 9 straight wins. Ronnie has dropped 3 in a row.",
       "Danny takes over 1st at 11-4."
      ],
      "matchups": [
@@ -32367,10 +32664,13 @@
     },
     {
      "week": 16,
+     "start": "2019-01-21",
+     "end": "2019-02-03",
+     "days": 14,
      "recap": [
-      "Danny posts the week's high score with 194.7 and beats Ronnie by 71.7.",
+      "A two-week matchup (Jan 21 to Feb 3) to cover the All-Star break. Danny posts the week's high score with 194.7 and beats Ronnie by 71.7.",
       "Closest game: Joe edges Palagi 146.2 to 133.6. Blowout of the week: Danny over Ronnie by 71.7. Upset alert: Vin, 10th coming in, knocks off Zac (5th).",
-      "Brother vs. brother goes to Tom, 146.0 to 106.9. Joe is rolling with 10 straight wins. Ronnie has dropped 4 in a row.",
+      "Joe is rolling with 10 straight wins. Ronnie has dropped 4 in a row.",
       "Danny leads the way at 12-4."
      ],
      "matchups": [
@@ -32676,10 +32976,13 @@
     },
     {
      "week": 17,
+     "start": "2019-02-04",
+     "end": "2019-02-10",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 164.3 and beats Joe by 33.8.",
       "Closest game: Zac edges Tim 157.4 to 142.4. Blowout of the week: Palagi over Steve by 72.8. Upset alert: Vin, 9th coming in, knocks off Nick (3rd).",
-      "Brother vs. brother goes to Vin, 142.9 to 119.0. Danny is rolling with 3 straight wins. Joe's 10-game win streak is over. Steve has dropped 4 in a row.",
+      "Danny is rolling with 3 straight wins. Joe's 10-game win streak is over. Steve has dropped 4 in a row.",
       "Danny leads the way at 13-4."
      ],
      "matchups": [
@@ -32979,10 +33282,13 @@
     },
     {
      "week": 18,
+     "start": "2019-02-11",
+     "end": "2019-02-17",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 172.5 and beats Danny by 27.9.",
-      "Photo finish: Tom edges Tim 127.2 to 126.2. Blowout of the week: Zac over Nick by 50.7. Upset alert: Steve, 11th coming in, knocks off Danny (1st).",
-      "Zac beats Nick 146.4 to 95.7. Somebody check who set Zac's lineup. Tom is rolling with 3 straight wins. Steve snaps a 4-game skid. Will has dropped 3 in a row.",
+      "Photo finish (brother vs. brother): Tom edges Tim 127.2 to 126.2. Blowout of the week (Zac vs. one of the brothers who supposedly run his account): Zac over Nick by 50.7. Upset alert: Steve, 11th coming in, knocks off Danny (1st).",
+      "Tom is rolling with 3 straight wins. Steve snaps a 4-game skid. Will has dropped 3 in a row.",
       "Danny leads the way at 13-5."
      ],
      "matchups": [
@@ -33276,6 +33582,9 @@
     },
     {
      "week": 19,
+     "start": "2019-02-18",
+     "end": "2019-02-24",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 152.5 and beats Tom by 40.5.",
       "Closest game: Zac edges Palagi 145.3 to 132.5. Blowout of the week: Vin over Danny by 62.9. Upset alert: Vin, 9th coming in, knocks off Danny (1st).",
@@ -33579,11 +33888,14 @@
     },
     {
      "week": 20,
+     "start": "2019-02-25",
+     "end": "2019-03-03",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 203.3 and beats Zac by 111.9.",
       "Closest game: Vin edges Will 134.3 to 112.9. Blowout of the week: Danny over Zac by 111.9.",
       "Joe is rolling with 3 straight wins. Nick has dropped 4 in a row.",
-      "That wraps the regular season, with Joe on top at 15-5."
+      "That wraps the regular season, with Joe on top at 15-5. The six-team playoff field is set: Joe (1), Danny (2), Palagi (3), Nick (4), Zac (5), Jefe (6). Danny and Joe earn a first-round bye. Ronnie just misses out at 9-11."
      ],
      "matchups": [
       {
@@ -33859,9 +34171,10 @@
     {
      "week": 100,
      "recap": [
-      "Jefe wins the 2018-19 championship. Zac finishes 2nd and Danny 3rd.",
-      "Joe won the regular season at 15-5 but finishes 4th once the playoffs are done.",
-      "At the other end, Tom finishes 12th."
+      "From the No. 6 seed, Jefe wins the 2018-19 championship! Jefe beat Palagi (3) in the quarterfinals, beat Joe (1) in the semifinals and beat Zac (5) in the final, 117.0 to 116.5.",
+      "Zac settles for 2nd, and Danny takes 3rd by beating Joe 125.9 to 104.8.",
+      "Joe won the regular season at 15-5 but fell to Jefe in the semifinals.",
+      "At the other end, Tom finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -34733,10 +35046,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2019-09-30",
+     "end": "2019-10-13",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Will posts the week's high score with 296.4 and beats Palagi by 60.0.",
+      "Welcome to the 2019-20 season of Rene Rancourt's Day Job! Jefe comes in as the defending champion.",
+      "Will posts the week's high score with 296.4 and beats Palagi by 60.0.",
       "Photo finish: Zac edges Tom 207.6 to 207.1. Blowout of the week: Will over Palagi by 60.0.",
-      "Brother vs. brother goes to Tim, 239.7 to 228.1.",
       "Will leads the way at 1-0."
      ],
      "matchups": [
@@ -34958,10 +35274,12 @@
     },
     {
      "week": 2,
+     "start": "2019-10-14",
+     "end": "2019-10-20",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 185.1 and beats Vin by 41.4.",
-      "Photo finish: Will edges Danny 152.7 to 152.1. Blowout of the week: Ronnie over Zac by 41.6.",
-      "Brother vs. brother goes to Will, 152.7 to 152.1.",
+      "Photo finish (brother vs. brother): Will edges Danny 152.7 to 152.1. Blowout of the week: Ronnie over Zac by 41.6.",
       "Joe takes over 1st at 2-0."
      ],
      "matchups": [
@@ -35189,10 +35507,13 @@
     },
     {
      "week": 3,
+     "start": "2019-10-21",
+     "end": "2019-10-27",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 177.6 and beats Ronnie by 55.9.",
       "Closest game: Zac edges Joe 162.9 to 153.2. Blowout of the week: Nick over Ronnie by 55.9. Upset alert: Zac, 9th coming in, knocks off Joe (1st).",
-      "Brother vs. brother goes to Tim, 145.2 to 120.4. Jefe is rolling with 3 straight wins. Danny has dropped 3 in a row.",
+      "Jefe is rolling with 3 straight wins. Danny has dropped 3 in a row.",
       "Jefe takes over 1st at 3-0."
      ],
      "matchups": [
@@ -35442,10 +35763,13 @@
     },
     {
      "week": 4,
+     "start": "2019-10-28",
+     "end": "2019-11-03",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 153.9 and beats Joe by 8.2.",
-      "Photo finish: Palagi edges Ronnie 123.5 to 122.8. Blowout of the week: Danny over Tom by 16.9. Upset alert: Nick, 10th coming in, knocks off Joe (2nd).",
-      "Brother vs. brother goes to Danny, 133.7 to 116.8. Jefe is rolling with 4 straight wins. Vin has dropped 3 in a row.",
+      "Photo finish: Palagi edges Ronnie 123.5 to 122.8. Blowout of the week (brother vs. brother): Danny over Tom by 16.9. Upset alert: Nick, 10th coming in, knocks off Joe (2nd).",
+      "Jefe is rolling with 4 straight wins. Vin has dropped 3 in a row.",
       "Jefe leads the way at 4-0."
      ],
      "matchups": [
@@ -35707,10 +36031,13 @@
     },
     {
      "week": 5,
+     "start": "2019-11-04",
+     "end": "2019-11-10",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 165.2 and beats Ronnie by 31.1.",
-      "Photo finish: Jefe edges Tim 129.5 to 125.9. Blowout of the week: Vin over Zac by 39.3. Upset alert: Palagi, 12th coming in, knocks off Joe (4th).",
-      "Brother vs. brother goes to Tom, 159.4 to 131.0. Jefe is rolling with 5 straight wins. Joe has dropped 3 in a row.",
+      "Photo finish: Jefe edges Tim 129.5 to 125.9. Blowout of the week (Zac vs. one of the brothers who supposedly run his account): Vin over Zac by 39.3. Upset alert: Palagi, 12th coming in, knocks off Joe (4th).",
+      "Jefe is rolling with 5 straight wins. Joe has dropped 3 in a row.",
       "Jefe leads the way at 5-0. Ronnie drops to 12th."
      ],
      "matchups": [
@@ -35980,10 +36307,13 @@
     },
     {
      "week": 6,
+     "start": "2019-11-11",
+     "end": "2019-11-17",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 166.2 and beats Will by 12.1.",
       "Photo finish: Joe edges Danny 156.7 to 154.2. Blowout of the week: Jefe over Tom by 42.6. Upset alert: Palagi, 10th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Vin, 140.9 to 119.9. Jefe is rolling with 6 straight wins. Will has dropped 4 in a row.",
+      "Jefe is rolling with 6 straight wins. Will has dropped 4 in a row.",
       "Jefe leads the way at 6-0. Zac drops to 12th."
      ],
      "matchups": [
@@ -36264,10 +36594,13 @@
     },
     {
      "week": 7,
+     "start": "2019-11-18",
+     "end": "2019-11-24",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 228.5 and beats Will by 99.8.",
       "Closest game: Palagi edges Vin 132.1 to 125.5. Blowout of the week: Joe over Will by 99.8. Upset alert: Danny, 11th coming in, knocks off Steve (4th).",
-      "Nick beats Zac 204.1 to 141.5. Somebody check who set Zac's lineup. Jefe is rolling with 7 straight wins. Will has dropped 5 in a row.",
+      "Jefe is rolling with 7 straight wins. Will has dropped 5 in a row.",
       "Jefe leads the way at 7-0."
      ],
      "matchups": [
@@ -36556,6 +36889,9 @@
     },
     {
      "week": 8,
+     "start": "2019-11-25",
+     "end": "2019-12-01",
+     "days": 7,
      "recap": [
       "Palagi posts the week's high score with 207.8 and beats Zac by 75.3.",
       "Photo finish: Vin edges Danny 155.2 to 155.0. Blowout of the week: Palagi over Zac by 75.3.",
@@ -36861,6 +37197,9 @@
     },
     {
      "week": 9,
+     "start": "2019-12-02",
+     "end": "2019-12-08",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 166.1 and beats Will by 47.5.",
       "Closest game: Jefe edges Steve 135.4 to 128.5. Blowout of the week: Vin over Will by 47.5.",
@@ -37172,11 +37511,14 @@
     },
     {
      "week": 10,
+     "start": "2019-12-09",
+     "end": "2019-12-15",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 177.2 and beats Tom by 80.6.",
       "Photo finish: Ronnie edges Joe 126.7 to 126.6. Blowout of the week: Steve over Tom by 80.6. Upset alert: Ronnie, 9th coming in, knocks off Joe (4th).",
       "Jefe is rolling with 10 straight wins. Palagi's 6-game win streak is over. Will has dropped 8 in a row.",
-      "Jefe leads the way at 10-0. Will drops to 12th."
+      "Halfway home: Jefe leads at 10-0, Tim is right behind at 8-2, and Will has work to do in last place."
      ],
      "matchups": [
       {
@@ -37475,6 +37817,9 @@
     },
     {
      "week": 11,
+     "start": "2019-12-16",
+     "end": "2019-12-22",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 194.0 and beats Will by 41.4.",
       "Closest game: Zac edges Jefe 168.8 to 154.8. Blowout of the week: Steve over Ronnie by 67.6. Upset alert: Zac, 10th coming in, knocks off Jefe (1st).",
@@ -37777,10 +38122,13 @@
     },
     {
      "week": 12,
+     "start": "2019-12-23",
+     "end": "2019-12-29",
+     "days": 7,
      "recap": [
-      "Nick posts the week's high score with 183.7 and beats Jefe by 32.0.",
-      "Closest game: Steve edges Joe 145.0 to 131.7. Blowout of the week: Tim over Danny by 42.2.",
-      "Brother vs. brother goes to Tim, 153.4 to 111.2. Tim is rolling with 7 straight wins. Will has dropped 10 in a row.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Nick posts the week's high score with 183.7 and beats Jefe by 32.0.",
+      "Closest game: Steve edges Joe 145.0 to 131.7. Blowout of the week (brother vs. brother): Tim over Danny by 42.2.",
+      "Tim is rolling with 7 straight wins. Will has dropped 10 in a row.",
       "Tim takes over 1st at 10-2."
      ],
      "matchups": [
@@ -38096,10 +38444,13 @@
     },
     {
      "week": 13,
+     "start": "2019-12-30",
+     "end": "2020-01-05",
+     "days": 7,
      "recap": [
-      "Zac posts the week's high score with 199.5 and beats Ronnie by 66.6.",
-      "Photo finish: Danny edges Will 129.0 to 128.0. Blowout of the week: Zac over Ronnie by 66.6.",
-      "Brother vs. brother goes to Danny, 129.0 to 128.0. Tim is rolling with 8 straight wins. Will has dropped 11 in a row.",
+      "Happy New Year! 2019 goes out and 2020 comes in. Zac posts the week's high score with 199.5 and beats Ronnie by 66.6.",
+      "Photo finish (brother vs. brother): Danny edges Will 129.0 to 128.0. Blowout of the week: Zac over Ronnie by 66.6.",
+      "Tim is rolling with 8 straight wins. Will has dropped 11 in a row.",
       "Tim leads the way at 11-2."
      ],
      "matchups": [
@@ -38434,10 +38785,13 @@
     },
     {
      "week": 14,
+     "start": "2020-01-06",
+     "end": "2020-01-12",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 172.2 and beats Tim by 44.1.",
       "Closest game: Zac edges Joe 144.0 to 131.1. Blowout of the week: Jefe over Danny by 70.6. Upset alert: Will, 12th coming in, knocks off Tim (1st).",
-      "Brother vs. brother goes to Will, 172.2 to 128.1. Zac is rolling with 5 straight wins. Will snaps a 11-game skid. Tom has dropped 9 in a row.",
+      "Zac is rolling with 5 straight wins. Will snaps a 11-game skid. Tom has dropped 9 in a row.",
       "Jefe takes over 1st at 12-2."
      ],
      "matchups": [
@@ -38751,10 +39105,13 @@
     },
     {
      "week": 15,
+     "start": "2020-01-13",
+     "end": "2020-01-19",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 195.9 and beats Zac by 62.5.",
       "Photo finish: Vin edges Tim 140.3 to 139.2. Blowout of the week: Joe over Nick by 67.3. Upset alert: Joe, 9th coming in, knocks off Nick (4th).",
-      "Brother vs. brother goes to Danny, 158.9 to 122.0. Vin is rolling with 5 straight wins. Joe snaps a 5-game skid. Tom has dropped 10 in a row.",
+      "Vin is rolling with 5 straight wins. Joe snaps a 5-game skid. Tom has dropped 10 in a row.",
       "Jefe leads the way at 13-2."
      ],
      "matchups": [
@@ -39062,10 +39419,13 @@
     },
     {
      "week": 16,
+     "start": "2020-01-20",
+     "end": "2020-02-02",
+     "days": 14,
      "recap": [
-      "Joe posts the week's high score with 189.1 and beats Palagi by 51.9.",
-      "Closest game: Danny edges Ronnie 151.2 to 143.6. Blowout of the week: Will over Tom by 64.8.",
-      "Vin beats Zac 188.6 to 153.6. Somebody check who set Zac's lineup. Vin is rolling with 6 straight wins. Tom has dropped 11 in a row.",
+      "A two-week matchup (Jan 20 to Feb 2) to cover the All-Star break. Joe posts the week's high score with 189.1 and beats Palagi by 51.9.",
+      "Closest game: Danny edges Ronnie 151.2 to 143.6. Blowout of the week (brother vs. brother): Will over Tom by 64.8.",
+      "Vin is rolling with 6 straight wins. Tom has dropped 11 in a row.",
       "Jefe leads the way at 14-2."
      ],
      "matchups": [
@@ -39386,10 +39746,13 @@
     },
     {
      "week": 17,
+     "start": "2020-02-03",
+     "end": "2020-02-09",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 170.5 and beats Tim by 25.3.",
       "Closest game: Palagi edges Steve 133.0 to 126.6. Blowout of the week: Jefe over Tom by 57.9. Upset alert: Zac, 9th coming in, knocks off Tim (2nd).",
-      "Brother vs. brother goes to Nick, 148.4 to 127.3. Jefe is rolling with 5 straight wins. Vin's 6-game win streak is over. Tom has dropped 12 in a row.",
+      "Jefe is rolling with 5 straight wins. Vin's 6-game win streak is over. Tom has dropped 12 in a row.",
       "Jefe leads the way at 15-2."
      ],
      "matchups": [
@@ -39711,10 +40074,13 @@
     },
     {
      "week": 18,
+     "start": "2020-02-10",
+     "end": "2020-02-16",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 221.5 and beats Joe by 38.9.",
-      "Photo finish: Tim edges Tom 123.1 to 121.0. Blowout of the week: Jefe over Ronnie by 96.5.",
-      "Nick beats Zac 155.4 to 109.7. Somebody check who set Zac's lineup. Jefe is rolling with 6 straight wins. Tim snaps a 4-game skid. Tom has dropped 13 in a row.",
+      "Photo finish (brother vs. brother): Tim edges Tom 123.1 to 121.0. Blowout of the week: Jefe over Ronnie by 96.5.",
+      "Jefe is rolling with 6 straight wins. Tim snaps a 4-game skid. Tom has dropped 13 in a row.",
       "Jefe leads the way at 16-2."
      ],
      "matchups": [
@@ -40046,6 +40412,9 @@
     },
     {
      "week": 19,
+     "start": "2020-02-17",
+     "end": "2020-02-23",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 191.5 and beats Tim by 30.2.",
       "Closest game: Steve edges Will 167.9 to 160.2. Blowout of the week: Vin over Danny by 71.0. Upset alert: Joe, 9th coming in, knocks off Jefe (1st).",
@@ -40359,11 +40728,14 @@
     },
     {
      "week": 20,
+     "start": "2020-02-24",
+     "end": "2020-03-01",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 206.2 and beats Will by 57.9.",
       "Closest game: Tim edges Ronnie 136.4 to 125.9. Blowout of the week: Vin over Will by 57.9. Upset alert: Palagi, 8th coming in, knocks off Nick (3rd).",
       "Vin is rolling with 3 straight wins. Nick's 4-game win streak is over. Tom has dropped 15 in a row.",
-      "That wraps the regular season, with Jefe on top at 16-4."
+      "Nobody knew it yet, but this was the last week of the season. The NHL paused on March 12, 2020, and the league never crowned a champion. Jefe finishes on top at 16-4."
      ],
      "matchups": [
       {
@@ -41015,10 +41387,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2021-01-11",
+     "end": "2021-01-24",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Joe posts the week's high score with 317.6 and beats Steve by 48.9.",
-      "Closest game: Tom edges Zac 268.1 to 255.0. Blowout of the week: Danny over Tim by 51.5.",
-      "Brother vs. brother goes to Danny, 250.5 to 199.0.",
+      "Welcome to the 2020-21 season of Rene Rancourt's Day Job! Nobody lifted the trophy after the pandemic cut 2019-20 short, so the title is wide open. Hockey is back in January with a 56-game NHL schedule, so this one is a sprint.",
+      "Joe posts the week's high score with 317.6 and beats Steve by 48.9.",
+      "Closest game: Tom edges Zac 268.1 to 255.0. Blowout of the week (brother vs. brother): Danny over Tim by 51.5.",
       "Joe leads the way at 1-0."
      ],
      "matchups": [
@@ -41240,10 +41615,12 @@
     },
     {
      "week": 2,
+     "start": "2021-01-25",
+     "end": "2021-01-31",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 198.7 and beats Ronnie by 96.2.",
       "Photo finish: Tim edges Steve 143.7 to 141.0. Blowout of the week: Zac over Ronnie by 96.2.",
-      "Brother vs. brother goes to Danny, 190.8 to 154.7.",
       "Vin takes over 1st at 2-0."
      ],
      "matchups": [
@@ -41471,10 +41848,13 @@
     },
     {
      "week": 3,
+     "start": "2021-02-01",
+     "end": "2021-02-07",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 168.2 and beats Vin by 4.4.",
       "Photo finish: Palagi edges Tom 130.6 to 126.8. Blowout of the week: Joe over Zac by 60.0. Upset alert: Steve, 10th coming in, knocks off Vin (1st).",
-      "Brother vs. brother goes to Will, 144.0 to 121.5. Danny is rolling with 3 straight wins. Ronnie has dropped 3 in a row.",
+      "Danny is rolling with 3 straight wins. Ronnie has dropped 3 in a row.",
       "Danny takes over 1st at 3-0."
      ],
      "matchups": [
@@ -41723,10 +42103,13 @@
     },
     {
      "week": 4,
+     "start": "2021-02-08",
+     "end": "2021-02-14",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 183.1 and beats Nick by 96.3.",
       "Closest game: Steve edges Zac 168.6 to 160.4. Blowout of the week: Joe over Nick by 96.3. Upset alert: Will, 9th coming in, knocks off Jefe (3rd).",
-      "Brother vs. brother goes to Danny, 110.1 to 101.3. Danny is rolling with 4 straight wins. Ronnie has dropped 4 in a row.",
+      "Danny is rolling with 4 straight wins. Ronnie has dropped 4 in a row.",
       "Danny leads the way at 4-0."
      ],
      "matchups": [
@@ -41988,10 +42371,13 @@
     },
     {
      "week": 5,
+     "start": "2021-02-15",
+     "end": "2021-02-21",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 166.3 and beats Zac by 17.5.",
       "Photo finish: Jefe edges Tim 136.6 to 135.1. Blowout of the week: Joe over Palagi by 51.2.",
-      "Vin beats Zac 166.3 to 148.8. Somebody check who set Zac's lineup. Danny is rolling with 5 straight wins. Ronnie has dropped 5 in a row.",
+      "Danny is rolling with 5 straight wins. Ronnie has dropped 5 in a row.",
       "Danny leads the way at 5-0."
      ],
      "matchups": [
@@ -42276,11 +42662,14 @@
     },
     {
      "week": 6,
+     "start": "2021-02-22",
+     "end": "2021-02-28",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 198.7 and beats Palagi by 63.4.",
       "Photo finish: Ronnie edges Will 152.2 to 148.6. Blowout of the week: Steve over Palagi by 63.4. Upset alert: Ronnie, 12th coming in, knocks off Will (6th).",
-      "Brother vs. brother goes to Vin, 158.7 to 147.4. Joe is rolling with 4 straight wins. Danny's 5-game win streak is over. Tim has dropped 4 in a row.",
-      "Vin takes over 1st at 5-1."
+      "Joe is rolling with 4 straight wins. Danny's 5-game win streak is over. Tim has dropped 4 in a row.",
+      "Halfway home: Vin leads at 5-1, Joe is right behind at 5-1, and Tim has work to do in last place."
      ],
      "matchups": [
       {
@@ -42556,10 +42945,13 @@
     },
     {
      "week": 7,
+     "start": "2021-03-01",
+     "end": "2021-03-07",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 236.2 and beats Will by 18.7.",
-      "Photo finish: Zac edges Nick 170.6 to 168.3. Blowout of the week: Jefe over Ronnie by 38.9. Upset alert: Palagi, 7th coming in, knocks off Vin (1st).",
-      "Zac beats Nick 170.6 to 168.3. Somebody check who set Zac's lineup. Joe is rolling with 5 straight wins. Steve's 4-game win streak is over. Tim has dropped 5 in a row.",
+      "Photo finish (Zac vs. one of the brothers who supposedly run his account): Zac edges Nick 170.6 to 168.3. Blowout of the week: Jefe over Ronnie by 38.9. Upset alert: Palagi, 7th coming in, knocks off Vin (1st).",
+      "Joe is rolling with 5 straight wins. Steve's 4-game win streak is over. Tim has dropped 5 in a row.",
       "Joe takes over 1st at 6-1."
      ],
      "matchups": [
@@ -42834,6 +43226,9 @@
     },
     {
      "week": 8,
+     "start": "2021-03-08",
+     "end": "2021-03-14",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 195.5 and beats Palagi by 2.2.",
       "Photo finish: Zac edges Palagi 195.5 to 193.3. Blowout of the week: Vin over Danny by 28.7.",
@@ -43106,6 +43501,9 @@
     },
     {
      "week": 9,
+     "start": "2021-03-15",
+     "end": "2021-03-21",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 210.6 and beats Danny by 79.1.",
       "Photo finish: Palagi edges Nick 146.6 to 145.3. Blowout of the week: Zac over Danny by 79.1. Upset alert: Tom, 10th coming in, knocks off Joe (1st).",
@@ -43386,6 +43784,9 @@
     },
     {
      "week": 10,
+     "start": "2021-03-22",
+     "end": "2021-03-28",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 197.2 and beats Tom by 54.4.",
       "Closest game: Danny edges Nick 147.2 to 124.2. Blowout of the week: Will over Zac by 64.6. Upset alert: Tim, 12th coming in, knocks off Palagi (7th).",
@@ -43655,11 +44056,14 @@
     },
     {
      "week": 11,
+     "start": "2021-03-29",
+     "end": "2021-04-04",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 199.4 and beats Zac by 115.6.",
       "Closest game: Nick edges Will 133.0 to 121.7. Blowout of the week: Jefe over Zac by 115.6. Upset alert: Ronnie, 11th coming in, knocks off Steve (6th).",
       "Jefe is rolling with 5 straight wins. Vin has dropped 3 in a row.",
-      "That wraps the regular season, with Joe on top at 8-3."
+      "That wraps the regular season, with Joe on top at 8-3. The six-team playoff field is set: Joe (1), Jefe (2), Danny (3), Vin (4), Will (5), Palagi (6). Jefe and Joe earn a first-round bye. Steve just misses out at 5-5-1."
      ],
      "matchups": [
       {
@@ -43906,9 +44310,10 @@
     {
      "week": 100,
      "recap": [
-      "Vin wins the 2020-21 championship. Joe finishes 2nd and Jefe 3rd.",
-      "Joe won the regular season at 8-3 but finishes 2nd once the playoffs are done.",
-      "At the other end, Nick finishes 12th."
+      "From the No. 4 seed, Vin wins the 2020-21 championship! Vin beat Will (5) in the quarterfinals, beat Jefe (2) in the semifinals and beat Joe (1) in the final, 144.9 to 135.1.",
+      "Joe settles for 2nd, and Jefe takes 3rd by beating Palagi 157.7 to 137.1.",
+      "Upset of the playoffs: No. 6 Palagi knocks off No. 3 Danny in the quarterfinals. Joe won the regular season at 8-3 but fell to Vin in the final.",
+      "At the other end, Nick finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -44811,10 +45216,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2021-10-11",
+     "end": "2021-10-17",
+     "days": 7,
      "recap": [
+      "Welcome to the 2021-22 season of Rene Rancourt's Day Job! Vin comes in as the defending champion.",
       "Tim posts the week's high score with 150.5 and beats Danny by 34.2.",
       "Photo finish: Zac edges Tom 110.4 to 110.3. Blowout of the week: Palagi over Will by 37.5.",
-      "Brother vs. brother goes to Tim, 150.5 to 116.3.",
       "Tim leads the way at 1-0."
      ],
      "matchups": [
@@ -45036,10 +45444,12 @@
     },
     {
      "week": 2,
+     "start": "2021-10-18",
+     "end": "2021-10-24",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 178.1 and beats Zac by 18.1.",
-      "Closest game: Will edges Danny 138.1 to 130.8. Blowout of the week: Vin over Joe by 45.0. Upset alert: Jefe, 10th coming in, knocks off Palagi (2nd).",
-      "Brother vs. brother goes to Will, 138.1 to 130.8.",
+      "Closest game (brother vs. brother): Will edges Danny 138.1 to 130.8. Blowout of the week: Vin over Joe by 45.0. Upset alert: Jefe, 10th coming in, knocks off Palagi (2nd).",
       "Tim leads the way at 2-0."
      ],
      "matchups": [
@@ -45267,10 +45677,13 @@
     },
     {
      "week": 3,
+     "start": "2021-10-25",
+     "end": "2021-10-31",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 189.9 and beats Danny by 48.0.",
       "Photo finish: Palagi edges Tom 136.5 to 133.2. Blowout of the week: Jefe over Danny by 48.0. Upset alert: Will, 9th coming in, knocks off Tim (1st).",
-      "Brother vs. brother goes to Will, 141.9 to 137.3. Danny has dropped 3 in a row.",
+      "Danny has dropped 3 in a row.",
       "Jefe takes over 1st at 2-1."
      ],
      "matchups": [
@@ -45513,10 +45926,13 @@
     },
     {
      "week": 4,
+     "start": "2021-11-01",
+     "end": "2021-11-07",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 178.8 and beats Joe by 52.6.",
       "Closest game: Vin edges Tim 166.4 to 157.9. Blowout of the week: Nick over Joe by 52.6. Upset alert: Vin, 8th coming in, knocks off Tim (2nd).",
-      "Brother vs. brother goes to Tom, 170.6 to 138.8. Jefe is rolling with 3 straight wins. Danny has dropped 4 in a row.",
+      "Jefe is rolling with 3 straight wins. Danny has dropped 4 in a row.",
       "Jefe leads the way at 3-1. Danny drops to 12th."
      ],
      "matchups": [
@@ -45779,10 +46195,13 @@
     },
     {
      "week": 5,
+     "start": "2021-11-08",
+     "end": "2021-11-14",
+     "days": 7,
      "recap": [
       "Tom posts the week's high score with 195.0 and beats Will by 53.6.",
-      "Closest game: Ronnie edges Danny 154.4 to 148.5. Blowout of the week: Tom over Will by 53.6.",
-      "Brother vs. brother goes to Tom, 195.0 to 141.4. Jefe is rolling with 4 straight wins. Danny has dropped 5 in a row.",
+      "Closest game: Ronnie edges Danny 154.4 to 148.5. Blowout of the week (brother vs. brother): Tom over Will by 53.6.",
+      "Jefe is rolling with 4 straight wins. Danny has dropped 5 in a row.",
       "Jefe leads the way at 4-1."
      ],
      "matchups": [
@@ -46051,10 +46470,13 @@
     },
     {
      "week": 6,
+     "start": "2021-11-15",
+     "end": "2021-11-21",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 199.2 and beats Tom by 73.4.",
-      "Photo finish: Nick edges Vin 162.1 to 159.7. Blowout of the week: Jefe over Tom by 73.4.",
-      "Brother vs. brother goes to Nick, 162.1 to 159.7. Jefe is rolling with 5 straight wins. Danny has dropped 6 in a row.",
+      "Photo finish (brother vs. brother): Nick edges Vin 162.1 to 159.7. Blowout of the week: Jefe over Tom by 73.4.",
+      "Jefe is rolling with 5 straight wins. Danny has dropped 6 in a row.",
       "Jefe leads the way at 5-1."
      ],
      "matchups": [
@@ -46337,10 +46759,13 @@
     },
     {
      "week": 7,
+     "start": "2021-11-22",
+     "end": "2021-11-28",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 205.3 and beats Will by 63.6.",
-      "Photo finish: Nick edges Zac 133.3 to 130.9. Blowout of the week: Joe over Will by 63.6.",
-      "Brother vs. brother goes to Tim, 143.9 to 118.8. Jefe is rolling with 6 straight wins. Ronnie's 5-game win streak is over. Danny has dropped 7 in a row.",
+      "Photo finish (Zac vs. one of the brothers who supposedly run his account): Nick edges Zac 133.3 to 130.9. Blowout of the week: Joe over Will by 63.6.",
+      "Jefe is rolling with 6 straight wins. Ronnie's 5-game win streak is over. Danny has dropped 7 in a row.",
       "Jefe leads the way at 6-1."
      ],
      "matchups": [
@@ -46635,6 +47060,9 @@
     },
     {
      "week": 8,
+     "start": "2021-11-29",
+     "end": "2021-12-05",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 207.8 and beats Joe by 51.4.",
       "Closest game: Nick edges Tim 152.5 to 142.8. Blowout of the week: Jefe over Joe by 51.4. Upset alert: Will, 10th coming in, knocks off Steve (3rd).",
@@ -46933,6 +47361,9 @@
     },
     {
      "week": 9,
+     "start": "2021-12-06",
+     "end": "2021-12-12",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 229.9 and beats Will by 58.5.",
       "Photo finish: Joe edges Tom 181.9 to 178.4. Blowout of the week: Vin over Will by 58.5.",
@@ -47230,6 +47661,9 @@
     },
     {
      "week": 10,
+     "start": "2021-12-13",
+     "end": "2021-12-19",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 143.4 and beats Nick by 32.5.",
       "Closest game: Tom edges Steve 106.3 to 97.5. Blowout of the week: Tim over Palagi by 59.3. Upset alert: Danny, 12th coming in, knocks off Nick (1st).",
@@ -47519,11 +47953,14 @@
     },
     {
      "week": 11,
+     "start": "2021-12-20",
+     "end": "2022-01-02",
+     "days": 14,
      "recap": [
-      "Jefe posts the week's high score with 156.8 and beats Zac by 82.7.",
+      "A two-week matchup over the holidays (Dec 20 to Jan 2). Jefe posts the week's high score with 156.8 and beats Zac by 82.7.",
       "Photo finish: Tom edges Vin 108.1 to 105.1. Blowout of the week: Jefe over Zac by 82.7. Upset alert: Will, 8th coming in, knocks off Nick (1st).",
       "Danny is rolling with 3 straight wins. Vin's 4-game win streak is over. Palagi has dropped 8 in a row.",
-      "Jefe takes over 1st at 8-3."
+      "Halfway home: Jefe leads at 8-3, Nick is right behind at 8-3, and Palagi has work to do in last place."
      ],
      "matchups": [
       {
@@ -47817,10 +48254,13 @@
     },
     {
      "week": 12,
+     "start": "2022-01-03",
+     "end": "2022-01-09",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 170.2 and beats Tim by 51.5.",
-      "Photo finish: Zac edges Tom 134.1 to 132.4. Blowout of the week: Danny over Tim by 51.5.",
-      "Brother vs. brother goes to Danny, 170.2 to 118.7. Danny is rolling with 4 straight wins. Palagi has dropped 9 in a row.",
+      "Photo finish: Zac edges Tom 134.1 to 132.4. Blowout of the week (brother vs. brother): Danny over Tim by 51.5.",
+      "Danny is rolling with 4 straight wins. Palagi has dropped 9 in a row.",
       "Nick takes over 1st at 9-3."
      ],
      "matchups": [
@@ -48127,10 +48567,13 @@
     },
     {
      "week": 13,
+     "start": "2022-01-10",
+     "end": "2022-01-16",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 181.8 and beats Will by 41.3.",
       "Photo finish: Vin edges Joe 121.6 to 119.7. Blowout of the week: Jefe over Palagi by 83.4. Upset alert: Tom, 10th coming in, knocks off Nick (1st).",
-      "Brother vs. brother goes to Danny, 181.8 to 140.5. Danny is rolling with 5 straight wins. Palagi has dropped 10 in a row.",
+      "Danny is rolling with 5 straight wins. Palagi has dropped 10 in a row.",
       "Jefe takes over 1st at 9-4."
      ],
      "matchups": [
@@ -48431,10 +48874,13 @@
     },
     {
      "week": 14,
+     "start": "2022-01-17",
+     "end": "2022-01-23",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 191.1 and beats Nick by 49.0.",
-      "Closest game: Will edges Tim 188.7 to 178.1. Blowout of the week: Ronnie over Nick by 49.0.",
-      "Brother vs. brother goes to Will, 188.7 to 178.1. Vin is rolling with 3 straight wins. Danny's 5-game win streak is over. Palagi has dropped 11 in a row.",
+      "Closest game (brother vs. brother): Will edges Tim 188.7 to 178.1. Blowout of the week: Ronnie over Nick by 49.0.",
+      "Vin is rolling with 3 straight wins. Danny's 5-game win streak is over. Palagi has dropped 11 in a row.",
       "Jefe leads the way at 10-4."
      ],
      "matchups": [
@@ -48734,10 +49180,13 @@
     },
     {
      "week": 15,
+     "start": "2022-01-24",
+     "end": "2022-01-30",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 192.9 and beats Tom by 62.5.",
-      "Photo finish: Zac edges Steve 172.3 to 168.9. Blowout of the week: Danny over Tom by 62.5. Upset alert: Tim, 8th coming in, knocks off Vin (2nd).",
-      "Brother vs. brother goes to Danny, 192.9 to 130.4. Jefe is rolling with 3 straight wins. Palagi has dropped 12 in a row.",
+      "Photo finish: Zac edges Steve 172.3 to 168.9. Blowout of the week (brother vs. brother): Danny over Tom by 62.5. Upset alert: Tim, 8th coming in, knocks off Vin (2nd).",
+      "Jefe is rolling with 3 straight wins. Palagi has dropped 12 in a row.",
       "Jefe leads the way at 11-4."
      ],
      "matchups": [
@@ -49040,10 +49489,13 @@
     },
     {
      "week": 16,
+     "start": "2022-01-31",
+     "end": "2022-02-13",
+     "days": 14,
      "recap": [
-      "A multi-week period this time, so the scores run high. Jefe posts the week's high score with 315.6 and beats Tim by 115.4.",
+      "A two-week matchup (Jan 31 to Feb 13) to cover the February (All-Star weekend plus the Olympic window the NHL ended up skipping) break, so the numbers run big. Jefe posts the week's high score with 315.6 and beats Tim by 115.4.",
       "Photo finish: Steve edges Nick 192.8 to 191.7. Blowout of the week: Jefe over Tim by 115.4. Upset alert: Danny, 9th coming in, knocks off Ronnie (4th).",
-      "Vin beats Zac 233.1 to 193.2. Somebody check who set Zac's lineup. Jefe is rolling with 4 straight wins. Palagi has dropped 13 in a row.",
+      "Jefe is rolling with 4 straight wins. Palagi has dropped 13 in a row.",
       "Jefe leads the way at 12-4."
      ],
      "matchups": [
@@ -49345,10 +49797,13 @@
     },
     {
      "week": 17,
+     "start": "2022-02-14",
+     "end": "2022-02-20",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 238.0 and beats Palagi by 111.3.",
       "Photo finish: Zac edges Tim 138.6 to 134.0. Blowout of the week: Steve over Palagi by 111.3.",
-      "Brother vs. brother goes to Vin, 192.2 to 161.5. Jefe is rolling with 5 straight wins. Palagi has dropped 14 in a row.",
+      "Jefe is rolling with 5 straight wins. Palagi has dropped 14 in a row.",
       "Jefe leads the way at 13-4."
      ],
      "matchups": [
@@ -49656,10 +50111,13 @@
     },
     {
      "week": 18,
+     "start": "2022-02-21",
+     "end": "2022-02-27",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 208.8 and beats Ronnie by 35.8.",
-      "Closest game: Zac edges Nick 165.1 to 159.3. Blowout of the week: Danny over Steve by 78.1. Upset alert: Zac, 11th coming in, knocks off Nick (4th).",
-      "Zac beats Nick 165.1 to 159.3. Somebody check who set Zac's lineup. Jefe is rolling with 6 straight wins. Palagi has dropped 15 in a row.",
+      "Closest game (Zac vs. one of the brothers who supposedly run his account): Zac edges Nick 165.1 to 159.3. Blowout of the week: Danny over Steve by 78.1. Upset alert: Zac, 11th coming in, knocks off Nick (4th).",
+      "Jefe is rolling with 6 straight wins. Palagi has dropped 15 in a row.",
       "Jefe leads the way at 14-4."
      ],
      "matchups": [
@@ -49983,6 +50441,9 @@
     },
     {
      "week": 19,
+     "start": "2022-02-28",
+     "end": "2022-03-06",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 209.4 and beats Steve by 58.4.",
       "Photo finish: Vin edges Danny 162.9 to 160.0. Blowout of the week: Will over Steve by 58.4. Upset alert: Tom, 11th coming in, knocks off Ronnie (6th).",
@@ -50316,6 +50777,9 @@
     },
     {
      "week": 20,
+     "start": "2022-03-07",
+     "end": "2022-03-13",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 237.4 and beats Steve by 47.2.",
       "Closest game: Tim edges Ronnie 183.3 to 168.9. Blowout of the week: Jefe over Steve by 47.2. Upset alert: Palagi, 12th coming in, knocks off Nick (3rd).",
@@ -50649,6 +51113,9 @@
     },
     {
      "week": 21,
+     "start": "2022-03-14",
+     "end": "2022-03-20",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 191.7 and beats Tom by 34.9.",
       "Photo finish: Will edges Zac 141.0 to 136.9. Blowout of the week: Steve over Tom by 34.9.",
@@ -50983,11 +51450,14 @@
     },
     {
      "week": 22,
+     "start": "2022-03-21",
+     "end": "2022-03-27",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 215.0 and beats Zac by 45.9.",
       "Closest game: Will edges Nick 196.7 to 185.6. Blowout of the week: Danny over Palagi by 70.0.",
       "Vin is rolling with 7 straight wins. Ronnie has dropped 7 in a row.",
-      "That wraps the regular season, with Vin on top at 17-5."
+      "That wraps the regular season, with Vin on top at 17-5. The six-team playoff field is set: Vin (1), Jefe (2), Joe (3), Steve (4), Will (5), Nick (6). Jefe and Vin earn a first-round bye. Zac just misses out at 10-12."
      ],
      "matchups": [
       {
@@ -51294,9 +51764,10 @@
     {
      "week": 100,
      "recap": [
-      "Jefe wins the 2021-22 championship. Vin finishes 2nd and Steve 3rd.",
-      "Vin won the regular season at 17-5 but finishes 2nd once the playoffs are done.",
-      "At the other end, Ronnie finishes 12th."
+      "Jefe wins the 2021-22 championship as the No. 2 seed! After a first-round bye, Jefe beat Nick (6) in the semifinals and beat Vin (1) in the final, 189.0 to 142.0.",
+      "Vin settles for 2nd, and Steve takes 3rd by beating Nick 149.0 to 136.6.",
+      "Upset of the playoffs: No. 6 Nick knocks off No. 3 Joe in the quarterfinals. Vin won the regular season at 17-5 but fell to Jefe in the final.",
+      "At the other end, Ronnie finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -52229,10 +52700,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2022-10-10",
+     "end": "2022-10-16",
+     "days": 7,
      "recap": [
+      "Welcome to the 2022-23 season of Rene Rancourt's Day Job! Jefe comes in as the defending champion.",
       "Joe posts the week's high score with 147.3 and beats Steve by 29.3.",
       "Photo finish: Ronnie edges Tom 134.5 to 132.5. Blowout of the week: Jefe over Will by 42.5.",
-      "Zac beats Vin 139.2 to 135.8. Somebody check who set Zac's lineup.",
       "Joe leads the way at 1-0."
      ],
      "matchups": [
@@ -52454,6 +52928,9 @@
     },
     {
      "week": 2,
+     "start": "2022-10-17",
+     "end": "2022-10-23",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 193.5 and beats Nick by 46.2.",
       "Photo finish: Joe edges Jefe 175.6 to 172.4. Blowout of the week: Steve over Nick by 46.2.",
@@ -52684,10 +53161,13 @@
     },
     {
      "week": 3,
+     "start": "2022-10-24",
+     "end": "2022-10-30",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 193.5 and beats Steve by 34.5.",
       "Closest game: Ronnie edges Joe 188.0 to 180.2. Blowout of the week: Palagi over Vin by 37.2. Upset alert: Danny, 9th coming in, knocks off Zac (4th).",
-      "Brother vs. brother goes to Will, 160.5 to 130.0. Ronnie is rolling with 3 straight wins. Nick has dropped 3 in a row.",
+      "Ronnie is rolling with 3 straight wins. Nick has dropped 3 in a row.",
       "Tim takes over 1st at 3-0."
      ],
      "matchups": [
@@ -52938,10 +53418,13 @@
     },
     {
      "week": 4,
+     "start": "2022-10-31",
+     "end": "2022-11-06",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 226.1 and beats Steve by 45.6.",
       "Closest game: Nick edges Ronnie 167.9 to 162.9. Blowout of the week: Zac over Palagi by 52.4. Upset alert: Nick, 11th coming in, knocks off Ronnie (2nd).",
-      "Brother vs. brother goes to Danny, 148.1 to 109.9. Tim is rolling with 4 straight wins. Tom has dropped 4 in a row.",
+      "Tim is rolling with 4 straight wins. Tom has dropped 4 in a row.",
       "Tim leads the way at 4-0."
      ],
      "matchups": [
@@ -53196,6 +53679,9 @@
     },
     {
      "week": 5,
+     "start": "2022-11-07",
+     "end": "2022-11-13",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 194.2 and beats Ronnie by 29.7.",
       "Closest game: Jefe edges Vin 143.9 to 137.9. Blowout of the week: Joe over Tom by 56.4.",
@@ -53475,10 +53961,13 @@
     },
     {
      "week": 6,
+     "start": "2022-11-14",
+     "end": "2022-11-20",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 183.6 and beats Ronnie by 24.5.",
       "Closest game: Zac edges Jefe 165.0 to 156.3. Blowout of the week: Nick over Joe by 41.9. Upset alert: Nick, 11th coming in, knocks off Joe (3rd).",
-      "Brother vs. brother goes to Tim, 172.6 to 160.3. Tim is rolling with 6 straight wins. Tom has dropped 6 in a row.",
+      "Tim is rolling with 6 straight wins. Tom has dropped 6 in a row.",
       "Tim leads the way at 6-0."
      ],
      "matchups": [
@@ -53768,6 +54257,9 @@
     },
     {
      "week": 7,
+     "start": "2022-11-21",
+     "end": "2022-11-27",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 212.7 and beats Tim by 58.7.",
       "Photo finish: Palagi edges Steve 147.5 to 145.9. Blowout of the week: Nick over Tom by 71.5. Upset alert: Jefe, 8th coming in, knocks off Danny (3rd).",
@@ -54048,6 +54540,9 @@
     },
     {
      "week": 8,
+     "start": "2022-11-28",
+     "end": "2022-12-04",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 202.9 and beats Joe by 51.7.",
       "Photo finish: Jefe edges Palagi 141.0 to 137.1. Blowout of the week: Tim over Nick by 53.3.",
@@ -54334,10 +54829,13 @@
     },
     {
      "week": 9,
+     "start": "2022-12-05",
+     "end": "2022-12-11",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 207.6 and beats Nick by 34.4.",
       "Closest game: Jefe edges Steve 150.3 to 138.5. Blowout of the week: Joe over Zac by 40.9.",
-      "Brother vs. brother goes to Vin, 207.6 to 173.2. Vin is rolling with 4 straight wins. Zac's 5-game win streak is over. Tom has dropped 9 in a row.",
+      "Vin is rolling with 4 straight wins. Zac's 5-game win streak is over. Tom has dropped 9 in a row.",
       "Tim leads the way at 8-1."
      ],
      "matchups": [
@@ -54621,10 +55119,13 @@
     },
     {
      "week": 10,
+     "start": "2022-12-12",
+     "end": "2022-12-18",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 207.1 and beats Zac by 19.8.",
       "Closest game: Vin edges Tim 174.3 to 169.1. Blowout of the week: Ronnie over Steve by 54.2. Upset alert: Nick, 10th coming in, knocks off Zac (2nd).",
-      "Nick beats Zac 207.1 to 187.3. Somebody check who set Zac's lineup. Vin is rolling with 5 straight wins. Tom snaps a 9-game skid. Danny has dropped 4 in a row.",
+      "Vin is rolling with 5 straight wins. Tom snaps a 9-game skid. Danny has dropped 4 in a row.",
       "Tim leads the way at 8-2."
      ],
      "matchups": [
@@ -54900,11 +55401,14 @@
     },
     {
      "week": 11,
+     "start": "2022-12-19",
+     "end": "2022-12-25",
+     "days": 7,
      "recap": [
-      "Vin posts the week's high score with 169.0 and beats Tom by 38.3.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Vin posts the week's high score with 169.0 and beats Tom by 38.3.",
       "Photo finish: Danny edges Nick 121.7 to 120.4. Blowout of the week: Palagi over Joe by 38.7.",
       "Vin is rolling with 6 straight wins. Danny snaps a 4-game skid. Steve has dropped 3 in a row.",
-      "Vin takes over 1st at 8-3."
+      "Halfway home: Vin leads at 8-3, Tim is right behind at 8-3, and Tom has work to do in last place."
      ],
      "matchups": [
       {
@@ -55187,10 +55691,13 @@
     },
     {
      "week": 12,
+     "start": "2022-12-26",
+     "end": "2023-01-01",
+     "days": 7,
      "recap": [
-      "Joe posts the week's high score with 180.4 and beats Steve by 28.8.",
+      "Happy New Year! 2022 goes out and 2023 comes in. Joe posts the week's high score with 180.4 and beats Steve by 28.8.",
       "Closest game: Jefe edges Will 154.5 to 147.5. Blowout of the week: Tom over Ronnie by 36.2. Upset alert: Danny, 9th coming in, knocks off Tim (2nd).",
-      "Brother vs. brother goes to Danny, 178.3 to 147.3. Vin is rolling with 7 straight wins. Steve has dropped 4 in a row.",
+      "Vin is rolling with 7 straight wins. Steve has dropped 4 in a row.",
       "Vin leads the way at 9-3."
      ],
      "matchups": [
@@ -55480,6 +55987,9 @@
     },
     {
      "week": 13,
+     "start": "2023-01-02",
+     "end": "2023-01-08",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 205.8 and beats Ronnie by 86.3.",
       "Closest game: Jefe edges Joe 179.5 to 166.6. Blowout of the week: Will over Ronnie by 86.3.",
@@ -55793,10 +56303,13 @@
     },
     {
      "week": 14,
+     "start": "2023-01-09",
+     "end": "2023-01-15",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 214.7 and beats Danny by 64.6.",
       "Closest game: Ronnie edges Joe 175.5 to 167.6. Blowout of the week: Zac over Danny by 64.6.",
-      "Brother vs. brother goes to Will, 150.4 to 139.5. Vin is rolling with 9 straight wins. Tim snaps a 4-game skid. Steve has dropped 6 in a row.",
+      "Vin is rolling with 9 straight wins. Tim snaps a 4-game skid. Steve has dropped 6 in a row.",
       "Vin leads the way at 11-3."
      ],
      "matchups": [
@@ -56098,10 +56611,13 @@
     },
     {
      "week": 15,
+     "start": "2023-01-16",
+     "end": "2023-01-22",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 215.9 and beats Tim by 9.6.",
-      "Photo finish: Joe edges Will 158.7 to 155.5. Blowout of the week: Danny over Tom by 56.8.",
-      "Brother vs. brother goes to Danny, 182.0 to 125.2. Vin is rolling with 10 straight wins. Steve has dropped 7 in a row.",
+      "Photo finish: Joe edges Will 158.7 to 155.5. Blowout of the week (brother vs. brother): Danny over Tom by 56.8.",
+      "Vin is rolling with 10 straight wins. Steve has dropped 7 in a row.",
       "Vin leads the way at 12-3."
      ],
      "matchups": [
@@ -56423,6 +56939,9 @@
     },
     {
      "week": 16,
+     "start": "2023-01-23",
+     "end": "2023-01-29",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 190.5 and beats Jefe by 34.0.",
       "Photo finish: Tim edges Ronnie 173.0 to 171.5. Blowout of the week: Joe over Tom by 52.1.",
@@ -56749,10 +57268,13 @@
     },
     {
      "week": 17,
+     "start": "2023-01-30",
+     "end": "2023-02-12",
+     "days": 14,
      "recap": [
-      "Jefe posts the week's high score with 209.3 and beats Zac by 36.6.",
+      "A two-week matchup (Jan 30 to Feb 12) to cover the All-Star break. Jefe posts the week's high score with 209.3 and beats Zac by 36.6.",
       "Closest game: Palagi edges Tom 174.8 to 158.9. Blowout of the week: Vin over Ronnie by 81.7.",
-      "Brother vs. brother goes to Tim, 186.2 to 123.6. Vin is rolling with 12 straight wins. Zac's 4-game win streak is over. Steve has dropped 9 in a row.",
+      "Vin is rolling with 12 straight wins. Zac's 4-game win streak is over. Steve has dropped 9 in a row.",
       "Vin leads the way at 14-3."
      ],
      "matchups": [
@@ -57076,6 +57598,9 @@
     },
     {
      "week": 18,
+     "start": "2023-02-13",
+     "end": "2023-02-19",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 202.0 and beats Will by 33.5.",
       "Photo finish: Ronnie edges Zac 172.7 to 169.3. Blowout of the week: Vin over Will by 33.5. Upset alert: Ronnie, 9th coming in, knocks off Zac (2nd).",
@@ -57390,6 +57915,9 @@
     },
     {
      "week": 19,
+     "start": "2023-02-20",
+     "end": "2023-02-26",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 218.6 and beats Will by 66.6.",
       "Photo finish: Ronnie edges Danny 138.7 to 137.1. Blowout of the week: Jefe over Palagi by 69.0.",
@@ -57705,10 +58233,13 @@
     },
     {
      "week": 20,
+     "start": "2023-02-27",
+     "end": "2023-03-05",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 210.0 and beats Tom by 33.0.",
       "Closest game: Jefe edges Steve 140.8 to 134.1. Blowout of the week: Ronnie over Palagi by 60.0.",
-      "Brother vs. brother goes to Tim, 210.0 to 177.0. Tim is rolling with 5 straight wins. Nick has dropped 7 in a row.",
+      "Tim is rolling with 5 straight wins. Nick has dropped 7 in a row.",
       "Vin leads the way at 16-4."
      ],
      "matchups": [
@@ -58035,11 +58566,14 @@
     },
     {
      "week": 21,
+     "start": "2023-03-06",
+     "end": "2023-03-12",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 201.8 and beats Vin by 20.1.",
       "Closest game: Danny edges Joe 183.8 to 167.2. Blowout of the week: Palagi over Will by 41.6. Upset alert: Nick, 10th coming in, knocks off Zac (4th).",
-      "Nick beats Zac 195.1 to 155.2. Somebody check who set Zac's lineup. Tim is rolling with 6 straight wins. Nick snaps a 7-game skid. Will has dropped 5 in a row.",
-      "That wraps the regular season, with Vin on top at 16-5."
+      "Tim is rolling with 6 straight wins. Nick snaps a 7-game skid. Will has dropped 5 in a row.",
+      "That wraps the regular season, with Vin on top at 16-5. The six-team playoff field is set: Vin (1), Tim (2), Jefe (3), Zac (4), Joe (5), Danny (6). Tim and Vin earn a first-round bye. Palagi just misses out at 11-10."
      ],
      "matchups": [
       {
@@ -58340,9 +58874,10 @@
     {
      "week": 100,
      "recap": [
-      "Vin wins the 2022-23 championship. Tim finishes 2nd and Jefe 3rd.",
+      "Vin wins the 2022-23 championship as the No. 1 seed! After a first-round bye, Vin beat Joe (5) in the semifinals and beat Tim (2) in the final, 204.2 to 194.2.",
+      "Tim settles for 2nd, and Jefe takes 3rd by beating Joe 168.8 to 158.8.",
       "Vin did it all, winning the regular season at 16-5 too.",
-      "At the other end, Will finishes 12th."
+      "At the other end, Will finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -59269,10 +59804,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2023-10-09",
+     "end": "2023-10-15",
+     "days": 7,
      "recap": [
+      "Welcome to the 2023-24 season of Rene Rancourt's Day Job! Vin comes in as the defending champion. Front-office news: Hallie takes over the franchise Palagi ran and relocates it as Mojo Dojo Casa House. Welcome to your rookie season.",
       "Nick posts the week's high score with 153.5 and beats Vin by 5.0.",
       "Photo finish: Zac edges Tim 138.4 to 134.4. Blowout of the week: Steve over Danny by 27.9.",
-      "Brother vs. brother goes to Nick, 153.5 to 148.5.",
       "Nick leads the way at 1-0."
      ],
      "matchups": [
@@ -59494,6 +60032,9 @@
     },
     {
      "week": 2,
+     "start": "2023-10-16",
+     "end": "2023-10-22",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 185.3 and beats Tom by 58.4.",
       "Closest game: Danny edges Nick 146.5 to 139.3. Blowout of the week: Steve over Tom by 58.4. Upset alert: Danny, 11th coming in, knocks off Nick (1st).",
@@ -59724,10 +60265,13 @@
     },
     {
      "week": 3,
+     "start": "2023-10-23",
+     "end": "2023-10-29",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 173.2 and beats Nick by 5.5.",
       "Closest game: Steve edges Nick 173.2 to 167.7. Blowout of the week: Danny over Jefe by 26.0.",
-      "Brother vs. brother goes to Tim, 150.8 to 127.7. Steve is rolling with 3 straight wins. Joe has dropped 3 in a row.",
+      "Steve is rolling with 3 straight wins. Joe has dropped 3 in a row.",
       "Steve leads the way at 3-0."
      ],
      "matchups": [
@@ -59977,10 +60521,13 @@
     },
     {
      "week": 4,
+     "start": "2023-10-30",
+     "end": "2023-11-05",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 169.5 and beats Jefe by 48.6.",
-      "Photo finish: Zac edges Vin 164.6 to 160.6. Blowout of the week: Tim over Steve by 51.3. Upset alert: Joe, 12th coming in, knocks off Ronnie (4th).",
-      "Zac beats Vin 164.6 to 160.6. Somebody check who set Zac's lineup. Zac is rolling with 4 straight wins. Will has dropped 3 in a row.",
+      "Photo finish (Zac vs. one of the brothers who supposedly run his account): Zac edges Vin 164.6 to 160.6. Blowout of the week: Tim over Steve by 51.3. Upset alert: Joe, 12th coming in, knocks off Ronnie (4th).",
+      "Zac is rolling with 4 straight wins. Will has dropped 3 in a row.",
       "Zac takes over 1st at 4-0."
      ],
      "matchups": [
@@ -60233,10 +60780,13 @@
     },
     {
      "week": 5,
+     "start": "2023-11-06",
+     "end": "2023-11-12",
+     "days": 7,
      "recap": [
       "Tim posts the week's high score with 196.4 and beats Hallie by 5.0.",
-      "Closest game: Tim edges Hallie 196.4 to 191.4. Blowout of the week: Nick over Will by 61.4.",
-      "In-law showdown: Tim gets the better of Hallie, 196.4 to 191.4. Zac is rolling with 5 straight wins. Will has dropped 4 in a row.",
+      "Closest game (in-law edition): Tim edges Hallie 196.4 to 191.4. Blowout of the week: Nick over Will by 61.4.",
+      "Zac is rolling with 5 straight wins. Will has dropped 4 in a row.",
       "Zac leads the way at 5-0. Joe drops to 12th."
      ],
      "matchups": [
@@ -60506,10 +61056,13 @@
     },
     {
      "week": 6,
+     "start": "2023-11-13",
+     "end": "2023-11-19",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 165.4 and beats Will by 45.7.",
-      "Photo finish: Nick edges Zac 138.9 to 135.9. Blowout of the week: Steve over Hallie by 64.8.",
-      "Nick beats Zac 138.9 to 135.9. Somebody check who set Zac's lineup. Tim is rolling with 5 straight wins. Zac's 5-game win streak is over. Will has dropped 5 in a row.",
+      "Photo finish (Zac vs. one of the brothers who supposedly run his account): Nick edges Zac 138.9 to 135.9. Blowout of the week: Steve over Hallie by 64.8.",
+      "Tim is rolling with 5 straight wins. Zac's 5-game win streak is over. Will has dropped 5 in a row.",
       "Tim takes over 1st at 5-1."
      ],
      "matchups": [
@@ -60785,10 +61338,13 @@
     },
     {
      "week": 7,
+     "start": "2023-11-20",
+     "end": "2023-11-26",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 205.9 and beats Hallie by 56.5.",
       "Photo finish: Zac edges Jefe 169.4 to 168.6. Blowout of the week: Ronnie over Hallie by 56.5. Upset alert: Vin, 9th coming in, knocks off Tim (1st).",
-      "Brother vs. brother goes to Tom, 129.0 to 110.5. Nick is rolling with 4 straight wins. Tim's 5-game win streak is over. Hallie has dropped 4 in a row.",
+      "Nick is rolling with 4 straight wins. Tim's 5-game win streak is over. Hallie has dropped 4 in a row.",
       "Zac takes over 1st at 6-1."
      ],
      "matchups": [
@@ -61063,10 +61619,13 @@
     },
     {
      "week": 8,
+     "start": "2023-11-27",
+     "end": "2023-12-03",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 200.3 and beats Tom by 44.5.",
       "Closest game: Will edges Zac 145.2 to 137.6. Blowout of the week: Vin over Hallie by 56.0. Upset alert: Will, 10th coming in, knocks off Zac (1st).",
-      "Brother vs. brother goes to Tim, 156.3 to 134.9. Nick is rolling with 5 straight wins. Hallie has dropped 5 in a row.",
+      "Nick is rolling with 5 straight wins. Hallie has dropped 5 in a row.",
       "Nick takes over 1st at 6-2."
      ],
      "matchups": [
@@ -61347,10 +61906,13 @@
     },
     {
      "week": 9,
+     "start": "2023-12-04",
+     "end": "2023-12-10",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 165.0 and beats Tim by 43.3.",
       "Photo finish: Ronnie edges Vin 148.7 to 145.5. Blowout of the week: Jefe over Tom by 45.7.",
-      "In-law showdown: Danny gets the better of Hallie, 137.0 to 111.4. Nick is rolling with 6 straight wins. Hallie has dropped 6 in a row.",
+      "Nick is rolling with 6 straight wins. Hallie has dropped 6 in a row.",
       "Nick leads the way at 7-2."
      ],
      "matchups": [
@@ -61639,10 +62201,13 @@
     },
     {
      "week": 10,
+     "start": "2023-12-11",
+     "end": "2023-12-17",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 177.0 and beats Tim by 6.9.",
-      "Photo finish: Tom edges Will 144.5 to 143.3. Blowout of the week: Zac over Joe by 30.7. Upset alert: Vin, 8th coming in, knocks off Steve (2nd).",
-      "Brother vs. brother goes to Tom, 144.5 to 143.3. Nick is rolling with 7 straight wins. Hallie has dropped 7 in a row.",
+      "Photo finish (brother vs. brother): Tom edges Will 144.5 to 143.3. Blowout of the week: Zac over Joe by 30.7. Upset alert: Vin, 8th coming in, knocks off Steve (2nd).",
+      "Nick is rolling with 7 straight wins. Hallie has dropped 7 in a row.",
       "Nick leads the way at 8-2."
      ],
      "matchups": [
@@ -61932,11 +62497,14 @@
     },
     {
      "week": 11,
+     "start": "2023-12-18",
+     "end": "2023-12-24",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 170.5 and beats Nick by 2.4.",
       "Photo finish: Ronnie edges Nick 170.5 to 168.1. Blowout of the week: Vin over Danny by 45.7. Upset alert: Ronnie, 8th coming in, knocks off Nick (1st).",
-      "Brother vs. brother goes to Will, 170.3 to 130.1. Hallie snaps a 7-game skid. Joe has dropped 7 in a row.",
-      "Zac takes over 1st at 8-2-1."
+      "Hallie snaps a 7-game skid. Joe has dropped 7 in a row.",
+      "Halfway home: Zac leads at 8-2-1, Nick is right behind at 8-3, and Joe has work to do in last place."
      ],
      "matchups": [
       {
@@ -62212,10 +62780,13 @@
     },
     {
      "week": 12,
+     "start": "2023-12-25",
+     "end": "2023-12-31",
+     "days": 7,
      "recap": [
-      "Jefe posts the week's high score with 167.1 and beats Ronnie by 28.0.",
-      "Closest game: Vin edges Nick 158.1 to 141.5. Blowout of the week: Tom over Joe by 59.9.",
-      "Brother vs. brother goes to Vin, 158.1 to 141.5. Vin is rolling with 3 straight wins. Joe has dropped 8 in a row.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Jefe posts the week's high score with 167.1 and beats Ronnie by 28.0.",
+      "Closest game (brother vs. brother): Vin edges Nick 158.1 to 141.5. Blowout of the week: Tom over Joe by 59.9.",
+      "Vin is rolling with 3 straight wins. Joe has dropped 8 in a row.",
       "Zac leads the way at 8-3-1."
      ],
      "matchups": [
@@ -62498,8 +63069,11 @@
     },
     {
      "week": 13,
+     "start": "2024-01-01",
+     "end": "2024-01-07",
+     "days": 7,
      "recap": [
-      "Tom posts the week's high score with 180.7 and beats Steve by 18.0.",
+      "Happy New Year! 2024 goes out and 2024 comes in. Tom posts the week's high score with 180.7 and beats Steve by 18.0.",
       "Photo finish: Ronnie edges Will 157.3 to 155.2. Blowout of the week: Zac over Hallie by 66.5. Upset alert: Tom, 10th coming in, knocks off Steve (3rd).",
       "Vin is rolling with 4 straight wins. Joe has dropped 9 in a row.",
       "Zac leads the way at 9-3-1."
@@ -62790,10 +63364,13 @@
     },
     {
      "week": 14,
+     "start": "2024-01-08",
+     "end": "2024-01-14",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 197.9 and beats Jefe by 29.9.",
-      "Photo finish: Tom edges Tim 145.6 to 142.7. Blowout of the week: Ronnie over Zac by 46.6. Upset alert: Ronnie, 6th coming in, knocks off Zac (1st).",
-      "Brother vs. brother goes to Tom, 145.6 to 142.7. Vin is rolling with 5 straight wins. Joe snaps a 9-game skid. Hallie has dropped 3 in a row.",
+      "Photo finish (brother vs. brother): Tom edges Tim 145.6 to 142.7. Blowout of the week: Ronnie over Zac by 46.6. Upset alert: Ronnie, 6th coming in, knocks off Zac (1st).",
+      "Vin is rolling with 5 straight wins. Joe snaps a 9-game skid. Hallie has dropped 3 in a row.",
       "Nick takes over 1st at 10-4."
      ],
      "matchups": [
@@ -63096,10 +63673,13 @@
     },
     {
      "week": 15,
+     "start": "2024-01-15",
+     "end": "2024-01-21",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 208.8 and beats Joe by 58.0.",
       "Photo finish: Steve edges Tim 171.9 to 168.4. Blowout of the week: Ronnie over Joe by 58.0. Upset alert: Hallie, 12th coming in, knocks off Tom (7th).",
-      "Brother vs. brother goes to Danny, 156.7 to 150.6. Nick is rolling with 3 straight wins. Vin's 5-game win streak is over. Jefe has dropped 3 in a row.",
+      "Nick is rolling with 3 straight wins. Vin's 5-game win streak is over. Jefe has dropped 3 in a row.",
       "Nick leads the way at 11-4. Joe drops to 12th."
      ],
      "matchups": [
@@ -63397,10 +63977,13 @@
     },
     {
      "week": 16,
+     "start": "2024-01-22",
+     "end": "2024-01-28",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 199.2 and beats Tom by 31.4.",
       "Photo finish: Zac edges Danny 183.0 to 180.4. Blowout of the week: Nick over Will by 52.6.",
-      "In-law showdown: Tim gets the better of Hallie, 196.6 to 155.0. Nick is rolling with 4 straight wins. Will has dropped 4 in a row.",
+      "Nick is rolling with 4 straight wins. Will has dropped 4 in a row.",
       "Nick leads the way at 12-4."
      ],
      "matchups": [
@@ -63698,10 +64281,13 @@
     },
     {
      "week": 17,
+     "start": "2024-01-29",
+     "end": "2024-02-11",
+     "days": 14,
      "recap": [
-      "Vin posts the week's high score with 174.8 and beats Tom by 54.8.",
+      "A two-week matchup (Jan 29 to Feb 11) to cover the All-Star break. Vin posts the week's high score with 174.8 and beats Tom by 54.8.",
       "Photo finish: Will edges Jefe 136.3 to 135.4. Blowout of the week: Vin over Tom by 54.8. Upset alert: Joe, 12th coming in, knocks off Danny (6th).",
-      "Nick beats Zac 130.7 to 129.0. Somebody check who set Zac's lineup. Nick is rolling with 5 straight wins. Will snaps a 4-game skid. Tom has dropped 3 in a row.",
+      "Nick is rolling with 5 straight wins. Will snaps a 4-game skid. Tom has dropped 3 in a row.",
       "Nick leads the way at 13-4. Hallie drops to 12th."
      ],
      "matchups": [
@@ -64005,10 +64591,13 @@
     },
     {
      "week": 18,
+     "start": "2024-02-12",
+     "end": "2024-02-18",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 191.4 and beats Joe by 66.6.",
       "Photo finish: Steve edges Will 173.8 to 170.8. Blowout of the week: Ronnie over Hallie by 78.7.",
-      "Brother vs. brother goes to Tom, 157.2 to 140.6. Nick is rolling with 6 straight wins. Danny has dropped 3 in a row.",
+      "Nick is rolling with 6 straight wins. Danny has dropped 3 in a row.",
       "Nick leads the way at 14-4."
      ],
      "matchups": [
@@ -64326,10 +64915,13 @@
     },
     {
      "week": 19,
+     "start": "2024-02-19",
+     "end": "2024-02-25",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 224.2 and beats Ronnie by 39.3.",
       "Photo finish: Hallie edges Vin 205.2 to 202.1. Blowout of the week: Jefe over Joe by 60.4. Upset alert: Hallie, 12th coming in, knocks off Vin (3rd).",
-      "Brother vs. brother goes to Danny, 213.2 to 175.2. Nick is rolling with 7 straight wins. Ronnie's 6-game win streak is over. Tim has dropped 3 in a row.",
+      "Nick is rolling with 7 straight wins. Ronnie's 6-game win streak is over. Tim has dropped 3 in a row.",
       "Nick leads the way at 15-4. Joe drops to 12th."
      ],
      "matchups": [
@@ -64641,10 +65233,13 @@
     },
     {
      "week": 20,
+     "start": "2024-02-26",
+     "end": "2024-03-03",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 209.0 and beats Tim by 49.1.",
       "Closest game: Vin edges Ronnie 198.9 to 156.9. Blowout of the week: Will over Joe by 92.3.",
-      "In-law showdown: Danny gets the better of Hallie, 191.8 to 138.6. Nick is rolling with 8 straight wins. Tim has dropped 4 in a row.",
+      "Nick is rolling with 8 straight wins. Tim has dropped 4 in a row.",
       "Nick leads the way at 16-4."
      ],
      "matchups": [
@@ -64964,11 +65559,14 @@
     },
     {
      "week": 21,
+     "start": "2024-03-04",
+     "end": "2024-03-10",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 210.0 and beats Tim by 57.7.",
       "Closest game: Zac edges Joe 158.4 to 153.0. Blowout of the week: Jefe over Tim by 57.7.",
-      "Brother vs. brother goes to Tom, 170.2 to 162.4. Nick is rolling with 9 straight wins. Steve's 4-game win streak is over. Tim has dropped 5 in a row.",
-      "That wraps the regular season, with Nick on top at 17-4."
+      "Nick is rolling with 9 straight wins. Steve's 4-game win streak is over. Tim has dropped 5 in a row.",
+      "That wraps the regular season, with Nick on top at 17-4. The 8-team playoff field is set: Nick (1), Vin (2), Zac (3), Ronnie (4), Steve (5), Danny (6), Jefe (7), Tom (8). Tim just misses out at 9-12."
      ],
      "matchups": [
       {
@@ -65264,9 +65862,10 @@
     {
      "week": 100,
      "recap": [
-      "Nick wins the 2023-24 championship. Vin finishes 2nd and Steve 3rd.",
-      "Nick did it all, winning the regular season at 17-4 too.",
-      "At the other end, Joe finishes 12th."
+      "Nick wins the 2023-24 championship as the No. 1 seed! Nick beat Tom (8) in the quarterfinals, beat Steve (5) in the semifinals and beat Vin (2) in the final, 175.4 to 165.3.",
+      "Vin settles for 2nd, and Steve takes 3rd by beating Zac 151.1 to 136.5.",
+      "Upset of the playoffs: No. 7 Jefe knocks off No. 4 Ronnie in the final. Nick did it all, winning the regular season at 17-4 too.",
+      "At the other end, Joe finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -66188,10 +66787,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2024-10-07",
+     "end": "2024-10-13",
+     "days": 7,
      "recap": [
+      "Welcome to the 2024-25 season of Rene Rancourt's Day Job! Nick comes in as the defending champion.",
       "Jefe posts the week's high score with 160.6 and beats Joe by 41.2.",
-      "Closest game: Danny edges Ronnie 150.9 to 143.8. Blowout of the week: Nick over Zac by 56.8.",
-      "Nick beats Zac 142.0 to 85.2. Somebody check who set Zac's lineup.",
+      "Closest game: Danny edges Ronnie 150.9 to 143.8. Blowout of the week (Zac vs. one of the brothers who supposedly run his account): Nick over Zac by 56.8.",
       "Jefe leads the way at 1-0."
      ],
      "matchups": [
@@ -66413,10 +67015,12 @@
     },
     {
      "week": 2,
+     "start": "2024-10-14",
+     "end": "2024-10-20",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 204.3 and beats Tim by 13.9.",
-      "Photo finish: Will edges Danny 137.2 to 136.8. Blowout of the week: Joe over Tom by 55.2. Upset alert: Hallie, 8th coming in, knocks off Nick (3rd).",
-      "Brother vs. brother goes to Will, 137.2 to 136.8.",
+      "Photo finish (brother vs. brother): Will edges Danny 137.2 to 136.8. Blowout of the week: Joe over Tom by 55.2. Upset alert: Hallie, 8th coming in, knocks off Nick (3rd).",
       "Jefe leads the way at 2-0."
      ],
      "matchups": [
@@ -66639,6 +67243,9 @@
     },
     {
      "week": 3,
+     "start": "2024-10-21",
+     "end": "2024-10-27",
+     "days": 7,
      "recap": [
       "Steve posts the week's high score with 176.1 and beats Nick by 8.1.",
       "Photo finish: Will edges Zac 154.9 to 152.7. Blowout of the week: Vin over Tim by 23.2.",
@@ -66895,10 +67502,13 @@
     },
     {
      "week": 4,
+     "start": "2024-10-28",
+     "end": "2024-11-03",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 211.3 and beats Vin by 31.6.",
       "Closest game: Tim edges Nick 166.6 to 154.4. Blowout of the week: Joe over Zac by 50.8.",
-      "Household bragging rights go to Hallie this week, 184.5 to 141.4. Jefe is rolling with 4 straight wins. Tom has dropped 4 in a row.",
+      "Jefe is rolling with 4 straight wins. Tom has dropped 4 in a row.",
       "Jefe leads the way at 4-0. Zac drops to 12th."
      ],
      "matchups": [
@@ -67163,10 +67773,13 @@
     },
     {
      "week": 5,
+     "start": "2024-11-04",
+     "end": "2024-11-10",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 173.7 and beats Danny by 6.4.",
       "Photo finish: Tom edges Zac 126.4 to 126.1. Blowout of the week: Steve over Will by 24.0.",
-      "Brother vs. brother goes to Vin, 161.3 to 144.4. Jefe is rolling with 5 straight wins. Tom snaps a 4-game skid. Zac has dropped 5 in a row.",
+      "Jefe is rolling with 5 straight wins. Tom snaps a 4-game skid. Zac has dropped 5 in a row.",
       "Jefe leads the way at 5-0."
      ],
      "matchups": [
@@ -67431,10 +68044,13 @@
     },
     {
      "week": 6,
+     "start": "2024-11-11",
+     "end": "2024-11-17",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 218.6 and beats Jefe by 29.6.",
-      "Closest game: Tom edges Hallie 147.4 to 141.5. Blowout of the week: Danny over Zac by 91.8. Upset alert: Nick, 9th coming in, knocks off Jefe (1st).",
-      "In-law showdown: Tom gets the better of Hallie, 147.4 to 141.5. Ronnie is rolling with 3 straight wins. Jefe's 5-game win streak is over. Zac has dropped 6 in a row.",
+      "Closest game (in-law edition): Tom edges Hallie 147.4 to 141.5. Blowout of the week: Danny over Zac by 91.8. Upset alert: Nick, 9th coming in, knocks off Jefe (1st).",
+      "Ronnie is rolling with 3 straight wins. Jefe's 5-game win streak is over. Zac has dropped 6 in a row.",
       "Jefe leads the way at 5-1."
      ],
      "matchups": [
@@ -67691,10 +68307,13 @@
     },
     {
      "week": 7,
+     "start": "2024-11-18",
+     "end": "2024-11-24",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 173.3 and beats Jefe by 33.8.",
       "Photo finish: Tim edges Joe 136.3 to 135.4. Blowout of the week: Zac over Jefe by 33.8. Upset alert: Zac, 12th coming in, knocks off Jefe (1st).",
-      "In-law showdown: Hallie gets the better of Danny, 147.0 to 137.9. Ronnie is rolling with 4 straight wins. Zac snaps a 6-game skid. Joe has dropped 3 in a row.",
+      "Ronnie is rolling with 4 straight wins. Zac snaps a 6-game skid. Joe has dropped 3 in a row.",
       "Jefe leads the way at 5-2."
      ],
      "matchups": [
@@ -67964,10 +68583,13 @@
     },
     {
      "week": 8,
+     "start": "2024-11-25",
+     "end": "2024-12-01",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 235.7 and beats Ronnie by 75.6.",
-      "Closest game: Tom edges Tim 180.2 to 170.5. Blowout of the week: Jefe over Ronnie by 75.6. Upset alert: Zac, 12th coming in, knocks off Hallie (3rd).",
-      "Brother vs. brother goes to Tom, 180.2 to 170.5. Ronnie's 4-game win streak is over. Joe has dropped 4 in a row.",
+      "Closest game (brother vs. brother): Tom edges Tim 180.2 to 170.5. Blowout of the week: Jefe over Ronnie by 75.6. Upset alert: Zac, 12th coming in, knocks off Hallie (3rd).",
+      "Ronnie's 4-game win streak is over. Joe has dropped 4 in a row.",
       "Jefe leads the way at 6-2."
      ],
      "matchups": [
@@ -68224,10 +68846,13 @@
     },
     {
      "week": 9,
+     "start": "2024-12-02",
+     "end": "2024-12-08",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 179.3 and beats Steve by 51.3.",
-      "Photo finish: Will edges Ronnie 166.0 to 162.0. Blowout of the week: Danny over Tim by 55.3. Upset alert: Zac, 12th coming in, knocks off Steve (6th).",
-      "Brother vs. brother goes to Danny, 163.8 to 108.5. Vin is rolling with 3 straight wins. Joe snaps a 4-game skid. Nick has dropped 3 in a row.",
+      "Photo finish: Will edges Ronnie 166.0 to 162.0. Blowout of the week (brother vs. brother): Danny over Tim by 55.3. Upset alert: Zac, 12th coming in, knocks off Steve (6th).",
+      "Vin is rolling with 3 straight wins. Joe snaps a 4-game skid. Nick has dropped 3 in a row.",
       "Vin takes over 1st at 7-2."
      ],
      "matchups": [
@@ -68498,6 +69123,9 @@
     },
     {
      "week": 10,
+     "start": "2024-12-09",
+     "end": "2024-12-15",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 192.5 and beats Ronnie by 24.0.",
       "Closest game: Nick edges Tom 149.8 to 128.6. Blowout of the week: Zac over Tim by 31.7.",
@@ -68786,11 +69414,14 @@
     },
     {
      "week": 11,
+     "start": "2024-12-16",
+     "end": "2024-12-22",
+     "days": 7,
      "recap": [
       "Hallie posts the week's high score with 189.4 and beats Tim by 67.6.",
-      "Photo finish: Jefe edges Steve 152.0 to 148.9. Blowout of the week: Hallie over Tim by 67.6.",
-      "In-law showdown: Hallie gets the better of Tim, 189.4 to 121.8. Danny is rolling with 4 straight wins. Zac's 4-game win streak is over. Steve has dropped 4 in a row.",
-      "Jefe leads the way at 8-2-1."
+      "Photo finish: Jefe edges Steve 152.0 to 148.9. Blowout of the week (in-law edition): Hallie over Tim by 67.6.",
+      "Danny is rolling with 4 straight wins. Zac's 4-game win streak is over. Steve has dropped 4 in a row.",
+      "Halfway home: Jefe leads at 8-2-1, Danny is right behind at 8-3, and Tim has work to do in last place."
      ],
      "matchups": [
       {
@@ -69086,10 +69717,13 @@
     },
     {
      "week": 12,
+     "start": "2024-12-23",
+     "end": "2024-12-29",
+     "days": 7,
      "recap": [
-      "Jefe posts the week's high score with 154.4 and beats Joe by 34.7.",
-      "Photo finish: Steve edges Tim 122.6 to 119.8. Blowout of the week: Tom over Will by 52.3. Upset alert: Tom, 11th coming in, knocks off Will (6th).",
-      "Brother vs. brother goes to Tom, 153.6 to 101.3. Danny is rolling with 5 straight wins. Steve snaps a 4-game skid. Tim has dropped 5 in a row.",
+      "Christmas week around the league, and somebody found a little something extra under the tree. Jefe posts the week's high score with 154.4 and beats Joe by 34.7.",
+      "Photo finish: Steve edges Tim 122.6 to 119.8. Blowout of the week (brother vs. brother): Tom over Will by 52.3. Upset alert: Tom, 11th coming in, knocks off Will (6th).",
+      "Danny is rolling with 5 straight wins. Steve snaps a 4-game skid. Tim has dropped 5 in a row.",
       "Jefe leads the way at 9-2-1."
      ],
      "matchups": [
@@ -69387,10 +70021,13 @@
     },
     {
      "week": 13,
+     "start": "2024-12-30",
+     "end": "2025-01-05",
+     "days": 7,
      "recap": [
-      "Vin posts the week's high score with 189.8 and beats Steve by 18.1.",
+      "Happy New Year! 2024 goes out and 2025 comes in. Vin posts the week's high score with 189.8 and beats Steve by 18.1.",
       "Closest game: Zac edges Ronnie 171.6 to 157.0. Blowout of the week: Jefe over Tim by 74.8. Upset alert: Nick, 11th coming in, knocks off Hallie (3rd).",
-      "Brother vs. brother goes to Danny, 145.0 to 124.2. Danny is rolling with 6 straight wins. Tim has dropped 6 in a row.",
+      "Danny is rolling with 6 straight wins. Tim has dropped 6 in a row.",
       "Jefe leads the way at 10-2-1."
      ],
      "matchups": [
@@ -69693,6 +70330,9 @@
     },
     {
      "week": 14,
+     "start": "2025-01-06",
+     "end": "2025-01-12",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 192.6 and beats Tom by 49.0.",
       "Closest game: Hallie edges Ronnie 169.1 to 145.6. Blowout of the week: Danny over Joe by 58.9. Upset alert: Tim, 12th coming in, knocks off Vin (3rd).",
@@ -69994,10 +70634,13 @@
     },
     {
      "week": 15,
+     "start": "2025-01-13",
+     "end": "2025-01-19",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 167.8 and beats Zac by 20.8.",
       "Photo finish: Tim edges Nick 165.9 to 164.0. Blowout of the week: Joe over Zac by 20.8. Upset alert: Tom, 11th coming in, knocks off Danny (2nd).",
-      "Household bragging rights go to Will this week, 164.5 to 147.2. Jefe is rolling with 6 straight wins. Danny's 7-game win streak is over. Steve has dropped 3 in a row.",
+      "Jefe is rolling with 6 straight wins. Danny's 7-game win streak is over. Steve has dropped 3 in a row.",
       "Jefe leads the way at 12-2-1."
      ],
      "matchups": [
@@ -70288,10 +70931,13 @@
     },
     {
      "week": 16,
+     "start": "2025-01-20",
+     "end": "2025-01-26",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 197.3 and beats Tom by 53.3.",
       "Photo finish: Ronnie edges Tim 156.2 to 155.8. Blowout of the week: Zac over Tom by 53.3. Upset alert: Nick, 11th coming in, knocks off Vin (4th).",
-      "Brother vs. brother goes to Nick, 163.3 to 139.9. Jefe is rolling with 7 straight wins. Vin has dropped 3 in a row.",
+      "Jefe is rolling with 7 straight wins. Vin has dropped 3 in a row.",
       "Jefe leads the way at 13-2-1."
      ],
      "matchups": [
@@ -70588,10 +71234,13 @@
     },
     {
      "week": 17,
+     "start": "2025-01-27",
+     "end": "2025-02-02",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 193.2 and beats Vin by 39.9.",
-      "Closest game: Danny edges Zac 155.6 to 147.8. Blowout of the week: Hallie over Tom by 51.1.",
-      "In-law showdown: Hallie gets the better of Tom, 162.5 to 111.4. Jefe is rolling with 8 straight wins. Vin has dropped 4 in a row.",
+      "Closest game: Danny edges Zac 155.6 to 147.8. Blowout of the week (in-law edition): Hallie over Tom by 51.1.",
+      "Jefe is rolling with 8 straight wins. Vin has dropped 4 in a row.",
       "Jefe leads the way at 14-2-1."
      ],
      "matchups": [
@@ -70901,10 +71550,13 @@
     },
     {
      "week": 18,
+     "start": "2025-02-03",
+     "end": "2025-02-09",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 177.3 and beats Jefe by 20.6.",
-      "Photo finish: Danny edges Hallie 155.6 to 151.9. Blowout of the week: Nick over Ronnie by 39.9. Upset alert: Zac, 8th coming in, knocks off Jefe (1st).",
-      "In-law showdown: Danny gets the better of Hallie, 155.6 to 151.9. Steve is rolling with 3 straight wins. Jefe's 8-game win streak is over. Vin has dropped 5 in a row.",
+      "Photo finish (in-law edition): Danny edges Hallie 155.6 to 151.9. Blowout of the week: Nick over Ronnie by 39.9. Upset alert: Zac, 8th coming in, knocks off Jefe (1st).",
+      "Steve is rolling with 3 straight wins. Jefe's 8-game win streak is over. Vin has dropped 5 in a row.",
       "Jefe leads the way at 14-3-1."
      ],
      "matchups": [
@@ -71216,10 +71868,13 @@
     },
     {
      "week": 19,
+     "start": "2025-02-10",
+     "end": "2025-03-02",
+     "days": 21,
      "recap": [
-      "A multi-week period this time, so the scores run high. Jefe posts the week's high score with 265.8 and beats Ronnie by 66.2.",
+      "A three-week matchup (Feb 10 to Mar 2) to cover the 4 Nations Face-Off break, so the numbers run big. Jefe posts the week's high score with 265.8 and beats Ronnie by 66.2.",
       "Closest game: Danny edges Steve 234.5 to 221.6. Blowout of the week: Jefe over Ronnie by 66.2. Upset alert: Nick, 9th coming in, knocks off Will (4th).",
-      "Brother vs. brother goes to Tom, 228.1 to 183.7. Danny is rolling with 3 straight wins. Vin has dropped 6 in a row.",
+      "Danny is rolling with 3 straight wins. Vin has dropped 6 in a row.",
       "Jefe leads the way at 15-3-1."
      ],
      "matchups": [
@@ -71531,10 +72186,13 @@
     },
     {
      "week": 20,
+     "start": "2025-03-03",
+     "end": "2025-03-09",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 193.5 and beats Will by 38.6.",
       "Closest game: Nick edges Joe 167.9 to 156.3. Blowout of the week: Ronnie over Will by 38.6. Upset alert: Tim, 12th coming in, knocks off Danny (2nd).",
-      "Brother vs. brother goes to Tim, 184.4 to 157.6. Nick is rolling with 3 straight wins. Vin snaps a 6-game skid. Hallie has dropped 3 in a row.",
+      "Nick is rolling with 3 straight wins. Vin snaps a 6-game skid. Hallie has dropped 3 in a row.",
       "Jefe leads the way at 16-3-1."
      ],
      "matchups": [
@@ -71840,11 +72498,14 @@
     },
     {
      "week": 21,
+     "start": "2025-03-10",
+     "end": "2025-03-16",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 225.8 and beats Will by 58.3.",
       "Closest game: Steve edges Hallie 145.1 to 137.2. Blowout of the week: Jefe over Will by 58.3. Upset alert: Joe, 10th coming in, knocks off Ronnie (4th).",
       "Nick is rolling with 4 straight wins. Hallie has dropped 4 in a row.",
-      "That wraps the regular season, with Jefe on top at 17-3-1."
+      "That wraps the regular season, with Jefe on top at 17-3-1. The 8-team playoff field is set: Jefe (1), Danny (2), Hallie (3), Steve (4), Nick (5), Ronnie (6), Zac (7), Vin (8). Will just misses out at 10-11."
      ],
      "matchups": [
       {
@@ -72140,9 +72801,10 @@
     {
      "week": 100,
      "recap": [
-      "Jefe wins the 2024-25 championship. Danny finishes 2nd and Steve 3rd.",
-      "Jefe did it all, winning the regular season at 17-3 too.",
-      "At the other end, Tim finishes 12th."
+      "Jefe wins the 2024-25 championship as the No. 1 seed! Jefe beat Vin (8) in the quarterfinals, beat Steve (4) in the semifinals and beat Danny (2) in the final, 210.3 to 135.0.",
+      "Danny settles for 2nd, and Steve takes 3rd by beating Ronnie 202.5 to 161.2.",
+      "Upset of the playoffs: No. 8 Vin knocks off No. 3 Hallie in the final. Jefe did it all, winning the regular season at 17-3-1 too.",
+      "At the other end, Tim finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
@@ -73034,10 +73696,13 @@
    "weeks": [
     {
      "week": 1,
+     "start": "2025-10-06",
+     "end": "2025-10-12",
+     "days": 7,
      "recap": [
+      "Welcome to the 2025-26 season of Rene Rancourt's Day Job! Jefe comes in as the defending champion.",
       "Joe posts the week's high score with 170.6 and beats Steve by 12.8.",
       "Photo finish: Jefe edges Nick 132.4 to 131.0. Blowout of the week: Tim over Zac by 57.4.",
-      "Brother vs. brother goes to Will, 114.7 to 111.8.",
       "Joe leads the way at 1-0."
      ],
      "matchups": [
@@ -73259,10 +73924,12 @@
     },
     {
      "week": 2,
+     "start": "2025-10-13",
+     "end": "2025-10-19",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 187.1 and beats Vin by 39.1.",
       "Photo finish: Ronnie edges Jefe 175.4 to 174.5. Blowout of the week: Steve over Will by 42.0. Upset alert: Nick, 8th coming in, knocks off Tim (2nd).",
-      "In-law showdown: Tom gets the better of Hallie, 159.7 to 124.7.",
       "Joe leads the way at 2-0. Hallie drops to 12th."
      ],
      "matchups": [
@@ -73485,6 +74152,9 @@
     },
     {
      "week": 3,
+     "start": "2025-10-20",
+     "end": "2025-10-26",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 192.7 and beats Vin by 47.2.",
       "Closest game: Zac edges Steve 158.6 to 153.3. Blowout of the week: Will over Vin by 47.2. Upset alert: Hallie, 12th coming in, knocks off Joe (1st).",
@@ -73730,10 +74400,13 @@
     },
     {
      "week": 4,
+     "start": "2025-10-27",
+     "end": "2025-11-02",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 196.9 and beats Zac by 80.2.",
-      "Closest game: Danny edges Tim 148.5 to 131.9. Blowout of the week: Vin over Zac by 80.2.",
-      "Vin beats Zac 196.9 to 116.7. Somebody check who set Zac's lineup. Danny is rolling with 3 straight wins. Tim has dropped 3 in a row.",
+      "Closest game (brother vs. brother): Danny edges Tim 148.5 to 131.9. Blowout of the week (Zac vs. one of the brothers who supposedly run his account): Vin over Zac by 80.2.",
+      "Danny is rolling with 3 straight wins. Tim has dropped 3 in a row.",
       "Joe takes over 1st at 3-1."
      ],
      "matchups": [
@@ -73988,10 +74661,13 @@
     },
     {
      "week": 5,
+     "start": "2025-11-03",
+     "end": "2025-11-09",
+     "days": 7,
      "recap": [
       "Joe posts the week's high score with 231.2 and beats Tom by 139.2.",
       "Closest game: Tim edges Steve 120.3 to 111.5. Blowout of the week: Joe over Tom by 139.2.",
-      "Brother vs. brother goes to Nick, 161.5 to 143.8. Jefe is rolling with 3 straight wins. Tom has dropped 3 in a row.",
+      "Jefe is rolling with 3 straight wins. Tom has dropped 3 in a row.",
       "Joe leads the way at 4-1."
      ],
      "matchups": [
@@ -74248,10 +74924,13 @@
     },
     {
      "week": 6,
+     "start": "2025-11-10",
+     "end": "2025-11-16",
+     "days": 7,
      "recap": [
       "Nick posts the week's high score with 180.2 and beats Hallie by 39.7.",
-      "Closest game: Steve edges Danny 151.2 to 135.3. Blowout of the week: Will over Tom by 50.9.",
-      "Brother vs. brother goes to Will, 164.5 to 113.6. Will is rolling with 4 straight wins. Tom has dropped 4 in a row.",
+      "Closest game: Steve edges Danny 151.2 to 135.3. Blowout of the week (brother vs. brother): Will over Tom by 50.9.",
+      "Will is rolling with 4 straight wins. Tom has dropped 4 in a row.",
       "Joe leads the way at 5-1."
      ],
      "matchups": [
@@ -74527,10 +75206,13 @@
     },
     {
      "week": 7,
+     "start": "2025-11-17",
+     "end": "2025-11-23",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 221.2 and beats Danny by 95.0.",
-      "Photo finish: Hallie edges Tim 149.6 to 147.3. Blowout of the week: Vin over Danny by 95.0.",
-      "In-law showdown: Hallie gets the better of Tim, 149.6 to 147.3. Will is rolling with 5 straight wins. Tom has dropped 5 in a row.",
+      "Photo finish (in-law edition): Hallie edges Tim 149.6 to 147.3. Blowout of the week: Vin over Danny by 95.0.",
+      "Will is rolling with 5 straight wins. Tom has dropped 5 in a row.",
       "Will takes over 1st at 6-1."
      ],
      "matchups": [
@@ -74812,10 +75494,13 @@
     },
     {
      "week": 8,
+     "start": "2025-11-24",
+     "end": "2025-11-30",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 205.4 and beats Tim by 74.0.",
       "Photo finish: Vin edges Steve 136.9 to 136.2. Blowout of the week: Nick over Tom by 78.5. Upset alert: Zac, 9th coming in, knocks off Joe (2nd).",
-      "In-law showdown: Hallie gets the better of Danny, 174.0 to 130.0. Nick is rolling with 4 straight wins. Will's 5-game win streak is over. Tom has dropped 6 in a row.",
+      "Nick is rolling with 4 straight wins. Will's 5-game win streak is over. Tom has dropped 6 in a row.",
       "Will leads the way at 6-2."
      ],
      "matchups": [
@@ -75110,10 +75795,13 @@
     },
     {
      "week": 9,
+     "start": "2025-12-01",
+     "end": "2025-12-07",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 219.9 and beats Jefe by 32.5.",
       "Closest game: Nick edges Joe 191.6 to 180.5. Blowout of the week: Danny over Ronnie by 51.6. Upset alert: Danny, 9th coming in, knocks off Ronnie (3rd).",
-      "Brother vs. brother goes to Tom, 124.4 to 78.0. Nick is rolling with 5 straight wins. Tom snaps a 6-game skid. Tim has dropped 4 in a row.",
+      "Nick is rolling with 5 straight wins. Tom snaps a 6-game skid. Tim has dropped 4 in a row.",
       "Will leads the way at 7-2."
      ],
      "matchups": [
@@ -75397,11 +76085,14 @@
     },
     {
      "week": 10,
+     "start": "2025-12-08",
+     "end": "2025-12-14",
+     "days": 7,
      "recap": [
       "Ronnie posts the week's high score with 191.4 and beats Steve by 54.1.",
-      "Closest game: Danny edges Tom 136.3 to 120.9. Blowout of the week: Will over Nick by 60.7.",
-      "Brother vs. brother goes to Danny, 136.3 to 120.9. Vin is rolling with 5 straight wins. Nick's 5-game win streak is over. Tim has dropped 5 in a row.",
-      "Will leads the way at 8-2."
+      "Closest game (brother vs. brother): Danny edges Tom 136.3 to 120.9. Blowout of the week: Will over Nick by 60.7.",
+      "Vin is rolling with 5 straight wins. Nick's 5-game win streak is over. Tim has dropped 5 in a row.",
+      "Halfway home: Will leads at 8-2, Vin is right behind at 7-3, and Tom has work to do in last place."
      ],
      "matchups": [
       {
@@ -75676,10 +76367,13 @@
     },
     {
      "week": 11,
+     "start": "2025-12-15",
+     "end": "2025-12-21",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 225.8 and beats Ronnie by 54.0.",
       "Photo finish: Danny edges Joe 199.4 to 198.2. Blowout of the week: Vin over Ronnie by 54.0. Upset alert: Danny, 8th coming in, knocks off Joe (3rd).",
-      "Brother vs. brother goes to Will, 208.6 to 165.3. Vin is rolling with 6 straight wins. Tim has dropped 6 in a row.",
+      "Vin is rolling with 6 straight wins. Tim has dropped 6 in a row.",
       "Will leads the way at 9-2."
      ],
      "matchups": [
@@ -75976,10 +76670,13 @@
     },
     {
      "week": 12,
+     "start": "2025-12-22",
+     "end": "2025-12-28",
+     "days": 7,
      "recap": [
-      "A short week, so the scores run low. Ronnie posts the week's high score with 140.3 and beats Hallie by 24.8.",
+      "Merry Christmas from the RRDJ desk. The NHL's holiday break makes this a short week, so the scores run low. Ronnie posts the week's high score with 140.3 and beats Hallie by 24.8.",
       "Closest game: Jefe edges Nick 96.2 to 83.8. Blowout of the week: Joe over Steve by 32.9.",
-      "Brother vs. brother goes to Will, 97.5 to 74.9. Vin is rolling with 7 straight wins. Tim has dropped 7 in a row.",
+      "Vin is rolling with 7 straight wins. Tim has dropped 7 in a row.",
       "Will leads the way at 10-2."
      ],
      "matchups": [
@@ -76286,10 +76983,13 @@
     },
     {
      "week": 13,
+     "start": "2025-12-29",
+     "end": "2026-01-04",
+     "days": 7,
      "recap": [
-      "Joe posts the week's high score with 219.4 and beats Vin by 75.9.",
+      "Happy New Year! 2025 goes out and 2026 comes in. Joe posts the week's high score with 219.4 and beats Vin by 75.9.",
       "Photo finish: Danny edges Zac 176.5 to 176.3. Blowout of the week: Joe over Vin by 75.9.",
-      "In-law showdown: Hallie gets the better of Tom, 149.4 to 119.9. Will is rolling with 5 straight wins. Vin's 7-game win streak is over. Tim has dropped 8 in a row.",
+      "Will is rolling with 5 straight wins. Vin's 7-game win streak is over. Tim has dropped 8 in a row.",
       "Will leads the way at 11-2."
      ],
      "matchups": [
@@ -76582,6 +77282,9 @@
     },
     {
      "week": 14,
+     "start": "2026-01-05",
+     "end": "2026-01-11",
+     "days": 7,
      "recap": [
       "Vin posts the week's high score with 182.8 and beats Will by 10.6.",
       "Closest game: Danny edges Nick 138.0 to 131.3. Blowout of the week: Zac over Steve by 26.1.",
@@ -76891,10 +77594,13 @@
     },
     {
      "week": 15,
+     "start": "2026-01-12",
+     "end": "2026-01-18",
+     "days": 7,
      "recap": [
       "Jefe posts the week's high score with 257.3 and beats Tom by 44.4.",
       "Photo finish: Ronnie edges Joe 132.2 to 129.0. Blowout of the week: Jefe over Tom by 44.4. Upset alert: Zac, 7th coming in, knocks off Vin (2nd).",
-      "Zac beats Vin 203.2 to 181.4. Somebody check who set Zac's lineup. Jefe is rolling with 5 straight wins. Tim has dropped 10 in a row.",
+      "Jefe is rolling with 5 straight wins. Tim has dropped 10 in a row.",
       "Will leads the way at 12-3."
      ],
      "matchups": [
@@ -77199,10 +77905,13 @@
     },
     {
      "week": 16,
+     "start": "2026-01-19",
+     "end": "2026-01-25",
+     "days": 7,
      "recap": [
       "Danny posts the week's high score with 205.8 and beats Jefe by 25.8.",
       "Photo finish: Ronnie edges Will 171.1 to 170.9. Blowout of the week: Steve over Tim by 35.7.",
-      "Brother vs. brother goes to Vin, 170.4 to 144.8. Danny is rolling with 4 straight wins. Jefe's 5-game win streak is over. Tim has dropped 11 in a row.",
+      "Danny is rolling with 4 straight wins. Jefe's 5-game win streak is over. Tim has dropped 11 in a row.",
       "Will leads the way at 12-4."
      ],
      "matchups": [
@@ -77522,10 +78231,13 @@
     },
     {
      "week": 17,
+     "start": "2026-01-26",
+     "end": "2026-02-01",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 207.0 and beats Tom by 59.5.",
       "Closest game: Danny edges Steve 154.9 to 136.6. Blowout of the week: Jefe over Joe by 69.2.",
-      "Brother vs. brother goes to Will, 207.0 to 147.5. Danny is rolling with 5 straight wins. Tim has dropped 12 in a row.",
+      "Danny is rolling with 5 straight wins. Tim has dropped 12 in a row.",
       "Will leads the way at 13-4."
      ],
      "matchups": [
@@ -77849,10 +78561,13 @@
     },
     {
      "week": 18,
+     "start": "2026-02-02",
+     "end": "2026-03-01",
+     "days": 28,
      "recap": [
-      "A multi-week period this time, so the scores run high. Jefe posts the week's high score with 283.6 and beats Steve by 48.8.",
+      "A four-week matchup (Feb 2 to Mar 1) to cover the Milan-Cortina Olympic break, so the numbers run big. Jefe posts the week's high score with 283.6 and beats Steve by 48.8.",
       "Closest game: Ronnie edges Nick 236.1 to 216.7. Blowout of the week: Jefe over Steve by 48.8.",
-      "In-law showdown: Tim gets the better of Hallie, 241.3 to 217.8. Zac is rolling with 5 straight wins. Tim snaps a 12-game skid. Tom has dropped 9 in a row.",
+      "Zac is rolling with 5 straight wins. Tim snaps a 12-game skid. Tom has dropped 9 in a row.",
       "Will leads the way at 14-4."
      ],
      "matchups": [
@@ -78170,10 +78885,13 @@
     },
     {
      "week": 19,
+     "start": "2026-03-02",
+     "end": "2026-03-08",
+     "days": 7,
      "recap": [
       "Will posts the week's high score with 200.9 and beats Jefe by 14.4.",
       "Closest game: Tim edges Ronnie 136.8 to 130.7. Blowout of the week: Vin over Steve by 32.1. Upset alert: Tim, 11th coming in, knocks off Ronnie (5th).",
-      "In-law showdown: Danny gets the better of Hallie, 167.5 to 157.1. Zac is rolling with 6 straight wins. Tom has dropped 10 in a row.",
+      "Zac is rolling with 6 straight wins. Tom has dropped 10 in a row.",
       "Will leads the way at 15-4."
      ],
      "matchups": [
@@ -78507,11 +79225,14 @@
     },
     {
      "week": 20,
+     "start": "2026-03-09",
+     "end": "2026-03-15",
+     "days": 7,
      "recap": [
       "Zac posts the week's high score with 187.5 and beats Will by 45.2.",
-      "Photo finish: Tom edges Tim 149.4 to 148.5. Blowout of the week: Steve over Hallie by 51.7.",
-      "Brother vs. brother goes to Tom, 149.4 to 148.5. Zac is rolling with 7 straight wins. Tom snaps a 10-game skid. Hallie has dropped 7 in a row.",
-      "That wraps the regular season, with Will on top at 15-5."
+      "Photo finish (brother vs. brother): Tom edges Tim 149.4 to 148.5. Blowout of the week: Steve over Hallie by 51.7.",
+      "Zac is rolling with 7 straight wins. Tom snaps a 10-game skid. Hallie has dropped 7 in a row.",
+      "That wraps the regular season, with Will on top at 15-5. The 8-team playoff field is set: Will (1), Vin (2), Zac (3), Jefe (4), Ronnie (5), Danny (6), Joe (7), Nick (8). Steve just misses out at 9-11."
      ],
      "matchups": [
       {
@@ -78804,9 +79525,10 @@
     {
      "week": 100,
      "recap": [
-      "Jefe wins the 2025-26 championship. Vin finishes 2nd and Zac 3rd.",
-      "Will won the regular season at 15-5 but finishes 7th once the playoffs are done.",
-      "At the other end, Steve finishes 12th."
+      "From the No. 4 seed, Jefe wins the 2025-26 championship! Jefe beat Ronnie (5) in the quarterfinals, beat Nick (8) in the semifinals and beat Vin (2) in the final, 187.0 to 172.0.",
+      "Vin settles for 2nd, and Zac takes 3rd by beating Nick 221.2 to 203.7.",
+      "Upset of the playoffs: No. 8 Nick knocks off No. 1 Will in the quarterfinals. Will won the regular season at 15-5 but fell to Nick in the quarterfinals.",
+      "At the other end, Steve finishes 12th. See you next season."
      ],
      "matchups": [],
      "highScore": null,
