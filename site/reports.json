@@ -80051,19 +80051,22 @@
         "name": "Elias Pettersson",
         "nhl": "VAN",
         "pts": 33.3,
-        "mgr": "Will"
+        "mgr": "Will",
+        "pid": "8480012"
        },
        "D": {
         "name": "Evan Bouchard",
         "nhl": "EDM",
         "pts": 26.2,
-        "mgr": "Zac"
+        "mgr": "Zac",
+        "pid": "8480803"
        },
        "G": {
         "name": "Igor Shesterkin",
         "nhl": "NYR",
         "pts": 23.7,
-        "mgr": "Tom"
+        "mgr": "Tom",
+        "pid": "8478048"
        }
       },
       "low": {
@@ -80071,19 +80074,22 @@
         "name": "Gavin McKenna",
         "nhl": "TOR",
         "pts": -1.2,
-        "mgr": "Joe"
+        "mgr": "Joe",
+        "pid": "8486067"
        },
        "D": {
         "name": "Rasmus Andersson",
         "nhl": "VGK",
         "pts": -0.6,
-        "mgr": "Tom"
+        "mgr": "Tom",
+        "pid": "8478397"
        },
        "G": {
         "name": "Darcy Kuemper",
         "nhl": "LAK",
         "pts": -3.8,
-        "mgr": "Tim"
+        "mgr": "Tim",
+        "pid": "8475311"
        }
       },
       "faHigh": {
@@ -80378,19 +80384,22 @@
         "name": "Tim Stutzle",
         "nhl": "OTT",
         "pts": 31.8,
-        "mgr": "Nick"
+        "mgr": "Nick",
+        "pid": "8482116"
        },
        "D": {
         "name": "Shayne Gostisbehere",
         "nhl": "CAR",
         "pts": 16.8,
-        "mgr": "Zac"
+        "mgr": "Zac",
+        "pid": "8476906"
        },
        "G": {
         "name": "Jake Oettinger",
         "nhl": "DAL",
         "pts": 26.8,
-        "mgr": "Danny"
+        "mgr": "Danny",
+        "pid": "8479979"
        }
       },
       "low": {
@@ -80398,19 +80407,22 @@
         "name": "Will Smith",
         "nhl": "SJS",
         "pts": -0.7,
-        "mgr": "Hallie"
+        "mgr": "Hallie",
+        "pid": "8484227"
        },
        "D": {
         "name": "Luca Cagnoni",
         "nhl": "SJS",
         "pts": 0.7,
-        "mgr": "Vin"
+        "mgr": "Vin",
+        "pid": "8484152"
        },
        "G": {
         "name": "Mackenzie Blackwood",
         "nhl": "COL",
         "pts": -1.4,
-        "mgr": "Zac"
+        "mgr": "Zac",
+        "pid": "8478406"
        }
       },
       "faHigh": {
@@ -80941,19 +80953,22 @@
         "name": "Brady Tkachuk",
         "nhl": "FLA",
         "pts": 41,
-        "mgr": "Vin"
+        "mgr": "Vin",
+        "pid": "8480801"
        },
        "D": {
         "name": "Seth Jones",
         "nhl": "FLA",
         "pts": 26.8,
-        "mgr": "Tim"
+        "mgr": "Tim",
+        "pid": "8477495"
        },
        "G": {
         "name": "Linus Ullmark",
         "nhl": "OTT",
         "pts": 20.8,
-        "mgr": "Jefe"
+        "mgr": "Jefe",
+        "pid": "8476999"
        }
       },
       "low": {
@@ -80961,20 +80976,23 @@
         "name": "Rickard Rakell",
         "nhl": "PIT",
         "pts": 0.1,
-        "mgr": "Ronnie"
+        "mgr": "Ronnie",
+        "pid": "8476483"
        },
        "D": {
         "name": "Luca Cagnoni",
         "nhl": "SJS",
         "pts": -0.7,
-        "mgr": "Vin"
+        "mgr": "Vin",
+        "pid": "8484152"
        },
        "G": {
         "name": "Sergei Murashov",
         "nhl": "PIT",
         "pts": -3.2,
         "mgr": "Vin",
-        "note": "Dropped Sun Oct 18"
+        "note": "Dropped Sun Oct 18",
+        "pid": "8483703"
        }
       },
       "faHigh": {
@@ -81427,19 +81445,22 @@
         "name": "Leon Draisaitl",
         "nhl": "EDM",
         "pts": 32.2,
-        "mgr": "Hallie"
+        "mgr": "Hallie",
+        "pid": "8477934"
        },
        "D": {
         "name": "Jacob Trouba",
         "nhl": "SJS",
         "pts": 20.7,
-        "mgr": "Joe"
+        "mgr": "Joe",
+        "pid": "8476885"
        },
        "G": {
         "name": "Joel Hofer",
         "nhl": "STL",
         "pts": 22,
-        "mgr": "Ronnie"
+        "mgr": "Ronnie",
+        "pid": "8480981"
        }
       },
       "low": {
@@ -81447,19 +81468,22 @@
         "name": "Tyler Bertuzzi",
         "nhl": "CHI",
         "pts": -0.8,
-        "mgr": "Tim"
+        "mgr": "Tim",
+        "pid": "8477479"
        },
        "D": {
         "name": "Mattias Ekholm",
         "nhl": "EDM",
         "pts": 0.5,
-        "mgr": "Ronnie"
+        "mgr": "Ronnie",
+        "pid": "8475218"
        },
        "G": {
         "name": "Jet Greaves",
         "nhl": "CBJ",
         "pts": -2.2,
-        "mgr": "Danny"
+        "mgr": "Danny",
+        "pid": "8482982"
        }
       },
       "faHigh": {

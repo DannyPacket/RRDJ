@@ -129,7 +129,15 @@ ul.plain.games-next { gap: 0; }
 
 /* Stars */
 .stars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.star { display: grid; gap: 2px; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--board); }
+.star { position: relative; display: grid; gap: 2px; padding: 12px 92px 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--board); min-height: 104px; align-content: start; }
+.star .shot { position: absolute; top: 12px; right: 12px; width: 68px; height: 68px; border-radius: 50%; background: var(--chip); border: 1px solid var(--line); overflow: visible; }
+.star .shot .face { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; object-position: top; display: block; }
+.star .shot .badge { position: absolute; right: -6px; bottom: -6px; width: 30px; height: 30px; border-radius: 50%; background: var(--board); border: 1px solid var(--line); display: grid; place-items: center; }
+.star .shot.none .badge { right: 19px; bottom: 19px; }
+.tlogo { width: 24px; height: 24px; }
+.tl-dark { display: none; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tl-light { display: none; } :root:not([data-theme="light"]) .tl-dark { display: inline; } }
+:root[data-theme="dark"] .tl-light { display: none; } :root[data-theme="dark"] .tl-dark { display: inline; }
 .star .pos { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .star .pts { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1; }
 .star.hi .pts { color: var(--win); } .star.lo .pts { color: var(--loss); }
@@ -484,7 +492,13 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     // Full-width stars
     const stars = [];
     if (w.players) {
-      const card = (p, pos, kind, fa) => p ? h("div", { class: "star " + kind },
+      // Headshot with the NHL team logo as a badge; both are local copies (see player_images.js)
+      const tlogo = abbr => abbr ? [h("img", { class: "tlogo tl-light", src: "teams/" + abbr + "_light.svg", alt: abbr, width: "26", height: "26", loading: "lazy", onerror: e => e.target.remove() }),
+        h("img", { class: "tlogo tl-dark", src: "teams/" + abbr + "_dark.svg", alt: abbr, width: "26", height: "26", loading: "lazy", onerror: e => e.target.remove() })] : null;
+      const shot = p => h("span", { class: "shot" + (p.pid ? "" : " none"), "aria-hidden": "true" },
+        p.pid ? h("img", { class: "face", src: "players/" + p.pid + ".png", alt: "", width: "68", height: "68", loading: "lazy", onerror: e => e.target.remove() }) : null,
+        h("span", { class: "badge" }, tlogo(p.nhl)));
+      const card = (p, pos, kind, fa) => p ? h("div", { class: "star " + kind }, shot(p),
         h("span", { class: "pos" }, pos), h("span", { class: "pts num" }, fmt(p.pts)),
         h("span", null, h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, p.nhl)),
         h("span", { class: "muted small" }, h("span", { class: "mgr", style: "color:var(--ink)" }, p.mgr), team(p.mgr) ? " - " + team(p.mgr) : ""),

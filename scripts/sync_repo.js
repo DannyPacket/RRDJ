@@ -14,11 +14,15 @@ html = '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta
   html.slice(0, cut) + '\n</head>\n<body>\n' + html.slice(cut).replace(/^\n+/, '') + '\n</body>\n</html>\n';
 fs.writeFileSync(path.join(site, 'index.html'), html);
 fs.copyFileSync(path.join(src, 'reports.json'), path.join(site, 'reports.json'));
-for (const f of fs.readdirSync(path.join(src, 'logos'))) fs.copyFileSync(path.join(src, 'logos', f), path.join(site, 'logos', f));
+for (const d of ['logos', 'players', 'teams']) {
+  if (!fs.existsSync(path.join(src, d))) continue;
+  fs.mkdirSync(path.join(site, d), { recursive: true });
+  for (const f of fs.readdirSync(path.join(src, d))) fs.copyFileSync(path.join(src, d, f), path.join(site, d, f));
+}
 
 const scripts = path.join(repo, 'scripts');
 fs.mkdirSync(scripts, { recursive: true });
-for (const f of ['fantrax_pull.js', 'nhl_lock.js', 'history.js', 'legacy_weeks.js', 'week_dates.json', 'sync_repo.js']) {
+for (const f of ['fantrax_pull.js', 'nhl_lock.js', 'history.js', 'legacy_weeks.js', 'week_dates.json', 'player_images.js', 'sync_repo.js']) {
   const text = fs.readFileSync(path.join(__dirname, f), 'utf8').replace(/spreadsheets\/d\/[\w-]+/g, 'spreadsheets/d/<SHEET_ID>');
   fs.writeFileSync(path.join(scripts, f), text);
 }
