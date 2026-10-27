@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rancourt Weekly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: a rink-board program. Header band ruled like a rink (blue line, red centre line, blue line),
+   then a two-column week view on wide screens, single column on phones. */
+:root {
+  --ice: #F1F4F7;
+  --board: #FFFFFF;
+  --ink: #0F1C2B;
+  --muted: #586777;
+  --line: #D4DCE4;
+  --red: #C8102E;
+  --blue: #1D4E9E;
+  --win: #18794A;
+  --loss: #B3261E;
+  --chip: #E6ECF2;
+  --display: "Big Shoulders Display", "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ice: #0A1018; --board: #111A25; --ink: #E5ECF2; --muted: #93A0AE; --line: #233142;
+    --red: #FF4F60; --blue: #78A6FF; --win: #4CC38A; --loss: #FF7B70; --chip: #1A2533;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ice: #0A1018; --board: #111A25; --ink: #E5ECF2; --muted: #93A0AE; --line: #233142;
+  --red: #FF4F60; --blue: #78A6FF; --win: #4CC38A; --loss: #FF7B70; --chip: #1A2533;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--ice); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Header */
+header { background: var(--board); border-bottom: 1px solid var(--line); }
+header .wrap { padding-block: 28px 20px; display: grid; gap: 14px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--display); font-weight: 900; font-size: clamp(34px, 7vw, 60px); line-height: .95; margin: 0; letter-spacing: .01em; text-transform: uppercase; text-wrap: balance; }
+.weekline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.weekline .wk { font-family: var(--display); font-weight: 800; font-size: clamp(24px, 4vw, 32px); color: var(--red); text-transform: uppercase; }
+.weekline .dates { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.rink { height: 10px; display: grid; grid-template-rows: 3px 1fr 2px 1fr 3px; }
+.rink i:nth-child(1), .rink i:nth-child(5) { background: var(--blue); }
+.rink i:nth-child(3) { background: var(--red); }
+
+/* Picker */
+.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.picker label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+select { font: 500 14px var(--body); color: var(--ink); background: var(--chip); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
+.weeks { display: flex; flex-wrap: wrap; gap: 6px; }
+.weeks button { font: 600 13px var(--mono); min-width: 38px; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--board); color: var(--ink); cursor: pointer; }
+.weeks button[aria-pressed="true"] { background: var(--ink); color: var(--board); border-color: var(--ink); }
+.weeks button:hover { border-color: var(--blue); }
+button:focus-visible, select:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* Body grid */
+main .wrap { padding-block: 28px 56px; display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: start; } }
+.cols > div { display: grid; gap: 28px; min-width: 0; }
+section { display: grid; gap: 12px; min-width: 0; }
+h2 { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; margin: 0; display: flex; align-items: center; gap: 10px; }
+h2::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--red); flex: none; }
+.panel { background: var(--board); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; min-width: 0; }
+.recap p { margin: 0; max-width: 66ch; }
+.recap { display: grid; gap: 12px; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.mgr { font-weight: 600; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+
+/* Matchups */
+.games { display: grid; gap: 0; }
+.game { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 12px; padding: 10px 0; border-top: 1px solid var(--line); }
+.game:first-child { border-top: 0; padding-top: 0; }
+.game .side { display: contents; }
+.game .w .mgr { color: var(--ink); }
+.game .l { color: var(--muted); }
+.game .l .mgr { font-weight: 500; }
+.tag { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; padding: 2px 6px; border-radius: 4px; background: var(--chip); color: var(--muted); margin-left: 6px; vertical-align: 1px; }
+.tag.hs { background: var(--red); color: var(--board); }
+
+/* Standings */
+.tablewrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); text-align: left; padding: 0 6px 8px; border-bottom: 2px solid var(--ink); }
+td { padding: 7px 6px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+td.r, th.r { text-align: right; }
+tr.playoff-cut td { border-bottom: 2px solid var(--red); }
+.move { font: 600 11px var(--mono); }
+.up { color: var(--win); } .down { color: var(--loss); }
+.st-W { color: var(--win); } .st-L { color: var(--loss); }
+.team { display: block; font-size: 12px; color: var(--muted); line-height: 1.2; }
+.who { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: none; background: var(--chip); border: 1px solid var(--line); }
+td.rk, td.mvcell, td.r { white-space: nowrap; }
+td { height: 48px; }
+.standings table { table-layout: fixed; min-width: 520px; }
+.whotext { min-width: 0; }
+.whotext .mgr { display: block; white-space: nowrap; line-height: 1.25; }
+.team { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-items: stretch; } }
+.cols.top > div > section { grid-template-rows: auto 1fr; }
+.weekpanel { display: grid; gap: 18px; align-content: start; }
+.upnext { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
+ul.plain.games-next { gap: 0; }
+.games-next li { display: grid; gap: 2px; padding: 8px 0; border-top: 1px solid var(--line); }
+.games-next li:first-child { border-top: 0; padding-top: 0; }
+.standings tbody tr.row { cursor: pointer; }
+.standings tbody tr.row:hover td, .standings tbody tr.row.open td { background: var(--chip); }
+.standings tbody tr.row:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.standings tr.row.open td { border-bottom-color: transparent; }
+.standings tr.detail td { height: auto; padding: 4px 10px 14px; background: var(--chip); }
+.mh { display: grid; gap: 0; }
+.mh-row { display: grid; grid-template-columns: 3.4em 1.6em minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.mh-row:first-child { border-top: 0; }
+.mh-res { font: 700 12px var(--mono); }
+.games-next .rec { font: 500 12px var(--mono); color: var(--muted); }
+
+/* Stars */
+.stars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.star { display: grid; gap: 2px; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--board); }
+.star .pos { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.star .pts { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1; }
+.star.hi .pts { color: var(--win); } .star.lo .pts { color: var(--loss); }
+.star .tag.note { justify-self: start; margin: 4px 0 0; text-transform: none; letter-spacing: 0; font-weight: 500; }
+.fa-note { display: grid; gap: 1px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px; line-height: 1.35; }
+.fa-label { font: 600 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+.subhead { font: 600 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+
+/* Lists */
+ul.plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.streak { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.streak .len { font-family: var(--display); font-weight: 800; font-size: 20px; min-width: 92px; }
+.emo { font-size: 18px; }
+.trade { display: grid; gap: 6px; }
+.trade .row { display: flex; flex-wrap: wrap; gap: 4px 8px; }
+ul.plain.moves { gap: 0; }
+.moves li { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+.moves li:first-child { border-top: 0; padding-top: 2px; }
+.mvlist { display: grid; gap: 8px; min-width: 0; }
+.add { color: var(--win); font-weight: 600; } .drop { color: var(--loss); }
+.empty { color: var(--muted); font-style: italic; }
+.tally li { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 10px; align-items: baseline; }
+.tally .cnt { font-family: var(--display); font-weight: 900; font-size: 24px; color: var(--red); line-height: 1; }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; align-items: stretch; }
+.pair > section { grid-template-rows: auto 1fr; }
+.tt { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+.subhead + .tt { border-top: 0; padding-top: 0; }
+.tt-sides { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.tt-side { display: grid; gap: 6px; align-content: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+.tt-side.lead { border-color: var(--red); }
+.tt-side .tag { justify-self: start; margin-left: 0; }
+.tt-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.tt-total { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1; }
+.tt-p { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+/* Standings journey (bump chart) */
+.journey { position: relative; min-width: 640px; }
+.jsvg { display: block; width: 100%; height: auto; overflow: visible; }
+.jgrid { stroke: var(--line); stroke-width: 1; }
+.jaxis { font: 500 11px var(--mono); fill: var(--muted); }
+.jaxis.fin { font-weight: 700; fill: var(--ink); }
+.jaxis.fut { opacity: .45; }
+.jcut { stroke: var(--red); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .8; }
+.jline .jpath { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; opacity: .32; }
+.jline .jfin { stroke-dasharray: 4 4; }
+.jline .jdot { fill: var(--muted); opacity: .32; stroke: var(--board); stroke-width: 2; cursor: pointer; }
+.jline .jhit { fill: none; stroke: transparent; stroke-width: 14; cursor: pointer; }
+.jline.hv .jpath { stroke: var(--blue); opacity: 1; stroke-width: 2.5; }
+.jline.hv .jdot { fill: var(--blue); opacity: 1; }
+.jline.on .jpath { stroke: var(--red); opacity: 1; stroke-width: 3; }
+.jline.on .jdot { fill: var(--red); opacity: 1; r: 5; }
+.jlab { font: 500 13px var(--body); fill: var(--muted); cursor: pointer; }
+.jlab.hv { fill: var(--ink); }
+.jlab.on { fill: var(--ink); font-weight: 700; }
+.jlab:focus-visible { outline: 2px solid var(--blue); }
+.jtip { position: absolute; pointer-events: none; background: var(--board); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.18); white-space: nowrap; }
+.jtip[hidden] { display: none; }
+
+/* Final-standings podium */
+.podium { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: end; }
+.step { display: grid; justify-items: center; text-align: center; gap: 4px; padding: 18px 14px 0; border-radius: 12px 12px 0 0; border: 1px solid var(--line); border-bottom: 0; background: var(--board); overflow: hidden; }
+.step.p1 { border-top: 5px solid var(--red); padding-top: 22px; }
+.step .medal { font-size: 34px; line-height: 1; }
+.step.p1 .medal { font-size: 46px; }
+.logo.pod { width: 64px; height: 64px; }
+.step.p1 .logo.pod { width: 88px; height: 88px; }
+.pod-name { font-family: var(--display); font-weight: 900; font-size: 30px; line-height: 1; text-transform: uppercase; }
+.step.p1 .pod-name { font-size: 44px; }
+.step .pos { font: 600 11px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.pod-dl { display: grid; grid-template-columns: auto auto; gap: 2px 12px; margin: 8px 0 12px; font-size: 13px; text-align: left; }
+.pod-dl dt { color: var(--muted); } .pod-dl dd { margin: 0; font-weight: 600; }
+.step .block { align-self: end; justify-self: stretch; margin: 0 -14px; display: grid; place-items: center; font-family: var(--display); font-weight: 900; color: var(--board); background: var(--ink); }
+.step.p1 .block { height: 96px; font-size: 56px; background: var(--red); }
+.step.p2 .block { height: 64px; font-size: 40px; background: var(--blue); }
+.step.p3 .block { height: 44px; font-size: 32px; background: var(--muted); }
+@media (max-width: 600px) {
+  .podium { gap: 8px; }
+  .step { padding: 12px 6px 0; }
+  .pod-name, .step.p1 .pod-name { font-size: 22px; }
+  .pod-dl { grid-template-columns: 1fr; font-size: 12px; text-align: center; }
+  .step .block { margin: 0 -6px; }
+}
+
+/* Tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
+.tabs button { font: 700 15px var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; }
+.tabs button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--red); }
+.picker[hidden] { display: none; }
+
+/* League history */
+.champs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.champ { display: grid; gap: 4px; align-content: start; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--line); border-top: 4px solid var(--red); background: var(--board); }
+.champ.live { border-top-color: var(--blue); }
+.champ .pos, .recd .pos { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.champ-name { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.1; }
+.champ-name .mgr { font-weight: 800; }
+.champ-dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; margin: 6px 0 0; font-size: 13px; }
+.champ-dl dt { color: var(--muted); } .champ-dl dd { margin: 0; font-weight: 600; }
+.logo.sm { width: 22px; height: 22px; }
+table.alltime tr.group th { border-bottom: 0; padding-bottom: 2px; }
+table.alltime tr.group th.grp { text-align: center; color: var(--ink); border-bottom: 2px solid var(--red); }
+table.alltime { min-width: 900px; }
+table.alltime td { height: 44px; }
+table.seasonal { min-width: 860px; }
+table.rivals { min-width: 760px; }
+.mgrpage { display: grid; gap: 28px; }
+.mgr-head { display: flex; align-items: center; gap: 16px; }
+.mgr-head .champ-name { font-size: 40px; }
+.logo.xl { width: 72px; height: 72px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tile { display: grid; gap: 2px; align-content: start; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--board); }
+.tile .pos { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.tile-v { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1.05; }
+ul.plain.gamelog { max-width: 560px; }
+td.post { font-weight: 600; }
+th button.sort { font: inherit; color: inherit; text-transform: inherit; letter-spacing: inherit; background: none; border: 0; padding: 0; cursor: pointer; white-space: nowrap; }
+th[aria-sort] button.sort { color: var(--ink); }
+@media (min-width: 860px) { .cols.hist { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+.recs { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.recd { display: grid; gap: 2px; align-content: start; padding: 12px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--board); }
+.recd .pts { font-family: var(--display); font-weight: 800; font-size: 28px; line-height: 1.05; }
+ul.plain.runners { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px; gap: 6px; }
+.runners li { display: grid; grid-template-columns: 1.1em 3.6em minmax(0, 1fr); gap: 6px; align-items: baseline; }
+.runners .rn { color: var(--muted); font-weight: 500; }
+.runners .rv { font-weight: 600; }
+.runners .rw { display: grid; line-height: 1.3; min-width: 0; }
+.runners .rw .mgr { font-size: 13px; }
+table.finishes td { height: auto; padding: 6px; }
+.place { display: block; font: 700 13px var(--mono); }
+.place.p1 { color: var(--red); } .place.p2, .place.p3 { color: var(--ink); } .place.p4 { color: var(--muted); font-weight: 500; }
+.place.now { font-style: italic; }
+.tiny { display: block; font-size: 11px; }
+table.h2h { min-width: 760px; table-layout: fixed; font-size: 13px; }
+table.h2h th, table.h2h td { text-align: center; padding: 3px; height: 34px; border-bottom: 1px solid var(--line); }
+table.h2h th[scope="row"] { text-align: left; font: 600 13px var(--body); color: var(--ink); text-transform: none; letter-spacing: 0; width: 76px; position: sticky; left: 0; background: var(--board); }
+table.h2h .colhead { font: 600 11px var(--mono); letter-spacing: 0; text-transform: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+table.h2h td.self { background: var(--chip); }
+.cell { width: 100%; height: 28px; font: 600 12px var(--mono); color: var(--ink); border: 1px solid transparent; border-radius: 5px; background: none; cursor: pointer; }
+.cell:hover { border-color: var(--line); }
+.cell[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.h2h-detail { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+.h2h-head { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+ul.plain.h2h-list { gap: 0; max-width: 460px; }
+.h2h-list li { display: grid; grid-template-columns: 7em minmax(0, 1fr) auto; gap: 10px; padding: 5px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.h2h-list li:first-child { border-top: 0; }
+.h2h-list li.upcoming { font-style: italic; }
+footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
+#status { color: var(--muted); }
+@media (prefers-reduced-motion: no-preference) { .weeks button { transition: background .12s, color .12s, border-color .12s; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow" id="season-eyebrow">Fantasy hockey</div>
+    <h1 id="league">Rene Rancourt's Day Job</h1>
+    <div class="weekline"><span class="wk" id="wk">Weekly report</span><span class="dates" id="dates"></span></div>
+    <div class="rink" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button></nav>
+    <div class="picker" id="picker">
+      <label for="season">Season</label>
+      <select id="season"></select>
+      <label>Week</label>
+      <div class="weeks" id="weeks" role="group" aria-label="Week"></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap" id="content">
+    <p id="status">Loading the weekly report…</p>
+  </div>
+</main>
+
+<script>
+(function () {
+  const EMO = { W: [[10, "😍💦"], [6, "🥵"], [3, "🔥"]], L: [[10, "😵💀"], [6, "🥶"], [3, "❄️"]] };
+  const emoji = (k, n) => (EMO[k].find(([min]) => n >= min) || [0, ""])[1];
+  const fmt = n => (Math.round(n * 10) / 10).toFixed(1);
+  const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  const d = iso => { const [y, m, dd] = iso.split("-").map(Number); return new Date(Date.UTC(y, m - 1, dd)); };
+  const day = iso => { const x = d(iso); return DOW[x.getUTCDay()] + " " + MON[x.getUTCMonth()] + " " + x.getUTCDate(); };
+  const range = (a, b) => day(a) + " – " + day(b) + ", " + d(b).getUTCFullYear();
+
+  function h(tag, attrs, ...kids) {
+    const el = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v == null || v === false) continue;
+      if (k === "class") el.className = v; else if (k.startsWith("on")) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v);
+    }
+    for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+    return el;
+  }
+  const panel = (...k) => h("div", { class: "panel" }, ...k);
+  const sec = (title, ...k) => h("section", null, h("h2", null, title), ...k);
+  const player = p => [h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, [p.nhl, p.pos].filter(Boolean).join(" · "))];
+
+  let DATA = null, cur = { s: null, w: null };
+  const $ = id => document.getElementById(id);
+
+  function hashFor(s, w) { return s.id + "-w" + w.week; }
+  function readHash() {
+    const m = (location.hash || "").match(/^#([\w.~-]+)-w(\d+)$/);
+    return m ? { s: m[1], w: Number(m[2]) } : null;
+  }
+
+  function pick(seasonId, weekNo, push) {
+    const s = DATA.seasons.find(x => x.id === seasonId) || DATA.seasons[DATA.seasons.length - 1];
+    const weeks = [...s.weeks].sort((a, b) => a.week - b.week);
+    const w = weeks.find(x => x.week === weekNo) || weeks[weeks.length - 1];
+    cur = { s, w };
+    setTab("week");
+    $("season").value = s.id;
+    $("weeks").replaceChildren(...weeks.map(x => h("button", { type: "button", "aria-pressed": x === w ? "true" : "false", onclick: () => pick(s.id, x.week, true) }, x.week === 100 ? "Final" : x.week)));
+    if (push) { try { history.replaceState(null, "", "#" + hashFor(s, w)); } catch (e) { location.hash = hashFor(s, w); } }
+    render(s, w);
+  }
+
+  function render(s, w) {
+    const fromSheet = s.source === "sheet";
+    $("season-eyebrow").textContent = s.label + " season · " + (fromSheet ? "Yahoo" : "Fantrax");
+    $("wk").textContent = w.week === 100 ? "Final standings" : "Week " + w.week;
+    $("dates").textContent = w.start ? range(w.start, w.end) + (w.days && w.days !== 7 ? " · " + w.days + "-day period" : "") : "";
+    document.title = "Rancourt Weekly";
+    const team = m => s.teams && s.teams[m];
+    const label = w.days && w.days !== 7 ? "last " + w.days + " days" : "last 7 days";
+
+    // Left column: the week (recap, then next week's games)
+    const left = [];
+    const rec = m => { const r = (w.standings || []).find(x => x.mgr === m); return r ? " (" + r.w + "-" + r.l + "-" + (r.t || 0) + ")" : ""; };
+    // This season's series: the earlier result if they've met, otherwise when the rematch is
+    const meet = (a, b) => {
+      const pair = g => (g.a === a && g.b === b) || (g.a === b && g.b === a);
+      const met = s.weeks.filter(x => x.week <= w.week && x.matchups).sort((x, y) => x.week - y.week)
+        .flatMap(x => x.matchups.filter(pair).map(g => ({ wk: x.week, g })));
+      if (met.length) {
+        const { wk, g } = met[met.length - 1], won = g.ap === g.bp ? null : g.ap > g.bp ? g.a : g.b;
+        return "Rematch of week " + wk + ": " + (won ? won + " won " : "tied ") + fmt(Math.max(g.ap, g.bp)) + "-" + fmt(Math.min(g.ap, g.bp));
+      }
+      const later = (s.schedule || []).filter(([wk, x, y]) => wk > w.week + 1 && pair({ a: x, b: y })).map(x => x[0]);
+      return later.length ? "First meeting this season · rematch in week " + later[0] : s.schedule ? "Only meeting this season" : "";
+    };
+    const upnext = w.next && w.next.length ? h("div", { class: "upnext" },
+      h("div", { class: "subhead" }, "Up next · Week " + (w.week + 1)),
+      h("ul", { class: "plain games-next" }, w.next.map(([a, b]) => h("li", null,
+        h("span", null, h("span", { class: "mgr" }, a), h("span", { class: "muted small" }, rec(a)), " vs ", h("span", { class: "mgr" }, b), h("span", { class: "muted small" }, rec(b))),
+        meet(a, b) ? h("span", { class: "rec" }, meet(a, b)) : null)))) : null;
+    if ((w.recap && w.recap.length) || upnext) left.push(sec("The week", panel(h("div", { class: "weekpanel" },
+      w.recap && w.recap.length ? h("div", { class: "recap" }, w.recap.map(p => h("p", null, p))) : null, upnext))));
+    const st = (w.streaks || []).slice().sort((a, b) => (a.kind === b.kind ? b.n - a.n : a.kind === "W" ? -1 : 1));
+    const pair = [];
+    pair.push(sec("Streaks", panel(st.length ? h("ul", { class: "plain" }, st.map(x => h("li", { class: "streak" },
+      h("span", { class: "len " + (x.kind === "W" ? "up" : "down") }, x.n + (x.kind === "W" ? " wins" : " losses")),
+      h("span", { class: "emo", "aria-hidden": "true" }, emoji(x.kind, x.n)),
+      h("span", { class: "mgr" }, x.mgrs.join(", ")))))
+      : h("div", { class: "empty" }, "No streaks of 3 or more"), h("div", { class: "muted small", style: "margin-top:8px" }, "Minimum 3 straight results"))));
+    if (w.highScoreTally && w.highScoreTally.length) {
+      pair.push(sec("Weekly high scores", panel(
+        w.highScore ? h("div", { class: "small muted", style: "margin-bottom:10px" }, "This week: ", h("span", { class: "mgr", style: "color:var(--ink)" }, w.highScore.mgr), " with ", h("span", { class: "num" }, fmt(w.highScore.pts))) : null,
+        h("ul", { class: "plain tally" }, w.highScoreTally.map(t => h("li", null,
+        h("span", { class: "cnt" }, t.count),
+        h("span", null, t.entries.map((e, i) => h("span", null, i ? ", " : "", h("span", { class: "mgr" }, e.mgr), " ", h("span", { class: "muted num small" }, "(wk " + e.weeks.join(", ") + ")"))))))))));
+    }
+    const moves = w.moves || [], trades = w.trades || [];
+    const tt = s.tradeTracker && s.tradeTracker.trades || [];
+    const tracker = t => {
+      const totals = t.sides.map(sd => sd.gets.reduce((a, p) => a + (p.pts || 0), 0));
+      const best = Math.max(...totals), lead = totals.filter(x => x === best).length === 1 && best > 0 ? totals.indexOf(best) : -1;
+      return h("div", { class: "tt" },
+        h("div", { class: "muted small" }, "Traded " + day(t.date) + " · fantasy points since the trade"),
+        h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
+          h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt(totals[i]))),
+          sd.gets.map(p => h("div", { class: "tt-p" }, h("span", null, ...player(p)),
+            h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
+          i === lead ? h("span", { class: "tag hs" }, "Ahead by " + fmt(best - Math.min(...totals))) : null))));
+    };
+    const trackerSec = sec("Trade tracker", panel(tt.length
+      ? h("div", { style: "display:grid;gap:12px" }, h("div", { class: "subhead" }, "Every trade this season · through " + day(s.tradeTracker.through)), tt.map(tracker))
+      : h("div", { class: "empty" }, "No trades yet this season")));
+    const movementSec = sec("Movement", panel(h("div", { style: "display:grid;gap:18px" },
+      h("div", { class: "trade" }, h("div", { class: "subhead" }, "Trades"),
+        trades.length ? trades.map(t => h("div", { class: "trade" }, t.sides.map(sd => h("div", { class: "row" }, h("span", { class: "mgr" }, sd.mgr + " gets"), sd.gets.map((p, i) => h("span", null, i ? ", " : "", ...player(p)))))))
+          : h("div", { class: "empty" }, "No trades this week")),
+      h("div", { style: "display:grid;gap:8px" }, h("div", { class: "subhead" }, "Adds & drops"),
+        moves.length ? h("ul", { class: "plain moves" }, [...new Set(moves.map(m => m.mgr))].map(mgr => h("li", null,
+          h("span", { class: "mgr" }, mgr),
+          h("div", { class: "mvlist" }, moves.filter(m => m.mgr === mgr).map(m => h("div", { class: "mv" },
+            m.add ? h("div", null, h("span", { class: "add" }, "+ "), ...player(m.add), m.add.note ? h("span", { class: "tag" }, m.add.note) : null) : null,
+            m.drop ? h("div", null, h("span", { class: "drop" }, "− "), ...player(m.drop)) : null))))))
+          : h("div", { class: "empty" }, "No adds or drops this week"))
+    )));
+
+    // A manager's matchups this season through this week
+    const mgrWeeks = m => {
+      const rows = [...s.weeks].filter(x => x.week <= w.week && x.matchups).sort((a, b) => a.week - b.week).flatMap(x => x.matchups
+        .filter(g => g.a === m || g.b === m).map(g => {
+          const [p, q, opp] = g.a === m ? [g.ap, g.bp, g.b] : [g.bp, g.ap, g.a];
+          const res = p > q ? "W" : p < q ? "L" : "T";
+          return h("div", { class: "mh-row" },
+            h("span", { class: "num muted" }, "Wk " + x.week),
+            h("span", { class: "mh-res " + (res === "W" ? "up" : res === "L" ? "down" : "muted") }, res),
+            h("span", null, "vs ", h("span", { class: "mgr" }, opp), x.highScore && x.highScore.mgr === m ? h("span", { class: "tag hs" }, "High score") : null),
+            h("span", { class: "num" }, fmt(p) + "-" + fmt(q)));
+        }));
+      return h("div", { class: "mh" }, rows.length ? rows : h("div", { class: "empty" }, "No games yet"));
+    };
+
+    // Right column: standings
+    const right = [];
+    if (w.standings && w.standings.length) {
+      right.push(sec("Standings", panel(h("div", { class: "tablewrap standings" }, h("table", null,
+        h("colgroup", null, h("col", { style: "width:2.2em" }), h("col", { style: "width:3em" }), h("col"), h("col", { style: "width:4.6em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:3.2em" })),
+        h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r" }, "PF"), h("th", { class: "r" }, "PA"), h("th", { class: "r" }, "Net"), h("th", { class: "r" }, "Strk"))),
+        h("tbody", null, w.standings.flatMap(r => {
+          const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: "8" }, mgrWeeks(r.mgr)));
+          const toggle = e => {
+            const row = e.currentTarget, open = row.classList.contains("open");
+            row.closest("tbody").querySelectorAll("tr.row.open").forEach(x => { x.classList.remove("open"); x.setAttribute("aria-expanded", "false"); x.nextSibling.hidden = true; });
+            if (!open) { row.classList.add("open"); row.setAttribute("aria-expanded", "true"); detail.hidden = false; }
+          };
+          const mv = r.prev ? r.prev - r.rank : 0;
+          const net = r.pa != null ? r.pf - r.pa : null;
+          const logo = s.logos && s.logos[r.mgr];
+          return [h("tr", { class: "row", tabindex: "0", role: "button", "aria-expanded": "false", title: "Show " + r.mgr + "'s weeks", onclick: toggle,
+            onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(e); } } },
+            h("td", { class: "num rk" }, r.rank),
+            h("td", { class: "num mvcell" }, mv ? h("span", { class: "move " + (mv > 0 ? "up" : "down"), title: "Was " + r.prev }, (mv > 0 ? "▲" : "▼") + Math.abs(mv)) : h("span", { class: "move muted", "aria-hidden": "true" }, r.prev ? "–" : "")),
+            h("td", { class: "whocell" }, h("div", { class: "who" },
+              logo ? h("img", { class: "logo", src: logo, alt: "", width: "28", height: "28", loading: "lazy", onerror: e => e.target.remove() }) : null,
+              h("div", { class: "whotext" }, h("span", { class: "mgr" }, r.mgr), team(r.mgr) ? h("span", { class: "team", title: team(r.mgr) }, team(r.mgr)) : null))),
+            h("td", { class: "r num" }, r.w + "-" + r.l + "-" + (r.t || 0)),
+            h("td", { class: "r num" }, fmt(r.pf)),
+            h("td", { class: "r num" }, r.pa != null ? fmt(r.pa) : "–"),
+            h("td", { class: "r num " + (net == null ? "" : net >= 0 ? "up" : "down") }, net == null ? "–" : (net > 0 ? "+" : "") + fmt(net)),
+            h("td", { class: "r num st-" + (r.streak || " ")[0] }, r.streak || "")), detail];
+        }))), h("div", { class: "muted small", style: "margin-top:10px" }, "Click a manager to see their weeks.")))));
+    }
+
+    // Full-width stars
+    const stars = [];
+    if (w.players) {
+      const card = (p, pos, kind, fa) => p ? h("div", { class: "star " + kind },
+        h("span", { class: "pos" }, pos), h("span", { class: "pts num" }, fmt(p.pts)),
+        h("span", null, h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, p.nhl)),
+        h("span", { class: "muted small" }, h("span", { class: "mgr", style: "color:var(--ink)" }, p.mgr), team(p.mgr) ? " - " + team(p.mgr) : ""),
+        p.note ? h("span", { class: "tag note" }, p.note) : null,
+        fa ? h("div", { class: "fa-note" },
+          h("span", { class: "fa-label" }, "Free agent outscored him"),
+          h("span", null, h("span", { class: "mgr" }, fa.name), " ", h("span", { class: "muted" }, fa.nhl), " ", h("span", { class: "num" }, fmt(fa.pts))),
+          h("span", { class: "muted" }, fa.mgr ? "Picked up by " + fa.mgr + " after the cutoff · " + (fa.note || "").replace(/^(Free agent pickup|Waiver claim) /, "") : "Not on any roster")) : null) : null;
+      const names = { F: "Forward", D: "Defense", G: "Goalie" };
+      stars.push(sec("Top & bottom players",
+        h("div", { class: "subhead" }, "Highest scoring (" + label + ")"),
+        h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(w.players.high[k], names[k], "hi", w.players.faHigh && w.players.faHigh[k]))),
+        h("div", { class: "subhead", style: "margin-top:6px" }, "Lowest scoring (" + label + ")"),
+        h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(w.players.low[k], names[k], "lo"))),
+        h("div", { class: "muted small" }, "Players on a roster at the week's roster lock (puck drop of the first game), with at least 1 game played, credited to that manager for the whole week even if dropped or traded later. If a free agent (unowned, or picked up after the cutoff) beat the top score, he's noted in small text on that card.")));
+    }
+
+    $("content").replaceChildren(...[
+      w.week === 100 ? podium(s, w) : null,
+      h("div", { class: "cols top" }, h("div", null, left), h("div", null, right)),
+      journey(s, w),
+      w.week === 100 ? null : h("div", { class: "pair" }, pair),
+      ...stars,
+      ...(fromSheet ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
+      h("footer", null, fromSheet ? "Rebuilt from the league sheet (Yahoo season). Write-ups are generated from the scores." : "Scores and stats from Fantrax. Fantrax can apply stat corrections after a week ends.")].filter(Boolean));
+  }
+
+  // League history tab: everything here is computed from DATA.history (every game in the sheet since the first season).
+  const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+  let hSort = { key: "pct", dir: -1 }, hPair = null, hSeason = null, sSort = { key: "reg", dir: 1 }, hMgr = null, hLog = null;
+
+  const TABS = ["week", "history", "seasons", "manager"];
+  function setTab(view) {
+    TABS.forEach(t => $("tab-" + t).setAttribute("aria-pressed", t === view ? "true" : "false"));
+    $("picker").hidden = view !== "week";
+  }
+  // History views share one renderer; arg is the season or manager the hash names (#seasons-2025-26, #manager-Tom)
+  function setHash(hash) { try { window.history.replaceState(null, "", "#" + hash); } catch (e) { location.hash = hash; } }
+  function showHistory(push, view, arg) {
+    view = view || "history";
+    if (view === "seasons" && arg) hSeason = arg;
+    if (view === "manager" && arg) hMgr = arg;
+    setTab(view);
+    if (push) setHash(view === "seasons" && hSeason ? "seasons-" + hSeason : view === "manager" && hMgr ? "manager-" + hMgr : view);
+    renderHistory(view);
+  }
+
+  function renderHistory(view) {
+    const H = DATA.history || {}, G = H.games || [], finals = H.finals || {}, champs = H.champions || {}, odd = H.odd || {};
+    const latest = DATA.seasons[DATA.seasons.length - 1];
+    const logos = latest.logos || {};
+    const isOdd = g => !!(odd[g[0]] && odd[g[0]][g[1]]);
+    const seasons = [...new Set(G.map(g => g[0]))].sort();
+    const done = seasons.filter(y => finals[y]);
+    $("season-eyebrow").textContent = "All seasons · " + (seasons[0] || "") + " to " + (seasons[seasons.length - 1] || "");
+    $("wk").textContent = { history: "League history", seasons: "Season history", manager: "Manager history" }[view];
+    $("dates").textContent = G.length + " games · " + seasons.length + " seasons";
+
+    const sides = G.flatMap(g => [
+      { s: g[0], wk: g[1], m: g[2], p: g[3], opp: g[4], q: g[5], odd: isOdd(g) },
+      { s: g[0], wk: g[1], m: g[4], p: g[5], opp: g[2], q: g[3], odd: isOdd(g) }]);
+    const res = x => x.p > x.q ? "W" : x.p < x.q ? "L" : "T";
+    const top = {};
+    sides.forEach(x => { const k = x.s + "|" + x.wk; top[k] = Math.max(top[k] == null ? -Infinity : top[k], x.p); });
+    const isTop = x => x.p === top[x.s + "|" + x.wk];
+
+    // All-time and per-season totals
+    const mgrs = [...new Set(sides.map(x => x.m))];
+    const A = Object.fromEntries(mgrs.map(m => [m, { m, w: 0, l: 0, t: 0, pf: 0, pa: 0, gp: 0, hs: 0, titles: 0, seasons: new Set(), best: null }]));
+    const S = {};
+    sides.forEach(x => {
+      const a = A[x.m], r = res(x).toLowerCase();
+      a[r]++; a.pf += x.p; a.pa += x.q; a.gp++; a.seasons.add(x.s); if (isTop(x)) a.hs++;
+      const ss = ((S[x.s] = S[x.s] || {})[x.m] = S[x.s][x.m] || { m: x.m, s: x.s, w: 0, l: 0, t: 0, pf: 0, pa: 0, gpN: 0, pfN: 0, hs: 0, gp: 0 });
+      ss[r]++; ss.pf += x.p; ss.pa += x.q; ss.gp++; if (isTop(x)) ss.hs++; if (!x.odd) { ss.gpN++; ss.pfN += x.p; }
+    });
+    Object.values(champs).forEach(m => { if (A[m]) A[m].titles++; });
+    const recent = done.slice(-5);
+    recent.forEach(y => Object.entries(finals[y]).forEach(([m, p]) => {
+      if (!A[m]) return;
+      if (A[m].best5 == null || p < A[m].best5) A[m].best5 = p;
+      if (A[m].worst5 == null || p > A[m].worst5) A[m].worst5 = p;
+    }));
+    mgrs.forEach(m => { const a = A[m]; a.pct = a.gp ? (a.w + a.t / 2) / a.gp : 0; a.net = a.pf - a.pa; a.avg = a.gp ? a.pf / a.gp : 0; a.n = a.seasons.size; });
+    const pct = r => r.gp ? (r.w + r.t / 2) / r.gp : 0;
+    const order = mgrs.slice().sort((x, y) => A[y].pct - A[x].pct || A[y].pf - A[x].pf);
+    const rec3 = r => r.w + "-" + r.l + "-" + r.t;
+    const who = (m, small) => h("span", { class: "who" },
+      logos[m] ? h("img", { class: "logo" + (small ? " sm" : ""), src: logos[m], alt: "", width: small ? "22" : "28", height: small ? "22" : "28", loading: "lazy", onerror: e => e.target.remove() }) : null,
+      h("span", { class: "mgr" }, m));
+
+    // Streaks within a season
+    const streaks = [];
+    for (const y of seasons) for (const m of mgrs) {
+      const xs = sides.filter(x => x.s === y && x.m === m).sort((a, b) => a.wk - b.wk);
+      let run = null;
+      const close = () => { if (run && run.n >= 2) streaks.push(run); };
+      xs.forEach(x => {
+        const r = res(x);
+        if (run && run.k === r) { run.n++; run.to = x.wk; } else { close(); run = { k: r, n: 1, m, s: y, from: x.wk, to: x.wk }; }
+      });
+      if (run) { run.active = y === latest.id; close(); }
+    }
+
+    // 1. Champions
+    const lastWeek = [...latest.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
+    const champCards = done.slice().reverse().map(y => {
+      const f = finals[y], byPlace = Object.entries(f).sort((a, b) => a[1] - b[1]);
+      const reg = Object.values(S[y] || {}).sort((a, b) => pct(b) - pct(a) || b.pf - a.pf)[0];
+      return h("div", { class: "champ" },
+        h("span", { class: "pos" }, y),
+        h("span", { class: "champ-name" }, who(champs[y] || byPlace[0][0])),
+        h("span", { class: "muted small" }, "Champion"),
+        h("dl", { class: "champ-dl" },
+          h("dt", null, "Runner-up"), h("dd", null, byPlace[1] ? byPlace[1][0] : "–"),
+          h("dt", null, "Third"), h("dd", null, byPlace[2] ? byPlace[2][0] : "–"),
+          reg ? [h("dt", null, "Best record"), h("dd", null, reg.m + " ", h("span", { class: "num muted" }, rec3(reg)))] : null,
+          h("dt", null, "Last place"), h("dd", null, byPlace[byPlace.length - 1][0])));
+    });
+    if (!finals[latest.id] && lastWeek && lastWeek.standings) {
+      const lead = lastWeek.standings[0];
+      champCards.unshift(h("div", { class: "champ live" },
+        h("span", { class: "pos" }, latest.id + " · in progress"),
+        h("span", { class: "champ-name" }, who(lead.mgr)),
+        h("span", { class: "muted small" }, "1st after week " + lastWeek.week),
+        h("dl", { class: "champ-dl" },
+          h("dt", null, "Record"), h("dd", { class: "num" }, lead.w + "-" + lead.l + "-" + (lead.t || 0)),
+          h("dt", null, "Going for"), h("dd", null, champs[seasons[seasons.length - 2]] && champs[seasons[seasons.length - 2]] === champs[seasons[seasons.length - 3]]
+            ? champs[seasons[seasons.length - 2]] + "'s three-peat" : "the title"))));
+    }
+
+    // 2. All-time standings (sortable)
+    const cols = [
+      ["m", "Manager", 0], ["n", "Seasons", 1], ["w", "W-L-T", 1], ["pct", "Win %", 1], ["pf", "PF", 1], ["pa", "PA", 1],
+      ["net", "Net", 1], ["avg", "Avg", 1], ["hs", "High scores", 1], ["titles", "Titles", 1], ["best5", "Best finish", 1], ["worst5", "Worst finish", 1]];
+    const standWrap = h("div", { class: "tablewrap" });
+    const drawStand = () => {
+      const k = hSort.key, rows = mgrs.slice().sort((x, y) => {
+        const a = A[x][k], b = A[y][k];
+        if (k === "m") return hSort.dir * (a < b ? -1 : a > b ? 1 : 0);
+        return hSort.dir * ((a == null ? 99 : a) - (b == null ? 99 : b)) || A[y].pct - A[x].pct;
+      });
+      standWrap.replaceChildren(h("table", { class: "alltime" },
+        h("thead", null, h("tr", { class: "group" }, h("th", { colspan: String(cols.length - 1) }, ""), h("th", { colspan: "2", class: "grp" }, "Last 5 seasons")),
+          h("tr", null, h("th", null, "#"), cols.map(([key, label, r]) => h("th", { class: r ? "r" : null, "aria-sort": hSort.key === key ? (hSort.dir < 0 ? "descending" : "ascending") : null },
+          h("button", { type: "button", class: "sort", onclick: () => { hSort = { key, dir: hSort.key === key ? -hSort.dir : (key === "m" || key === "best5" || key === "worst5" || key === "pa" ? 1 : -1) }; drawStand(); } },
+            label, hSort.key === key ? (hSort.dir < 0 ? " ▾" : " ▴") : ""))))),
+        h("tbody", null, rows.map((m, i) => {
+          const a = A[m];
+          return h("tr", null,
+            h("td", { class: "num rk" }, i + 1),
+            h("td", null, who(m)),
+            h("td", { class: "r num" }, a.n),
+            h("td", { class: "r num" }, rec3(a)),
+            h("td", { class: "r num" }, a.pct.toFixed(3).replace(/^0/, "")),
+            h("td", { class: "r num" }, Math.round(a.pf).toLocaleString()),
+            h("td", { class: "r num" }, Math.round(a.pa).toLocaleString()),
+            h("td", { class: "r num " + (a.net >= 0 ? "up" : "down") }, (a.net > 0 ? "+" : "") + Math.round(a.net).toLocaleString()),
+            h("td", { class: "r num" }, fmt(a.avg)),
+            h("td", { class: "r num" }, a.hs),
+            h("td", { class: "r num" }, a.titles ? "🏆".repeat(a.titles) : "–"),
+            h("td", { class: "r num" }, a.best5 ? ord(a.best5) : "–"),
+            h("td", { class: "r num" }, a.worst5 ? ord(a.worst5) : "–"));
+        }))));
+    };
+    drawStand();
+
+    // 3. Finishes by season
+    const curStand = lastWeek && lastWeek.standings ? Object.fromEntries(lastWeek.standings.map(r => [r.mgr, r.rank])) : {};
+    const finishTable = h("div", { class: "tablewrap" }, h("table", { class: "finishes" },
+      h("thead", null, h("tr", null, h("th", null, "Manager"), seasons.map(y => h("th", { class: "r" }, y.slice(2) + (finals[y] ? "" : "*"))))),
+      h("tbody", null, order.map(m => h("tr", null, h("td", null, who(m, true)), seasons.map(y => {
+        const p = finals[y] ? finals[y][m] : curStand[m], r = S[y] && S[y][m];
+        return h("td", { class: "r" }, p ? h("span", { class: "place p" + Math.min(p, 4) + (finals[y] ? "" : " now") }, ord(p)) : "–",
+          r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "")) : null);
+      }))))));
+
+    // 4. Record book (single-week score records leave out odd-length periods: multi-week and short weeks)
+    const kind = (y, wk) => odd[y] && odd[y][wk];
+    const normal = sides.filter(x => !kind(x.s, x.wk));
+    const wins = G.filter(g => !kind(g[0], g[1]) && g[3] !== g[5]).map(g => {
+      const aw = g[3] > g[5];
+      return { s: g[0], wk: g[1], win: aw ? g[2] : g[4], lose: aw ? g[4] : g[2], wp: Math.max(g[3], g[5]), lp: Math.min(g[3], g[5]), d: Math.abs(g[3] - g[5]) };
+    });
+    const when = x => x.s.slice(2) + " wk " + x.wk;
+    const full = done.flatMap(y => Object.values(S[y] || {}));
+    const card = (label, list) => h("div", { class: "recd" },
+      h("span", { class: "pos" }, label),
+      list[0] ? [h("span", { class: "pts num" }, list[0].v), h("span", null, h("span", { class: "mgr" }, list[0].m), " ", h("span", { class: "muted small" }, list[0].sub))] : h("span", { class: "empty" }, "–"),
+      list.length > 1 ? h("ul", { class: "plain runners" }, list.slice(1).map((x, i) => h("li", null,
+        h("span", { class: "rn num" }, i + 2), h("span", { class: "rv num" }, x.v),
+        h("span", { class: "rw" }, h("span", { class: "mgr" }, x.m), h("span", { class: "muted" }, x.sub))))) : null);
+    const pickN = (arr, f, n = 3) => arr.slice().sort(f).slice(0, n);
+    const streakSub = x => when({ s: x.s, wk: x.from }) + "-" + x.to + (x.active ? " · active" : "");
+    const records = [
+      card("Highest score", pickN(normal, (a, b) => b.p - a.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "vs " + x.opp + " · " + when(x) }))),
+      card("Lowest score", pickN(normal, (a, b) => a.p - b.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "vs " + x.opp + " · " + when(x) }))),
+      card("Biggest blowout", pickN(wins, (a, b) => b.d - a.d).map(x => ({ v: "+" + fmt(x.d), m: x.win, sub: "over " + x.lose + " · " + when(x) }))),
+      card("Closest game", pickN(wins, (a, b) => a.d - b.d).map(x => ({ v: "+" + fmt(x.d), m: x.win, sub: "over " + x.lose + " · " + when(x) }))),
+      card("Most points in a loss", pickN(normal.filter(x => res(x) === "L"), (a, b) => b.p - a.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "lost to " + x.opp + " · " + when(x) }))),
+      card("Fewest points in a win", pickN(normal.filter(x => res(x) === "W"), (a, b) => a.p - b.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "beat " + x.opp + " · " + when(x) }))),
+      card("Longest win streak", pickN(streaks.filter(x => x.k === "W"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " W", m: x.m, sub: streakSub(x) }))),
+      card("Longest losing streak", pickN(streaks.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.m, sub: streakSub(x) }))),
+      card("Best season record", pickN(full, (a, b) => pct(b) - pct(a) || b.pf - a.pf).map(x => ({ v: x.w + "-" + x.l + (x.t ? "-" + x.t : ""), m: x.m, sub: x.s }))),
+      card("Worst season record", pickN(full, (a, b) => pct(a) - pct(b) || a.pf - b.pf).map(x => ({ v: x.w + "-" + x.l + (x.t ? "-" + x.t : ""), m: x.m, sub: x.s }))),
+      card("Best scoring season", pickN(full.filter(x => x.gpN), (a, b) => b.pfN / b.gpN - a.pfN / a.gpN).map(x => ({ v: fmt(x.pfN / x.gpN), m: x.m, sub: "per week · " + x.s }))),
+      card("Most high scores in a season", pickN(full, (a, b) => b.hs - a.hs).map(x => ({ v: x.hs, m: x.m, sub: x.s })))];
+
+    // 4b. Season view: one season's standings and single-week records, picked from a menu
+    const regPlace = H.regular || {};
+    const medal = p => p === 1 ? "🥇 " : p === 2 ? "🥈 " : p === 3 ? "🥉 " : "";
+    const seasonSel = h("select", { id: "season-view" }, seasons.slice().reverse().map(y => h("option", { value: y }, y + (finals[y] ? "" : " (in progress)"))));
+    seasonSel.value = hSeason && seasons.includes(hSeason) ? hSeason : (done[done.length - 1] || seasons[seasons.length - 1]);
+    const seasonBody = h("div", { style: "display:grid;gap:16px" });
+    const scols = [["m", "Manager", 0], ["w", "W-L-T", 1], ["pct", "Win %", 1], ["pf", "PF", 1], ["pa", "PA", 1], ["net", "Net", 1], ["avg", "Avg", 1],
+      ["hs", "High scores", 1], ["reg", "Regular season", 1], ["post", "Postseason", 1]];
+    const drawSeason = () => {
+      const y = hSeason = seasonSel.value, k = sSort.key;
+      if (view === "seasons") setHash("seasons-" + y);
+      const rows = Object.values(S[y] || {}).map(r => Object.assign({}, r, { pct: pct(r), net: r.pf - r.pa, avg: r.gp ? r.pf / r.gp : 0,
+        reg: (regPlace[y] || {})[r.m], post: (finals[y] || {})[r.m] }));
+      rows.sort((a, b) => (k === "m" ? sSort.dir * (a.m < b.m ? -1 : a.m > b.m ? 1 : 0)
+        : sSort.dir * ((a[k] == null ? 99 : a[k]) - (b[k] == null ? 99 : b[k]))) || (a.reg || 99) - (b.reg || 99));
+      const table = h("table", { class: "alltime seasonal" },
+        h("thead", null, h("tr", null, h("th", null, "#"), scols.map(([key, label, r]) => h("th", { class: r ? "r" : null, "aria-sort": k === key ? (sSort.dir < 0 ? "descending" : "ascending") : null },
+          h("button", { type: "button", class: "sort", onclick: () => { sSort = { key, dir: k === key ? -sSort.dir : (["m", "reg", "post", "pa"].includes(key) ? 1 : -1) }; drawSeason(); } },
+            label, k === key ? (sSort.dir < 0 ? " ▾" : " ▴") : ""))))),
+        h("tbody", null, rows.map((r, i) => h("tr", null,
+          h("td", { class: "num rk" }, i + 1),
+          h("td", null, who(r.m)),
+          h("td", { class: "r num" }, rec3(r)),
+          h("td", { class: "r num" }, r.pct.toFixed(3).replace(/^0/, "")),
+          h("td", { class: "r num" }, fmt(r.pf)),
+          h("td", { class: "r num" }, fmt(r.pa)),
+          h("td", { class: "r num " + (r.net >= 0 ? "up" : "down") }, (r.net > 0 ? "+" : "") + fmt(r.net)),
+          h("td", { class: "r num" }, fmt(r.avg)),
+          h("td", { class: "r num" }, r.hs),
+          h("td", { class: "r num" }, r.reg ? ord(r.reg) : "–"),
+          h("td", { class: "r num post" }, r.post ? medal(r.post) + ord(r.post) : finals[y] ? "–" : "TBD")))));
+      const sideY = normal.filter(x => x.s === y), winY = wins.filter(x => x.s === y), stY = streaks.filter(x => x.s === y);
+      const cards = [
+        card("Highest score", pickN(sideY, (a, b) => b.p - a.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "vs " + x.opp + " · wk " + x.wk }))),
+        card("Lowest score", pickN(sideY, (a, b) => a.p - b.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "vs " + x.opp + " · wk " + x.wk }))),
+        card("Biggest blowout", pickN(winY, (a, b) => b.d - a.d).map(x => ({ v: "+" + fmt(x.d), m: x.win, sub: "over " + x.lose + " · wk " + x.wk }))),
+        card("Closest game", pickN(winY, (a, b) => a.d - b.d).map(x => ({ v: "+" + fmt(x.d), m: x.win, sub: "over " + x.lose + " · wk " + x.wk }))),
+        card("Most points in a loss", pickN(sideY.filter(x => res(x) === "L"), (a, b) => b.p - a.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "lost to " + x.opp + " · wk " + x.wk }))),
+        card("Fewest points in a win", pickN(sideY.filter(x => res(x) === "W"), (a, b) => a.p - b.p).map(x => ({ v: fmt(x.p), m: x.m, sub: "beat " + x.opp + " · wk " + x.wk }))),
+        card("Longest win streak", pickN(stY.filter(x => x.k === "W"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " W", m: x.m, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") }))),
+        card("Longest losing streak", pickN(stY.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.m, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") })))];
+      const so = DATA.seasons.find(x => x.id === y), sw = so && [...so.weeks].filter(x => x.standings && x.standings.length).sort((a, b) => b.week - a.week)[0];
+      seasonBody.replaceChildren(h("div", { class: "tablewrap" }, table), h("div", { class: "subhead" }, y + " single-week records"), h("div", { class: "recs" }, cards), sw ? journey(so, sw) : null);
+    };
+    seasonSel.addEventListener("change", drawSeason);
+    drawSeason();
+
+    // 5. Head-to-head grid; one pair open at a time
+    const pairGames = (a, b) => G.filter(g => (g[2] === a && g[4] === b) || (g[2] === b && g[4] === a));
+    const vs = (a, b) => { let w = 0, l = 0, t = 0; pairGames(a, b).forEach(g => { const [p, q] = g[2] === a ? [g[3], g[5]] : [g[5], g[3]]; p > q ? w++ : p < q ? l++ : t++; }); return { w, l, t }; };
+    const detail = h("div", { class: "h2h-detail" });
+    const cells = [];
+    const drawPair = () => {
+      cells.forEach(c => c.el.setAttribute("aria-pressed", hPair && c.a === hPair[0] && c.b === hPair[1] ? "true" : "false"));
+      if (!hPair) { detail.replaceChildren(h("div", { class: "muted small" }, "Pick a square to see every meeting between two managers.")); return; }
+      const [a, b] = hPair, r = vs(a, b), gs = pairGames(a, b).slice().reverse();
+      const played = Math.max(0, ...G.filter(g => g[0] === latest.id).map(g => g[1]));
+      const upcoming = (latest.schedule || []).filter(([wk, x, y]) => wk > played && ((x === a && y === b) || (x === b && y === a))).map(x => x[0]);
+      const series = r.w === r.l ? "Series tied " + r.w + "-" + r.l : (r.w > r.l ? a : b) + " leads " + Math.max(r.w, r.l) + "-" + Math.min(r.w, r.l);
+      detail.replaceChildren(
+        h("div", { class: "h2h-head" }, h("span", { class: "mgr" }, a + " vs " + b), h("span", { class: "muted small" }, series + (r.t ? " (" + r.t + " tie)" : ""))),
+        h("ul", { class: "plain h2h-list" }, upcoming.map(wk => h("li", { class: "upcoming" },
+          h("span", { class: "num muted" }, when({ s: latest.id, wk })), h("span", { class: "muted" }, "Upcoming"), h("span", null, ""))),
+          gs.map(g => {
+          const [p, q] = g[2] === a ? [g[3], g[5]] : [g[5], g[3]];
+          return h("li", null, h("span", { class: "num muted" }, when({ s: g[0], wk: g[1] })),
+            h("span", { class: "mh-res " + (p > q ? "up" : p < q ? "down" : "muted") }, p > q ? a : p < q ? b : "Tie"),
+            h("span", { class: "num" }, fmt(Math.max(p, q)) + "-" + fmt(Math.min(p, q))));
+        })));
+    };
+    const grid = h("div", { class: "tablewrap" }, h("table", { class: "h2h" },
+      h("thead", null, h("tr", null, h("th", { class: "corner" }, h("span", { class: "sr" }, "Row manager's record against column manager")), order.map(m => h("th", { class: "colhead", title: m }, m)))),
+      h("tbody", null, order.map(a => h("tr", null, h("th", { scope: "row" }, a), order.map(b => {
+        if (a === b) return h("td", { class: "self", "aria-hidden": "true" }, "");
+        const r = vs(a, b), n = r.w + r.l + r.t;
+        if (!n) return h("td", { class: "muted" }, "–");
+        const share = (r.w + r.t / 2) / n, tint = Math.round(Math.abs(share - 0.5) * 2 * 45);
+        const btn = h("button", { type: "button", class: "cell", "aria-pressed": "false", title: a + " vs " + b,
+          style: share === 0.5 ? null : "background:color-mix(in srgb, var(" + (share > 0.5 ? "--win" : "--loss") + ") " + tint + "%, transparent)",
+          onclick: () => { hPair = hPair && hPair[0] === a && hPair[1] === b ? null : [a, b]; drawPair(); } },
+          r.w + "-" + r.l + (r.t ? "-" + r.t : ""));
+        cells.push({ a, b, el: btn });
+        return h("td", null, btn);
+      }))))));
+    drawPair();
+
+    // 6. Manager history: one manager's career, seasons, rivals, records and game log
+    const mgrSel = h("select", { id: "manager-view" }, mgrs.slice().sort().map(m => h("option", { value: m }, m)));
+    mgrSel.value = hMgr && mgrs.includes(hMgr) ? hMgr : order[0];
+    const mgrBody = h("div", { class: "mgrpage" });
+    const tile = (label, value, sub) => h("div", { class: "tile" }, h("span", { class: "pos" }, label), h("span", { class: "tile-v num" }, value), sub ? h("span", { class: "muted small" }, sub) : null);
+    const drawMgr = () => {
+      const m = hMgr = mgrSel.value, a = A[m];
+      if (view === "manager") setHash("manager-" + m);
+      const titles = Object.entries(champs).filter(([, c]) => c === m).map(([y]) => y);
+      const mine = sides.filter(x => x.m === m), mineN = mine.filter(x => !x.odd);
+      const places = done.map(y => [y, finals[y][m]]).filter(x => x[1]);
+      const bestP = places.length ? Math.min(...places.map(x => x[1])) : null, worstP = places.length ? Math.max(...places.map(x => x[1])) : null;
+      const yearsAt = p => places.filter(x => x[1] === p).map(x => x[0].slice(2)).join(", ");
+      const podiums = places.filter(x => x[1] <= 3).length;
+      const head = h("div", { class: "mgr-head" },
+        logos[m] ? h("img", { class: "logo xl", src: logos[m], alt: "", width: "72", height: "72", onerror: e => e.target.remove() }) : null,
+        h("div", null, h("div", { class: "champ-name" }, m),
+          latest.teams && latest.teams[m] ? h("div", { class: "muted" }, latest.teams[m]) : null,
+          h("div", { class: "small", style: "margin-top:4px" }, titles.length ? "🏆 Champion " + titles.join(", ") : "Still chasing a first title")));
+      const tiles = h("div", { class: "tiles" },
+        tile("All-time record", rec3(a), ord(order.indexOf(m) + 1) + " of " + mgrs.length + " all-time"),
+        tile("Win %", a.pct.toFixed(3).replace(/^0/, ""), a.gp + " games"),
+        tile("Points per week", fmt(a.avg), Math.round(a.pf).toLocaleString() + " total"),
+        tile("Weekly high scores", a.hs, "across " + a.n + " seasons"),
+        tile("Podiums", podiums, done.length + " completed seasons"),
+        tile("Best finish", bestP ? ord(bestP) : "–", bestP ? yearsAt(bestP) : null),
+        tile("Worst finish", worstP ? ord(worstP) : "–", worstP ? yearsAt(worstP) : null));
+
+      // season by season
+      const seasonRows = seasons.filter(y => S[y] && S[y][m]).slice().reverse().map(y => {
+        const r = S[y][m], net = r.pf - r.pa, post = finals[y] && finals[y][m], regP = (regPlace[y] || {})[m];
+        return h("tr", null,
+          h("td", { class: "num" }, y + (finals[y] ? "" : "*")),
+          h("td", { class: "r num" }, rec3(r)),
+          h("td", { class: "r num" }, pct(r).toFixed(3).replace(/^0/, "")),
+          h("td", { class: "r num" }, fmt(r.pf)),
+          h("td", { class: "r num" }, fmt(r.pa)),
+          h("td", { class: "r num " + (net >= 0 ? "up" : "down") }, (net > 0 ? "+" : "") + fmt(net)),
+          h("td", { class: "r num" }, fmt(r.gp ? r.pf / r.gp : 0)),
+          h("td", { class: "r num" }, r.hs),
+          h("td", { class: "r num" }, regP ? ord(regP) : "–"),
+          h("td", { class: "r num post" }, post ? medal(post) + ord(post) : finals[y] ? "–" : "TBD"));
+      });
+      const seasonTable = h("div", { class: "tablewrap" }, h("table", { class: "alltime seasonal" },
+        h("thead", null, h("tr", null, ["Season", "W-L-T", "Win %", "PF", "PA", "Net", "Avg", "High scores", "Regular season", "Postseason"].map((t, i) => h("th", { class: i ? "r" : null }, t)))),
+        h("tbody", null, seasonRows)));
+
+      // rivals
+      const played = Math.max(0, ...G.filter(g => g[0] === latest.id).map(g => g[1]));
+      const rivals = mgrs.filter(o => o !== m).map(o => {
+        const gs = mine.filter(x => x.opp === o), r = { w: 0, l: 0, t: 0 };
+        gs.forEach(x => r[res(x).toLowerCase()]++);
+        const n = gs.length, last = gs[gs.length - 1];
+        const next = (latest.schedule || []).find(([wk, x, y]) => wk > played && ((x === m && y === o) || (x === o && y === m)));
+        return { o, r, n, share: n ? (r.w + r.t / 2) / n : 0, pf: n ? gs.reduce((t, x) => t + x.p, 0) / n : 0, pa: n ? gs.reduce((t, x) => t + x.q, 0) / n : 0, last, next: next && next[0] };
+      }).sort((x, y) => y.share - x.share || y.r.w - x.r.w);
+      const rivalTable = h("div", { class: "tablewrap" }, h("table", { class: "alltime rivals" },
+        h("thead", null, h("tr", null, ["Opponent", "W-L-T", "Win %", "Avg for", "Avg against", "Last meeting", "Next"].map((t, i) => h("th", { class: i ? "r" : null }, t)))),
+        h("tbody", null, rivals.map(x => h("tr", null,
+          h("td", null, who(x.o)),
+          h("td", { class: "r num" }, rec3(x.r)),
+          h("td", { class: "r num " + (x.share > .5 ? "up" : x.share < .5 ? "down" : "") }, x.n ? x.share.toFixed(3).replace(/^0/, "") : "–"),
+          h("td", { class: "r num" }, x.n ? fmt(x.pf) : "–"),
+          h("td", { class: "r num" }, x.n ? fmt(x.pa) : "–"),
+          h("td", { class: "r num" }, x.last ? h("span", null, h("span", { class: res(x.last) === "W" ? "up" : res(x.last) === "L" ? "down" : "muted" }, res(x.last)), " " + fmt(x.last.p) + "-" + fmt(x.last.q) + " ", h("span", { class: "muted" }, "(" + when(x.last) + ")")) : "–"),
+          h("td", { class: "r num" }, x.next ? "wk " + x.next : "–"))))));
+
+      // personal records (single-week ones leave out odd-length periods)
+      const myStreaks = streaks.filter(x => x.m === m);
+      const mrec = [
+        card("Highest score", pickN(mineN, (a, b) => b.p - a.p).map(x => ({ v: fmt(x.p), m: "vs " + x.opp, sub: when(x) }))),
+        card("Lowest score", pickN(mineN, (a, b) => a.p - b.p).map(x => ({ v: fmt(x.p), m: "vs " + x.opp, sub: when(x) }))),
+        card("Biggest win", pickN(mineN.filter(x => res(x) === "W"), (a, b) => (b.p - b.q) - (a.p - a.q)).map(x => ({ v: "+" + fmt(x.p - x.q), m: "over " + x.opp, sub: fmt(x.p) + "-" + fmt(x.q) + " · " + when(x) }))),
+        card("Worst loss", pickN(mineN.filter(x => res(x) === "L"), (a, b) => (b.q - b.p) - (a.q - a.p)).map(x => ({ v: "-" + fmt(x.q - x.p), m: "to " + x.opp, sub: fmt(x.p) + "-" + fmt(x.q) + " · " + when(x) }))),
+        card("Longest win streak", pickN(myStreaks.filter(x => x.k === "W"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " W", m: x.s, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") }))),
+        card("Longest losing streak", pickN(myStreaks.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.s, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") }))),
+        card("Most points in a loss", pickN(mineN.filter(x => res(x) === "L"), (a, b) => b.p - a.p).map(x => ({ v: fmt(x.p), m: "lost to " + x.opp, sub: when(x) }))),
+        card("Fewest points in a win", pickN(mineN.filter(x => res(x) === "W"), (a, b) => a.p - b.p).map(x => ({ v: fmt(x.p), m: "beat " + x.opp, sub: when(x) })))];
+
+      // game log for one season
+      const logSeasons = seasons.filter(y => S[y] && S[y][m]).slice().reverse();
+      const logSel = h("select", { id: "log-season", "aria-label": "Game log season" }, logSeasons.map(y => h("option", { value: y }, y)));
+      logSel.value = hLog && logSeasons.includes(hLog) ? hLog : logSeasons[0];
+      const logBody = h("div");
+      const drawLog = () => {
+        const y = hLog = logSel.value;
+        const gs = mine.filter(x => x.s === y).sort((a, b) => a.wk - b.wk);
+        const up = y === latest.id ? (latest.schedule || []).filter(([wk, x, z]) => wk > played && (x === m || z === m)).map(([wk, x, z]) => ({ wk, opp: x === m ? z : x })) : [];
+        logBody.replaceChildren(h("ul", { class: "plain h2h-list gamelog" },
+          gs.map(x => h("li", null,
+            h("span", { class: "num muted" }, "Wk " + x.wk),
+            h("span", null, h("span", { class: "mh-res " + (res(x) === "W" ? "up" : res(x) === "L" ? "down" : "muted") }, res(x)), " vs ", h("span", { class: "mgr" }, x.opp),
+              isTop(x) ? h("span", { class: "tag hs" }, "High score") : null, x.odd ? h("span", { class: "tag" }, odd[x.s][x.wk] === "long" ? "Multi-week" : "Short week") : null),
+            h("span", { class: "num" }, fmt(x.p) + "-" + fmt(x.q)))),
+          up.map(x => h("li", { class: "upcoming" }, h("span", { class: "num muted" }, "Wk " + x.wk), h("span", { class: "muted" }, "vs " + x.opp + " · upcoming"), h("span", null, "")))));
+      };
+      logSel.addEventListener("change", drawLog);
+      drawLog();
+
+      mgrBody.replaceChildren(head, tiles,
+        sec("Season by season", panel(seasonTable, h("div", { class: "muted small", style: "margin-top:10px" }, "* season in progress"))),
+        sec("Rivals", panel(rivalTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Every regular-season meeting, best record first. Next = the next meeting this season."))),
+        sec("Personal records", h("div", { class: "recs" }, mrec), h("div", { class: "muted small" }, "Single-week records leave out multi-week periods and short weeks.")),
+        sec("Game log", panel(h("div", { class: "picker", style: "margin-bottom:12px" }, h("label", { for: "log-season" }, "Season"), logSel), logBody)));
+    };
+    mgrSel.addEventListener("change", drawMgr);
+    drawMgr();
+
+    const oddList = Object.entries(odd).flatMap(([y, ws]) => Object.entries(ws).map(([wk, k]) => y + " wk " + wk + " (" + (k === "long" ? "multi-week" : "short week") + ")"));
+    const foot = h("footer", null, "History from the league sheet: " + seasons[0] + " onward. Seasons before Fantrax were on Yahoo.");
+    if (view === "seasons") return $("content").replaceChildren(
+      sec("Season history", panel(h("div", { class: "picker", style: "margin-bottom:14px" }, h("label", { for: "season-view" }, "Season"), seasonSel), seasonBody),
+        h("div", { class: "muted small" }, "Regular season = place after the last regular-season week. Postseason = final place including playoffs. Single-week records leave out multi-week periods and short weeks.")),
+      foot);
+    if (view === "manager") return $("content").replaceChildren(
+      h("div", { class: "picker" }, h("label", { for: "manager-view" }, "Manager"), mgrSel), mgrBody, foot);
+    $("content").replaceChildren(
+      sec("Champions", h("div", { class: "champs" }, champCards)),
+      sec("All-time standings", panel(standWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season games. Click a column to sort. High scores = weeks with the league's top score. Finishes are final places including playoffs, from the last 5 completed seasons."))),
+      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place including playoffs, with the regular-season record under it. * season in progress: current place."))),
+      sec("Record book", h("div", { class: "recs" }, records),
+        h("div", { class: "muted small" }, "Single-week score records leave out multi-week periods and short weeks" + (oddList.length ? ": " + oddList.join(", ") : "") + ". Season records count completed seasons only.")),
+      sec("Head to head", panel(grid, detail), h("div", { class: "muted small" }, "Each square is the row manager's record against the column manager.")),
+      foot);
+  }
+
+  // Standings journey: a bump chart of every manager's rank, week by week (plus the final place on the Final page).
+  // Emphasis form: every line is gray context, one followed manager is drawn in red. Click a line or name to follow.
+  let jSel = null;
+  const SVG = "http://www.w3.org/2000/svg";
+  function sv(tag, attrs, ...kids) {
+    const el = document.createElementNS(SVG, tag);
+    for (const [k, v] of Object.entries(attrs || {})) {
+      if (v == null) continue;
+      if (k.startsWith("on")) el.addEventListener(k.slice(2), v); else el.setAttribute(k, v);
+    }
+    for (const kid of kids.flat()) if (kid != null) el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
+    return el;
+  }
+  function journey(s, w) {
+    const ordn = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+    const upTo = w.week === 100 ? Infinity : w.week;
+    // The axis always spans the whole season (every scheduled week, then Final); weeks not played yet stay empty
+    const byWeek = Object.fromEntries(s.weeks.filter(x => x.week !== 100 && x.week <= upTo && x.standings && x.standings.length)
+      .map(x => [x.week, Object.fromEntries(x.standings.map(r => [r.mgr, r]))]));
+    const nWeeks = Math.max(0, ...s.weeks.filter(x => x.week !== 100).map(x => x.week), ...(s.schedule || []).map(x => x[0]));
+    const cols = Array.from({ length: nWeeks }, (_, i) => ({ label: String(i + 1), title: "Week " + (i + 1), by: byWeek[i + 1] || null }));
+    cols.push({ label: "Final", title: "Final", final: true, by: w.week === 100 ? Object.fromEntries(w.standings.map(r => [r.mgr, r])) : null });
+    if (!cols.some(c => c.by)) return null;
+    const mgrs = w.standings.slice().sort((a, b) => a.rank - b.rank).map(r => r.mgr), n = mgrs.length;
+    if (!mgrs.includes(jSel)) jSel = mgrs[0];
+    const W = 900, padL = 30, padR = 88, padT = 14, padB = 34, rowH = 28, H = padT + (n - 1) * rowH + padB;
+    const xAt = i => padL + i * (W - padL - padR) / (cols.length - 1), yAt = r => padT + (r - 1) * rowH;
+    const last = cols.map(c => !!c.by).lastIndexOf(true), cut = Math.min(8, n - 1);
+    const groups = {}, labels = {};
+    const tip = h("div", { class: "jtip", hidden: "" });
+    const wrap = h("div", { class: "journey" });
+    const paint = hover => {
+      for (const m of mgrs) {
+        const g = groups[m], on = m === jSel, hv = m === hover && !on;
+        g.setAttribute("class", "jline" + (on ? " on" : hv ? " hv" : ""));
+        labels[m].setAttribute("class", "jlab" + (on ? " on" : hv ? " hv" : ""));
+        labels[m].setAttribute("aria-pressed", on ? "true" : "false");
+      }
+      const top = groups[hover && hover !== jSel ? hover : jSel];
+      top.parentNode.append(top);
+      if (hover && hover !== jSel) groups[jSel].parentNode.append(groups[jSel]);
+    };
+    const pick = m => { jSel = m; paint(null); };
+    const showTip = (e, m, c) => {
+      const r = c.by[m], box = wrap.getBoundingClientRect();
+      tip.replaceChildren(h("span", { class: "mgr" }, m), h("span", { class: "muted" }, " · " + c.title),
+        h("div", { class: "num" }, (c.final ? "Finished " : "") + ordn(r.rank) + (c.final ? "" : " · " + r.w + "-" + r.l + "-" + (r.t || 0))));
+      tip.hidden = false;
+      const x = e.clientX - box.left, y = e.clientY - box.top;
+      tip.style.left = Math.min(Math.max(x + 12, 0), box.width - 170) + "px";
+      tip.style.top = Math.max(y - 54, 0) + "px";
+    };
+    const hideTip = () => { tip.hidden = true; };
+
+    const svg = sv("svg", { viewBox: "0 0 " + W + " " + H, class: "jsvg", role: "img", "aria-label": "Standings by week for every manager. Rank 1 at the top." },
+      // rank gridlines and labels
+      mgrs.map((_, i) => [sv("line", { class: "jgrid", x1: padL, x2: W - padR, y1: yAt(i + 1), y2: yAt(i + 1) }),
+        sv("text", { class: "jaxis", x: padL - 10, y: yAt(i + 1) + 4, "text-anchor": "end" }, i + 1)]),
+      cols.map((c, i) => sv("text", { class: "jaxis" + (c.final ? " fin" : "") + (c.by ? "" : " fut"), x: xAt(i), y: H - 10, "text-anchor": "middle" }, c.label)),
+      sv("text", { class: "jaxis", x: padL - 10, y: H - 10, "text-anchor": "end" }, "Wk"),
+      // playoff line between 8th and 9th
+      n > 8 ? [sv("line", { class: "jcut", x1: padL, x2: W - padR, y1: (yAt(cut) + yAt(cut + 1)) / 2, y2: (yAt(cut) + yAt(cut + 1)) / 2 })] : null);
+    const plot = sv("g");
+    svg.append(plot);
+    for (const m of mgrs) {
+      const pts = cols.map((c, i) => c.by && c.by[m] ? [xAt(i), yAt(c.by[m].rank), c] : null);
+      const reg = pts.filter((q, i) => q && !(cols[i].final));
+      const d = reg.map((q, i) => (i ? "L" : "M") + q[0] + " " + q[1]).join(" ");
+      const fin = cols[last].final && pts[last] && reg.length ? "M" + reg[reg.length - 1][0] + " " + reg[reg.length - 1][1] + " L" + pts[last][0] + " " + pts[last][1] : null;
+      const g = sv("g", { class: "jline" },
+        sv("path", { class: "jhit", d: d + (fin ? " " + fin.replace("M", "M") : ""), onclick: () => pick(m), onmouseenter: () => paint(m), onmouseleave: () => paint(null) }),
+        sv("path", { class: "jpath", d }),
+        fin ? sv("path", { class: "jpath jfin", d: fin }) : null,
+        pts.map(q => q && sv("circle", { class: "jdot", cx: q[0], cy: q[1], r: 4,
+          onmouseenter: e => { paint(m); showTip(e, m, q[2]); }, onmousemove: e => showTip(e, m, q[2]), onmouseleave: () => { paint(null); hideTip(); }, onclick: () => pick(m) })));
+      groups[m] = g;
+      plot.append(g);
+      const endR = pts[last] ? cols[last].by[m].rank : null;
+      labels[m] = sv("text", { class: "jlab", x: xAt(last) + 12, y: yAt(endR) + 4, tabindex: "0", role: "button",
+        onclick: () => pick(m), onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(m); } },
+        onmouseenter: () => paint(m), onmouseleave: () => paint(null) }, m);
+      svg.append(labels[m]);
+    }
+    wrap.append(svg, tip);
+    paint(null);
+    return sec("Standings journey", panel(h("div", { class: "tablewrap" }, wrap),
+      h("div", { class: "muted small", style: "margin-top:8px" }, "Rank after each week" + (w.week === 100 ? ", then the final place after the playoffs (dashed)" : "") + ". Dashed red line = playoff cut (top 8). Click a line or a name to follow a manager.")));
+  }
+
+  function podium(s, w) {
+    const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
+    const regRank = last ? Object.fromEntries(last.standings.map(r => [r.mgr, r.rank])) : {};
+    const top = w.standings.slice().sort((a, b) => a.rank - b.rank).slice(0, 3);
+    const tally = Object.fromEntries((w.highScoreTally || []).flatMap(t => t.entries.map(e => [e.mgr, t.count])));
+    const label = ["Champion", "Runner-up", "Third place"], medalOf = ["🥇", "🥈", "🥉"];
+    const ordn = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
+    const step = (r, i) => {
+      if (!r) return null;
+      const logo = s.logos && s.logos[r.mgr];
+      return h("div", { class: "step p" + (i + 1) },
+        h("span", { class: "medal", "aria-hidden": "true" }, medalOf[i]),
+        logo ? h("img", { class: "logo pod", src: logo, alt: "", width: i ? "64" : "88", height: i ? "64" : "88", onerror: e => e.target.remove() }) : null,
+        h("span", { class: "pos" }, label[i]),
+        h("span", { class: "pod-name" }, r.mgr),
+        s.teams && s.teams[r.mgr] ? h("span", { class: "muted small" }, s.teams[r.mgr]) : null,
+        h("dl", { class: "pod-dl" },
+          h("dt", null, "Record"), h("dd", { class: "num" }, r.w + "-" + r.l + "-" + (r.t || 0)),
+          h("dt", null, "Points for"), h("dd", { class: "num" }, fmt(r.pf)),
+          regRank[r.mgr] ? [h("dt", null, "Regular season"), h("dd", { class: "num" }, ordn(regRank[r.mgr]))] : null,
+          h("dt", null, "High scores"), h("dd", { class: "num" }, tally[r.mgr] || 0)),
+        h("div", { class: "block", "aria-hidden": "true" }, i + 1));
+    };
+    return sec(s.label + " podium", h("div", { class: "podium" }, step(top[1], 1), step(top[0], 0), step(top[2], 2)));
+  }
+
+  function boot(data) {
+    DATA = data;
+    $("league").textContent = data.league || "Fantasy hockey";
+    $("season").replaceChildren(...data.seasons.map(s => h("option", { value: s.id }, s.label)));
+    $("season").addEventListener("change", e => pick(e.target.value, null, true));
+    $("tab-week").addEventListener("click", () => pick(cur.s ? cur.s.id : null, cur.w ? cur.w.week : null, true));
+    $("tab-history").addEventListener("click", () => showHistory(true, "history"));
+    $("tab-seasons").addEventListener("click", () => showHistory(true, "seasons"));
+    $("tab-manager").addEventListener("click", () => showHistory(true, "manager"));
+    const route = () => {
+      const v = (location.hash || "").match(/^#(history|seasons|manager)(?:-(.+))?$/);
+      if (v) return showHistory(false, v[1], v[2] && decodeURIComponent(v[2]));
+      const x = readHash(); pick(x ? x.s : null, x ? x.w : null, false);
+    };
+    route();
+    window.addEventListener("hashchange", route);
+  }
+
+  fetch("reports.json", { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(boot)
+    .catch(() => { $("status").textContent = "The weekly report couldn't load. Refresh the page to try again."; });
+})();
+</script>
+
+</body>
+</html>
