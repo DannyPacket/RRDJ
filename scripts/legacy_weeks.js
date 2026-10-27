@@ -46,6 +46,17 @@ if (teamsFile) for (const line of fs.readFileSync(teamsFile, 'utf8').split(/\r?\
 const datesFile = require('path').join(__dirname, 'week_dates.json');
 const weekDates = fs.existsSync(datesFile) ? JSON.parse(fs.readFileSync(datesFile, 'utf8')) : {};
 const allFinals = {};
+const series = []; // [season, week, a, aPts, b, bPts], each game once
+{
+  const seen = new Set();
+  for (const [season, team, week, opp, , , pf, pa, , , , , , , , type, scoring] of rows) {
+    if (scoring === 'Categories' || (type && type !== 'Regular') || Number(week) === 100 || !opp || pf === '' || pa === '') continue;
+    const k = season + '|' + week + '|' + [team, opp].sort().join('|');
+    if (seen.has(k)) continue;
+    seen.add(k); series.push([season, Number(week), team, num(pf), opp, num(pa)]);
+  }
+  series.sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]));
+}
 const bySeason = {};
 for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
   if (Number(week) === 100) (allFinals[season] = allFinals[season] || {})[team] = Number(place);
@@ -149,6 +160,57 @@ function championStory(id, S, regStandings, fin) {
   return out;
 }
 
+// All-time series between two managers through season y, week wk (inclusive)
+function seriesOf(a, b, y, wk) {
+  const g = series.filter(x => ((x[2] === a && x[4] === b) || (x[2] === b && x[4] === a)) && (x[0] < y || (x[0] === y && x[1] <= wk)));
+  let aw = 0, bw = 0, t = 0, run = 0, runBy = null, prevRun = 0, prevBy = null;
+  g.forEach((x, i) => {
+    const [pa, pb] = x[2] === a ? [x[3], x[5]] : [x[5], x[3]];
+    const w = pa > pb ? a : pb > pa ? b : null;
+    if (w === a) aw++; else if (w === b) bw++; else t++;
+    if (i === g.length - 1) { prevRun = run; prevBy = runBy; }
+    if (w && w === runBy) run++; else { runBy = w; run = w ? 1 : 0; }
+  });
+  return { aw, bw, t, n: g.length, run, runBy, prevRun, prevBy };
+}
+// One all-time series note for the week, if anything stands out
+function seriesNote(decided, y, wk) {
+  const notes = [];
+  for (const x of decided) {
+    const r = seriesOf(x.w, x.l, y, wk);
+    if (r.prevBy === x.l && r.prevRun >= 5) notes.push({ pri: 4, t: `${x.w} finally beats ${x.l}, snapping a ${r.prevRun}-game losing streak in the series.` });
+    else if (r.bw === 0 && r.aw >= 6) notes.push({ pri: 3, t: `${x.w} is now ${r.aw}-0 all-time against ${x.l}.` });
+    else if (r.runBy === x.w && r.run >= 6) notes.push({ pri: 2, t: `${x.w} has now beaten ${x.l} ${r.run} straight times.` });
+    else if (r.n >= 10 && r.aw === r.bw) notes.push({ pri: 1, t: `The all-time ${x.w}-${x.l} series is dead even at ${r.aw}-${r.bw}${r.t ? '-' + r.t : ''}.` });
+  }
+  notes.sort((a, b) => b.pri - a.pri);
+  const top = notes[0];
+  if (!top) return '';
+  return top.pri >= 3 || wk % 3 === 0 ? top.t : ''; // the big ones always, the rest here and there
+}
+// Real hockey news by date ('offseason' = before week 1); only well-documented events
+const NEWS = {
+  '2013-14': [['2014-02-15', 'T.J. Oshie turned Sochi into his stage, scoring on four of six shootout tries to beat Russia.'], ['2014-02-23', 'Canada took Olympic gold in Sochi, shutting out Sweden 3-0 in the final.'], ['2014-03-05', 'The Rangers and Lightning swapped captains at the deadline: Martin St. Louis for Ryan Callahan.']],
+  '2015-16': [['2016-01-06', 'Columbus and Nashville made a one-for-one blockbuster, Ryan Johansen for Seth Jones.'], ['2016-01-31', 'John Scott, the enforcer the league tried to keep out of the All-Star Game, captained the Pacific to the title and took home MVP.']],
+  '2016-17': [['offseason', 'The summer brought two jaw-droppers on the same afternoon: Taylor Hall to New Jersey for Adam Larsson, and P.K. Subban to Nashville for Shea Weber.'], ['2017-01-29', 'The NHL celebrated its 100 greatest players at All-Star weekend in Los Angeles.']],
+  '2017-18': [['offseason', 'The Vegas Golden Knights play their first season.'], ['2017-11-05', 'Matt Duchene finally moved, going to Ottawa in a three-team blockbuster with Colorado and Nashville.'], ['2018-02-25', 'With no NHL players in PyeongChang, the Olympic Athletes from Russia beat Germany in overtime for gold.']],
+  '2018-19': [['offseason', 'Erik Karlsson was traded from Ottawa to San Jose right before the season.']],
+  '2020-21': [['offseason', 'The NHL realigned for one season, with all seven Canadian teams in an all-Canadian North Division.']],
+  '2021-22': [['offseason', 'The Seattle Kraken joined the league as team number 32.'], ['2021-11-04', 'Buffalo finally traded Jack Eichel, sending him to Vegas.'], ['2021-12-22', 'With COVID cases piling up, the NHL pulled its players out of the Beijing Olympics.']],
+  '2022-23': [['2023-01-30', 'The Islanders landed Bo Horvat from Vancouver.'], ['2023-02-26', 'New Jersey added Timo Meier from San Jose ahead of the deadline.']],
+  '2023-24': [['offseason', 'Connor Bedard made his NHL debut in Chicago.']],
+  '2024-25': [['2025-01-24', 'Carolina stunned everyone, landing Mikko Rantanen from Colorado in a three-team deal.'], ['2025-02-15', 'Three fights in the first nine seconds of Canada vs. USA set the tone at the 4 Nations Face-Off.'], ['2025-02-20', 'Connor McDavid scored in overtime as Canada beat the USA 3-2 to win the 4 Nations Face-Off.'], ['2025-03-07', 'Carolina flipped Rantanen to Dallas only weeks after getting him.'], ['2025-04-06', 'Alex Ovechkin scored goal 895, passing Wayne Gretzky for the most in NHL history.']],
+  '2025-26': [['2026-02-10', 'NHL players are back on Olympic ice for the first time since 2014.']]
+};
+function newsFor(y, wk, dw) {
+  const items = (NEWS[y] || []).filter(([d]) => (d === 'offseason' && wk === 1) || (dw && d !== 'offseason' && dw[0] <= d && d <= dw[1]));
+  return items.length ? 'Around the league: ' + items.map(x => x[1]).join(' ') : '';
+}
+function newsAfter(y, lastEnd) {
+  const items = (NEWS[y] || []).filter(([d]) => d !== 'offseason' && lastEnd && d > lastEnd);
+  return items.length ? 'Around the league: ' + items.map(x => x[1]).join(' ') : '';
+}
+
 const seasonsOut = [];
 for (const [id, S] of Object.entries(bySeason)) {
   const weeksNo = Object.keys(S.games).map(Number).sort((a, b) => a - b);
@@ -222,7 +284,11 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (hot) p3.push(`${hot.m} is rolling with ${hot.s.n} straight wins.`);
     if (snap) p3.push(snap.s.k === 'L' ? `${snap.m} snaps a ${snap.s.n}-game skid.` : `${snap.m}'s ${snap.s.n}-game win streak is over.`);
     if (cold && (!snap || cold.m !== snap.m)) p3.push(`${cold.m} has dropped ${cold.s.n} in a row.`);
+    const sn = seriesNote(decided, id, wk);
+    if (sn) p3.push(sn);
     if (p3.length) recap.push(p3.join(' '));
+    const news = newsFor(id, wk, dw);
+    if (news) recap.push(news);
     const leader = standings[0], bottom = standings[standings.length - 1].mgr;
     const lastWk = wk === weeksNo[weeksNo.length - 1];
     const half = wk === Math.ceil(regWeeks / 2);
@@ -242,6 +308,8 @@ for (const [id, S] of Object.entries(bySeason)) {
     const regRank = Object.fromEntries(last.standings.map(x => [x.mgr, x.rank]));
     const standings = fin.map(m => Object.assign({}, last.standings.find(x => x.mgr === m), { rank: S.finals[m], prev: regRank[m] }));
     const recap = championStory(id, S, last.standings, fin);
+    const late = newsAfter(id, last.end);
+    if (late) recap.splice(recap.length - 1, 0, late);
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [] });
   }
   seasonsOut.push({ id, label: id, source: 'sheet', teams: teamNames[id] || {}, logos, schedule, weeks });
