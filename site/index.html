@@ -228,6 +228,8 @@ ul.plain.moves { gap: 0; }
 .champ-dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; margin: 6px 0 0; font-size: 13px; }
 .champ-dl dt { color: var(--muted); } .champ-dl dd { margin: 0; font-weight: 600; }
 .logo.sm { width: 22px; height: 22px; }
+.logo.initial { display: inline-grid; place-items: center; font: 800 14px var(--display); color: var(--ink); }
+.logo.initial.sm { font-size: 12px; }
 table.alltime tr.group th { border-bottom: 0; padding-bottom: 2px; }
 table.alltime tr.group th.grp { text-align: center; color: var(--ink); border-bottom: 2px solid var(--red); }
 table.alltime { min-width: 900px; }
@@ -324,6 +326,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     return el;
   }
   const panel = (...k) => h("div", { class: "panel" }, ...k);
+  const avatar = (m, src, px, cls) => src
+    ? h("img", { class: "logo" + (cls ? " " + cls : ""), src, alt: "", width: String(px), height: String(px), loading: "lazy", onerror: e => e.target.replaceWith(avatar(m, null, px, cls)) })
+    : h("span", { class: "logo initial" + (cls ? " " + cls : ""), "aria-hidden": "true" }, (m || "?").charAt(0).toUpperCase());
   const sec = (title, ...k) => h("section", null, h("h2", null, title), ...k);
   const player = p => [h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, [p.nhl, p.pos].filter(Boolean).join(" · "))];
 
@@ -458,7 +463,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             h("td", { class: "num rk" }, r.rank),
             h("td", { class: "num mvcell" }, mv ? h("span", { class: "move " + (mv > 0 ? "up" : "down"), title: "Was " + r.prev }, (mv > 0 ? "▲" : "▼") + Math.abs(mv)) : h("span", { class: "move muted", "aria-hidden": "true" }, r.prev ? "–" : "")),
             h("td", { class: "whocell" }, h("div", { class: "who" },
-              logo ? h("img", { class: "logo", src: logo, alt: "", width: "28", height: "28", loading: "lazy", onerror: e => e.target.remove() }) : null,
+              avatar(r.mgr, logo, 28),
               h("div", { class: "whotext" }, h("span", { class: "mgr" }, r.mgr), team(r.mgr) ? h("span", { class: "team", title: team(r.mgr) }, team(r.mgr)) : null))),
             h("td", { class: "r num" }, r.w + "-" + r.l + "-" + (r.t || 0)),
             h("td", { class: "r num" }, fmt(r.pf)),
@@ -501,7 +506,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
   // League history tab: everything here is computed from DATA.history (every game in the sheet since the first season).
   const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
-  let hSort = { key: "pct", dir: -1 }, hPair = null, hSeason = null, sSort = { key: "reg", dir: 1 }, hMgr = null, hLog = null;
+  let fSort = { key: "m", dir: 1 }, hSort = { key: "pct", dir: -1 }, hPair = null, hSeason = null, sSort = { key: "reg", dir: 1 }, hMgr = null, hLog = null;
 
   const TABS = ["week", "history", "seasons", "manager"];
   function setTab(view) {
@@ -550,19 +555,16 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       ss[r]++; ss.pf += x.p; ss.pa += x.q; ss.gp++; if (isTop(x)) ss.hs++; if (!x.odd) { ss.gpN++; ss.pfN += x.p; }
     });
     Object.values(champs).forEach(m => { if (A[m]) A[m].titles++; });
-    const recent = done.slice(-5);
-    recent.forEach(y => Object.entries(finals[y]).forEach(([m, p]) => {
+    done.forEach(y => Object.entries(finals[y]).forEach(([m, p]) => {
       if (!A[m]) return;
-      if (A[m].best5 == null || p < A[m].best5) A[m].best5 = p;
-      if (A[m].worst5 == null || p > A[m].worst5) A[m].worst5 = p;
+      if (p === 2) A[m].p2 = (A[m].p2 || 0) + 1;
+      if (p === 3) A[m].p3 = (A[m].p3 || 0) + 1;
     }));
     mgrs.forEach(m => { const a = A[m]; a.pct = a.gp ? (a.w + a.t / 2) / a.gp : 0; a.net = a.pf - a.pa; a.avg = a.gp ? a.pf / a.gp : 0; a.n = a.seasons.size; });
     const pct = r => r.gp ? (r.w + r.t / 2) / r.gp : 0;
     const order = mgrs.slice().sort((x, y) => A[y].pct - A[x].pct || A[y].pf - A[x].pf);
     const rec3 = r => r.w + "-" + r.l + "-" + r.t;
-    const who = (m, small) => h("span", { class: "who" },
-      logos[m] ? h("img", { class: "logo" + (small ? " sm" : ""), src: logos[m], alt: "", width: small ? "22" : "28", height: small ? "22" : "28", loading: "lazy", onerror: e => e.target.remove() }) : null,
-      h("span", { class: "mgr" }, m));
+    const who = (m, small) => h("span", { class: "who" }, avatar(m, logos[m], small ? 22 : 28, small ? "sm" : ""), h("span", { class: "mgr" }, m));
 
     // Streaks within a season
     const streaks = [];
@@ -607,18 +609,17 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     // 2. All-time standings (sortable)
     const cols = [
       ["m", "Manager", 0], ["n", "Seasons", 1], ["w", "W-L-T", 1], ["pct", "Win %", 1], ["pf", "PF", 1], ["pa", "PA", 1],
-      ["net", "Net", 1], ["avg", "Avg", 1], ["hs", "High scores", 1], ["titles", "Titles", 1], ["best5", "Best finish", 1], ["worst5", "Worst finish", 1]];
+      ["net", "Net", 1], ["avg", "Avg", 1], ["hs", "High scores", 1], ["titles", "Titles", 1], ["p2", "2nd", 1], ["p3", "3rd", 1]];
     const standWrap = h("div", { class: "tablewrap" });
     const drawStand = () => {
       const k = hSort.key, rows = mgrs.slice().sort((x, y) => {
-        const a = A[x][k], b = A[y][k];
+        const a = A[x][k] || 0, b = A[y][k] || 0;
         if (k === "m") return hSort.dir * (a < b ? -1 : a > b ? 1 : 0);
         return hSort.dir * ((a == null ? 99 : a) - (b == null ? 99 : b)) || A[y].pct - A[x].pct;
       });
       standWrap.replaceChildren(h("table", { class: "alltime" },
-        h("thead", null, h("tr", { class: "group" }, h("th", { colspan: String(cols.length - 1) }, ""), h("th", { colspan: "2", class: "grp" }, "Last 5 seasons")),
-          h("tr", null, h("th", null, "#"), cols.map(([key, label, r]) => h("th", { class: r ? "r" : null, "aria-sort": hSort.key === key ? (hSort.dir < 0 ? "descending" : "ascending") : null },
-          h("button", { type: "button", class: "sort", onclick: () => { hSort = { key, dir: hSort.key === key ? -hSort.dir : (key === "m" || key === "best5" || key === "worst5" || key === "pa" ? 1 : -1) }; drawStand(); } },
+        h("thead", null, h("tr", null, h("th", null, "#"), cols.map(([key, label, r]) => h("th", { class: r ? "r" : null, "aria-sort": hSort.key === key ? (hSort.dir < 0 ? "descending" : "ascending") : null },
+          h("button", { type: "button", class: "sort", onclick: () => { hSort = { key, dir: hSort.key === key ? -hSort.dir : (key === "m" || key === "pa" ? 1 : -1) }; drawStand(); } },
             label, hSort.key === key ? (hSort.dir < 0 ? " ▾" : " ▴") : ""))))),
         h("tbody", null, rows.map((m, i) => {
           const a = A[m];
@@ -633,22 +634,33 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             h("td", { class: "r num " + (a.net >= 0 ? "up" : "down") }, (a.net > 0 ? "+" : "") + Math.round(a.net).toLocaleString()),
             h("td", { class: "r num" }, fmt(a.avg)),
             h("td", { class: "r num" }, a.hs),
-            h("td", { class: "r num" }, a.titles ? "🏆".repeat(a.titles) : "–"),
-            h("td", { class: "r num" }, a.best5 ? ord(a.best5) : "–"),
-            h("td", { class: "r num" }, a.worst5 ? ord(a.worst5) : "–"));
+            h("td", { class: "r num" }, a.titles ? "🏆 " + a.titles : "–"),
+            h("td", { class: "r num" }, a.p2 || "–"),
+            h("td", { class: "r num" }, a.p3 || "–"));
         }))));
     };
     drawStand();
 
     // 3. Finishes by season
     const curStand = lastWeek && lastWeek.standings ? Object.fromEntries(lastWeek.standings.map(r => [r.mgr, r.rank])) : {};
-    const finishTable = h("div", { class: "tablewrap" }, h("table", { class: "finishes" },
-      h("thead", null, h("tr", null, h("th", null, "Manager"), seasons.map(y => h("th", { class: "r" }, y.slice(2) + (live(y) ? "*" : ""))))),
-      h("tbody", null, order.map(m => h("tr", null, h("td", null, who(m, true)), seasons.map(y => {
-        const p = finals[y] ? finals[y][m] : curStand[m], r = S[y] && S[y][m];
-        return h("td", { class: "r" }, p ? h("span", { class: "place p" + Math.min(p, 4) + (finals[y] ? "" : " now") }, ord(p)) : "–",
-          r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "")) : null);
-      }))))));
+    const regPlace0 = H.regular || {};
+    const placeOf = (y, m) => finals[y] ? finals[y][m] : live(y) ? curStand[m] : (regPlace0[y] || {})[m];
+    const finishTable = h("div", { class: "tablewrap" });
+    const drawFinishes = () => {
+      const k = fSort.key;
+      const rows = mgrs.slice().sort((x, y) => k === "m" ? fSort.dir * (x < y ? -1 : x > y ? 1 : 0)
+        : ((placeOf(k, x) || 99) - (placeOf(k, y) || 99)) * fSort.dir || (x < y ? -1 : 1));
+      const head = (key, label, r) => h("th", { class: r ? "r" : null, "aria-sort": k === key ? (fSort.dir < 0 ? "descending" : "ascending") : null },
+        h("button", { type: "button", class: "sort", onclick: () => { fSort = { key, dir: k === key ? -fSort.dir : 1 }; drawFinishes(); } }, label, k === key ? (fSort.dir < 0 ? " ▾" : " ▴") : ""));
+      finishTable.replaceChildren(h("table", { class: "finishes" },
+        h("thead", null, h("tr", null, head("m", "Manager", 0), seasons.map(y => head(y, y.slice(2) + (live(y) ? "*" : finals[y] ? "" : "†"), 1)))),
+        h("tbody", null, rows.map(m => h("tr", null, h("td", null, who(m, true)), seasons.map(y => {
+          const p = placeOf(y, m), r = S[y] && S[y][m];
+          return h("td", { class: "r" }, p ? h("span", { class: "place p" + Math.min(p, 4) + (finals[y] ? "" : " now") }, ord(p)) : "–",
+            r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "")) : null);
+        }))))));
+    };
+    drawFinishes();
 
     // 4. Record book (single-week score records leave out odd-length periods: multi-week and short weeks)
     const kind = (y, wk) => odd[y] && odd[y][wk];
@@ -885,8 +897,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       h("div", { class: "picker" }, h("label", { for: "manager-view" }, "Manager"), mgrSel), mgrBody, foot);
     $("content").replaceChildren(
       sec("Champions", h("div", { class: "champs" }, champCards)),
-      sec("All-time standings", panel(standWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season games. Click a column to sort. High scores = weeks with the league's top score. Finishes are final places including playoffs, from the last 5 completed seasons."))),
-      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place including playoffs, with the regular-season record under it. * season in progress: current place."))),
+      sec("All-time standings", panel(standWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season games. Click a column to sort. High scores = weeks with the league's top score. Titles, 2nd and 3rd count final places including playoffs."))),
+      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place including playoffs, with the regular-season record under it. Click a season to see it in finishing order. * season in progress: current place. † no playoffs that year: regular-season place."))),
       sec("Record book", h("div", { class: "recs" }, records),
         h("div", { class: "muted small" }, "Single-week score records leave out multi-week periods and short weeks" + (oddList.length ? ": " + oddList.join(", ") : "") + ". Season records count completed seasons only.")),
       sec("Head to head", panel(grid, detail), h("div", { class: "muted small" }, "Each square is the row manager's record against the column manager.")),
@@ -1011,7 +1023,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
   function boot(data) {
     DATA = data;
     $("league").textContent = data.league || "Fantasy hockey";
-    $("season").replaceChildren(...data.seasons.map(s => h("option", { value: s.id }, s.label)));
+    const lastId = data.seasons[data.seasons.length - 1].id;
+    $("season").replaceChildren(...data.seasons.slice().reverse().map(s => h("option", { value: s.id },
+      s.label + (s.id === lastId ? " (in progress)" : s.weeks.some(w => w.week === 100) ? "" : " (no playoffs)"))));
     $("season").addEventListener("change", e => pick(e.target.value, null, true));
     $("tab-week").addEventListener("click", () => pick(cur.s ? cur.s.id : null, cur.w ? cur.w.week : null, true));
     $("tab-history").addEventListener("click", () => showHistory(true, "history"));
