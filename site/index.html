@@ -220,6 +220,31 @@ ul.plain.moves { gap: 0; }
   .step .block { margin: 0 -6px; }
 }
 
+/* Export */
+.export-btn { margin-left: auto; font: 600 13px var(--mono); padding: 7px 12px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--board); cursor: pointer; }
+.export-btn:disabled { opacity: .6; cursor: progress; }
+.export-holder { position: fixed; left: -20000px; top: 0; }
+.export-sheet { width: 1200px; background: var(--ice); color: var(--ink); padding: 0 0 24px; }
+.export-sheet .export-head { background: var(--board); border-bottom: 1px solid var(--line); padding: 28px 32px 20px; display: grid; gap: 12px; }
+.export-sheet .export-title { font-family: var(--display); font-weight: 900; font-size: 56px; line-height: .95; text-transform: uppercase; }
+.export-sheet .weekline .wk { white-space: nowrap; }
+.export-sheet .export-body { padding: 24px 32px 0; display: grid; gap: 28px; }
+.export-sheet .export-foot { padding: 18px 32px 0; font: 500 12px var(--mono); color: var(--muted); display: flex; justify-content: space-between; }
+.export-sheet .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+.export-sheet .cols.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-items: stretch; }
+.export-sheet .tablewrap { overflow: visible; }
+.export-sheet .journey { min-width: 0; }
+.export-sheet .no-export, .export-sheet .jtip, .export-sheet footer { display: none !important; }
+.export-modal { position: fixed; inset: 0; z-index: 50; background: rgba(0,0,0,.55); display: grid; place-items: center; padding: 16px; }
+.export-card { background: var(--board); color: var(--ink); border-radius: 12px; border: 1px solid var(--line); width: min(720px, 100%); max-height: calc(100vh - 32px); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; padding: 16px; }
+.export-card h3 { margin: 0; font: 800 20px var(--display); text-transform: uppercase; letter-spacing: .04em; }
+.export-preview { overflow: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--ice); }
+.export-preview img { display: block; width: 100%; height: auto; }
+.export-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.export-actions button { font: 600 13px var(--mono); padding: 8px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
+.export-actions button.primary { background: var(--ink); color: var(--board); border-color: var(--ink); }
+.export-status { font-size: 13px; color: var(--muted); margin-left: auto; }
+
 /* Tabs */
 .tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
 .tabs button { font: 700 15px var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; }
@@ -311,6 +336,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       <select id="season"></select>
       <label>Week</label>
       <div class="weeks" id="weeks" role="group" aria-label="Week"></div>
+      <button type="button" class="export-btn" id="export">Export image</button>
     </div>
   </div>
 </header>
@@ -486,7 +512,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             h("td", { class: "r num" }, r.pa != null ? fmt(r.pa) : "–"),
             h("td", { class: "r num " + (net == null ? "" : net >= 0 ? "up" : "down") }, net == null ? "–" : (net > 0 ? "+" : "") + fmt(net)),
             h("td", { class: "r num st-" + (r.streak || " ")[0] }, r.streak || "")), detail];
-        }))), h("div", { class: "muted small", style: "margin-top:10px" }, "Click a manager to see their weeks.")))));
+        }))), h("div", { class: "muted small no-export", style: "margin-top:10px" }, "Click a manager to see their weeks.")))));
     }
 
     // Full-width stars
@@ -1052,7 +1078,104 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     return sec(s.label + " podium", h("div", { class: "podium" }, step(top[1], 1), step(top[0], 0), step(top[2], 2)));
   }
 
+  // Export: renders the current week (header, write-up, standings, journey, streaks, players, movement) as one PNG
+  let exportLib = null;
+  const loadExportLib = () => exportLib || (exportLib = new Promise((ok, fail) => {
+    const sc = document.createElement("script");
+    sc.src = "https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js";
+    sc.onload = () => window.htmlToImage ? ok(window.htmlToImage) : fail(new Error("no library"));
+    sc.onerror = () => { exportLib = null; fail(new Error("library failed to load")); };
+    document.head.append(sc);
+  }));
+  // Google Fonts CSS with every font file inlined, so the image keeps the site's fonts (null if it can't be fetched)
+  let fontCSS;
+  const loadFontCSS = () => fontCSS || (fontCSS = (async () => {
+    try {
+      const link = document.querySelector('link[rel="stylesheet"][href*="fonts.googleapis"]');
+      if (!link) return null;
+      let css = await fetch(link.href).then(r => r.ok ? r.text() : Promise.reject());
+      const urls = [...new Set([...css.matchAll(/url\((https:[^)]+)\)/g)].map(m => m[1]))];
+      const toData = u => fetch(u).then(r => r.blob()).then(b => new Promise(ok => { const fr = new FileReader(); fr.onload = () => ok(fr.result); fr.readAsDataURL(b); }));
+      const datas = await Promise.all(urls.map(toData));
+      urls.forEach((u, i) => { css = css.split(u).join(datas[i]); });
+      return css;
+    } catch (e) { return null; }
+  })());
+  async function exportWeek() {
+    const btn = $("export");
+    btn.disabled = true; btn.textContent = "Building…";
+    let holder = null;
+    try {
+      const lib = await loadExportLib();
+      const { s, w } = cur;
+      const body = $("content").cloneNode(true);
+      body.removeAttribute("id");
+      body.className = "export-body";
+      body.querySelectorAll("img").forEach(i => i.removeAttribute("loading"));
+      const sheet = h("div", { class: "export-sheet" },
+        h("div", { class: "export-head" },
+          h("div", { class: "eyebrow" }, $("season-eyebrow").textContent),
+          h("div", { class: "export-title" }, DATA.league || "Rene Rancourt's Day Job"),
+          h("div", { class: "weekline" }, h("span", { class: "wk" }, $("wk").textContent), h("span", { class: "dates" }, $("dates").textContent)),
+          h("div", { class: "rink", "aria-hidden": "true" }, h("i"), h("i"), h("i"), h("i"), h("i"))),
+        body,
+        h("div", { class: "export-foot" }, h("span", null, "Rancourt Weekly"), h("span", null, s.source === "sheet" ? "Rebuilt from the league sheet" : "Scores and stats from Fantrax")));
+      holder = h("div", { class: "export-holder", "aria-hidden": "true" }, sheet);
+      document.body.append(holder);
+      await Promise.all([...sheet.querySelectorAll("img")].map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const fonts = await loadFontCSS();
+      const opts = { pixelRatio: 2, backgroundColor: getComputedStyle(document.body).backgroundColor, width: 1200 };
+      if (fonts) opts.fontEmbedCSS = fonts;
+      let blob;
+      try { blob = await lib.toBlob(sheet, opts); } catch (e) { blob = null; }
+      if (!blob) blob = await lib.toBlob(sheet, Object.assign({ skipFonts: true }, opts));
+      if (!blob) throw new Error("empty image");
+      showExport(blob, "rrdj-" + s.id + "-" + (w.week === 100 ? "final" : "week-" + w.week) + ".png");
+    } catch (e) {
+      alert("Couldn't build the image (" + (e && e.message || "unknown error") + "). Try again in a moment.");
+    } finally {
+      if (holder) holder.remove();
+      btn.disabled = false; btn.textContent = "Export image";
+    }
+  }
+  function showExport(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const status = h("span", { class: "export-status", role: "status" }, "");
+    const close = () => { modal.remove(); URL.revokeObjectURL(url); document.removeEventListener("keydown", onKey); };
+    const onKey = e => { if (e.key === "Escape") close(); };
+    const copy = async () => {
+      try {
+        await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+        status.textContent = "Copied. Paste it into Discord.";
+      } catch (e) { status.textContent = "Copying isn't allowed here. Use Download instead."; }
+    };
+    const download = async () => {
+      const dl = window.claude && window.claude.use ? await window.claude.use("downloads").catch(() => null) : null;
+      if (dl) {
+        try { await dl.save({ filename, data: blob }); status.textContent = "Saved."; }
+        catch (e) { status.textContent = e && e.code === "declined" ? "Download cancelled." : "Download isn't available here."; }
+        return;
+      }
+      const a = h("a", { href: url, download: filename }); document.body.append(a); a.click(); a.remove();
+      status.textContent = "Downloaded.";
+    };
+    const modal = h("div", { class: "export-modal", role: "dialog", "aria-modal": "true", "aria-label": "Export image", onclick: e => { if (e.target === modal) close(); } },
+      h("div", { class: "export-card" },
+        h("h3", null, "Export image"),
+        h("div", { class: "export-preview" }, h("img", { src: url, alt: "Preview of the exported week" })),
+        h("div", { class: "export-actions" },
+          h("button", { type: "button", class: "primary", onclick: copy }, "Copy image"),
+          h("button", { type: "button", onclick: download }, "Download PNG"),
+          h("button", { type: "button", onclick: close }, "Close"),
+          status)));
+    document.body.append(modal);
+    document.addEventListener("keydown", onKey);
+    modal.querySelector("button.primary").focus();
+  }
+
   function boot(data) {
+    $("export").addEventListener("click", exportWeek);
     DATA = data;
     $("league").textContent = data.league || "Fantasy hockey";
     const lastId = data.seasons[data.seasons.length - 1].id;
