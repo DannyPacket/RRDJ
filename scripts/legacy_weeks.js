@@ -1,12 +1,13 @@
 // Weekly-report entries for past seasons, rebuilt from the sheet (no Fantrax data: no player cards, moves or trades).
-// Usage: node legacy_weeks.js <tab.csv> <reports.json>
+// Usage: node legacy_weeks.js <master.csv> <reports.json>   (Master tab: gid=771004; regular-season rows and week 100 only,
+// categories seasons skipped)
 // For every season in the sheet that reports.json doesn't already hold as a Fantrax season, (re)writes
 // seasons[] = { id, label, source: "sheet", logos, schedule, weeks: [...] } with matchups, standings (sheet rank,
 // cumulative W-L-T/PF/PA, streak), 3+ streaks, high-score tally, the next week's pairings and a short recap
 // written from the numbers. Week 100 is the final-standings entry. Seasons stay sorted by id, so the newest
 // (Fantrax) season stays last, which the site treats as the current season.
 const fs = require('fs');
-const [csvFile, reportsFile] = process.argv.slice(2);
+const [csvFile, reportsFile, teamsFile] = process.argv.slice(2); // teamsFile (optional): Teams tab CSV, gid=771005 (Season, Manager, Team name)
 const rows = fs.readFileSync(csvFile, 'utf8').split(/\r?\n/).filter(Boolean).map(line => {
   const out = []; let cur = '', q = false;
   for (const ch of line) {
@@ -32,9 +33,19 @@ const rel = (a, b) => {
   return null;
 };
 
+// Team names per season from the Teams tab (quoted CSV fields are allowed)
+const teamNames = {};
+if (teamsFile) for (const line of fs.readFileSync(teamsFile, 'utf8').split(/\r?\n/).slice(1).filter(Boolean)) {
+  const c = []; let cur = '', q = false;
+  for (const ch of line) { if (ch === '"') q = !q; else if (ch === ',' && !q) { c.push(cur); cur = ''; } else cur += ch; }
+  c.push(cur);
+  if (c[0] && c[1]) (teamNames[c[0]] = teamNames[c[0]] || {})[c[1]] = c[2];
+}
+
 const bySeason = {};
-for (const [season, team, week, opp, place, , pf, pa] of rows) {
-  if (fantrax.has(season)) continue;
+for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
+  if (fantrax.has(season) || scoring === 'Categories') continue;
+  if (type && type !== 'Regular' && type !== 'Final') continue;
   const S = bySeason[season] = bySeason[season] || { rank: {}, games: {}, finals: {} };
   const wk = Number(week);
   if (wk === 100) { S.finals[team] = Number(place); continue; }
@@ -135,7 +146,7 @@ for (const [id, S] of Object.entries(bySeason)) {
       `At the other end, ${fin[fin.length - 1]} finishes 12th.`];
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [] });
   }
-  seasonsOut.push({ id, label: id, source: 'sheet', logos, schedule, weeks });
+  seasonsOut.push({ id, label: id, source: 'sheet', teams: teamNames[id] || {}, logos, schedule, weeks });
 }
 
 r.seasons = r.seasons.filter(s => s.source !== 'sheet').concat(seasonsOut).sort((a, b) => (a.id < b.id ? -1 : 1));

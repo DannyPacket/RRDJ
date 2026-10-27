@@ -1,6 +1,8 @@
-// League history for the site, built from the sheet's CSV export (every season, every week).
+// League history for the site, built from the sheet's Master tab CSV export (every season, every week).
+// Games are regular-season rows only (Season Type, column P); categories seasons (Scoring, column Q) keep their
+// final places and champion but no games, since their scores aren't points.
 // Usage: node history.js <tab.csv> <reports.json>
-//   tab.csv: curl -sL "https://docs.google.com/spreadsheets/d/<SHEET_ID>/export?format=csv&gid=692892130"
+//   tab.csv: curl -sL "https://docs.google.com/spreadsheets/d/<SHEET_ID>/export?format=csv&gid=771004"
 // Writes reports.json.history = { games: [[season, week, a, aPts, b, bPts]], finals: { season: { mgr: place } }, champions: { season: mgr },
 //   odd: { season: { week: "long" | "short" } }, regular: { season: { mgr: place after the last regular-season week } } }
 // "odd" weeks are periods whose average score is 30% above or below that season's median week (multi-week breaks,
@@ -19,9 +21,10 @@ const rows = fs.readFileSync(csvFile, 'utf8').split(/\r?\n/).filter(Boolean).map
 }).slice(1);
 const num = s => parseFloat(String(s).replace(/,/g, ''));
 const games = [], seen = new Set(), finals = {}, lastWk = {}, regular = {};
-for (const [season, team, week, opp, place, , pf, pa] of rows) {
+for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
   const wk = Number(week);
   if (wk === 100) { (finals[season] = finals[season] || {})[team] = Number(place); continue; }
+  if ((type && type !== 'Regular') || scoring === 'Categories') continue;
   if (!opp || pf === '' || pa === '') continue;
   if (wk > (lastWk[season] || 0)) { lastWk[season] = wk; regular[season] = {}; }
   if (wk === lastWk[season] && place !== '') regular[season][team] = Number(place);
