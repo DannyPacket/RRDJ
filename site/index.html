@@ -252,8 +252,10 @@ ul.plain.moves { gap: 0; }
 .br-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--board); }
 .export-sheet .br-toggle { display: none; }
 .bracket-scroll { overflow-x: auto; overflow-y: hidden; }
-.bracket { display: grid; gap: 4px; min-width: max-content; }
-.br-sub { font: 800 15px var(--display); letter-spacing: .06em; text-transform: uppercase; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.bracket { display: flex; flex-wrap: wrap; gap: 18px 40px; align-items: start; }
+.br-col { display: grid; gap: 4px; width: max-content; }
+.br-sub { font: 800 16px var(--display); letter-spacing: .06em; text-transform: uppercase; padding-bottom: 4px; border-bottom: 2px solid var(--ink); }
+.br-sub.champ-s { border-bottom-color: var(--red); }
 .br-heads { display: flex; gap: var(--br-gap); }
 .br-heads > div { width: var(--br-w); font: 600 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .br-heads b { color: var(--ink); font: 800 14px var(--display); letter-spacing: .04em; margin-right: 6px; }
@@ -1129,7 +1131,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       const roots = all.filter(g => !playsLater(g.a, rounds.indexOf(g.w)) && !playsLater(g.b, rounds.indexOf(g.w)))
         .map(g => ({ t: node(g, rounds.indexOf(g.w)), best: Math.min(place[g.a] || 99, place[g.b] || 99) }))
         .sort((a, b) => a.best - b.best);
-      const W = 176, GAP = 24, GH = 47, SLOT = 52, LAB = 15, PAD = 10;
+      const W = 160, GAP = 20, GH = 47, SLOT = 52, LAB = 15, PAD = 10;
       const x = r => r * (W + GAP);
       // lay out each tree on its own, then drop it as high as it fits without overlapping earlier trees in any column
       const used = {}; let height = 0;
@@ -1178,10 +1180,10 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         area.append(h("div", { class: "br-label" + (isTitle ? " champ-l" : ""), style: "left:" + x(t.r) + "px;top:" + (t.y - LAB) + "px" }, placeName(best) + (isTitle && champ ? " · 🏆 " + champ : "")));
       });
       area.prepend(svg);
-      return [
-        type === "Consolation" ? h("div", { class: "br-sub" }, "Consolation") : null,
+      return h("div", { class: "br-col" },
+        h("div", { class: "br-sub" + (type === "Playoffs" ? " champ-s" : "") }, type === "Playoffs" ? "Championship" : "Consolation"),
         h("div", { class: "br-heads" }, rounds.map((wk, r) => h("div", null, h("b", null, roundName(type, r, rounds.length)), "Wk " + wk))),
-        area];
+        area);
     }
 
     function table() {
@@ -1201,7 +1203,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       };
       const body = [];
       mgrs.forEach((m, i) => {
-        if (typeOf(m) === "Consolation" && (i === 0 || typeOf(mgrs[i - 1]) !== "Consolation")) body.push(h("tr", { class: "grp" }, h("td", { colspan: String(weeks.length + 2) }, "Consolation")));
+        if (types.length > 1 && (i === 0 || typeOf(mgrs[i - 1]) !== typeOf(m))) body.push(h("tr", { class: "grp" }, h("td", { colspan: String(weeks.length + 2) }, typeOf(m) === "Playoffs" ? "Championship" : "Consolation")));
         body.push(h("tr", null,
           h("td", { class: "num" }, (medal(place[m]) ? medal(place[m]) + " " : "") + (place[m] ? ord(place[m]) : "")),
           h("td", null, h("span", { class: "br-who" }, avatar(m, s.logos && s.logos[m], 18, "xs"), h("span", { class: "mgr" }, m), h("span", { class: "seedn" }, "(" + (seed[m] || "–") + ")"))),
@@ -1220,7 +1222,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       Object.entries(btns).forEach(([k, b]) => b.setAttribute("aria-pressed", k === v ? "true" : "false"));
       note.textContent = "Seeds are regular-season finishes. " + (v === "table" ? "Rows are in final order; each week shows the score and opponent." : "Winners in bold; the red line traces the champion's run.") + (types.includes("Consolation") ? " Consolation is the teams that missed the playoffs, playing for 7th on down." : "");
       body.replaceChildren(v === "table" ? table() : h("div", { class: "bracket-scroll" },
-        h("div", { class: "bracket", style: "--br-w:176px;--br-gap:24px" }, types.flatMap(tree))));
+        h("div", { class: "bracket", style: "--br-w:160px;--br-gap:20px" }, types.map(tree))));
     };
     const toggle = h("div", { class: "br-toggle", role: "group", "aria-label": "Playoff view" },
       ["bracket", "table"].map(v => btns[v] = h("button", { type: "button", onclick: () => show(v) }, v === "bracket" ? "Bracket" : "Table")));
