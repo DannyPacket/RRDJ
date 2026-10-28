@@ -1204,6 +1204,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       Object.entries(finals[y] || {}).forEach(([m, pl]) => { if (!P[m]) return; if (pl === 1) P[m].titles++; if (pl === 2) P[m].p2++; if (pl === 3) P[m].p3++; });
     });
     mgrs.forEach(m => { const a = P[m], n = a.w + a.l + a.t, cn = a.cw + a.cl + a.ct; a.pct = n ? (a.w + a.t / 2) / n : null; a.n = n; a.cpct = cn ? (a.cw + a.ct / 2) / cn : null; a.cn = cn; });
+    const noConsol = pSeasons.filter(y => !pinfo[y].consol.length);
     const pcols = [["m", "Manager"], ["trips", "Trips"], ["w", "Record"], ["pct", "Win %"], ["fin", "Finals"], ["titles", "Titles"], ["p2", "2nd"], ["p3", "3rd"],
       ["consol", "Trips"], ["cw", "Record"], ["cpct", "Win %"], ["ctitles", "Titles"]];
     const pWrap = h("div", { class: "tablewrap" });
@@ -1289,7 +1290,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
     const foot = h("footer", null, "History from the league sheet: " + seasons[0] + " onward. Seasons before Fantrax were on Yahoo.");
     if (view === "playoffs") return $("content").replaceChildren(
-      sec("Playoff standings", panel(pWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Championship: trips = seasons in the championship bracket, out of seasons played that had playoffs; the record counts every championship-bracket game, including the 3rd, 5th and 7th place games; finals = trips to the title game. Consolation: the consolation bracket (2013-14 to 2022-23; the 8-team playoff years had none), and its title goes to the bracket winner. Click a column to sort."))),
+      sec("Playoff standings", panel(pWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Championship: trips = seasons in the championship bracket, out of seasons played that had playoffs; the record counts every championship-bracket game, including the 3rd, 5th and 7th place games; finals = trips to the title game. Consolation: the consolation bracket, and its title goes to the bracket winner." + (noConsol.length ? " No consolation games are in the sheet for " + noConsol.join(", ") + "." : "") + " Click a column to sort."))),
       sec("Championship games", panel(finalsTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season seeds in brackets. Click a season to open its Final page. 2014-15 scores are categories won."))),
       sec("Playoff records", h("div", { class: "recs" }, precs), h("div", { class: "muted small" }, "Championship-bracket games in points seasons (2014-15 isn't included). Upsets only count games where both teams were still alive for the title.")),
       sec("Playoff rivalries", panel(h("ul", { class: "plain prival" }, rivalList), h("div", { class: "muted small", style: "margin-top:10px" }, "Managers who've met most often in the championship bracket, including placement games. Click a rivalry to see each meeting."))),
@@ -1521,7 +1522,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const show = v => {
       brView = v; try { localStorage.setItem("rrdj-bracket-view", v); } catch (e) {}
       Object.entries(btns).forEach(([k, b]) => b.setAttribute("aria-pressed", k === v ? "true" : "false"));
-      note.textContent = "Seeds are regular-season finishes. " + (v === "table" ? "Rows are in final order; each week shows the score and opponent." : "Winners in bold; the red line traces the champion's run.") + (types.includes("Consolation") ? " Consolation is the teams that missed the playoffs, playing for 7th on down." : "");
+      note.textContent = "Seeds are regular-season finishes. " + (v === "table" ? "Rows are in final order; each week shows the score and opponent." : "Winners in bold; the red line traces the champion's run.") + (types.includes("Consolation") ? " Consolation is the teams that missed the playoffs, playing for " + ord(Math.min(...games.filter(g => g.type === "Consolation").flatMap(g => [place[g.a] || 99, place[g.b] || 99]))) + " on down." : "");
       body.replaceChildren(v === "table" ? table() : h("div", { class: "bracket-scroll" },
         h("div", { class: "bracket", style: "--br-w:160px;--br-gap:20px" }, types.map(tree))));
     };

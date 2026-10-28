@@ -7001,7 +7001,7 @@
     "Danny": "logos/y2014-15-danny.png",
     "Hallie": "logos/hallie.webp",
     "Jefe": "logos/y2014-15-jefe.jpg",
-    "Joe": "logos/joe.webp",
+    "Joe": "logos/y2013-14-joe.png",
     "Nick": "logos/y2014-15-nick.png",
     "Ronnie": "logos/y2014-15-ronnie.png",
     "Steve": "logos/y2014-15-steve.png",
@@ -7010,6 +7010,7 @@
     "Vin": "logos/y2014-15-vin.png",
     "Will": "logos/y2014-15-will.jpg",
     "Zac": "logos/zac.webp",
+    "Patrick": "logos/y2013-14-patrick.jpg",
     "Tara": "logos/y2014-15-tara.png"
    },
    "schedule": [
@@ -11958,8 +11959,9 @@
     "Vin": "logos/y2015-16-vin.png",
     "Will": "logos/y2015-16-will.jpg",
     "Zac": "logos/zac.webp",
-    "Palagi": "logos/y2015-16-palagi.jpg",
-    "Tara": "logos/y2015-16-tara.png"
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2015-16-tara.png",
+    "Palagi": "logos/y2015-16-palagi.jpg"
    },
    "schedule": [
     [
@@ -19065,6 +19067,7 @@
     "Vin": "logos/y2016-17-vin.png",
     "Will": "logos/y2016-17-will.jpg",
     "Zac": "logos/zac.webp",
+    "Patrick": "logos/y2013-14-patrick.jpg",
     "Tara": "logos/y2016-17-tara.png",
     "Palagi": "logos/y2016-17-palagi.png"
    },
@@ -26178,6 +26181,8 @@
     "Vin": "logos/y2017-18-vin.png",
     "Will": "logos/y2017-18-will.jpg",
     "Zac": "logos/y2017-18-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png",
     "Palagi": "logos/y2017-18-palagi.jpg"
    },
    "schedule": [
@@ -33332,6 +33337,8 @@
     "Vin": "logos/y2018-19-vin.png",
     "Will": "logos/y2018-19-will.jpg",
     "Zac": "logos/y2018-19-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png",
     "Palagi": "logos/y2018-19-palagi.jpg"
    },
    "schedule": [
@@ -40020,6 +40027,8 @@
     "Vin": "logos/y2019-20-vin.png",
     "Will": "logos/y2019-20-will.jpg",
     "Zac": "logos/y2019-20-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png",
     "Palagi": "logos/y2019-20-palagi.jpg"
    },
    "schedule": [
@@ -46633,6 +46642,8 @@
     "Vin": "logos/y2020-21-vin.png",
     "Will": "logos/y2020-21-will.png",
     "Zac": "logos/y2020-21-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png",
     "Palagi": "logos/y2020-21-palagi.jpg"
    },
    "schedule": [
@@ -50256,6 +50267,8 @@
     "Vin": "logos/y2021-22-vin.png",
     "Will": "logos/y2021-22-will.jpg",
     "Zac": "logos/y2021-22-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png",
     "Palagi": "logos/y2021-22-palagi.jpg"
    },
    "schedule": [
@@ -57898,6 +57911,8 @@
     "Vin": "logos/y2022-23-vin.png",
     "Will": "logos/y2022-23-will.jpg",
     "Zac": "logos/y2022-23-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png",
     "Palagi": "logos/y2022-23-palagi.jpg"
    },
    "schedule": [
@@ -65127,7 +65142,9 @@
     "Tom": "logos/y2023-24-tom.png",
     "Vin": "logos/y2023-24-vin.png",
     "Will": "logos/y2023-24-will.jpg",
-    "Zac": "logos/y2023-24-zac.png"
+    "Zac": "logos/y2023-24-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png"
    },
    "schedule": [
     [
@@ -72218,7 +72235,9 @@
     "Tom": "logos/y2024-25-tom.jpg",
     "Vin": "logos/y2024-25-vin.png",
     "Will": "logos/y2024-25-will.png",
-    "Zac": "logos/y2024-25-zac.png"
+    "Zac": "logos/y2024-25-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png"
    },
    "schedule": [
     [
@@ -79170,6 +79189,22 @@
         "bp": 164.6
        },
        {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Tom",
+        "ap": 191.7,
+        "bp": 146.9
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Will",
+        "ap": 110.2,
+        "bp": 177.9
+       },
+       {
         "w": 23,
         "type": "Playoffs",
         "a": "Danny",
@@ -79200,6 +79235,22 @@
         "b": "Vin",
         "ap": 161.8,
         "bp": 182.9
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Will",
+        "ap": 172.3,
+        "bp": 131.2
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 161,
+        "bp": 167.7
        },
        {
         "w": 24,
@@ -79268,7 +79319,9 @@
     "Tom": "logos/y2025-26-tom.jpg",
     "Vin": "logos/y2025-26-vin.png",
     "Will": "logos/y2025-26-will.png",
-    "Zac": "logos/y2025-26-zac.png"
+    "Zac": "logos/y2025-26-zac.png",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png"
    },
    "schedule": [
     [
@@ -85999,6 +86052,22 @@
         "bp": 167.1
        },
        {
+        "w": 21,
+        "type": "Consolation",
+        "a": "Hallie",
+        "b": "Tim",
+        "ap": 196.4,
+        "bp": 159.3
+       },
+       {
+        "w": 21,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Tom",
+        "ap": 95.3,
+        "bp": 155.4
+       },
+       {
         "w": 22,
         "type": "Playoffs",
         "a": "Danny",
@@ -86029,6 +86098,22 @@
         "b": "Zac",
         "ap": 181.1,
         "bp": 164.2
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Hallie",
+        "b": "Tom",
+        "ap": 158.6,
+        "bp": 171.9
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Tim",
+        "ap": 132.2,
+        "bp": 156.5
        },
        {
         "w": 23,
@@ -102482,6 +102567,24 @@
    ],
    [
     "2024-25",
+    22,
+    "Consolation",
+    "Joe",
+    191.7,
+    "Tom",
+    146.9
+   ],
+   [
+    "2024-25",
+    22,
+    "Consolation",
+    "Tim",
+    110.2,
+    "Will",
+    177.9
+   ],
+   [
+    "2024-25",
     23,
     "Playoffs",
     "Danny",
@@ -102515,6 +102618,24 @@
     161.8,
     "Vin",
     182.9
+   ],
+   [
+    "2024-25",
+    23,
+    "Consolation",
+    "Joe",
+    172.3,
+    "Will",
+    131.2
+   ],
+   [
+    "2024-25",
+    23,
+    "Consolation",
+    "Tim",
+    161,
+    "Tom",
+    167.7
    ],
    [
     "2024-25",
@@ -102590,6 +102711,24 @@
    ],
    [
     "2025-26",
+    21,
+    "Consolation",
+    "Hallie",
+    196.4,
+    "Tim",
+    159.3
+   ],
+   [
+    "2025-26",
+    21,
+    "Consolation",
+    "Steve",
+    95.3,
+    "Tom",
+    155.4
+   ],
+   [
+    "2025-26",
     22,
     "Playoffs",
     "Danny",
@@ -102623,6 +102762,24 @@
     181.1,
     "Zac",
     164.2
+   ],
+   [
+    "2025-26",
+    22,
+    "Consolation",
+    "Hallie",
+    158.6,
+    "Tom",
+    171.9
+   ],
+   [
+    "2025-26",
+    22,
+    "Consolation",
+    "Steve",
+    132.2,
+    "Tim",
+    156.5
    ],
    [
     "2025-26",
