@@ -1151,19 +1151,24 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const sc = x => (x.cat ? cfmt : fmt);
 
     // playoff standings
-    const P = Object.fromEntries(mgrs.map(m => [m, { m, w: 0, l: 0, t: 0, trips: 0, eligible: 0, byes: 0, fin: 0, titles: 0, p2: 0, p3: 0, consol: 0 }]));
+    const P = Object.fromEntries(mgrs.map(m => [m, { m, w: 0, l: 0, t: 0, trips: 0, eligible: 0, byes: 0, fin: 0, titles: 0, p2: 0, p3: 0, consol: 0, cw: 0, cl: 0, ct: 0, ctitles: 0 }]));
     tside.forEach(x => { const a = P[x.m]; if (a) a[res(x).toLowerCase()]++; });
+    pside.filter(x => x.type === "Consolation").forEach(x => { const a = P[x.m]; if (a) a["c" + res(x).toLowerCase()]++; });
     pSeasons.forEach(y => {
       const I = pinfo[y];
       Object.keys(finals[y] || {}).forEach(m => { if (P[m]) P[m].eligible++; });
       I.teams.forEach(m => { if (P[m]) P[m].trips++; });
       I.byes.forEach(m => { if (P[m]) P[m].byes++; });
       I.consol.forEach(m => { if (P[m]) P[m].consol++; });
+      // consolation title: the consolation team with the best final place (it won the last consolation game)
+      const cChamp = I.consol.slice().sort((a, b) => ((finals[y] || {})[a] || 99) - ((finals[y] || {})[b] || 99))[0];
+      if (cChamp && P[cChamp]) P[cChamp].ctitles++;
       if (I.fin) [I.fin.m, I.fin.opp].forEach(m => { if (P[m]) P[m].fin++; });
       Object.entries(finals[y] || {}).forEach(([m, pl]) => { if (!P[m]) return; if (pl === 1) P[m].titles++; if (pl === 2) P[m].p2++; if (pl === 3) P[m].p3++; });
     });
-    mgrs.forEach(m => { const a = P[m], n = a.w + a.l + a.t; a.pct = n ? (a.w + a.t / 2) / n : null; a.n = n; });
-    const pcols = [["m", "Manager"], ["trips", "Playoff trips"], ["byes", "Byes"], ["w", "W-L-T"], ["pct", "Win %"], ["fin", "Finals"], ["titles", "Titles"], ["p2", "2nd"], ["p3", "3rd"], ["consol", "Consolation"]];
+    mgrs.forEach(m => { const a = P[m], n = a.w + a.l + a.t, cn = a.cw + a.cl + a.ct; a.pct = n ? (a.w + a.t / 2) / n : null; a.n = n; a.cpct = cn ? (a.cw + a.ct / 2) / cn : null; a.cn = cn; });
+    const pcols = [["m", "Manager"], ["trips", "Playoff trips"], ["w", "Championship record"], ["pct", "Win %"], ["fin", "Finals"], ["titles", "Titles"], ["p2", "2nd"], ["p3", "3rd"],
+      ["consol", "Consolation trips"], ["cw", "Consolation record"], ["cpct", "Win %"], ["ctitles", "Consolation titles"]];
     const pWrap = h("div", { class: "tablewrap" });
     const drawP = () => {
       const k = pSort.key, rows = mgrs.filter(m => P[m].eligible).sort((x, y) => k === "m" ? pSort.dir * (x < y ? -1 : 1)
@@ -1174,13 +1179,15 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("tbody", null, rows.map((m, i) => { const a = P[m]; return h("tr", null,
           h("td", { class: "num rk" }, i + 1), h("td", null, whoLink(m)),
           h("td", { class: "r num" }, a.trips + " of " + a.eligible),
-          h("td", { class: "r num" }, a.byes || "–"),
           h("td", { class: "r num" }, a.n ? rec3(a) : "–"),
           h("td", { class: "r num" }, a.pct == null ? "–" : a.pct.toFixed(3).replace(/^0/, "")),
           h("td", { class: "r num" }, a.fin || "–"),
           h("td", { class: "r num" }, a.titles ? "🏆 " + a.titles : "–"),
           h("td", { class: "r num" }, a.p2 || "–"), h("td", { class: "r num" }, a.p3 || "–"),
-          h("td", { class: "r num" }, a.consol || "–")); }))));
+          h("td", { class: "r num" }, a.consol || "–"),
+          h("td", { class: "r num" }, a.cn ? a.cw + "-" + a.cl + "-" + a.ct : "–"),
+          h("td", { class: "r num" }, a.cpct == null ? "–" : a.cpct.toFixed(3).replace(/^0/, "")),
+          h("td", { class: "r num" }, a.ctitles || "–")); }))));
     };
     drawP();
 
@@ -1227,7 +1234,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
     const foot = h("footer", null, "History from the league sheet: " + seasons[0] + " onward. Seasons before Fantrax were on Yahoo.");
     if (view === "playoffs") return $("content").replaceChildren(
-      sec("Playoff standings", panel(pWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Playoff trips = seasons in the championship bracket, out of seasons played that had playoffs. W-L-T counts every championship-bracket game, including the 3rd, 5th and 7th place games. Finals = trips to the title game. Consolation = seasons in the consolation bracket. Click a column to sort."))),
+      sec("Playoff standings", panel(pWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Playoff trips = seasons in the championship bracket, out of seasons played that had playoffs. Championship record counts every championship-bracket game, including the 3rd, 5th and 7th place games. Finals = trips to the title game. Consolation trips, record and titles cover the consolation bracket (2013-14 to 2022-23; the 8-team playoff years had none). Click a column to sort."))),
       sec("Championship games", panel(finalsTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season seeds in brackets. Click a season to open its Final page. 2014-15 scores are categories won."))),
       sec("Playoff records", h("div", { class: "recs" }, precs), h("div", { class: "muted small" }, "Championship-bracket games in points seasons (2014-15 isn't included). Upsets only count games where both teams were still alive for the title.")),
       sec("Playoff rivalries", panel(h("ul", { class: "plain prival" }, rivalList), h("div", { class: "muted small", style: "margin-top:10px" }, "Managers who've met most often in the championship bracket, including placement games."))),
