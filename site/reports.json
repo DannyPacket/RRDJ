@@ -72141,16 +72141,16 @@
         "type": "Consolation",
         "a": "Hallie",
         "b": "Will",
-        "ap": null,
-        "bp": null
+        "ap": 169.2,
+        "bp": 164.3
        },
        {
         "w": 22,
         "type": "Consolation",
         "a": "Joe",
         "b": "Tim",
-        "ap": null,
-        "bp": null
+        "ap": 105.1,
+        "bp": 154.3
        },
        {
         "w": 23,
@@ -72189,16 +72189,16 @@
         "type": "Consolation",
         "a": "Hallie",
         "b": "Tim",
-        "ap": null,
-        "bp": null
+        "ap": 168.7,
+        "bp": 160.5
        },
        {
         "w": 23,
         "type": "Consolation",
         "a": "Joe",
         "b": "Will",
-        "ap": null,
-        "bp": null
+        "ap": 147.7,
+        "bp": 179.6
        },
        {
         "w": 24,
@@ -102494,18 +102494,18 @@
     22,
     "Consolation",
     "Hallie",
-    null,
+    169.2,
     "Will",
-    null
+    164.3
    ],
    [
     "2023-24",
     22,
     "Consolation",
     "Joe",
-    null,
+    105.1,
     "Tim",
-    null
+    154.3
    ],
    [
     "2023-24",
@@ -102548,18 +102548,18 @@
     23,
     "Consolation",
     "Hallie",
-    null,
+    168.7,
     "Tim",
-    null
+    160.5
    ],
    [
     "2023-24",
     23,
     "Consolation",
     "Joe",
-    null,
+    147.7,
     "Will",
-    null
+    179.6
    ],
    [
     "2023-24",
