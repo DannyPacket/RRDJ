@@ -347,6 +347,13 @@ ul.plain.runners { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var
 table.finishes td { height: auto; padding: 6px; }
 tr.catrow td { background: color-mix(in srgb, var(--chip) 80%, transparent); }
 tr.catrow td:first-child { box-shadow: inset 3px 0 0 var(--muted); }
+button.golink { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
+button.golink:hover .mgr, button.golink:focus-visible .mgr { text-decoration: underline; text-underline-offset: 3px; }
+button.champ-go { display: block; width: 100%; font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; border-radius: 10px; }
+button.champ-go:hover > .champ, button.champ-go:focus-visible > .champ { border-color: var(--ink); }
+button.champ-go > .champ { height: 100%; }
+table.catlead td { height: auto; padding: 6px; white-space: nowrap; }
+table.catlead td .muted { font-size: 12px; }
 .cat-note { margin: 0 0 10px; padding: 8px 12px; border-radius: 6px; background: var(--chip); font-size: 13px; }
 .place { display: block; font: 700 13px var(--mono); }
 .place.p1 { color: var(--red); } .place.p2, .place.p3 { color: var(--ink); } .place.p4 { color: var(--muted); font-weight: 500; }
@@ -681,6 +688,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const order = mgrs.slice().sort((x, y) => A[y].pct - A[x].pct || A[y].pf - A[x].pf);
     const rec3 = r => r.w + "-" + r.l + "-" + r.t;
     const who = (m, small) => h("span", { class: "who" }, avatar(m, logos[m], small ? 22 : 28, small ? "sm" : ""), h("span", { class: "mgr" }, m));
+    const go = (v, arg) => { showHistory(true, v, arg); window.scrollTo(0, 0); };
+    const whoLink = (m, small) => h("button", { type: "button", class: "golink", title: "Open " + m + "'s manager history", onclick: () => go("manager", m) }, who(m, small));
+    const seasonLink = (y, tile) => h("button", { type: "button", class: "champ-go", title: "Open the " + y + " season history", onclick: () => go("seasons", y) }, tile);
 
     // Streaks within a season
     const streaks = [];
@@ -703,7 +713,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       h("span", { class: "small cancel-note" }, y === "2019-20" ? "Season cancelled due to the COVID-19 pandemic" : "Season cancelled"),
       h("dl", { class: "champ-dl ghost", "aria-hidden": "true" },
         ["Runner-up", "Third", "Best record", "Last place"].flatMap(t => [h("dt", null, t), h("dd", null, h("span", { class: "bar" }))])));
-    const champCards = seasons.filter(y => finals[y] || !live(y)).reverse().map(y => {
+    const champCards = seasons.filter(y => finals[y] || !live(y)).reverse().map(y => seasonLink(y, champCard(y)));
+    function champCard(y) {
       if (!finals[y]) return cancelled(y);
       const f = finals[y], byPlace = Object.entries(f).sort((a, b) => a[1] - b[1]);
       const reg = Object.values(S[y] || {}).sort((a, b) => pct(b) - pct(a) || b.pf - a.pf)[0]
@@ -717,7 +728,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
           h("dt", null, "Third"), h("dd", null, byPlace[2] ? byPlace[2][0] : "–"),
           reg ? [h("dt", null, "Best record"), h("dd", null, reg.m + " ", h("span", { class: "num muted" }, rec3(reg)))] : null,
           h("dt", null, "Last place"), h("dd", null, byPlace[byPlace.length - 1][0])));
-    });
+    }
     if (!finals[latest.id] && lastWeek && lastWeek.standings) {
       const lead = lastWeek.standings[0];
       champCards.unshift(h("div", { class: "champ live" },
@@ -749,7 +760,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
           const a = A[m];
           return h("tr", null,
             h("td", { class: "num rk" }, i + 1),
-            h("td", null, who(m)),
+            h("td", null, whoLink(m)),
             h("td", { class: "r num" }, a.n),
             h("td", { class: "r num" }, rec3(a)),
             h("td", { class: "r num" }, a.pct.toFixed(3).replace(/^0/, "")),
@@ -779,7 +790,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("button", { type: "button", class: "sort", onclick: () => { fSort = { key, dir: k === key ? -fSort.dir : 1 }; drawFinishes(); } }, label, k === key ? (fSort.dir < 0 ? " ▾" : " ▴") : ""));
       finishTable.replaceChildren(h("table", { class: "finishes" },
         h("thead", null, h("tr", null, head("m", "Manager", 0), seasons.map(y => head(y, y.slice(2) + (live(y) ? "*" : cat[y] ? "†" : finals[y] ? "" : "‡"), 1)))),
-        h("tbody", null, rows.map(m => h("tr", null, h("td", null, who(m, true)), seasons.map(y => {
+        h("tbody", null, rows.map(m => h("tr", null, h("td", null, whoLink(m, true)), seasons.map(y => {
           const p = placeOf(y, m), r = recOf(y, m);
           return h("td", { class: "r" + (live(y) ? " cur" : "") }, p ? h("span", { class: "place p" + Math.min(p, 4) + (finals[y] ? "" : " now") }, ord(p)) : "–",
             r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "")) : null);
@@ -863,12 +874,56 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         card("Longest win streak", pickN(stY.filter(x => x.k === "W"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " W", m: x.m, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") }))),
         card("Longest losing streak", pickN(stY.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.m, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") })))];
       const so = DATA.seasons.find(x => x.id === y), sw = so && [...so.weeks].filter(x => x.standings && x.standings.length).sort((a, b) => b.week - a.week)[0];
-      seasonBody.replaceChildren(
+      seasonBody.replaceChildren(...[
         catY ? h("div", { class: "cat-note" }, y + " was a categories season, scored in categories won each week. It counts here for W-L-T, win % and places, but not for points or records.") : null,
         h("div", { class: "tablewrap" }, table),
-        catY ? null : [h("div", { class: "subhead" }, y + " single-week records"), h("div", { class: "recs" }, cards)],
-        sw ? journey(so, sw) : null);
+        h("div", { class: "subhead" }, y + " single-week records"),
+        h("div", { class: "recs" }, catY ? catCards(y) : cards),
+        ...(catY ? catLeaders(y) || [] : []),
+        sw ? journey(so, sw) : null].filter(Boolean));
     };
+    // 2014-15: weekly records in categories won, plus season category leaders from Yahoo's team stats
+    function catCards(y) {
+      const xs = csides.filter(x => x.s === y), wn = xs.filter(x => res(x) === "W");
+      const st = [];
+      [...new Set(xs.map(x => x.m))].forEach(m => {
+        let run = null;
+        xs.filter(x => x.m === m).sort((a, b) => a.wk - b.wk).forEach(x => {
+          const r = res(x);
+          if (run && run.k === r) { run.n++; run.to = x.wk; } else { if (run && run.n >= 2) st.push(run); run = { k: r, n: 1, m, from: x.wk, to: x.wk }; }
+        });
+        if (run && run.n >= 2) st.push(run);
+      });
+      const cats = n => n + (n === 1 ? " cat" : " cats");
+      return [
+        card("Most categories in a week", pickN(xs, (a, b) => b.p - a.p || a.q - b.q).map(x => ({ v: cfmt(x.p), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " vs " + x.opp + " · wk " + x.wk }))),
+        card("Fewest categories in a week", pickN(xs, (a, b) => a.p - b.p || b.q - a.q).map(x => ({ v: cfmt(x.p), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " vs " + x.opp + " · wk " + x.wk }))),
+        card("Biggest blowout", pickN(wn, (a, b) => (b.p - b.q) - (a.p - a.q)).map(x => ({ v: "+" + cats(x.p - x.q), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " over " + x.opp + " · wk " + x.wk }))),
+        card("Closest win", pickN(wn, (a, b) => (a.p - a.q) - (b.p - b.q) || b.p - a.p).map(x => ({ v: "+" + cats(x.p - x.q), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " over " + x.opp + " · wk " + x.wk }))),
+        card("Longest win streak", pickN(st.filter(x => x.k === "W"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " W", m: x.m, sub: "wk " + x.from + "-" + x.to }))),
+        card("Longest losing streak", pickN(st.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.m, sub: "wk " + x.from + "-" + x.to })))];
+    }
+    function catLeaders(y) {
+      const cs = (H.catStats || {})[y];
+      if (!cs) return null;
+      const ms = Object.keys(cs.totals), low = cs.lowWins || [];
+      const show = (c, v) => c === "SV%" ? v.toFixed(3).replace(/^0/, "") : c === "GAA" ? v.toFixed(2) : c === "+/-" ? (v > 0 ? "+" : "") + v : v.toLocaleString();
+      const recPct = r => { const [w, l, t] = r.split("-").map(Number); return (w + t / 2) / (w + l + t || 1); };
+      const NAMES = { G: "Goals", A: "Assists", "+/-": "Plus/minus", PIM: "Penalty minutes", PPP: "Power-play points", SHP: "Shorthanded points", SOG: "Shots on goal", FW: "Faceoff wins", HIT: "Hits", BLK: "Blocks", W: "Goalie wins", GAA: "Goals-against avg", "SV%": "Save %", SHO: "Shutouts" };
+      const rows = cs.cats.map(c => {
+        const by = ms.slice().sort((a, b) => low.includes(c) ? cs.totals[a][c] - cs.totals[b][c] : cs.totals[b][c] - cs.totals[a][c]);
+        const bestRec = ms.slice().sort((a, b) => recPct(cs.records[b][c]) - recPct(cs.records[a][c]))[0];
+        return h("tr", null,
+          h("td", null, NAMES[c] || c),
+          by.slice(0, 3).map((m, i) => h("td", { class: i ? "muted" : null }, h("span", { class: i ? null : "mgr" }, m), " ", h("span", { class: "num" + (i ? "" : " muted") }, show(c, cs.totals[m][c])))),
+          h("td", { class: "r num" }, bestRec + " ", h("span", { class: "muted" }, cs.records[bestRec][c])));
+      });
+      return [h("div", { class: "subhead" }, y + " category leaders"),
+        h("div", { class: "tablewrap" }, h("table", { class: "catlead" },
+          h("thead", null, h("tr", null, h("th", null, "Category"), h("th", null, "Leader"), h("th", null, "2nd"), h("th", null, "3rd"), h("th", { class: "r" }, "Best record in the category"))),
+          h("tbody", null, rows))),
+        h("div", { class: "muted small" }, "Season totals and each team's won-lost record in every category, from Yahoo's team stats (playoffs included). Lowest is best for goals-against average.")];
+    }
     seasonSel.addEventListener("change", drawSeason);
     drawSeason();
 
@@ -992,7 +1047,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
       // game log for one season
       const logSeasons = seasons.filter(y => S[y] && S[y][m]).slice().reverse();
-      const logSel = h("select", { id: "log-season", "aria-label": "Game log season" }, logSeasons.map(y => h("option", { value: y }, y)));
+      const logSel = h("select", { id: "log-season", "aria-label": "Game log season" }, logSeasons.map(y => h("option", { value: y }, y + (isCat(y) ? " (categories)" : ""))));
       logSel.value = hLog && logSeasons.includes(hLog) ? hLog : logSeasons[0];
       const logBody = h("div");
       const drawLog = () => {
@@ -1003,7 +1058,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
           gs.map(x => h("li", null,
             h("span", { class: "num muted" }, "Wk " + x.wk),
             h("span", null, h("span", { class: "mh-res " + (res(x) === "W" ? "up" : res(x) === "L" ? "down" : "muted") }, res(x)), " vs ", h("span", { class: "mgr" }, x.opp),
-              !x.cat && isTop(x) ? h("span", { class: "tag hs" }, "High score") : null, x.cat ? h("span", { class: "tag" }, "Categories") : null, x.odd ? h("span", { class: "tag" }, odd[x.s][x.wk] === "long" ? "Multi-week" : "Short week") : null),
+              !x.cat && isTop(x) ? h("span", { class: "tag hs" }, "High score") : null, x.odd ? h("span", { class: "tag" }, odd[x.s][x.wk] === "long" ? "Multi-week" : "Short week") : null),
             h("span", { class: "num" }, score(x)))),
           up.map(x => h("li", { class: "upcoming" }, h("span", { class: "num muted" }, "Wk " + x.wk), h("span", { class: "muted" }, "vs " + x.opp + " · upcoming"), h("span", null, "")))));
       };
@@ -1011,7 +1066,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       drawLog();
 
       mgrBody.replaceChildren(head, tiles,
-        sec("Season by season", panel(seasonTable, h("div", { class: "muted small", style: "margin-top:10px" }, "* season in progress." + (seasons.some(y => S[y] && S[y][m] && S[y][m].cat) ? " † categories season (shaded): scored in categories won, so it counts for W-L-T, win % and places only." : "")))),
+        sec("Season by season", panel(seasonTable, h("div", { class: "muted small", style: "margin-top:10px" }, "* season in progress." + (seasons.some(y => S[y] && S[y][m] && S[y][m].cat) ? " † categories season (shaded)." : "")))),
         sec("Rivals", panel(rivalTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Every regular-season meeting, best record first. W-L-T includes the 2014-15 categories season; the scoring averages don't. Next = the next meeting this season."))),
         sec("Personal records", h("div", { class: "recs" }, mrec), h("div", { class: "muted small" }, "Single-week records leave out multi-week periods and short weeks.")),
         sec("Game log", panel(h("div", { class: "picker", style: "margin-bottom:12px" }, h("label", { for: "log-season" }, "Season"), logSel), logBody)));

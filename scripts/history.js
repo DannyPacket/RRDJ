@@ -52,6 +52,9 @@ for (const season of new Set(games.map(g => g[0]))) {
   for (const [w, m] of means) if (m > med * 1.3 || m < med * 0.7) (odd[season] = odd[season] || {})[w] = m > med ? "long" : "short";
 }
 const r = JSON.parse(fs.readFileSync(reportsFile, 'utf8'));
-r.history = { games, catGames, finals, champions, odd, regular, catRecords };
+// Category totals and per-category records for categories seasons, pulled once from Yahoo's Team Stats page (cat_stats.json)
+const catFile = require('path').join(__dirname, 'cat_stats.json');
+const catStats = fs.existsSync(catFile) ? JSON.parse(fs.readFileSync(catFile, 'utf8')) : {};
+r.history = { games, catGames, finals, champions, odd, regular, catRecords, catStats };
 fs.writeFileSync(reportsFile, JSON.stringify(r, null, 1));
 console.log('games', games.length, '| categories games', catGames.length, '| finals', Object.keys(finals).join(', '), '| champions', JSON.stringify(champions), '| odd weeks', JSON.stringify(odd));
