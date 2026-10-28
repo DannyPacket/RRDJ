@@ -33,6 +33,44 @@ const V = {
     `The target is on ${c}, the defending champion.`,
     `${c} is back to defend the title.`]),
 
+  // last season in a sentence (real results), then a summer rumor (clearly tongue-in-cheek)
+  lastSeason: (c, r, a, b, last) => say('lastS', [
+    `Quick refresher: ${c} beat ${r} ${a} to ${b} in last year's final, and ${last} finished in the basement.`,
+    `Last we saw this league, ${c} was beating ${r} ${a} to ${b} for the title and ${last} was stuck in last place.`,
+    `When we left off, ${c} had just knocked off ${r} ${a}-${b} in the final, while ${last} brought up the rear.`,
+    `Previously on Rene Rancourt's Day Job: ${c} over ${r}, ${a} to ${b}, in the final. ${last} finished last.`]),
+  summerChamp: (c, team, r) => say('summer', [
+    `Word around the league is ${c} spent the summer taking the trophy to every backyard barbecue that would have it.`,
+    `Sources say ${c} has watched the replay of that final more times than is healthy.`,
+    `${c} reportedly had the ${team || 'team'} logo printed on a golf shirt. Several golf shirts.`,
+    `Rumor has it ${c}'s name in the family group chat has been "Champ" since April.`,
+    `${r} has been heard muttering about that final all summer.`,
+    `The trophy, we're told, spent July on ${c}'s mantel, right in front of the family photos.`,
+    `${c} has been signing every text "Defending Champ" since the spring.`,
+    `Over the summer, ${c} tried to get the league to rename the trophy "the ${c} Cup." The motion failed.`,
+    `${c} reportedly framed the final box score and hung it in the hallway.`,
+    `The rest of the league spent the summer plotting how to knock off ${c}.`,
+    `Our sources can neither confirm nor deny that ${c} drank something out of the trophy this summer.`,
+    `${c} claims the title has "barely come up" since spring. Everyone else says otherwise.`,
+    `${c} spent the offseason telling anyone who'd listen how the ${team || 'title'} run came together.`]),
+  takeoverStory: (n, o) => ' ' + say('takeS', [
+    `${o} handed over the keys this summer, and ${n} wasted no time ordering new jerseys.`,
+    `Word is ${n} has already redecorated the ${o} era out of the war room.`,
+    `${o} leaves big skates to fill. ${n} says the rebuild is already done.`,
+    `The front office has a new voice: ${n} promises to restore the franchise to glory. Bold.`]),
+  rookieStory: (names, many) => ' ' + say('rookS', [
+    `${names} spent the summer cramming prospect rankings, we're told.`,
+    `${names} ${many ? 'show' : 'shows'} up with a fresh notebook and a lot of confidence.`,
+    `Rookie hazing is scheduled for week 2. Welcome, ${names}.`]),
+  returnStory: (names, many) => ' ' + say('retS', [
+    `${names} ${many ? 'swear' : 'swears'} the year off was "a rebuild, not a retirement."`,
+    `${names} couldn't stay away. Nobody ever really leaves this league.`,
+    `Rested and dangerous, says ${names}.`]),
+  departStory: (names, many) => ' ' + say('depS', [
+    `${names} ${many ? 'hang' : 'hangs'} up the skates. The league will miss the trash talk.`,
+    `So long to ${names}. The group chat just got a little quieter.`,
+    `${names} ${many ? 'head' : 'heads'} into fantasy retirement. The jersey isn't going to the rafters, but still.`]),
+
   // --- the week's lead: who had the high score
   hsWin: (x, p, o, d, margin) => say('hsOpen', [
     `${x} lights the lamp for the week's high score, ${p}.`,
@@ -100,6 +138,16 @@ const V = {
   cold: (m, n) => say('cold', [`${m} has dropped ${n} in a row.`, `${m}'s skid hits ${n}.`, `Somebody check on ${m}: ${n} straight losses.`, `${m} is in a funk, ${n} losses in a row.`, `Still no answer for ${m}, now ${n} straight losses.`, `${m} can't buy a win: ${n} in a row.`, `The losses keep coming for ${m}: ${n} straight.`, `${m} is stuck in a ${n}-game slide.`, `Rough stretch for ${m}, now ${n} straight losses.`, `${m} looks for answers after loss No. ${n} in a row.`]),
   snapSkid: (m, n) => say('snapSkid', [`${m} snaps ${an(n)} ${n}-game skid.`, `${m} finally wins again, ending ${an(n)} ${n}-game slide.`, `The skid is over: ${m} wins for the first time in ${n + 1} weeks.`, `${m} breaks through, snapping ${n} straight losses.`]),
   snapWin: (m, n) => say('snapWin', [`${m}'s ${n}-game win streak is over.`, `All good things: ${m}'s ${n}-game run comes to an end.`, `${m}'s heater cools off after ${n} straight wins.`, `The ${n}-game win streak ends for ${m}.`]),
+  // streak milestones: 6, 8, then every other week from 10
+  winMile: (m, n) => n === 6 ? say('w6', [`Six straight for ${m}. That's officially a streak.`, `${m} has won six in a row and is starting to look dangerous.`, `Six straight wins for ${m}. The rest of the league has noticed.`])
+    : n === 8 ? say('w8', [`Eight in a row for ${m}! Somebody stop this team.`, `${m} is up to eight straight wins. That's two months without a loss.`, `Eight straight for ${m}, and nobody has an answer.`])
+    : say('w10', [`Double digits! ${m} has won ${n} straight.`, `${n} straight wins for ${m}. This is getting silly.`, `${m}'s win streak hits ${n}. Book the parade?`, `Make that ${n} in a row for ${m}. Unreal.`]),
+  lossMile: (m, n) => n === 6 ? say('l6', [`Six straight losses for ${m}. Time to shake up the lines?`, `${m} has dropped six in a row. Somebody check the goalie's equipment.`, `Six in a row now for ${m}, and not the good kind.`])
+    : n === 8 ? say('l8', [`Eight straight losses for ${m}. Is there a trade deadline in this league?`, `${m} has lost eight straight. It's getting dark out there.`, `Eight in a row for ${m}. Somebody bring snacks.`])
+    : say('l10', [`${m} has lost ${n} straight. Double digits, and not the fun kind.`, `${n} losses in a row for ${m}. Nowhere to go but up.`, `${m}'s skid reaches ${n}. Somebody send help.`]),
+  streakRecord: (kind, beat, m, n, y) => ' ' + (beat
+    ? `That's the longest ${kind} streak in league history, passing ${m}'s ${n} in ${y}.`
+    : `That ties ${m}'s ${n} in ${y} for the longest ${kind} streak in league history.`),
   perfect: (m, n) => say('perfect', [`${m} is still perfect at ${n}-0.`, `${n}-0 and counting for ${m}.`, `Still unbeaten: ${m} at ${n}-0.`, `${m} hasn't lost yet: ${n}-0.`]),
   winless: (names, many, n) => say('winless', [`${names} ${many ? 'are' : 'is'} still looking for a first win (0-${n}).`, `Still waiting on win No. 1: ${names}, 0-${n}.`, `0-${n} and counting for ${names}.`]),
 

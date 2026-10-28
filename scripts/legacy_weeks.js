@@ -113,6 +113,18 @@ for (const [y, S] of Object.entries(bySeason)) {
   openRun[y] = {};
   for (const m of Object.keys(S.games[wks[0]] || {})) { let n = 0; for (const w of wks) { const g = S.games[w][m]; if (g && g.p > g.q) n++; else break; } openRun[y][m] = n; }
 }
+// Every in-season streak as it stood each week, for "longest win/losing streak in league history"
+const streakLog = [];
+for (const [y, S] of Object.entries(bySeason)) {
+  const run = {};
+  for (const w of Object.keys(S.games).map(Number).sort((a, b) => a - b)) for (const [m, g] of Object.entries(S.games[w])) {
+    const k = g.p > g.q ? 'W' : g.p < g.q ? 'L' : 'T', r = run[m];
+    run[m] = r && r.k === k ? { k, n: r.n + 1 } : { k, n: 1 };
+    if (k !== 'T') streakLog.push({ y, w, m, k, n: run[m].n });
+  }
+}
+// best streak of kind k before this week, leaving out the streak m is on right now (it covers the last n weeks)
+const bestStreakBefore = (k, id, wk, m, n) => streakLog.reduce((best, x) => x.k === k && (x.y < id || (x.y === id && x.w < wk && !(x.m === m && x.w > wk - n))) && x.n > best.n ? x : best, { n: 0 });
 const bestOpenBefore = id => { let best = { n: 0 }; for (const [y, o] of Object.entries(openRun)) if (y < id) for (const [m, n] of Object.entries(o)) if (n > best.n) best = { n, m, y }; return best; };
 // League single-week records before season y, week wk (points seasons, normal-length weeks only)
 const normalWeek = (y, w) => !(odd[y] && odd[y][w]) && !(w === 1 && (weekDates[y] || {})[1] && (Date.parse(weekDates[y][1][1]) - Date.parse(weekDates[y][1][0])) / 864e5 > 7);
@@ -134,17 +146,29 @@ function welcome(id, mgrs) {
   if (!prev) parts.push('Twelve managers, one trophy, and a long winter ahead.');
   else if (prev === '2019-20') parts.push('Nobody lifted the trophy after the pandemic cut 2019-20 short, so the title is wide open.');
   else if (champOf(prev)) parts.push(V.defending(champOf(prev)));
+  const prevS = prev && bySeason[prev], c = prev && champOf(prev);
+  if (prevS && c && Object.keys(prevS.post).length) {
+    const pw = bracketOf(prevS).pw, g = (prevS.post[pw[pw.length - 1]] || {})[c];
+    const fp = n => catSeasons.has(prev) ? String(Math.round(n)) : (Math.round(n * 10) / 10).toFixed(1);
+    const r = Object.keys(allFinals[prev]).find(m => allFinals[prev][m] === 2), last = lastPlaceOf(prev);
+    if (g && r && g.opp === r && last) parts.push(V.lastSeason(c, r, fp(g.p), fp(g.q), last));
+    if (mgrs.includes(c)) parts.push(V.summerChamp(c, (teamNames[prev] || {})[c], r));
+  } else if (prevS && !c) {
+    // a season that never finished (2019-20): who was on top when it stopped
+    const lw = Math.max(...Object.keys(prevS.rank).map(Number)), top = Object.keys(prevS.rank[lw]).find(m => prevS.rank[lw][m] === 1);
+    if (top) parts.push(`When the music stopped last March, ${top} had the best record in the league. ${top} would like everyone to remember that.`);
+  }
   if (catSeasons.has(id)) parts.push(`This one is different: a ${words[mgrs.length] || mgrs.length}-team head-to-head categories league, so each week is scored in categories won. A 7-5 win means seven categories to five.`);
   if (id === '2020-21') parts.push('Hockey is back in January with a 56-game NHL schedule, so this one is a sprint.');
   if (prev === '2014-15') parts.push('After a year of categories scoring, the league is back to points and back to 12 teams.');
   if (ins.length === 1 && outs.length === 1) {
     const nm = (teamNames[id] || {})[ins[0]];
-    parts.push(`Front-office news: ${ins[0]} takes over the franchise ${outs[0]} ran${nm ? ' and relocates it as ' + nm : ''}. Welcome to your rookie season.`);
+    parts.push(`Front-office news: ${ins[0]} takes over the franchise ${outs[0]} ran${nm ? ' and relocates it as ' + nm : ''}. Welcome to your rookie season.` + V.takeoverStory(ins[0], outs[0]));
   } else {
     const back = ins.filter(m => seasonIds.slice(0, i).some(y => (teamNames[y] || {})[m])), rookies = ins.filter(m => !back.includes(m));
-    if (back.length) parts.push(`${back.join(' and ')} ${back.length > 1 ? 'are' : 'is'} back after a year away.`);
-    if (rookies.length) parts.push(`${rookies.join(' and ')} ${rookies.length > 1 ? 'join for their rookie seasons' : 'joins for a rookie season'}.`);
-    if (outs.length && !back.length && !rookies.length) parts.push(`${outs.join(' and ')} ${outs.length > 1 ? "aren't" : "isn't"} back this year.`);
+    if (back.length) parts.push(`${back.join(' and ')} ${back.length > 1 ? 'are' : 'is'} back after a year away.` + V.returnStory(back.join(' and '), back.length > 1));
+    if (rookies.length) parts.push(`${rookies.join(' and ')} ${rookies.length > 1 ? 'join for their rookie seasons' : 'joins for a rookie season'}.` + V.rookieStory(rookies.join(' and '), rookies.length > 1));
+    if (outs.length && !back.length && !rookies.length) parts.push(`${outs.join(' and ')} ${outs.length > 1 ? "aren't" : "isn't"} back this year.` + V.departStory(outs.join(' and '), outs.length > 1));
   }
   return parts.join(' ');
 }
@@ -367,9 +391,22 @@ for (const [id, S] of Object.entries(bySeason)) {
     // perfect starts: say so when it ties or breaks the league's best opening run, otherwise only now and then
     for (const m of perfect) p3.push(bo.n && wk === bo.n + 1 ? `${m} is ${wk}-0, the best start in league history, passing ${bo.m}'s ${bo.n}-0 in ${bo.y}.` : bo.n && wk === bo.n ? `${m} is ${wk}-0, matching ${bo.m}'s ${bo.y} start for the best in league history.` : wk === 5 || wk % 3 === 0 ? V.perfect(m, wk) : '');
     if (winless.length) p3.push(V.winless(winless.join(' and '), winless.length > 1, wk));
-    if (hot && !perfect.includes(hot.m)) p3.push(V.hot(hot.m, hot.s.n));
+    // streak milestones (6, 8, then every other week from 10) and league-record streaks
+    const miles = [];
+    for (const m of mgrs) {
+      const st = streakOf(m);
+      if (st.k === 'T' || st.n < 6 || perfect.includes(m) || winless.includes(m)) continue;
+      const best = seasonIds.indexOf(id) > 0 ? bestStreakBefore(st.k, id, wk, m, st.n) : { n: 0 }, kind = st.k === 'W' ? 'win' : 'losing';
+      const rec = best.n && st.n === best.n + 1 ? V.streakRecord(kind, true, best.m, best.n, best.y) : best.n && st.n === best.n ? V.streakRecord(kind, false, best.m, best.n, best.y) : '';
+      const mile = st.n === 6 || st.n === 8 || (st.n >= 10 && st.n % 2 === 0);
+      if (!mile && !rec) continue;
+      miles.push(m);
+      p3.push((mile ? (st.k === 'W' ? V.winMile(m, st.n) : V.lossMile(m, st.n)) : (st.k === 'W' ? V.hot(m, st.n) : V.cold(m, st.n)))
+        + (rec || (mile && best.n && st.n > best.n + 1 ? " It's the longest in league history." : '')));
+    }
+    if (hot && !perfect.includes(hot.m) && !miles.includes(hot.m)) p3.push(V.hot(hot.m, hot.s.n));
     if (snap) p3.push(snap.s.k === 'L' ? V.snapSkid(snap.m, snap.s.n) : V.snapWin(snap.m, snap.s.n));
-    if (cold && (!snap || cold.m !== snap.m) && !winless.includes(cold.m)) p3.push(V.cold(cold.m, cold.s.n));
+    if (cold && (!snap || cold.m !== snap.m) && !winless.includes(cold.m) && !miles.includes(cold.m)) p3.push(V.cold(cold.m, cold.s.n));
     const prevY = prevOf(id), oldChamp = prevY && champOf(prevY);
     if (wk === 1 && oldChamp && G[oldChamp]) p3.push(G[oldChamp].p > G[oldChamp].q ? V.defenseWin(oldChamp, G[oldChamp].opp) : G[oldChamp].p < G[oldChamp].q ? V.defenseLoss(oldChamp, G[oldChamp].opp) : `The defending champ ${oldChamp} opens with a tie.`);
     const runner = prevY && Object.keys(allFinals[prevY] || {}).find(m => allFinals[prevY][m] === 2);
