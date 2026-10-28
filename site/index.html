@@ -398,6 +398,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
   const EMO = { W: [[10, "😍💦"], [6, "🥵"], [3, "🔥"]], L: [[10, "😵💀"], [6, "🥶"], [3, "❄️"]] };
   const emoji = (k, n) => (EMO[k].find(([min]) => n >= min) || [0, ""])[1];
   const fmt = n => (Math.round(n * 10) / 10).toFixed(1);
+  // 2014-15 was a categories season: its scores are categories won, so they print as whole numbers
+  const scoreFmt = s => s && s.scoring === "categories" ? n => String(Math.round(n)) : fmt;
   const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   const d = iso => { const [y, m, dd] = iso.split("-").map(Number); return new Date(Date.UTC(y, m - 1, dd)); };
@@ -442,6 +444,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
   }
 
   function render(s, w) {
+    const fmt = scoreFmt(s), cat = s.scoring === "categories";
     const fromSheet = s.source === "sheet";
     $("season-eyebrow").textContent = s.label + " season · " + (fromSheet ? "Yahoo" : "Fantrax");
     $("wk").textContent = w.week === 100 ? "Final standings" : "Week " + w.week;
@@ -535,7 +538,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     if (w.standings && w.standings.length) {
       right.push(sec("Standings", panel(h("div", { class: "tablewrap standings" }, h("table", null,
         h("colgroup", null, h("col", { style: "width:2.2em" }), h("col", { style: "width:3em" }), h("col"), h("col", { style: "width:4.6em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:3.2em" })),
-        h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r" }, "PF"), h("th", { class: "r" }, "PA"), h("th", { class: "r" }, "Net"), h("th", { class: "r" }, "Strk"))),
+        h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r", title: cat ? "Categories won" : "Points for" }, cat ? "CW" : "PF"), h("th", { class: "r", title: cat ? "Categories lost" : "Points against" }, cat ? "CL" : "PA"), h("th", { class: "r" }, "Net"), h("th", { class: "r" }, "Strk"))),
         h("tbody", null, w.standings.flatMap(r => {
           const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: "8" }, mgrWeeks(r.mgr)));
           const toggle = e => {
@@ -596,7 +599,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       w.week === 100 ? null : h("div", { class: "pair" }, pair),
       ...stars,
       ...(fromSheet ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
-      h("footer", null, fromSheet ? "Rebuilt from the league sheet (Yahoo season). Write-ups are generated from the scores." : "Scores and stats from Fantrax. Fantrax can apply stat corrections after a week ends.")].filter(Boolean));
+      h("footer", null, fromSheet ? "Rebuilt from the league sheet (Yahoo season). Write-ups are generated from the scores." + (cat ? " 2014-15 was a categories season: scores are categories won each week (CW/CL in the standings), there were no weekly high scores, and it's left out of the all-time stats." : "") : "Scores and stats from Fantrax. Fantrax can apply stat corrections after a week ends.")].filter(Boolean));
   }
 
   // League history tab: everything here is computed from DATA.history (every game in the sheet since the first season).
@@ -1105,6 +1108,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
   // Trees are packed column by column so the smaller place games sit under the final instead of below everything.
   let brView = (() => { try { return localStorage.getItem("rrdj-bracket-view") || "bracket"; } catch (e) { return "bracket"; } })();
   function playoffs(s, w) {
+    const fmt = scoreFmt(s);
     const games = (w.bracket || {}).games || [];
     if (!games.length) return null;
     const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
@@ -1232,6 +1236,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       body, note);
   }
   function podium(s, w) {
+    const fmt = scoreFmt(s), cat = s.scoring === "categories";
     const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
     const regRank = last ? Object.fromEntries(last.standings.map(r => [r.mgr, r.rank])) : {};
     const top = w.standings.slice().sort((a, b) => a.rank - b.rank).slice(0, 3);
@@ -1249,9 +1254,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         s.teams && s.teams[r.mgr] ? h("span", { class: "muted small" }, s.teams[r.mgr]) : null,
         h("dl", { class: "pod-dl" },
           h("dt", null, "Record"), h("dd", { class: "num" }, r.w + "-" + r.l + "-" + (r.t || 0)),
-          h("dt", null, "Points for"), h("dd", { class: "num" }, fmt(r.pf)),
+          h("dt", null, cat ? "Categories won" : "Points for"), h("dd", { class: "num" }, fmt(r.pf)),
           regRank[r.mgr] ? [h("dt", null, "Regular season"), h("dd", { class: "num" }, ordn(regRank[r.mgr]))] : null,
-          h("dt", null, "High scores"), h("dd", { class: "num" }, tally[r.mgr] || 0)),
+          cat ? null : [h("dt", null, "High scores"), h("dd", { class: "num" }, tally[r.mgr] || 0)]),
         h("div", { class: "block", "aria-hidden": "true" }, i + 1));
     };
     return sec(s.label + " podium", h("div", { class: "podium" }, step(top[1], 1), step(top[0], 0), step(top[2], 2)));
@@ -1359,7 +1364,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     $("league").textContent = data.league || "Fantasy hockey";
     const lastId = data.seasons[data.seasons.length - 1].id;
     $("season").replaceChildren(...data.seasons.slice().reverse().map(s => h("option", { value: s.id },
-      s.label + (s.id === lastId ? " (in progress)" : s.weeks.some(w => w.week === 100) ? "" : " (no playoffs)"))));
+      s.label + (s.id === lastId ? " (in progress)" : s.weeks.some(w => w.week === 100) ? "" : " (no playoffs)") + (s.scoring === "categories" ? " (categories)" : ""))));
     $("season").addEventListener("change", e => pick(e.target.value, null, true));
     $("tab-week").addEventListener("click", () => pick(cur.s ? cur.s.id : null, cur.w ? cur.w.week : null, true));
     $("tab-history").addEventListener("click", () => showHistory(true, "history"));

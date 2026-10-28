@@ -6978,6 +6978,4882 @@
    ]
   },
   {
+   "id": "2014-15",
+   "label": "2014-15",
+   "source": "sheet",
+   "scoring": "categories",
+   "teams": {
+    "Danny": "Danny Packet",
+    "Jefe": "The Bobloblawskis",
+    "Nick": "Boston Brewins",
+    "Ronnie": "Play Like Carl",
+    "Steve": "Ice pond pimps",
+    "Tara": "2UUs2KKs",
+    "Tim": "Super Sharp Cheddar",
+    "Tom": "Got Moves Like Jagr",
+    "Vin": "Bad Dance Party",
+    "Will": "Chara's In Charge"
+   },
+   "logos": {
+    "Danny": "logos/danny.webp",
+    "Hallie": "logos/hallie.webp",
+    "Jefe": "logos/jefe.webp",
+    "Joe": "logos/joe.webp",
+    "Nick": "logos/nick.webp",
+    "Ronnie": "logos/ronnie.webp",
+    "Steve": "logos/steve.webp",
+    "Tim": "logos/tim.webp",
+    "Tom": "logos/tom.webp",
+    "Vin": "logos/vin.webp",
+    "Will": "logos/will.webp",
+    "Zac": "logos/zac.webp"
+   },
+   "schedule": [
+    [
+     1,
+     "Danny",
+     "Vin"
+    ],
+    [
+     1,
+     "Jefe",
+     "Tim"
+    ],
+    [
+     1,
+     "Nick",
+     "Steve"
+    ],
+    [
+     1,
+     "Ronnie",
+     "Tom"
+    ],
+    [
+     1,
+     "Tara",
+     "Will"
+    ],
+    [
+     2,
+     "Danny",
+     "Jefe"
+    ],
+    [
+     2,
+     "Nick",
+     "Will"
+    ],
+    [
+     2,
+     "Ronnie",
+     "Tara"
+    ],
+    [
+     2,
+     "Steve",
+     "Vin"
+    ],
+    [
+     2,
+     "Tim",
+     "Tom"
+    ],
+    [
+     3,
+     "Danny",
+     "Tom"
+    ],
+    [
+     3,
+     "Jefe",
+     "Vin"
+    ],
+    [
+     3,
+     "Nick",
+     "Ronnie"
+    ],
+    [
+     3,
+     "Steve",
+     "Will"
+    ],
+    [
+     3,
+     "Tara",
+     "Tim"
+    ],
+    [
+     4,
+     "Danny",
+     "Tara"
+    ],
+    [
+     4,
+     "Jefe",
+     "Tom"
+    ],
+    [
+     4,
+     "Nick",
+     "Tim"
+    ],
+    [
+     4,
+     "Ronnie",
+     "Steve"
+    ],
+    [
+     4,
+     "Vin",
+     "Will"
+    ],
+    [
+     5,
+     "Danny",
+     "Nick"
+    ],
+    [
+     5,
+     "Jefe",
+     "Tara"
+    ],
+    [
+     5,
+     "Ronnie",
+     "Will"
+    ],
+    [
+     5,
+     "Steve",
+     "Tim"
+    ],
+    [
+     5,
+     "Tom",
+     "Vin"
+    ],
+    [
+     6,
+     "Danny",
+     "Steve"
+    ],
+    [
+     6,
+     "Jefe",
+     "Nick"
+    ],
+    [
+     6,
+     "Ronnie",
+     "Vin"
+    ],
+    [
+     6,
+     "Tara",
+     "Tom"
+    ],
+    [
+     6,
+     "Tim",
+     "Will"
+    ],
+    [
+     7,
+     "Danny",
+     "Will"
+    ],
+    [
+     7,
+     "Jefe",
+     "Steve"
+    ],
+    [
+     7,
+     "Nick",
+     "Tom"
+    ],
+    [
+     7,
+     "Ronnie",
+     "Tim"
+    ],
+    [
+     7,
+     "Tara",
+     "Vin"
+    ],
+    [
+     8,
+     "Danny",
+     "Ronnie"
+    ],
+    [
+     8,
+     "Jefe",
+     "Will"
+    ],
+    [
+     8,
+     "Nick",
+     "Tara"
+    ],
+    [
+     8,
+     "Steve",
+     "Tom"
+    ],
+    [
+     8,
+     "Tim",
+     "Vin"
+    ],
+    [
+     9,
+     "Danny",
+     "Tim"
+    ],
+    [
+     9,
+     "Jefe",
+     "Ronnie"
+    ],
+    [
+     9,
+     "Nick",
+     "Vin"
+    ],
+    [
+     9,
+     "Steve",
+     "Tara"
+    ],
+    [
+     9,
+     "Tom",
+     "Will"
+    ],
+    [
+     10,
+     "Danny",
+     "Vin"
+    ],
+    [
+     10,
+     "Jefe",
+     "Tim"
+    ],
+    [
+     10,
+     "Nick",
+     "Steve"
+    ],
+    [
+     10,
+     "Ronnie",
+     "Tom"
+    ],
+    [
+     10,
+     "Tara",
+     "Will"
+    ],
+    [
+     11,
+     "Danny",
+     "Jefe"
+    ],
+    [
+     11,
+     "Nick",
+     "Will"
+    ],
+    [
+     11,
+     "Ronnie",
+     "Tara"
+    ],
+    [
+     11,
+     "Steve",
+     "Vin"
+    ],
+    [
+     11,
+     "Tim",
+     "Tom"
+    ],
+    [
+     12,
+     "Danny",
+     "Tom"
+    ],
+    [
+     12,
+     "Jefe",
+     "Vin"
+    ],
+    [
+     12,
+     "Nick",
+     "Ronnie"
+    ],
+    [
+     12,
+     "Steve",
+     "Will"
+    ],
+    [
+     12,
+     "Tara",
+     "Tim"
+    ],
+    [
+     13,
+     "Danny",
+     "Tara"
+    ],
+    [
+     13,
+     "Jefe",
+     "Tom"
+    ],
+    [
+     13,
+     "Nick",
+     "Tim"
+    ],
+    [
+     13,
+     "Ronnie",
+     "Steve"
+    ],
+    [
+     13,
+     "Vin",
+     "Will"
+    ],
+    [
+     14,
+     "Danny",
+     "Nick"
+    ],
+    [
+     14,
+     "Jefe",
+     "Tara"
+    ],
+    [
+     14,
+     "Ronnie",
+     "Will"
+    ],
+    [
+     14,
+     "Steve",
+     "Tim"
+    ],
+    [
+     14,
+     "Tom",
+     "Vin"
+    ],
+    [
+     15,
+     "Danny",
+     "Steve"
+    ],
+    [
+     15,
+     "Jefe",
+     "Nick"
+    ],
+    [
+     15,
+     "Ronnie",
+     "Vin"
+    ],
+    [
+     15,
+     "Tara",
+     "Tom"
+    ],
+    [
+     15,
+     "Tim",
+     "Will"
+    ],
+    [
+     16,
+     "Danny",
+     "Will"
+    ],
+    [
+     16,
+     "Jefe",
+     "Steve"
+    ],
+    [
+     16,
+     "Nick",
+     "Tom"
+    ],
+    [
+     16,
+     "Ronnie",
+     "Tim"
+    ],
+    [
+     16,
+     "Tara",
+     "Vin"
+    ],
+    [
+     17,
+     "Danny",
+     "Ronnie"
+    ],
+    [
+     17,
+     "Jefe",
+     "Will"
+    ],
+    [
+     17,
+     "Nick",
+     "Tara"
+    ],
+    [
+     17,
+     "Steve",
+     "Tom"
+    ],
+    [
+     17,
+     "Tim",
+     "Vin"
+    ],
+    [
+     18,
+     "Danny",
+     "Tim"
+    ],
+    [
+     18,
+     "Jefe",
+     "Ronnie"
+    ],
+    [
+     18,
+     "Nick",
+     "Vin"
+    ],
+    [
+     18,
+     "Steve",
+     "Tara"
+    ],
+    [
+     18,
+     "Tom",
+     "Will"
+    ],
+    [
+     19,
+     "Danny",
+     "Vin"
+    ],
+    [
+     19,
+     "Jefe",
+     "Tim"
+    ],
+    [
+     19,
+     "Nick",
+     "Steve"
+    ],
+    [
+     19,
+     "Ronnie",
+     "Tom"
+    ],
+    [
+     19,
+     "Tara",
+     "Will"
+    ],
+    [
+     20,
+     "Danny",
+     "Jefe"
+    ],
+    [
+     20,
+     "Nick",
+     "Will"
+    ],
+    [
+     20,
+     "Ronnie",
+     "Tara"
+    ],
+    [
+     20,
+     "Steve",
+     "Vin"
+    ],
+    [
+     20,
+     "Tim",
+     "Tom"
+    ],
+    [
+     21,
+     "Danny",
+     "Tom"
+    ],
+    [
+     21,
+     "Jefe",
+     "Vin"
+    ],
+    [
+     21,
+     "Nick",
+     "Ronnie"
+    ],
+    [
+     21,
+     "Steve",
+     "Will"
+    ],
+    [
+     21,
+     "Tara",
+     "Tim"
+    ]
+   ],
+   "weeks": [
+    {
+     "week": 1,
+     "recap": [
+      "Welcome to the 2014-15 season of Rene Rancourt's Day Job! Danny comes in as the defending champion. This one is different: a 10-team head-to-head categories league, so each week is scored in categories won. A 7-5 win means seven categories to five. Joe and Patrick aren't back this year.",
+      "Vin wins the most categories this week with 10, beating Danny 10-2.",
+      "Photo finish: Tara edges Will 6 to 5. Blowout of the week: Vin over Danny by 8 categories.",
+      "Vin leads the way at 1-0."
+     ],
+     "matchups": [
+      {
+       "a": "Danny",
+       "ap": 2,
+       "b": "Vin",
+       "bp": 10
+      },
+      {
+       "a": "Jefe",
+       "ap": 3,
+       "b": "Tim",
+       "bp": 8
+      },
+      {
+       "a": "Nick",
+       "ap": 5,
+       "b": "Steve",
+       "bp": 8
+      },
+      {
+       "a": "Ronnie",
+       "ap": 5,
+       "b": "Tom",
+       "bp": 8
+      },
+      {
+       "a": "Tara",
+       "ap": 6,
+       "b": "Will",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": null,
+       "mgr": "Vin",
+       "w": 1,
+       "l": 0,
+       "t": 0,
+       "pf": 10,
+       "pa": 2,
+       "streak": "W1"
+      },
+      {
+       "rank": 2,
+       "prev": null,
+       "mgr": "Tim",
+       "w": 1,
+       "l": 0,
+       "t": 0,
+       "pf": 8,
+       "pa": 3,
+       "streak": "W1"
+      },
+      {
+       "rank": 3,
+       "prev": null,
+       "mgr": "Steve",
+       "w": 1,
+       "l": 0,
+       "t": 0,
+       "pf": 8,
+       "pa": 5,
+       "streak": "W1"
+      },
+      {
+       "rank": 3,
+       "prev": null,
+       "mgr": "Tom",
+       "w": 1,
+       "l": 0,
+       "t": 0,
+       "pf": 8,
+       "pa": 5,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": null,
+       "mgr": "Tara",
+       "w": 1,
+       "l": 0,
+       "t": 0,
+       "pf": 6,
+       "pa": 5,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": null,
+       "mgr": "Will",
+       "w": 0,
+       "l": 1,
+       "t": 0,
+       "pf": 5,
+       "pa": 6,
+       "streak": "L1"
+      },
+      {
+       "rank": 7,
+       "prev": null,
+       "mgr": "Nick",
+       "w": 0,
+       "l": 1,
+       "t": 0,
+       "pf": 5,
+       "pa": 8,
+       "streak": "L1"
+      },
+      {
+       "rank": 7,
+       "prev": null,
+       "mgr": "Ronnie",
+       "w": 0,
+       "l": 1,
+       "t": 0,
+       "pf": 5,
+       "pa": 8,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": null,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 1,
+       "t": 0,
+       "pf": 3,
+       "pa": 8,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": null,
+       "mgr": "Danny",
+       "w": 0,
+       "l": 1,
+       "t": 0,
+       "pf": 2,
+       "pa": 10,
+       "streak": "L1"
+      }
+     ],
+     "streaks": [],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Jefe"
+      ],
+      [
+       "Nick",
+       "Will"
+      ],
+      [
+       "Ronnie",
+       "Tara"
+      ],
+      [
+       "Steve",
+       "Vin"
+      ],
+      [
+       "Tim",
+       "Tom"
+      ]
+     ]
+    },
+    {
+     "week": 2,
+     "recap": [
+      "Tim wins the most categories this week with 9, beating Tom 9-3.",
+      "Photo finish: Danny edges Jefe 6 to 5. Blowout of the week (brother vs. brother): Tim over Tom by 6 categories.",
+      "Tim takes over 1st at 2-0."
+     ],
+     "matchups": [
+      {
+       "a": "Tim",
+       "ap": 9,
+       "b": "Tom",
+       "bp": 3
+      },
+      {
+       "a": "Nick",
+       "ap": 2,
+       "b": "Will",
+       "bp": 8
+      },
+      {
+       "a": "Steve",
+       "ap": 8,
+       "b": "Vin",
+       "bp": 4
+      },
+      {
+       "a": "Ronnie",
+       "ap": 7,
+       "b": "Tara",
+       "bp": 5
+      },
+      {
+       "a": "Danny",
+       "ap": 6,
+       "b": "Jefe",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 2,
+       "mgr": "Tim",
+       "w": 2,
+       "l": 0,
+       "t": 0,
+       "pf": 17,
+       "pa": 6,
+       "streak": "W2"
+      },
+      {
+       "rank": 2,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 2,
+       "l": 0,
+       "t": 0,
+       "pf": 16,
+       "pa": 9,
+       "streak": "W2"
+      },
+      {
+       "rank": 3,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 1,
+       "l": 1,
+       "t": 0,
+       "pf": 14,
+       "pa": 10,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 6,
+       "mgr": "Will",
+       "w": 1,
+       "l": 1,
+       "t": 0,
+       "pf": 13,
+       "pa": 8,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 7,
+       "mgr": "Ronnie",
+       "w": 1,
+       "l": 1,
+       "t": 0,
+       "pf": 12,
+       "pa": 13,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 5,
+       "mgr": "Tara",
+       "w": 1,
+       "l": 1,
+       "t": 0,
+       "pf": 11,
+       "pa": 12,
+       "streak": "L1"
+      },
+      {
+       "rank": 7,
+       "prev": 3,
+       "mgr": "Tom",
+       "w": 1,
+       "l": 1,
+       "t": 0,
+       "pf": 11,
+       "pa": 14,
+       "streak": "L1"
+      },
+      {
+       "rank": 8,
+       "prev": 10,
+       "mgr": "Danny",
+       "w": 1,
+       "l": 1,
+       "t": 0,
+       "pf": 8,
+       "pa": 15,
+       "streak": "W1"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 2,
+       "t": 0,
+       "pf": 8,
+       "pa": 14,
+       "streak": "L2"
+      },
+      {
+       "rank": 10,
+       "prev": 7,
+       "mgr": "Nick",
+       "w": 0,
+       "l": 2,
+       "t": 0,
+       "pf": 7,
+       "pa": 16,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tom"
+      ],
+      [
+       "Jefe",
+       "Vin"
+      ],
+      [
+       "Nick",
+       "Ronnie"
+      ],
+      [
+       "Steve",
+       "Will"
+      ],
+      [
+       "Tara",
+       "Tim"
+      ]
+     ]
+    },
+    {
+     "week": 3,
+     "recap": [
+      "Tim wins the most categories this week with 9, beating Tara 9-2.",
+      "Photo finish (brother vs. brother): Danny edges Tom 7 to 6. Blowout of the week: Tim over Tara by 7 categories.",
+      "Steve is rolling with 3 straight wins. Jefe has dropped 3 in a row.",
+      "Tim leads the way at 3-0."
+     ],
+     "matchups": [
+      {
+       "a": "Jefe",
+       "ap": 4,
+       "b": "Vin",
+       "bp": 9
+      },
+      {
+       "a": "Tara",
+       "ap": 2,
+       "b": "Tim",
+       "bp": 9
+      },
+      {
+       "a": "Nick",
+       "ap": 3,
+       "b": "Ronnie",
+       "bp": 8
+      },
+      {
+       "a": "Danny",
+       "ap": 7,
+       "b": "Tom",
+       "bp": 6
+      },
+      {
+       "a": "Steve",
+       "ap": 6,
+       "b": "Will",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Tim",
+       "w": 3,
+       "l": 0,
+       "t": 0,
+       "pf": 26,
+       "pa": 8,
+       "streak": "W3"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Steve",
+       "w": 3,
+       "l": 0,
+       "t": 0,
+       "pf": 22,
+       "pa": 14,
+       "streak": "W3"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 2,
+       "l": 1,
+       "t": 0,
+       "pf": 23,
+       "pa": 14,
+       "streak": "W1"
+      },
+      {
+       "rank": 4,
+       "prev": 5,
+       "mgr": "Ronnie",
+       "w": 2,
+       "l": 1,
+       "t": 0,
+       "pf": 20,
+       "pa": 16,
+       "streak": "W2"
+      },
+      {
+       "rank": 5,
+       "prev": 8,
+       "mgr": "Danny",
+       "w": 2,
+       "l": 1,
+       "t": 0,
+       "pf": 15,
+       "pa": 21,
+       "streak": "W2"
+      },
+      {
+       "rank": 6,
+       "prev": 4,
+       "mgr": "Will",
+       "w": 1,
+       "l": 2,
+       "t": 0,
+       "pf": 18,
+       "pa": 14,
+       "streak": "L1"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Tom",
+       "w": 1,
+       "l": 2,
+       "t": 0,
+       "pf": 17,
+       "pa": 21,
+       "streak": "L2"
+      },
+      {
+       "rank": 8,
+       "prev": 6,
+       "mgr": "Tara",
+       "w": 1,
+       "l": 2,
+       "t": 0,
+       "pf": 13,
+       "pa": 21,
+       "streak": "L2"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 3,
+       "t": 0,
+       "pf": 12,
+       "pa": 23,
+       "streak": "L3"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 0,
+       "l": 3,
+       "t": 0,
+       "pf": 10,
+       "pa": 24,
+       "streak": "L3"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Steve",
+        "Tim"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Jefe",
+        "Nick"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tara"
+      ],
+      [
+       "Jefe",
+       "Tom"
+      ],
+      [
+       "Nick",
+       "Tim"
+      ],
+      [
+       "Ronnie",
+       "Steve"
+      ],
+      [
+       "Vin",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 4,
+     "recap": [
+      "Vin wins the most categories this week with 10, beating Will 10-2.",
+      "Photo finish: Danny edges Tara 7 to 6. Blowout of the week: Vin over Will by 8 categories.",
+      "Tim is rolling with 4 straight wins. Nick has dropped 4 in a row.",
+      "Tim leads the way at 4-0."
+     ],
+     "matchups": [
+      {
+       "a": "Vin",
+       "ap": 10,
+       "b": "Will",
+       "bp": 2
+      },
+      {
+       "a": "Danny",
+       "ap": 7,
+       "b": "Tara",
+       "bp": 6
+      },
+      {
+       "a": "Jefe",
+       "ap": 7,
+       "b": "Tom",
+       "bp": 7
+      },
+      {
+       "a": "Nick",
+       "ap": 4,
+       "b": "Tim",
+       "bp": 7
+      },
+      {
+       "a": "Ronnie",
+       "ap": 5,
+       "b": "Steve",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Tim",
+       "w": 4,
+       "l": 0,
+       "t": 0,
+       "pf": 33,
+       "pa": 12,
+       "streak": "W4"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Steve",
+       "w": 3,
+       "l": 0,
+       "t": 1,
+       "pf": 27,
+       "pa": 19,
+       "streak": "T1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 3,
+       "l": 1,
+       "t": 0,
+       "pf": 33,
+       "pa": 16,
+       "streak": "W2"
+      },
+      {
+       "rank": 4,
+       "prev": 5,
+       "mgr": "Danny",
+       "w": 3,
+       "l": 1,
+       "t": 0,
+       "pf": 22,
+       "pa": 27,
+       "streak": "W3"
+      },
+      {
+       "rank": 5,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 2,
+       "l": 1,
+       "t": 1,
+       "pf": 25,
+       "pa": 21,
+       "streak": "T1"
+      },
+      {
+       "rank": 6,
+       "prev": 7,
+       "mgr": "Tom",
+       "w": 1,
+       "l": 2,
+       "t": 1,
+       "pf": 24,
+       "pa": 28,
+       "streak": "T1"
+      },
+      {
+       "rank": 7,
+       "prev": 6,
+       "mgr": "Will",
+       "w": 1,
+       "l": 3,
+       "t": 0,
+       "pf": 20,
+       "pa": 24,
+       "streak": "L2"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 1,
+       "l": 3,
+       "t": 0,
+       "pf": 19,
+       "pa": 28,
+       "streak": "L3"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 3,
+       "t": 1,
+       "pf": 19,
+       "pa": 30,
+       "streak": "T1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 0,
+       "l": 4,
+       "t": 0,
+       "pf": 14,
+       "pa": 31,
+       "streak": "L4"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Tim"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 4,
+       "mgrs": [
+        "Nick"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Tara"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Nick"
+      ],
+      [
+       "Jefe",
+       "Tara"
+      ],
+      [
+       "Ronnie",
+       "Will"
+      ],
+      [
+       "Steve",
+       "Tim"
+      ],
+      [
+       "Tom",
+       "Vin"
+      ]
+     ]
+    },
+    {
+     "week": 5,
+     "recap": [
+      "Tara wins the most categories this week with 13, beating Jefe 13-0.",
+      "Closest game: Ronnie edges Will 8 to 6. Blowout of the week: Tara over Jefe by 13 categories.",
+      "Danny is rolling with 4 straight wins. Tim's 4-game win streak is over. Nick has dropped 5 in a row.",
+      "Steve takes over 1st at 4-0-1."
+     ],
+     "matchups": [
+      {
+       "a": "Jefe",
+       "ap": 0,
+       "b": "Tara",
+       "bp": 13
+      },
+      {
+       "a": "Danny",
+       "ap": 8,
+       "b": "Nick",
+       "bp": 5
+      },
+      {
+       "a": "Ronnie",
+       "ap": 8,
+       "b": "Will",
+       "bp": 6
+      },
+      {
+       "a": "Steve",
+       "ap": 8,
+       "b": "Tim",
+       "bp": 5
+      },
+      {
+       "a": "Tom",
+       "ap": 3,
+       "b": "Vin",
+       "bp": 8
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 2,
+       "mgr": "Steve",
+       "w": 4,
+       "l": 0,
+       "t": 1,
+       "pf": 35,
+       "pa": 24,
+       "streak": "W1"
+      },
+      {
+       "rank": 2,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 4,
+       "l": 1,
+       "t": 0,
+       "pf": 41,
+       "pa": 19,
+       "streak": "W3"
+      },
+      {
+       "rank": 3,
+       "prev": 1,
+       "mgr": "Tim",
+       "w": 4,
+       "l": 1,
+       "t": 0,
+       "pf": 38,
+       "pa": 20,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Danny",
+       "w": 4,
+       "l": 1,
+       "t": 0,
+       "pf": 30,
+       "pa": 32,
+       "streak": "W4"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Ronnie",
+       "w": 3,
+       "l": 1,
+       "t": 1,
+       "pf": 33,
+       "pa": 27,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 2,
+       "l": 3,
+       "t": 0,
+       "pf": 32,
+       "pa": 28,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 6,
+       "mgr": "Tom",
+       "w": 1,
+       "l": 3,
+       "t": 1,
+       "pf": 27,
+       "pa": 36,
+       "streak": "L1"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Will",
+       "w": 1,
+       "l": 4,
+       "t": 0,
+       "pf": 26,
+       "pa": 32,
+       "streak": "L3"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 4,
+       "t": 1,
+       "pf": 19,
+       "pa": 43,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 0,
+       "l": 5,
+       "t": 0,
+       "pf": 19,
+       "pa": 39,
+       "streak": "L5"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Vin"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 5,
+       "mgrs": [
+        "Nick"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Will"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Steve"
+      ],
+      [
+       "Jefe",
+       "Nick"
+      ],
+      [
+       "Ronnie",
+       "Vin"
+      ],
+      [
+       "Tara",
+       "Tom"
+      ],
+      [
+       "Tim",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 6,
+     "recap": [
+      "Danny wins the most categories this week with 12, beating Steve 12-2.",
+      "Closest game (brother vs. brother): Will edges Tim 8 to 6. Blowout of the week: Danny over Steve by 10 categories. Upset alert: Will, 8th coming in, knocks off Tim (3rd).",
+      "Danny is rolling with 5 straight wins. Nick snaps a 5-game skid.",
+      "Vin takes over 1st at 5-1."
+     ],
+     "matchups": [
+      {
+       "a": "Danny",
+       "ap": 12,
+       "b": "Steve",
+       "bp": 2
+      },
+      {
+       "a": "Jefe",
+       "ap": 3,
+       "b": "Nick",
+       "bp": 11
+      },
+      {
+       "a": "Ronnie",
+       "ap": 3,
+       "b": "Vin",
+       "bp": 10
+      },
+      {
+       "a": "Tim",
+       "ap": 6,
+       "b": "Will",
+       "bp": 8
+      },
+      {
+       "a": "Tara",
+       "ap": 6,
+       "b": "Tom",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 2,
+       "mgr": "Vin",
+       "w": 5,
+       "l": 1,
+       "t": 0,
+       "pf": 51,
+       "pa": 22,
+       "streak": "W4"
+      },
+      {
+       "rank": 2,
+       "prev": 4,
+       "mgr": "Danny",
+       "w": 5,
+       "l": 1,
+       "t": 0,
+       "pf": 42,
+       "pa": 34,
+       "streak": "W5"
+      },
+      {
+       "rank": 3,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 4,
+       "l": 1,
+       "t": 1,
+       "pf": 37,
+       "pa": 36,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 3,
+       "mgr": "Tim",
+       "w": 4,
+       "l": 2,
+       "t": 0,
+       "pf": 44,
+       "pa": 28,
+       "streak": "L2"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Ronnie",
+       "w": 3,
+       "l": 2,
+       "t": 1,
+       "pf": 36,
+       "pa": 37,
+       "streak": "L1"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Tara",
+       "w": 2,
+       "l": 3,
+       "t": 1,
+       "pf": 38,
+       "pa": 34,
+       "streak": "T1"
+      },
+      {
+       "rank": 7,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 2,
+       "l": 4,
+       "t": 0,
+       "pf": 34,
+       "pa": 38,
+       "streak": "W1"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Tom",
+       "w": 1,
+       "l": 3,
+       "t": 2,
+       "pf": 33,
+       "pa": 42,
+       "streak": "T1"
+      },
+      {
+       "rank": 9,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 1,
+       "l": 5,
+       "t": 0,
+       "pf": 30,
+       "pa": 42,
+       "streak": "W1"
+      },
+      {
+       "rank": 10,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 5,
+       "t": 1,
+       "pf": 22,
+       "pa": 54,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 5,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Vin"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Will"
+      ],
+      [
+       "Jefe",
+       "Steve"
+      ],
+      [
+       "Nick",
+       "Tom"
+      ],
+      [
+       "Ronnie",
+       "Tim"
+      ],
+      [
+       "Tara",
+       "Vin"
+      ]
+     ]
+    },
+    {
+     "week": 7,
+     "recap": [
+      "Vin wins the most categories this week with 13, beating Tara 13-0.",
+      "Photo finish: Steve edges Jefe 7 to 6. Blowout of the week: Vin over Tara by 13 categories.",
+      "Vin is rolling with 5 straight wins. Danny's 5-game win streak is over. Jefe has dropped 3 in a row.",
+      "Vin leads the way at 6-1."
+     ],
+     "matchups": [
+      {
+       "a": "Tara",
+       "ap": 0,
+       "b": "Vin",
+       "bp": 13
+      },
+      {
+       "a": "Jefe",
+       "ap": 6,
+       "b": "Steve",
+       "bp": 7
+      },
+      {
+       "a": "Nick",
+       "ap": 6,
+       "b": "Tom",
+       "bp": 7
+      },
+      {
+       "a": "Ronnie",
+       "ap": 7,
+       "b": "Tim",
+       "bp": 5
+      },
+      {
+       "a": "Danny",
+       "ap": 6,
+       "b": "Will",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 6,
+       "l": 1,
+       "t": 0,
+       "pf": 64,
+       "pa": 22,
+       "streak": "W5"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 5,
+       "l": 1,
+       "t": 1,
+       "pf": 48,
+       "pa": 40,
+       "streak": "T1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 5,
+       "l": 1,
+       "t": 1,
+       "pf": 44,
+       "pa": 42,
+       "streak": "W1"
+      },
+      {
+       "rank": 4,
+       "prev": 5,
+       "mgr": "Ronnie",
+       "w": 4,
+       "l": 2,
+       "t": 1,
+       "pf": 43,
+       "pa": 42,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 4,
+       "mgr": "Tim",
+       "w": 4,
+       "l": 3,
+       "t": 0,
+       "pf": 49,
+       "pa": 35,
+       "streak": "L3"
+      },
+      {
+       "rank": 6,
+       "prev": 8,
+       "mgr": "Tom",
+       "w": 2,
+       "l": 3,
+       "t": 2,
+       "pf": 40,
+       "pa": 48,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Will",
+       "w": 2,
+       "l": 4,
+       "t": 1,
+       "pf": 40,
+       "pa": 44,
+       "streak": "T1"
+      },
+      {
+       "rank": 8,
+       "prev": 6,
+       "mgr": "Tara",
+       "w": 2,
+       "l": 4,
+       "t": 1,
+       "pf": 38,
+       "pa": 47,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 1,
+       "l": 6,
+       "t": 0,
+       "pf": 36,
+       "pa": 49,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 0,
+       "l": 6,
+       "t": 1,
+       "pf": 28,
+       "pa": 61,
+       "streak": "L3"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 5,
+       "mgrs": [
+        "Vin"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Jefe",
+        "Tim"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Ronnie"
+      ],
+      [
+       "Jefe",
+       "Will"
+      ],
+      [
+       "Nick",
+       "Tara"
+      ],
+      [
+       "Steve",
+       "Tom"
+      ],
+      [
+       "Tim",
+       "Vin"
+      ]
+     ]
+    },
+    {
+     "week": 8,
+     "recap": [
+      "Danny wins the most categories this week with 9, beating Ronnie 9-4.",
+      "Closest game: Tara edges Nick 6 to 4. Blowout of the week: Jefe over Will by 6 categories.",
+      "Vin is rolling with 6 straight wins. Tim has dropped 4 in a row.",
+      "Vin leads the way at 7-1. Nick drops to 10th."
+     ],
+     "matchups": [
+      {
+       "a": "Danny",
+       "ap": 9,
+       "b": "Ronnie",
+       "bp": 4
+      },
+      {
+       "a": "Jefe",
+       "ap": 8,
+       "b": "Will",
+       "bp": 2
+      },
+      {
+       "a": "Tim",
+       "ap": 2,
+       "b": "Vin",
+       "bp": 8
+      },
+      {
+       "a": "Steve",
+       "ap": 7,
+       "b": "Tom",
+       "bp": 4
+      },
+      {
+       "a": "Nick",
+       "ap": 4,
+       "b": "Tara",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 7,
+       "l": 1,
+       "t": 0,
+       "pf": 72,
+       "pa": 24,
+       "streak": "W6"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 6,
+       "l": 1,
+       "t": 1,
+       "pf": 57,
+       "pa": 44,
+       "streak": "W1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 6,
+       "l": 1,
+       "t": 1,
+       "pf": 51,
+       "pa": 46,
+       "streak": "W2"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 4,
+       "l": 3,
+       "t": 1,
+       "pf": 47,
+       "pa": 51,
+       "streak": "L1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 4,
+       "l": 4,
+       "t": 0,
+       "pf": 51,
+       "pa": 43,
+       "streak": "L4"
+      },
+      {
+       "rank": 6,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 3,
+       "l": 4,
+       "t": 1,
+       "pf": 44,
+       "pa": 51,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 6,
+       "mgr": "Tom",
+       "w": 2,
+       "l": 4,
+       "t": 2,
+       "pf": 44,
+       "pa": 55,
+       "streak": "L1"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Will",
+       "w": 2,
+       "l": 5,
+       "t": 1,
+       "pf": 42,
+       "pa": 52,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 1,
+       "l": 6,
+       "t": 1,
+       "pf": 36,
+       "pa": 63,
+       "streak": "W1"
+      },
+      {
+       "rank": 10,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 1,
+       "l": 7,
+       "t": 0,
+       "pf": 40,
+       "pa": 55,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 6,
+       "mgrs": [
+        "Vin"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 4,
+       "mgrs": [
+        "Tim"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tim"
+      ],
+      [
+       "Jefe",
+       "Ronnie"
+      ],
+      [
+       "Nick",
+       "Vin"
+      ],
+      [
+       "Steve",
+       "Tara"
+      ],
+      [
+       "Tom",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 9,
+     "recap": [
+      "Vin wins the most categories this week with 14, beating Nick 14-0.",
+      "Photo finish: Steve edges Tara 7 to 6. Blowout of the week (brother vs. brother): Vin over Nick by 14 categories.",
+      "Vin is rolling with 7 straight wins. Tim has dropped 5 in a row.",
+      "Vin leads the way at 8-1."
+     ],
+     "matchups": [
+      {
+       "a": "Nick",
+       "ap": 0,
+       "b": "Vin",
+       "bp": 14
+      },
+      {
+       "a": "Jefe",
+       "ap": 3,
+       "b": "Ronnie",
+       "bp": 11
+      },
+      {
+       "a": "Tom",
+       "ap": 1,
+       "b": "Will",
+       "bp": 11
+      },
+      {
+       "a": "Danny",
+       "ap": 10,
+       "b": "Tim",
+       "bp": 2
+      },
+      {
+       "a": "Steve",
+       "ap": 7,
+       "b": "Tara",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 8,
+       "l": 1,
+       "t": 0,
+       "pf": 86,
+       "pa": 24,
+       "streak": "W7"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 7,
+       "l": 1,
+       "t": 1,
+       "pf": 67,
+       "pa": 46,
+       "streak": "W2"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 7,
+       "l": 1,
+       "t": 1,
+       "pf": 58,
+       "pa": 52,
+       "streak": "W3"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 5,
+       "l": 3,
+       "t": 1,
+       "pf": 58,
+       "pa": 54,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 4,
+       "l": 5,
+       "t": 0,
+       "pf": 53,
+       "pa": 53,
+       "streak": "L5"
+      },
+      {
+       "rank": 6,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 3,
+       "l": 5,
+       "t": 1,
+       "pf": 53,
+       "pa": 53,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 6,
+       "mgr": "Tara",
+       "w": 3,
+       "l": 5,
+       "t": 1,
+       "pf": 50,
+       "pa": 58,
+       "streak": "L1"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Tom",
+       "w": 2,
+       "l": 5,
+       "t": 2,
+       "pf": 45,
+       "pa": 66,
+       "streak": "L2"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 1,
+       "l": 7,
+       "t": 1,
+       "pf": 39,
+       "pa": 74,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 1,
+       "l": 8,
+       "t": 0,
+       "pf": 40,
+       "pa": 69,
+       "streak": "L3"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 7,
+       "mgrs": [
+        "Vin"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Steve"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 5,
+       "mgrs": [
+        "Tim"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Nick"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Vin"
+      ],
+      [
+       "Jefe",
+       "Tim"
+      ],
+      [
+       "Nick",
+       "Steve"
+      ],
+      [
+       "Ronnie",
+       "Tom"
+      ],
+      [
+       "Tara",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 10,
+     "recap": [
+      "Tara wins the most categories this week with 10, beating Will 10-3.",
+      "Photo finish: Vin edges Danny 7 to 6. Blowout of the week: Tom over Ronnie by 8 categories. Upset alert: Nick, 10th coming in, knocks off Steve (3rd).",
+      "Vin is rolling with 8 straight wins. Tim snaps a 5-game skid.",
+      "Vin leads the way at 9-1. Jefe drops to 10th."
+     ],
+     "matchups": [
+      {
+       "a": "Ronnie",
+       "ap": 2,
+       "b": "Tom",
+       "bp": 10
+      },
+      {
+       "a": "Tara",
+       "ap": 10,
+       "b": "Will",
+       "bp": 3
+      },
+      {
+       "a": "Danny",
+       "ap": 6,
+       "b": "Vin",
+       "bp": 7
+      },
+      {
+       "a": "Jefe",
+       "ap": 5,
+       "b": "Tim",
+       "bp": 7
+      },
+      {
+       "a": "Nick",
+       "ap": 7,
+       "b": "Steve",
+       "bp": 4
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 9,
+       "l": 1,
+       "t": 0,
+       "pf": 93,
+       "pa": 30,
+       "streak": "W8"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 7,
+       "l": 2,
+       "t": 1,
+       "pf": 73,
+       "pa": 53,
+       "streak": "L1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 7,
+       "l": 2,
+       "t": 1,
+       "pf": 62,
+       "pa": 59,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 5,
+       "l": 4,
+       "t": 1,
+       "pf": 60,
+       "pa": 64,
+       "streak": "L1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 5,
+       "l": 5,
+       "t": 0,
+       "pf": 60,
+       "pa": 58,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 4,
+       "l": 5,
+       "t": 1,
+       "pf": 60,
+       "pa": 61,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 8,
+       "mgr": "Tom",
+       "w": 3,
+       "l": 5,
+       "t": 2,
+       "pf": 55,
+       "pa": 68,
+       "streak": "W1"
+      },
+      {
+       "rank": 8,
+       "prev": 6,
+       "mgr": "Will",
+       "w": 3,
+       "l": 6,
+       "t": 1,
+       "pf": 56,
+       "pa": 63,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 2,
+       "l": 8,
+       "t": 0,
+       "pf": 47,
+       "pa": 73,
+       "streak": "W1"
+      },
+      {
+       "rank": 10,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 1,
+       "l": 8,
+       "t": 1,
+       "pf": 44,
+       "pa": 81,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 8,
+       "mgrs": [
+        "Vin"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Jefe"
+      ],
+      [
+       "Nick",
+       "Will"
+      ],
+      [
+       "Ronnie",
+       "Tara"
+      ],
+      [
+       "Steve",
+       "Vin"
+      ],
+      [
+       "Tim",
+       "Tom"
+      ]
+     ]
+    },
+    {
+     "week": 11,
+     "recap": [
+      "Will wins the most categories this week with 8, beating Nick 8-4.",
+      "Photo finish (brother vs. brother): Tom edges Tim 7 to 6. Blowout of the week: Will over Nick by 4 categories.",
+      "Vin's 8-game win streak is over. Jefe has dropped 3 in a row.",
+      "Halfway home: Vin leads at 9-2, Danny is right behind at 8-2-1, and Jefe has work to do in last place."
+     ],
+     "matchups": [
+      {
+       "a": "Nick",
+       "ap": 4,
+       "b": "Will",
+       "bp": 8
+      },
+      {
+       "a": "Danny",
+       "ap": 7,
+       "b": "Jefe",
+       "bp": 5
+      },
+      {
+       "a": "Ronnie",
+       "ap": 7,
+       "b": "Tara",
+       "bp": 4
+      },
+      {
+       "a": "Tim",
+       "ap": 6,
+       "b": "Tom",
+       "bp": 7
+      },
+      {
+       "a": "Steve",
+       "ap": 6,
+       "b": "Vin",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 9,
+       "l": 2,
+       "t": 0,
+       "pf": 98,
+       "pa": 36,
+       "streak": "L1"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 8,
+       "l": 2,
+       "t": 1,
+       "pf": 80,
+       "pa": 58,
+       "streak": "W1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 8,
+       "l": 2,
+       "t": 1,
+       "pf": 68,
+       "pa": 64,
+       "streak": "W1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 6,
+       "l": 4,
+       "t": 1,
+       "pf": 67,
+       "pa": 68,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 5,
+       "l": 6,
+       "t": 0,
+       "pf": 66,
+       "pa": 65,
+       "streak": "L1"
+      },
+      {
+       "rank": 6,
+       "prev": 7,
+       "mgr": "Tom",
+       "w": 4,
+       "l": 5,
+       "t": 2,
+       "pf": 62,
+       "pa": 74,
+       "streak": "W2"
+      },
+      {
+       "rank": 7,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 4,
+       "l": 6,
+       "t": 1,
+       "pf": 64,
+       "pa": 67,
+       "streak": "W1"
+      },
+      {
+       "rank": 8,
+       "prev": 6,
+       "mgr": "Tara",
+       "w": 4,
+       "l": 6,
+       "t": 1,
+       "pf": 64,
+       "pa": 68,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 2,
+       "l": 9,
+       "t": 0,
+       "pf": 51,
+       "pa": 81,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 1,
+       "l": 9,
+       "t": 1,
+       "pf": 49,
+       "pa": 88,
+       "streak": "L3"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Jefe"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tom"
+      ],
+      [
+       "Jefe",
+       "Vin"
+      ],
+      [
+       "Nick",
+       "Ronnie"
+      ],
+      [
+       "Steve",
+       "Will"
+      ],
+      [
+       "Tara",
+       "Tim"
+      ]
+     ]
+    },
+    {
+     "week": 12,
+     "recap": [
+      "Steve wins the most categories this week with 9, beating Will 9-3.",
+      "Photo finish: Jefe edges Vin 6 to 5. Blowout of the week: Steve over Will by 6 categories. Upset alert: Jefe, 10th coming in, knocks off Vin (1st).",
+      "Tom is rolling with 3 straight wins.",
+      "Steve takes over 1st at 9-2-1."
+     ],
+     "matchups": [
+      {
+       "a": "Steve",
+       "ap": 9,
+       "b": "Will",
+       "bp": 3
+      },
+      {
+       "a": "Danny",
+       "ap": 4,
+       "b": "Tom",
+       "bp": 8
+      },
+      {
+       "a": "Nick",
+       "ap": 8,
+       "b": "Ronnie",
+       "bp": 4
+      },
+      {
+       "a": "Tara",
+       "ap": 5,
+       "b": "Tim",
+       "bp": 7
+      },
+      {
+       "a": "Jefe",
+       "ap": 6,
+       "b": "Vin",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 3,
+       "mgr": "Steve",
+       "w": 9,
+       "l": 2,
+       "t": 1,
+       "pf": 77,
+       "pa": 67,
+       "streak": "W2"
+      },
+      {
+       "rank": 2,
+       "prev": 1,
+       "mgr": "Vin",
+       "w": 9,
+       "l": 3,
+       "t": 0,
+       "pf": 103,
+       "pa": 42,
+       "streak": "L2"
+      },
+      {
+       "rank": 3,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 8,
+       "l": 3,
+       "t": 1,
+       "pf": 84,
+       "pa": 66,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 6,
+       "l": 5,
+       "t": 1,
+       "pf": 71,
+       "pa": 76,
+       "streak": "L1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 6,
+       "l": 6,
+       "t": 0,
+       "pf": 73,
+       "pa": 70,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Tom",
+       "w": 5,
+       "l": 5,
+       "t": 2,
+       "pf": 70,
+       "pa": 78,
+       "streak": "W3"
+      },
+      {
+       "rank": 7,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 4,
+       "l": 7,
+       "t": 1,
+       "pf": 69,
+       "pa": 75,
+       "streak": "L2"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Will",
+       "w": 4,
+       "l": 7,
+       "t": 1,
+       "pf": 67,
+       "pa": 76,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 3,
+       "l": 9,
+       "t": 0,
+       "pf": 59,
+       "pa": 85,
+       "streak": "W1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 2,
+       "l": 9,
+       "t": 1,
+       "pf": 55,
+       "pa": 93,
+       "streak": "W1"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Tom"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tara"
+      ],
+      [
+       "Jefe",
+       "Tom"
+      ],
+      [
+       "Nick",
+       "Tim"
+      ],
+      [
+       "Ronnie",
+       "Steve"
+      ],
+      [
+       "Vin",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 13,
+     "recap": [
+      "Vin wins the most categories this week with 11, beating Will 11-2.",
+      "Closest game: Tom edges Jefe 9 to 3. Blowout of the week: Vin over Will by 9 categories.",
+      "Tom is rolling with 4 straight wins. Tara has dropped 3 in a row.",
+      "Steve leads the way at 10-2-1."
+     ],
+     "matchups": [
+      {
+       "a": "Vin",
+       "ap": 11,
+       "b": "Will",
+       "bp": 2
+      },
+      {
+       "a": "Jefe",
+       "ap": 3,
+       "b": "Tom",
+       "bp": 9
+      },
+      {
+       "a": "Ronnie",
+       "ap": 3,
+       "b": "Steve",
+       "bp": 9
+      },
+      {
+       "a": "Danny",
+       "ap": 8,
+       "b": "Tara",
+       "bp": 2
+      },
+      {
+       "a": "Nick",
+       "ap": 5,
+       "b": "Tim",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 10,
+       "l": 2,
+       "t": 1,
+       "pf": 86,
+       "pa": 70,
+       "streak": "W3"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Vin",
+       "w": 10,
+       "l": 3,
+       "t": 0,
+       "pf": 114,
+       "pa": 44,
+       "streak": "W1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Danny",
+       "w": 9,
+       "l": 3,
+       "t": 1,
+       "pf": 92,
+       "pa": 68,
+       "streak": "W1"
+      },
+      {
+       "rank": 4,
+       "prev": 6,
+       "mgr": "Tom",
+       "w": 6,
+       "l": 5,
+       "t": 2,
+       "pf": 79,
+       "pa": 81,
+       "streak": "W4"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 6,
+       "l": 6,
+       "t": 1,
+       "pf": 78,
+       "pa": 75,
+       "streak": "T1"
+      },
+      {
+       "rank": 6,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 6,
+       "l": 6,
+       "t": 1,
+       "pf": 74,
+       "pa": 85,
+       "streak": "L2"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 4,
+       "l": 8,
+       "t": 1,
+       "pf": 71,
+       "pa": 83,
+       "streak": "L3"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 4,
+       "l": 8,
+       "t": 1,
+       "pf": 69,
+       "pa": 87,
+       "streak": "L2"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 3,
+       "l": 9,
+       "t": 1,
+       "pf": 64,
+       "pa": 90,
+       "streak": "T1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 2,
+       "l": 10,
+       "t": 1,
+       "pf": 58,
+       "pa": 102,
+       "streak": "L1"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Tom"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Steve"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Tara"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Nick"
+      ],
+      [
+       "Jefe",
+       "Tara"
+      ],
+      [
+       "Ronnie",
+       "Will"
+      ],
+      [
+       "Steve",
+       "Tim"
+      ],
+      [
+       "Tom",
+       "Vin"
+      ]
+     ]
+    },
+    {
+     "week": 14,
+     "recap": [
+      "Danny wins the most categories this week with 11, beating Nick 11-2.",
+      "Photo finish: Tara edges Jefe 7 to 6. Blowout of the week: Danny over Nick by 9 categories.",
+      "Tom is rolling with 5 straight wins. Will has dropped 3 in a row.",
+      "Danny takes over 1st at 10-3-1."
+     ],
+     "matchups": [
+      {
+       "a": "Danny",
+       "ap": 11,
+       "b": "Nick",
+       "bp": 2
+      },
+      {
+       "a": "Ronnie",
+       "ap": 9,
+       "b": "Will",
+       "bp": 2
+      },
+      {
+       "a": "Jefe",
+       "ap": 6,
+       "b": "Tara",
+       "bp": 7
+      },
+      {
+       "a": "Tom",
+       "ap": 7,
+       "b": "Vin",
+       "bp": 6
+      },
+      {
+       "a": "Steve",
+       "ap": 5,
+       "b": "Tim",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 3,
+       "mgr": "Danny",
+       "w": 10,
+       "l": 3,
+       "t": 1,
+       "pf": 103,
+       "pa": 70,
+       "streak": "W2"
+      },
+      {
+       "rank": 2,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 10,
+       "l": 3,
+       "t": 1,
+       "pf": 91,
+       "pa": 76,
+       "streak": "L1"
+      },
+      {
+       "rank": 3,
+       "prev": 2,
+       "mgr": "Vin",
+       "w": 10,
+       "l": 4,
+       "t": 0,
+       "pf": 120,
+       "pa": 51,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Tom",
+       "w": 7,
+       "l": 5,
+       "t": 2,
+       "pf": 86,
+       "pa": 87,
+       "streak": "W5"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 7,
+       "l": 6,
+       "t": 1,
+       "pf": 84,
+       "pa": 80,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Ronnie",
+       "w": 7,
+       "l": 6,
+       "t": 1,
+       "pf": 83,
+       "pa": 87,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 5,
+       "l": 8,
+       "t": 1,
+       "pf": 78,
+       "pa": 89,
+       "streak": "W1"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 4,
+       "l": 9,
+       "t": 1,
+       "pf": 71,
+       "pa": 96,
+       "streak": "L3"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 3,
+       "l": 10,
+       "t": 1,
+       "pf": 66,
+       "pa": 101,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 2,
+       "l": 11,
+       "t": 1,
+       "pf": 64,
+       "pa": 109,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 5,
+       "mgrs": [
+        "Tom"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Will"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Steve"
+      ],
+      [
+       "Jefe",
+       "Nick"
+      ],
+      [
+       "Ronnie",
+       "Vin"
+      ],
+      [
+       "Tara",
+       "Tom"
+      ],
+      [
+       "Tim",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 15,
+     "recap": [
+      "Jefe wins the most categories this week with 9, beating Nick 9-5.",
+      "Photo finish: Tara edges Tom 6 to 5. Blowout of the week: Jefe over Nick by 4 categories.",
+      "Tom's 5-game win streak is over.",
+      "Steve takes over 1st at 11-3-1."
+     ],
+     "matchups": [
+      {
+       "a": "Jefe",
+       "ap": 9,
+       "b": "Nick",
+       "bp": 5
+      },
+      {
+       "a": "Danny",
+       "ap": 5,
+       "b": "Steve",
+       "bp": 8
+      },
+      {
+       "a": "Ronnie",
+       "ap": 7,
+       "b": "Vin",
+       "bp": 5
+      },
+      {
+       "a": "Tara",
+       "ap": 6,
+       "b": "Tom",
+       "bp": 5
+      },
+      {
+       "a": "Tim",
+       "ap": 5,
+       "b": "Will",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 2,
+       "mgr": "Steve",
+       "w": 11,
+       "l": 3,
+       "t": 1,
+       "pf": 99,
+       "pa": 81,
+       "streak": "W1"
+      },
+      {
+       "rank": 2,
+       "prev": 1,
+       "mgr": "Danny",
+       "w": 10,
+       "l": 4,
+       "t": 1,
+       "pf": 108,
+       "pa": 78,
+       "streak": "L1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 10,
+       "l": 5,
+       "t": 0,
+       "pf": 125,
+       "pa": 58,
+       "streak": "L2"
+      },
+      {
+       "rank": 4,
+       "prev": 6,
+       "mgr": "Ronnie",
+       "w": 8,
+       "l": 6,
+       "t": 1,
+       "pf": 90,
+       "pa": 92,
+       "streak": "W2"
+      },
+      {
+       "rank": 5,
+       "prev": 4,
+       "mgr": "Tom",
+       "w": 7,
+       "l": 6,
+       "t": 2,
+       "pf": 91,
+       "pa": 93,
+       "streak": "L1"
+      },
+      {
+       "rank": 6,
+       "prev": 5,
+       "mgr": "Tim",
+       "w": 7,
+       "l": 7,
+       "t": 1,
+       "pf": 89,
+       "pa": 86,
+       "streak": "L1"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 6,
+       "l": 8,
+       "t": 1,
+       "pf": 84,
+       "pa": 94,
+       "streak": "W2"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 5,
+       "l": 9,
+       "t": 1,
+       "pf": 77,
+       "pa": 101,
+       "streak": "W1"
+      },
+      {
+       "rank": 9,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 11,
+       "t": 1,
+       "pf": 73,
+       "pa": 114,
+       "streak": "W1"
+      },
+      {
+       "rank": 10,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 3,
+       "l": 11,
+       "t": 1,
+       "pf": 71,
+       "pa": 110,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Will"
+      ],
+      [
+       "Jefe",
+       "Steve"
+      ],
+      [
+       "Nick",
+       "Tom"
+      ],
+      [
+       "Ronnie",
+       "Tim"
+      ],
+      [
+       "Tara",
+       "Vin"
+      ]
+     ]
+    },
+    {
+     "week": 16,
+     "recap": [
+      "Ronnie wins the most categories this week with 11, beating Tim 11-1.",
+      "Photo finish: Tom edges Nick 6 to 5. Blowout of the week: Ronnie over Tim by 10 categories.",
+      "Ronnie is rolling with 3 straight wins. Nick has dropped 3 in a row.",
+      "Steve leads the way at 12-3-1. Jefe drops to 10th."
+     ],
+     "matchups": [
+      {
+       "a": "Ronnie",
+       "ap": 11,
+       "b": "Tim",
+       "bp": 1
+      },
+      {
+       "a": "Tara",
+       "ap": 2,
+       "b": "Vin",
+       "bp": 11
+      },
+      {
+       "a": "Danny",
+       "ap": 9,
+       "b": "Will",
+       "bp": 4
+      },
+      {
+       "a": "Jefe",
+       "ap": 3,
+       "b": "Steve",
+       "bp": 9
+      },
+      {
+       "a": "Nick",
+       "ap": 5,
+       "b": "Tom",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 12,
+       "l": 3,
+       "t": 1,
+       "pf": 108,
+       "pa": 84,
+       "streak": "W2"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 11,
+       "l": 4,
+       "t": 1,
+       "pf": 117,
+       "pa": 82,
+       "streak": "W1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 11,
+       "l": 5,
+       "t": 0,
+       "pf": 136,
+       "pa": 60,
+       "streak": "W1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 9,
+       "l": 6,
+       "t": 1,
+       "pf": 101,
+       "pa": 93,
+       "streak": "W3"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 8,
+       "l": 6,
+       "t": 2,
+       "pf": 97,
+       "pa": 98,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Tim",
+       "w": 7,
+       "l": 8,
+       "t": 1,
+       "pf": 90,
+       "pa": 97,
+       "streak": "L2"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 6,
+       "l": 9,
+       "t": 1,
+       "pf": 86,
+       "pa": 105,
+       "streak": "L1"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 5,
+       "l": 10,
+       "t": 1,
+       "pf": 81,
+       "pa": 110,
+       "streak": "L1"
+      },
+      {
+       "rank": 9,
+       "prev": 10,
+       "mgr": "Nick",
+       "w": 3,
+       "l": 12,
+       "t": 1,
+       "pf": 76,
+       "pa": 116,
+       "streak": "L3"
+      },
+      {
+       "rank": 10,
+       "prev": 9,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 12,
+       "t": 1,
+       "pf": 76,
+       "pa": 123,
+       "streak": "L1"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Ronnie"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Nick"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Ronnie"
+      ],
+      [
+       "Jefe",
+       "Will"
+      ],
+      [
+       "Nick",
+       "Tara"
+      ],
+      [
+       "Steve",
+       "Tom"
+      ],
+      [
+       "Tim",
+       "Vin"
+      ]
+     ]
+    },
+    {
+     "week": 17,
+     "recap": [
+      "Steve wins the most categories this week with 11, beating Tom 11-1.",
+      "Photo finish: Danny edges Ronnie 7 to 6. Blowout of the week: Steve over Tom by 10 categories.",
+      "Steve is rolling with 3 straight wins. Tim has dropped 3 in a row.",
+      "Steve leads the way at 13-3-1."
+     ],
+     "matchups": [
+      {
+       "a": "Steve",
+       "ap": 11,
+       "b": "Tom",
+       "bp": 1
+      },
+      {
+       "a": "Tim",
+       "ap": 2,
+       "b": "Vin",
+       "bp": 10
+      },
+      {
+       "a": "Nick",
+       "ap": 8,
+       "b": "Tara",
+       "bp": 5
+      },
+      {
+       "a": "Danny",
+       "ap": 7,
+       "b": "Ronnie",
+       "bp": 6
+      },
+      {
+       "a": "Jefe",
+       "ap": 6,
+       "b": "Will",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 13,
+       "l": 3,
+       "t": 1,
+       "pf": 119,
+       "pa": 85,
+       "streak": "W3"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 12,
+       "l": 4,
+       "t": 1,
+       "pf": 124,
+       "pa": 88,
+       "streak": "W2"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 12,
+       "l": 5,
+       "t": 0,
+       "pf": 146,
+       "pa": 62,
+       "streak": "W2"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 9,
+       "l": 7,
+       "t": 1,
+       "pf": 107,
+       "pa": 100,
+       "streak": "L1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 8,
+       "l": 7,
+       "t": 2,
+       "pf": 98,
+       "pa": 109,
+       "streak": "L1"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Tim",
+       "w": 7,
+       "l": 9,
+       "t": 1,
+       "pf": 92,
+       "pa": 107,
+       "streak": "L3"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 6,
+       "l": 10,
+       "t": 1,
+       "pf": 91,
+       "pa": 113,
+       "streak": "L2"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 5,
+       "l": 10,
+       "t": 2,
+       "pf": 87,
+       "pa": 116,
+       "streak": "T1"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 4,
+       "l": 12,
+       "t": 1,
+       "pf": 84,
+       "pa": 121,
+       "streak": "W1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 12,
+       "t": 2,
+       "pf": 82,
+       "pa": 129,
+       "streak": "T1"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Steve"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Tim"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tim"
+      ],
+      [
+       "Jefe",
+       "Ronnie"
+      ],
+      [
+       "Nick",
+       "Vin"
+      ],
+      [
+       "Steve",
+       "Tara"
+      ],
+      [
+       "Tom",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 18,
+     "recap": [
+      "Danny wins the most categories this week with 12, beating Tim 12-0.",
+      "Closest game (brother vs. brother): Will edges Tom 6 to 4. Blowout of the week (brother vs. brother): Danny over Tim by 12 categories.",
+      "Steve is rolling with 4 straight wins. Tim has dropped 4 in a row.",
+      "Steve leads the way at 14-3-1."
+     ],
+     "matchups": [
+      {
+       "a": "Danny",
+       "ap": 12,
+       "b": "Tim",
+       "bp": 0
+      },
+      {
+       "a": "Nick",
+       "ap": 3,
+       "b": "Vin",
+       "bp": 10
+      },
+      {
+       "a": "Steve",
+       "ap": 9,
+       "b": "Tara",
+       "bp": 4
+      },
+      {
+       "a": "Jefe",
+       "ap": 4,
+       "b": "Ronnie",
+       "bp": 8
+      },
+      {
+       "a": "Tom",
+       "ap": 4,
+       "b": "Will",
+       "bp": 6
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 14,
+       "l": 3,
+       "t": 1,
+       "pf": 128,
+       "pa": 89,
+       "streak": "W4"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 13,
+       "l": 4,
+       "t": 1,
+       "pf": 136,
+       "pa": 88,
+       "streak": "W3"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 13,
+       "l": 5,
+       "t": 0,
+       "pf": 156,
+       "pa": 65,
+       "streak": "W3"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 10,
+       "l": 7,
+       "t": 1,
+       "pf": 115,
+       "pa": 104,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 8,
+       "l": 8,
+       "t": 2,
+       "pf": 102,
+       "pa": 115,
+       "streak": "L2"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Tim",
+       "w": 7,
+       "l": 10,
+       "t": 1,
+       "pf": 92,
+       "pa": 119,
+       "streak": "L4"
+      },
+      {
+       "rank": 7,
+       "prev": 8,
+       "mgr": "Will",
+       "w": 6,
+       "l": 10,
+       "t": 2,
+       "pf": 93,
+       "pa": 120,
+       "streak": "W1"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 6,
+       "l": 11,
+       "t": 1,
+       "pf": 95,
+       "pa": 122,
+       "streak": "L3"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 4,
+       "l": 13,
+       "t": 1,
+       "pf": 87,
+       "pa": 131,
+       "streak": "L1"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 13,
+       "t": 2,
+       "pf": 86,
+       "pa": 137,
+       "streak": "L1"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Steve"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Danny",
+        "Vin"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 4,
+       "mgrs": [
+        "Tim"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Tara"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Vin"
+      ],
+      [
+       "Jefe",
+       "Tim"
+      ],
+      [
+       "Nick",
+       "Steve"
+      ],
+      [
+       "Ronnie",
+       "Tom"
+      ],
+      [
+       "Tara",
+       "Will"
+      ]
+     ]
+    },
+    {
+     "week": 19,
+     "recap": [
+      "Tim wins the most categories this week with 12, beating Jefe 12-1.",
+      "Closest game: Will edges Tara 8 to 5. Blowout of the week: Tim over Jefe by 11 categories.",
+      "Steve is rolling with 5 straight wins. Tim snaps a 4-game skid. Tara has dropped 4 in a row.",
+      "Steve leads the way at 15-3-1."
+     ],
+     "matchups": [
+      {
+       "a": "Jefe",
+       "ap": 1,
+       "b": "Tim",
+       "bp": 12
+      },
+      {
+       "a": "Danny",
+       "ap": 9,
+       "b": "Vin",
+       "bp": 3
+      },
+      {
+       "a": "Nick",
+       "ap": 3,
+       "b": "Steve",
+       "bp": 9
+      },
+      {
+       "a": "Ronnie",
+       "ap": 9,
+       "b": "Tom",
+       "bp": 4
+      },
+      {
+       "a": "Tara",
+       "ap": 5,
+       "b": "Will",
+       "bp": 8
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 15,
+       "l": 3,
+       "t": 1,
+       "pf": 137,
+       "pa": 92,
+       "streak": "W5"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 14,
+       "l": 4,
+       "t": 1,
+       "pf": 145,
+       "pa": 91,
+       "streak": "W4"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 13,
+       "l": 6,
+       "t": 0,
+       "pf": 159,
+       "pa": 74,
+       "streak": "L1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 11,
+       "l": 7,
+       "t": 1,
+       "pf": 124,
+       "pa": 108,
+       "streak": "W2"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 8,
+       "l": 9,
+       "t": 2,
+       "pf": 106,
+       "pa": 124,
+       "streak": "L3"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Tim",
+       "w": 8,
+       "l": 10,
+       "t": 1,
+       "pf": 104,
+       "pa": 120,
+       "streak": "W1"
+      },
+      {
+       "rank": 7,
+       "prev": 7,
+       "mgr": "Will",
+       "w": 7,
+       "l": 10,
+       "t": 2,
+       "pf": 101,
+       "pa": 125,
+       "streak": "W2"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 6,
+       "l": 12,
+       "t": 1,
+       "pf": 100,
+       "pa": 130,
+       "streak": "L4"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 4,
+       "l": 14,
+       "t": 1,
+       "pf": 90,
+       "pa": 140,
+       "streak": "L2"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 14,
+       "t": 2,
+       "pf": 87,
+       "pa": 149,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 5,
+       "mgrs": [
+        "Steve"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 4,
+       "mgrs": [
+        "Tara"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Tom"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Jefe"
+      ],
+      [
+       "Nick",
+       "Will"
+      ],
+      [
+       "Ronnie",
+       "Tara"
+      ],
+      [
+       "Steve",
+       "Vin"
+      ],
+      [
+       "Tim",
+       "Tom"
+      ]
+     ]
+    },
+    {
+     "week": 20,
+     "recap": [
+      "Tom wins the most categories this week with 9, beating Tim 9-3.",
+      "Photo finish: Will edges Nick 7 to 6. Blowout of the week (brother vs. brother): Tom over Tim by 6 categories.",
+      "Steve is rolling with 6 straight wins. Tara snaps a 4-game skid. Jefe has dropped 3 in a row.",
+      "Steve leads the way at 16-3-1."
+     ],
+     "matchups": [
+      {
+       "a": "Tim",
+       "ap": 3,
+       "b": "Tom",
+       "bp": 9
+      },
+      {
+       "a": "Danny",
+       "ap": 7,
+       "b": "Jefe",
+       "bp": 5
+      },
+      {
+       "a": "Nick",
+       "ap": 6,
+       "b": "Will",
+       "bp": 7
+      },
+      {
+       "a": "Ronnie",
+       "ap": 4,
+       "b": "Tara",
+       "bp": 7
+      },
+      {
+       "a": "Steve",
+       "ap": 7,
+       "b": "Vin",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 16,
+       "l": 3,
+       "t": 1,
+       "pf": 144,
+       "pa": 97,
+       "streak": "W6"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 15,
+       "l": 4,
+       "t": 1,
+       "pf": 152,
+       "pa": 96,
+       "streak": "W5"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 13,
+       "l": 7,
+       "t": 0,
+       "pf": 164,
+       "pa": 81,
+       "streak": "L2"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 11,
+       "l": 8,
+       "t": 1,
+       "pf": 128,
+       "pa": 115,
+       "streak": "L1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 9,
+       "l": 9,
+       "t": 2,
+       "pf": 115,
+       "pa": 127,
+       "streak": "W1"
+      },
+      {
+       "rank": 6,
+       "prev": 7,
+       "mgr": "Will",
+       "w": 8,
+       "l": 10,
+       "t": 2,
+       "pf": 108,
+       "pa": 131,
+       "streak": "W3"
+      },
+      {
+       "rank": 7,
+       "prev": 6,
+       "mgr": "Tim",
+       "w": 8,
+       "l": 11,
+       "t": 1,
+       "pf": 107,
+       "pa": 129,
+       "streak": "L1"
+      },
+      {
+       "rank": 8,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 7,
+       "l": 12,
+       "t": 1,
+       "pf": 107,
+       "pa": 134,
+       "streak": "W1"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 4,
+       "l": 15,
+       "t": 1,
+       "pf": 96,
+       "pa": 147,
+       "streak": "L3"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 15,
+       "t": 2,
+       "pf": 92,
+       "pa": 156,
+       "streak": "L3"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 6,
+       "mgrs": [
+        "Steve"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 5,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 3,
+       "mgrs": [
+        "Will"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 3,
+       "mgrs": [
+        "Jefe",
+        "Nick"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [
+      [
+       "Danny",
+       "Tom"
+      ],
+      [
+       "Jefe",
+       "Vin"
+      ],
+      [
+       "Nick",
+       "Ronnie"
+      ],
+      [
+       "Steve",
+       "Will"
+      ],
+      [
+       "Tara",
+       "Tim"
+      ]
+     ]
+    },
+    {
+     "week": 21,
+     "recap": [
+      "Ronnie wins the most categories this week with 11, beating Nick 11-3.",
+      "Photo finish: Will edges Steve 7 to 6. Blowout of the week: Vin over Jefe by 10 categories. Upset alert: Will, 6th coming in, knocks off Steve (1st).",
+      "Danny is rolling with 6 straight wins. Steve's 6-game win streak is over. Jefe has dropped 4 in a row.",
+      "That wraps the regular season, with Danny on top at 16-4-1. The six-team playoff field is set: Danny (1), Steve (2), Vin (3), Ronnie (4), Tom (5), Will (6). Danny and Steve earn a first-round bye. Tara just misses out at 8-12-1."
+     ],
+     "matchups": [
+      {
+       "a": "Jefe",
+       "ap": 1,
+       "b": "Vin",
+       "bp": 11
+      },
+      {
+       "a": "Nick",
+       "ap": 3,
+       "b": "Ronnie",
+       "bp": 11
+      },
+      {
+       "a": "Danny",
+       "ap": 8,
+       "b": "Tom",
+       "bp": 4
+      },
+      {
+       "a": "Steve",
+       "ap": 6,
+       "b": "Will",
+       "bp": 7
+      },
+      {
+       "a": "Tara",
+       "ap": 7,
+       "b": "Tim",
+       "bp": 5
+      }
+     ],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 2,
+       "mgr": "Danny",
+       "w": 16,
+       "l": 4,
+       "t": 1,
+       "pf": 160,
+       "pa": 100,
+       "streak": "W6"
+      },
+      {
+       "rank": 2,
+       "prev": 1,
+       "mgr": "Steve",
+       "w": 16,
+       "l": 4,
+       "t": 1,
+       "pf": 150,
+       "pa": 104,
+       "streak": "L1"
+      },
+      {
+       "rank": 3,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 14,
+       "l": 7,
+       "t": 0,
+       "pf": 175,
+       "pa": 82,
+       "streak": "W1"
+      },
+      {
+       "rank": 4,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 12,
+       "l": 8,
+       "t": 1,
+       "pf": 139,
+       "pa": 118,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 9,
+       "l": 10,
+       "t": 2,
+       "pf": 119,
+       "pa": 135,
+       "streak": "L1"
+      },
+      {
+       "rank": 6,
+       "prev": 6,
+       "mgr": "Will",
+       "w": 9,
+       "l": 10,
+       "t": 2,
+       "pf": 115,
+       "pa": 137,
+       "streak": "W4"
+      },
+      {
+       "rank": 7,
+       "prev": 8,
+       "mgr": "Tara",
+       "w": 8,
+       "l": 12,
+       "t": 1,
+       "pf": 114,
+       "pa": 139,
+       "streak": "W2"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Tim",
+       "w": 8,
+       "l": 12,
+       "t": 1,
+       "pf": 112,
+       "pa": 136,
+       "streak": "L2"
+      },
+      {
+       "rank": 9,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 4,
+       "l": 16,
+       "t": 1,
+       "pf": 99,
+       "pa": 158,
+       "streak": "L4"
+      },
+      {
+       "rank": 10,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 16,
+       "t": 2,
+       "pf": 93,
+       "pa": 167,
+       "streak": "L4"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 6,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Will"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 4,
+       "mgrs": [
+        "Jefe",
+        "Nick"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": []
+    },
+    {
+     "week": 100,
+     "recap": [
+      "From the No. 4 seed, Ronnie wins the 2014-15 championship! Ronnie beat Will (6) in the quarterfinals, beat Danny (1) in the semifinals and beat Steve (2) in the final, 7 to 5.",
+      "Steve settles for 2nd, and Danny takes 3rd by beating Vin 7 to 4.",
+      "Danny won the regular season at 16-4-1 but fell to Ronnie in the semifinals.",
+      "At the other end, Tim finishes 10th. See you next season."
+     ],
+     "matchups": [],
+     "highScore": null,
+     "standings": [
+      {
+       "rank": 1,
+       "prev": 4,
+       "mgr": "Ronnie",
+       "w": 12,
+       "l": 8,
+       "t": 1,
+       "pf": 139,
+       "pa": 118,
+       "streak": "W1"
+      },
+      {
+       "rank": 2,
+       "prev": 2,
+       "mgr": "Steve",
+       "w": 16,
+       "l": 4,
+       "t": 1,
+       "pf": 150,
+       "pa": 104,
+       "streak": "L1"
+      },
+      {
+       "rank": 3,
+       "prev": 1,
+       "mgr": "Danny",
+       "w": 16,
+       "l": 4,
+       "t": 1,
+       "pf": 160,
+       "pa": 100,
+       "streak": "W6"
+      },
+      {
+       "rank": 4,
+       "prev": 3,
+       "mgr": "Vin",
+       "w": 14,
+       "l": 7,
+       "t": 0,
+       "pf": 175,
+       "pa": 82,
+       "streak": "W1"
+      },
+      {
+       "rank": 5,
+       "prev": 6,
+       "mgr": "Will",
+       "w": 9,
+       "l": 10,
+       "t": 2,
+       "pf": 115,
+       "pa": 137,
+       "streak": "W4"
+      },
+      {
+       "rank": 6,
+       "prev": 5,
+       "mgr": "Tom",
+       "w": 9,
+       "l": 10,
+       "t": 2,
+       "pf": 119,
+       "pa": 135,
+       "streak": "L1"
+      },
+      {
+       "rank": 7,
+       "prev": 9,
+       "mgr": "Nick",
+       "w": 4,
+       "l": 16,
+       "t": 1,
+       "pf": 99,
+       "pa": 158,
+       "streak": "L4"
+      },
+      {
+       "rank": 8,
+       "prev": 7,
+       "mgr": "Tara",
+       "w": 8,
+       "l": 12,
+       "t": 1,
+       "pf": 114,
+       "pa": 139,
+       "streak": "W2"
+      },
+      {
+       "rank": 9,
+       "prev": 10,
+       "mgr": "Jefe",
+       "w": 3,
+       "l": 16,
+       "t": 2,
+       "pf": 93,
+       "pa": 167,
+       "streak": "L4"
+      },
+      {
+       "rank": 10,
+       "prev": 8,
+       "mgr": "Tim",
+       "w": 8,
+       "l": 12,
+       "t": 1,
+       "pf": 112,
+       "pa": 136,
+       "streak": "L2"
+      }
+     ],
+     "streaks": [
+      {
+       "kind": "W",
+       "n": 6,
+       "mgrs": [
+        "Danny"
+       ]
+      },
+      {
+       "kind": "W",
+       "n": 4,
+       "mgrs": [
+        "Will"
+       ]
+      },
+      {
+       "kind": "L",
+       "n": 4,
+       "mgrs": [
+        "Jefe",
+        "Nick"
+       ]
+      }
+     ],
+     "highScoreTally": [],
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Will",
+        "ap": 6,
+        "bp": 5
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Tom",
+        "b": "Vin",
+        "ap": 1,
+        "bp": 10
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Ronnie",
+        "ap": 4,
+        "bp": 7
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Jefe",
+        "b": "Tara",
+        "ap": 0,
+        "bp": 13
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Tim",
+        "ap": 7,
+        "bp": 4
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Vin",
+        "ap": 7,
+        "bp": 5
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Tom",
+        "b": "Will",
+        "ap": 4,
+        "bp": 8
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Vin",
+        "ap": 7,
+        "bp": 4
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Jefe",
+        "b": "Tim",
+        "ap": 8,
+        "bp": 3
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Tara",
+        "ap": 10,
+        "bp": 3
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Steve",
+        "ap": 7,
+        "bp": 5
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
    "id": "2015-16",
    "label": "2015-16",
    "source": "sheet",

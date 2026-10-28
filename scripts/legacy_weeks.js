@@ -24,7 +24,10 @@ const fantrax = new Set(r.seasons.filter(s => s.source !== 'sheet').map(s => s.i
 const logos = (r.seasons.find(s => s.logos) || {}).logos || {};
 const BROTHERS = [['Will', 'Tom', 'Tim', 'Danny'], ['Nick', 'Vin']];
 const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th');
-const f1 = n => (Math.round(n * 10) / 10).toFixed(1);
+// Categories seasons (2014-15) score each week in categories won, so their numbers print as whole numbers
+let CAT = false;
+const f1 = n => CAT ? String(Math.round(n)) : (Math.round(n * 10) / 10).toFixed(1);
+const catSeasons = new Set();
 const rel = (a, b) => {
   if (BROTHERS.some(g => g.includes(a) && g.includes(b))) return 'brother vs. brother';
   if ([a, b].includes('Hallie') && [a, b].includes('Will')) return 'husband vs. wife';
@@ -60,7 +63,8 @@ const series = []; // [season, week, a, aPts, b, bPts], each game once
 const bySeason = {};
 for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
   if (Number(week) === 100) (allFinals[season] = allFinals[season] || {})[team] = Number(place);
-  if (fantrax.has(season) || scoring === 'Categories') continue;
+  if (fantrax.has(season)) continue;
+  if (scoring === 'Categories') catSeasons.add(season);
   const S = bySeason[season] = bySeason[season] || { rank: {}, games: {}, finals: {}, post: {} };
   const wk = Number(week);
   if (type === 'Playoffs' || type === 'Consolation') {
@@ -97,6 +101,7 @@ function welcome(id, mgrs) {
   if (!prev) parts.push('Twelve managers, one trophy, and a long winter ahead.');
   else if (prev === '2019-20') parts.push('Nobody lifted the trophy after the pandemic cut 2019-20 short, so the title is wide open.');
   else if (champOf(prev)) parts.push(`${champOf(prev)} comes in as the defending champion.`);
+  if (catSeasons.has(id)) parts.push(`This one is different: a ${words[mgrs.length] || mgrs.length}-team head-to-head categories league, so each week is scored in categories won. A 7-5 win means seven categories to five.`);
   if (id === '2020-21') parts.push('Hockey is back in January with a 56-game NHL schedule, so this one is a sprint.');
   if (prev === '2014-15') parts.push('After a year of categories scoring, the league is back to points and back to 12 teams.');
   if (ins.length === 1 && outs.length === 1) {
@@ -225,6 +230,7 @@ function newsAfter(y, lastEnd) {
 
 const seasonsOut = [];
 for (const [id, S] of Object.entries(bySeason)) {
+  CAT = catSeasons.has(id);
   const weeksNo = Object.keys(S.games).map(Number).sort((a, b) => a - b);
   const mgrs = Object.keys(S.games[weeksNo[0]]);
   const tot = Object.fromEntries(mgrs.map(m => [m, { w: 0, l: 0, t: 0, pf: 0, pa: 0, res: [] }]));
@@ -277,13 +283,14 @@ for (const [id, S] of Object.entries(bySeason)) {
     else if (kind === 'long' && wk > 1) context = 'A multi-week period this time, so the scores run high. ';
     else if (kind === 'short') context = 'A short week, so the scores run low. ';
     const hsG = G[hsMgr];
-    recap.push(context +
-      `${hsMgr} posts the week's high score with ${f1(top)}` + (hsG.p > hsG.q ? ` and beats ${hsG.opp} by ${f1(hsG.p - hsG.q)}.` : hsG.p < hsG.q ? ` and somehow still loses to ${hsG.opp}, who put up ${f1(hsG.q)}.` : `, and still only ties ${hsG.opp}.`));
+    recap.push(context + (CAT
+      ? `${hsMgr} wins the most categories this week with ${f1(top)}` + (hsG.p > hsG.q ? `, beating ${hsG.opp} ${f1(hsG.p)}-${f1(hsG.q)}.` : hsG.p < hsG.q ? ` and somehow still loses to ${hsG.opp}, who took ${f1(hsG.q)}.` : `, and still only ties ${hsG.opp}.`)
+      : `${hsMgr} posts the week's high score with ${f1(top)}` + (hsG.p > hsG.q ? ` and beats ${hsG.opp} by ${f1(hsG.p - hsG.q)}.` : hsG.p < hsG.q ? ` and somehow still loses to ${hsG.opp}, who put up ${f1(hsG.q)}.` : `, and still only ties ${hsG.opp}.`)));
     const decided = matchups.filter(x => x.ap !== x.bp).map(x => ({ w: x.ap > x.bp ? x.a : x.b, l: x.ap > x.bp ? x.b : x.a, wp: Math.max(x.ap, x.bp), lp: Math.min(x.ap, x.bp), d: Math.abs(x.ap - x.bp) }));
     const close = decided.slice().sort((a, b) => a.d - b.d)[0], blow = decided.slice().sort((a, b) => b.d - a.d)[0];
     const p2 = [];
-    if (close) p2.push((close.d < 5 ? 'Photo finish' : 'Closest game') + tagOf(close.w, close.l) + `: ${close.w} edges ${close.l} ${f1(close.wp)} to ${f1(close.lp)}.`);
-    if (blow && blow !== close) p2.push('Blowout of the week' + tagOf(blow.w, blow.l) + `: ${blow.w} over ${blow.l} by ${f1(blow.d)}.`);
+    if (close) p2.push((close.d < (CAT ? 2 : 5) ? 'Photo finish' : 'Closest game') + tagOf(close.w, close.l) + `: ${close.w} edges ${close.l} ${f1(close.wp)} to ${f1(close.lp)}.`);
+    if (blow && blow !== close) p2.push('Blowout of the week' + tagOf(blow.w, blow.l) + `: ${blow.w} over ${blow.l} by ${f1(blow.d)}${CAT ? ' categories' : ''}.`);
     if (wk > 1) {
       const up = decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 5).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l]))[0];
       if (up) p2.push(`Upset alert: ${up.w}, ${ord(prev[up.w])} coming in, knocks off ${up.l} (${ord(prev[up.l])}).`);
@@ -296,7 +303,7 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (hot) p3.push(`${hot.m} is rolling with ${hot.s.n} straight wins.`);
     if (snap) p3.push(snap.s.k === 'L' ? `${snap.m} snaps a ${snap.s.n}-game skid.` : `${snap.m}'s ${snap.s.n}-game win streak is over.`);
     if (cold && (!snap || cold.m !== snap.m)) p3.push(`${cold.m} has dropped ${cold.s.n} in a row.`);
-    const sn = seriesNote(decided, id, wk);
+    const sn = CAT ? '' : seriesNote(decided, id, wk);
     if (sn) p3.push(sn);
     if (p3.length) recap.push(p3.join(' '));
     const news = newsFor(id, wk, dw);
@@ -307,10 +314,10 @@ for (const [id, S] of Object.entries(bySeason)) {
     recap.push(lastWk ? (Object.keys(S.post).length ? playoffPicture(S, standings) : cancelledFinish(id, leader))
       : half ? `Halfway home: ${leader.mgr} leads at ${recStr(leader)}, ${standings[1].mgr} is right behind at ${recStr(standings[1])}, and ${bottom} has work to do in last place.`
       : leader.mgr !== prevLeader && wk > 1 ? `${leader.mgr} takes over 1st at ${leader.w}-${leader.l}${leader.t ? '-' + leader.t : ''}.`
-        : `${leader.mgr} leads the way at ${leader.w}-${leader.l}${leader.t ? '-' + leader.t : ''}.` + (bottom !== prevLast && wk > 1 ? ` ${bottom} drops to 12th.` : ''));
+        : `${leader.mgr} leads the way at ${leader.w}-${leader.l}${leader.t ? '-' + leader.t : ''}.` + (bottom !== prevLast && wk > 1 ? ` ${bottom} drops to ${ord(standings.length)}.` : ''));
     prevLeader = leader.mgr; prevLast = bottom;
 
-    weeks.push({ week: wk, start: dw ? dw[0] : undefined, end: dw ? dw[1] : undefined, days: dw ? days : undefined, recap: recap.filter(Boolean), matchups, highScore: { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally, next });
+    weeks.push({ week: wk, start: dw ? dw[0] : undefined, end: dw ? dw[1] : undefined, days: dw ? days : undefined, recap: recap.filter(Boolean), matchups, highScore: CAT ? null : { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally: CAT ? [] : highScoreTally, next });
   }
 
   // Final standings (week 100)
@@ -324,7 +331,7 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (late) recap.splice(recap.length - 1, 0, late);
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [], bracket: bracketGames(S) });
   }
-  seasonsOut.push({ id, label: id, source: 'sheet', teams: teamNames[id] || {}, logos, schedule, weeks });
+  seasonsOut.push({ id, label: id, source: 'sheet', scoring: CAT ? 'categories' : undefined, teams: teamNames[id] || {}, logos, schedule, weeks });
 }
 
 r.seasons = r.seasons.filter(s => s.source !== 'sheet').concat(seasonsOut).sort((a, b) => (a.id < b.id ? -1 : 1));
