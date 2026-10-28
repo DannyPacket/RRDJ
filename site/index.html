@@ -220,6 +220,7 @@ ul.plain.moves { gap: 0; }
   .step .block { margin: 0 -6px; }
 }
 
+.mh-div { grid-column: 1 / -1; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); font: 600 11px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 /* Export */
 .export-btn { margin-left: auto; font: 600 13px var(--mono); padding: 7px 12px; border-radius: 6px; border: 1px solid var(--ink); background: var(--ink); color: var(--board); cursor: pointer; }
 .export-btn:disabled { opacity: .6; cursor: progress; }
@@ -541,6 +542,28 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             h("span", null, "vs ", h("span", { class: "mgr" }, opp), x.highScore && x.highScore.mgr === m ? h("span", { class: "tag hs" }, "High score") : null),
             h("span", { class: "num" }, fmt(p) + "-" + fmt(q)));
         }));
+      // On the Final page, add the manager's playoff or consolation weeks (with byes and opponents' seeds) below a divider
+      if (w.week === 100 && w.bracket && w.bracket.games) {
+        const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
+        const seed = last ? Object.fromEntries(last.standings.map(r => [r.mgr, r.rank])) : {};
+        const mine = w.bracket.games.filter(g => g.a === m || g.b === m);
+        if (mine.length) {
+          const type = mine[0].type, wks = [...new Set(w.bracket.games.filter(g => g.type === type).map(g => g.w))].sort((a, b) => a - b);
+          const first = Math.min(...mine.map(g => g.w));
+          rows.push(h("div", { class: "mh-div" }, (type === "Playoffs" ? "Playoffs" : "Consolation") + " · seed " + (seed[m] || "–")));
+          wks.forEach(wk => {
+            const g = mine.find(x => x.w === wk);
+            if (!g) { if (wk < first) rows.push(h("div", { class: "mh-row" }, h("span", { class: "num muted" }, "Wk " + wk), h("span", { class: "mh-res muted" }, "–"), h("span", { class: "muted" }, "Bye"), h("span", null, ""))); return; }
+            const [p, q, opp] = g.a === m ? [g.ap, g.bp, g.b] : [g.bp, g.ap, g.a];
+            const res = p > q ? "W" : p < q ? "L" : "T";
+            rows.push(h("div", { class: "mh-row" },
+              h("span", { class: "num muted" }, "Wk " + wk),
+              h("span", { class: "mh-res " + (res === "W" ? "up" : res === "L" ? "down" : "muted") }, res),
+              h("span", null, "vs ", h("span", { class: "mgr" }, opp), h("span", { class: "muted" }, " (" + (seed[opp] || "–") + ")")),
+              h("span", { class: "num" }, fmt(p) + "-" + fmt(q))));
+          });
+        }
+      }
       return h("div", { class: "mh" }, rows.length ? rows : h("div", { class: "empty" }, "No games yet"));
     };
 
@@ -731,14 +754,14 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     }
     if (!finals[latest.id] && lastWeek && lastWeek.standings) {
       const lead = lastWeek.standings[0];
-      champCards.unshift(h("div", { class: "champ live" },
+      champCards.unshift(seasonLink(latest.id, h("div", { class: "champ live" },
         h("span", { class: "pos" }, latest.id + " · in progress"),
         h("span", { class: "champ-name" }, who(lead.mgr)),
         h("span", { class: "muted small" }, "1st after week " + lastWeek.week),
         h("dl", { class: "champ-dl" },
           h("dt", null, "Record"), h("dd", { class: "num" }, lead.w + "-" + lead.l + "-" + (lead.t || 0)),
           h("dt", null, "Going for"), h("dd", null, champs[seasons[seasons.length - 2]] && champs[seasons[seasons.length - 2]] === champs[seasons[seasons.length - 3]]
-            ? champs[seasons[seasons.length - 2]] + "'s three-peat" : "the title"))));
+            ? champs[seasons[seasons.length - 2]] + "'s three-peat" : "the title")))));
     }
 
     // 2. All-time standings (sortable)
@@ -851,9 +874,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("thead", null, h("tr", null, h("th", null, "#"), scols.map(([key, label, r]) => h("th", { class: r ? "r" : null, "aria-sort": k === key ? (sSort.dir < 0 ? "descending" : "ascending") : null },
           h("button", { type: "button", class: "sort", onclick: () => { sSort = { key, dir: k === key ? -sSort.dir : (["m", "reg", "post", "pa"].includes(key) ? 1 : -1) }; drawSeason(); } },
             label, k === key ? (sSort.dir < 0 ? " ▾" : " ▴") : ""))))),
-        h("tbody", null, rows.map((r, i) => h("tr", { class: catY ? "catrow" : null },
+        h("tbody", null, rows.map((r, i) => h("tr", null,
           h("td", { class: "num rk" }, i + 1),
-          h("td", null, who(r.m)),
+          h("td", null, whoLink(r.m)),
           h("td", { class: "r num" }, rec3(r)),
           h("td", { class: "r num" }, r.pct.toFixed(3).replace(/^0/, "")),
           h("td", { class: "r num" }, dash(r.pf, fmt)),
@@ -875,7 +898,6 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         card("Longest losing streak", pickN(stY.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.m, sub: "wk " + x.from + "-" + x.to + (x.active ? " · active" : "") })))];
       const so = DATA.seasons.find(x => x.id === y), sw = so && [...so.weeks].filter(x => x.standings && x.standings.length).sort((a, b) => b.week - a.week)[0];
       seasonBody.replaceChildren(...[
-        catY ? h("div", { class: "cat-note" }, y + " was a categories season, scored in categories won each week. It counts here for W-L-T, win % and places, but not for points or records.") : null,
         h("div", { class: "tablewrap" }, table),
         h("div", { class: "subhead" }, y + " single-week records"),
         h("div", { class: "recs" }, catY ? catCards(y) : cards),
@@ -884,7 +906,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     };
     // 2014-15: weekly records in categories won, plus season category leaders from Yahoo's team stats
     function catCards(y) {
-      const xs = csides.filter(x => x.s === y), wn = xs.filter(x => res(x) === "W");
+      const xs = csides.filter(x => x.s === y);
       const st = [];
       [...new Set(xs.map(x => x.m))].forEach(m => {
         let run = null;
@@ -894,12 +916,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         });
         if (run && run.n >= 2) st.push(run);
       });
-      const cats = n => n + (n === 1 ? " cat" : " cats");
       return [
         card("Most categories in a week", pickN(xs, (a, b) => b.p - a.p || a.q - b.q).map(x => ({ v: cfmt(x.p), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " vs " + x.opp + " · wk " + x.wk }))),
         card("Fewest categories in a week", pickN(xs, (a, b) => a.p - b.p || b.q - a.q).map(x => ({ v: cfmt(x.p), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " vs " + x.opp + " · wk " + x.wk }))),
-        card("Biggest blowout", pickN(wn, (a, b) => (b.p - b.q) - (a.p - a.q)).map(x => ({ v: "+" + cats(x.p - x.q), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " over " + x.opp + " · wk " + x.wk }))),
-        card("Closest win", pickN(wn, (a, b) => (a.p - a.q) - (b.p - b.q) || b.p - a.p).map(x => ({ v: "+" + cats(x.p - x.q), m: x.m, sub: cfmt(x.p) + "-" + cfmt(x.q) + " over " + x.opp + " · wk " + x.wk }))),
         card("Longest win streak", pickN(st.filter(x => x.k === "W"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " W", m: x.m, sub: "wk " + x.from + "-" + x.to }))),
         card("Longest losing streak", pickN(st.filter(x => x.k === "L"), (a, b) => b.n - a.n).map(x => ({ v: x.n + " L", m: x.m, sub: "wk " + x.from + "-" + x.to })))];
     }
@@ -952,7 +971,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     };
     const grid = h("div", { class: "tablewrap" }, h("table", { class: "h2h" },
       h("thead", null, h("tr", null, h("th", { class: "corner" }, h("span", { class: "sr" }, "Row manager's record against column manager")), order.map(m => h("th", { class: "colhead", title: m }, m)))),
-      h("tbody", null, order.map(a => h("tr", null, h("th", { scope: "row" }, a), order.map(b => {
+      h("tbody", null, order.map(a => h("tr", null, h("th", { scope: "row" }, h("button", { type: "button", class: "golink", title: "Open " + a + "'s manager history", onclick: () => go("manager", a) }, h("span", { class: "mgr" }, a))), order.map(b => {
         if (a === b) return h("td", { class: "self", "aria-hidden": "true" }, "");
         const r = vs(a, b), n = r.w + r.l + r.t;
         if (!n) return h("td", { class: "muted" }, "–");
