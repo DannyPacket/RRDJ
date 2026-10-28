@@ -22,7 +22,7 @@ for (const d of ['logos', 'players', 'teams']) {
 
 const scripts = path.join(repo, 'scripts');
 fs.mkdirSync(scripts, { recursive: true });
-for (const f of ['fantrax_pull.js', 'nhl_lock.js', 'history.js', 'legacy_weeks.js', 'week_dates.json', 'player_images.js', 'sync_repo.js']) {
+for (const f of ['fantrax_pull.js', 'nhl_lock.js', 'history.js', 'legacy_weeks.js', 'week_dates.json', 'player_images.js', 'voice.js', 'sync_repo.js']) {
   const text = fs.readFileSync(path.join(__dirname, f), 'utf8').replace(/spreadsheets\/d\/[\w-]+/g, 'spreadsheets/d/<SHEET_ID>');
   fs.writeFileSync(path.join(scripts, f), text);
 }

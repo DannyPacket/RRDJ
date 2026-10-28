@@ -85,7 +85,7 @@ const md = iso => { const [, m, d] = iso.split('-').map(Number); return MON[m - 
 const covers = (dw, mmdd) => { if (!dw) return false; const [a, b] = dw; const y = a.slice(0, 4), y2 = b.slice(0, 4); return [y, y2].some(Y => a <= Y + '-' + mmdd && Y + '-' + mmdd <= b); };
 const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
 // What the February break was each year (any other long winter week is the All-Star break)
-const FEB_BREAK = { '2013-14': 'Sochi Olympic', '2021-22': 'February (All-Star weekend plus the Olympic window the NHL ended up skipping)', '2024-25': '4 Nations Face-Off', '2025-26': 'Milan-Cortina Olympic' };
+const FEB_BREAK = { '2013-14': 'Sochi Olympic', '2021-22': 'All-Star and Olympic', '2024-25': '4 Nations Face-Off', '2025-26': 'Milan-Cortina Olympic' };
 const tagOf = (a, b) => {
   const k = rel(a, b);
   return k === 'brother vs. brother' ? ' (brother vs. brother)' : k === 'husband vs. wife' ? ' (and it\'s husband vs. wife)' : k === 'in-law' ? ' (in-law edition)'
@@ -93,8 +93,8 @@ const tagOf = (a, b) => {
 };
 const recStr = x => x.w + '-' + x.l + (x.t ? '-' + x.t : '');
 // Same phrase every rebuild: the pick is a hash of the key (season + week + slot), not random
-const an = n => /^(8|11|18|8d)(.|$)/.test(String(n)) ? 'an' : 'a'; // "an 8-game skid", "an 82.7-point win"
-const pick = (key, arr) => { let h = 7; for (const c of key) h = (h * 31 + c.charCodeAt(0)) >>> 0; return arr[h % arr.length]; };
+const { V, an } = require("./voice"); // announcer phrasing, rotated so lines don't repeat back to back
+const seasonsIn = (m, id) => seasonIds.filter(y => y <= id && (teamNames[y] || {})[m]).length;
 const prevOf = id => seasonIds[seasonIds.indexOf(id) - 1];
 const titlesBefore = (m, id) => seasonIds.filter(y => y < id && champOf(y) === m);
 const placeIn = (y, m) => (allFinals[y] || {})[m];
@@ -130,10 +130,10 @@ function welcome(id, mgrs) {
   const i = seasonIds.indexOf(id), prev = seasonIds[i - 1];
   const prevM = prev ? Object.keys(teamNames[prev] || {}) : [];
   const ins = prev ? mgrs.filter(m => !prevM.includes(m)) : [], outs = prev ? prevM.filter(m => !mgrs.includes(m)) : [];
-  const parts = [`Welcome to the ${id} season of Rene Rancourt's Day Job!`];
+  const parts = [V.welcome(id, i + 1)];
   if (!prev) parts.push('Twelve managers, one trophy, and a long winter ahead.');
   else if (prev === '2019-20') parts.push('Nobody lifted the trophy after the pandemic cut 2019-20 short, so the title is wide open.');
-  else if (champOf(prev)) parts.push(`${champOf(prev)} comes in as the defending champion.`);
+  else if (champOf(prev)) parts.push(V.defending(champOf(prev)));
   if (catSeasons.has(id)) parts.push(`This one is different: a ${words[mgrs.length] || mgrs.length}-team head-to-head categories league, so each week is scored in categories won. A 7-5 win means seven categories to five.`);
   if (id === '2020-21') parts.push('Hockey is back in January with a 56-game NHL schedule, so this one is a sprint.');
   if (prev === '2014-15') parts.push('After a year of categories scoring, the league is back to points and back to 12 teams.');
@@ -169,15 +169,15 @@ function playoffPicture(S, standings) {
   const field = teams.slice().sort((a, b) => seed[a] - seed[b]);
   const miss = standings.find(x => x.rank === field.length + 1);
   const leader = standings[0];
-  let t = `That wraps the regular season, with ${leader.mgr} on top at ${recStr(leader)}. The ${words[field.length] || field.length}-team playoff field is set: ${field.map(m => m + ' (' + seed[m] + ')').join(', ')}.`;
-  if (byes.length) t += ` ${byes.join(' and ')} earn${byes.length > 1 ? '' : 's'} a first-round bye.`;
-  if (miss) t += ` ${miss.mgr} just misses out at ${recStr(miss)}.`;
+  let t = V.playoffField(leader.mgr, recStr(leader), words[field.length] || field.length, field.map(m => m + ' (' + seed[m] + ')').join(', '));
+  if (byes.length) t += V.byes(byes.join(' and '), byes.length > 1);
+  if (miss) t += V.justMissed(miss.mgr, recStr(miss));
   const id = Object.keys(bySeason).find(y => bySeason[y] === S), prevY = prevOf(id), lastT = prevY && playoffTeams(prevY), oldChamp = prevY && champOf(prevY);
-  if (oldChamp && standings.some(x => x.mgr === oldChamp) && !field.includes(oldChamp)) t += ` The defending champ ${oldChamp} won't get to defend: no playoffs this year.`;
+  if (oldChamp && standings.some(x => x.mgr === oldChamp) && !field.includes(oldChamp)) t += V.champMisses(oldChamp);
   const back = lastT ? field.filter(m => !lastT.has(m) && standings.some(x => x.mgr === m)) : [];
-  if (back.length && back.length <= 2) t += ` ${back.join(' and ')} ${back.length > 1 ? 'are' : 'is'} back in the dance after missing last year.`;
+  if (back.length && back.length <= 2) t += V.backIn(back.join(' and '), back.length > 1);
   const run = field.map(m => ({ m, n: playoffRun(m, id) })).sort((a, b) => b.n - a.n)[0];
-  if (run && run.n >= 4) t += ` And ${run.m} is in for the ${ord(run.n)} straight season.`;
+  if (run && run.n >= 4) t += V.playoffRun(run.m, ord(run.n));
   return t;
 }
 function cancelledFinish(id, leader) {
@@ -194,20 +194,20 @@ function championStory(id, S, regStandings, fin) {
   const path = games(champ);
   const finalG = path[path.length - 1];
   const steps = path.map(x => 'beat ' + x.g.opp + ' (' + seed[x.g.opp] + ') in the ' + roundOf(x.w) + (x === finalG ? ', ' + f1(x.g.p) + ' to ' + f1(x.g.q) : ''));
-  const lead = seed[champ] >= 4 ? `From the No. ${seed[champ]} seed, ${champ} wins the ${id} championship!` : `${champ} wins the ${id} championship as the No. ${seed[champ]} seed!`;
-  const flourish = pick(id + 'champ', [' Raise the banner!', ' Cue the Rene Rancourt fist pumps.', ' Get the champagne on ice.', ' Hoist it!']);
-  out.push(lead + (path.length ? (path.length < pw.length ? ' After a first-round bye, ' + champ : ' ' + champ) + ' ' + (steps.length > 1 ? steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1] : steps[0]) + '.' : '') + flourish);
-  const before = titlesBefore(champ, id), prevY = prevOf(id), hist = [];
+  const lead = seed[champ] >= 4 ? V.champLow(champ, seed[champ], id) : V.champTop(champ, seed[champ], id);
+  out.push(lead + (path.length ? (path.length < pw.length ? ' After a first-round bye, ' + champ : ' ' + champ) + ' ' + (steps.length > 1 ? steps.slice(0, -1).join(', ') + ' and ' + steps[steps.length - 1] : steps[0]) + '.' : '') + V.flourish());
+  const before = titlesBefore(champ, id), prevY = prevOf(id);
   const firstRepeat = !seasonIds.some(y => y < id && champOf(y) && champOf(y) === champOf(prevOf(y)));
-  if (prevY && champOf(prevY) === champ) hist.push(`Back-to-back! ${champ} repeats as champion` + (firstRepeat ? ', the first repeat in league history' : '') + (before.length > 1 ? `, and now has ${before.length + 1} titles.` : '.'));
-  else if (before.length) { const lastT = before[before.length - 1], gap = seasonIds.indexOf(id) - seasonIds.indexOf(lastT); hist.push(`That's title No. ${before.length + 1} for ${champ}` + (gap >= 4 ? `, the first since ${lastT}.` : ` (also ${before.join(', ')}).`)); }
-  else hist.push(`It's the first title for ${champ}. Get that name on the Cup.`);
+  let hist;
+  if (prevY && champOf(prevY) === champ) hist = V.repeat(champ, firstRepeat, before.length + 1);
+  else if (before.length) { const lastT = before[before.length - 1], gap = seasonIds.indexOf(id) - seasonIds.indexOf(lastT); hist = gap >= 4 ? V.titleSince(champ, before.length + 1, lastT) : V.titleN(champ, before.length + 1, before.length > 1 ? before.slice(0, -1).join(', ') + ' and ' + before[before.length - 1] : before[0]); }
+  else hist = V.firstTitle(champ, seasonsIn(champ, id));
   const was = prevY && placeIn(prevY, champ);
-  if (was && was >= 7) hist.push(`A year ago ${champ} finished ${ord(was)}. Talk about a turnaround.`);
-  if (prevY && placeIn(prevY, second) === 2) hist.push(`${second} comes up one win short in the final for the second straight year.`);
-  out.push(hist.join(' '));
+  if (was && was >= 7) hist += V.turnaround(champ, ord(was));
+  if (prevY && placeIn(prevY, second) === 2) hist += V.runnerAgain(second);
+  out.push(hist);
   const third3 = games(third).find(x => roundOf(x.w) === 'final' && x.g.p > x.g.q);
-  out.push(`${second} settles for 2nd` + (third3 ? `, and ${third} takes 3rd by beating ${third3.g.opp} ${f1(third3.g.p)} to ${f1(third3.g.q)}.` : `, and ${third} finishes 3rd.`));
+  out.push(third3 ? V.podium(second, third, third3.g.opp, f1(third3.g.p), f1(third3.g.q)) : V.podiumNoGame(second, third));
   // biggest seed upset of the bracket
   // only games between two teams that were both still alive for the title (not the 3rd/5th/7th place games)
   const out_ = {}; pw.forEach(w => Object.entries(S.post[w] || {}).forEach(([m, g]) => { if (g.type === 'Playoffs' && g.p < g.q) out_[m] = out_[m] ?? w; }));
@@ -215,16 +215,16 @@ function championStory(id, S, regStandings, fin) {
   const ups = []; pw.forEach(w => Object.entries(S.post[w] || {}).forEach(([m, g]) => { if (g.type === 'Playoffs' && g.p > g.q && alive(m, w) && alive(g.opp, w) && seed[m] - seed[g.opp] >= 3) ups.push({ w, m, g, gap: seed[m] - seed[g.opp] }); }));
   const up = ups.sort((a, b) => b.gap - a.gap)[0];
   const extra = [];
-  if (up && up.m !== champ) extra.push(`Upset of the playoffs: No. ${seed[up.m]} ${up.m} knocks off No. ${seed[up.g.opp]} ${up.g.opp} in the ${roundOf(up.w)}.`);
-  if (reg1.mgr === champ) extra.push(`${champ} did it all, winning the regular season at ${recStr(reg1)} too.`);
+  if (up && up.m !== champ) extra.push(V.playoffUpset(up.m, seed[up.m], up.g.opp, seed[up.g.opp], roundOf(up.w)));
+  if (reg1.mgr === champ) extra.push(V.didItAll(champ, recStr(reg1)));
   else {
     const exit = games(reg1.mgr).find(x => x.g.p < x.g.q);
-    if (exit && up && up.m === exit.g.opp && up.w === exit.w && up.m !== champ) extra.push(`${reg1.mgr} won the regular season at ${recStr(reg1)}, so that one stings.`);
-    else extra.push(`${reg1.mgr} won the regular season at ${recStr(reg1)}` + (exit ? ` but fell to ${exit.g.opp} in the ${roundOf(exit.w)}.` : ` and finishes ${ord(S.finals[reg1.mgr])}.`));
+    if (exit && up && up.m === exit.g.opp && up.w === exit.w && up.m !== champ) extra.push(V.regStings(reg1.mgr, recStr(reg1)));
+    else extra.push(exit ? V.regExit(reg1.mgr, recStr(reg1), exit.g.opp, roundOf(exit.w)) : V.regPlace(reg1.mgr, recStr(reg1), ord(S.finals[reg1.mgr])));
   }
   out.push(extra.join(' '));
   const lastM = fin[fin.length - 1];
-  out.push(pick(id + 'end', [`At the other end, ${lastM} finishes ${ord(fin.length)}. See you next season.`, `And at the bottom of the table, ${lastM} finishes ${ord(fin.length)}. That's a wrap on ${id}.`, `${lastM} brings up the rear in ${ord(fin.length)}. Lights out on ${id}. See you next season.`]));
+  out.push(V.seasonEnd(lastM, ord(fin.length), id));
   return out;
 }
 
@@ -246,15 +246,15 @@ function seriesNote(decided, y, wk) {
   const notes = [];
   for (const x of decided) {
     const r = seriesOf(x.w, x.l, y, wk);
-    if (r.prevBy === x.l && r.prevRun >= 5) notes.push({ pri: 4, t: `${x.w} finally beats ${x.l}, snapping ${an(r.prevRun)} ${r.prevRun}-game losing streak in the series.` });
-    else if (r.bw === 0 && r.aw >= 6) notes.push({ pri: 3, t: `${x.w} is now ${r.aw}-0 all-time against ${x.l}.` });
-    else if (r.runBy === x.w && r.run >= 6) notes.push({ pri: 2, t: `${x.w} has now beaten ${x.l} ${r.run} straight times.` });
-    else if (r.n >= 10 && r.aw === r.bw) notes.push({ pri: 1, t: `The all-time ${x.w}-${x.l} series is dead even at ${r.aw}-${r.bw}${r.t ? '-' + r.t : ''}.` });
+    if (r.prevBy === x.l && r.prevRun >= 5) notes.push({ pri: 4, t: () => V.seriesSnap(x.w, x.l, r.prevRun) });
+    else if (r.bw === 0 && r.aw >= 6) notes.push({ pri: 3, t: () => V.seriesPerfect(x.w, x.l, r.aw) });
+    else if (r.runBy === x.w && r.run >= 6) notes.push({ pri: 2, t: () => V.seriesRun(x.w, x.l, r.run) });
+    else if (r.n >= 10 && r.aw === r.bw) notes.push({ pri: 1, t: () => V.seriesEven(x.w, x.l, r.aw + '-' + r.bw + (r.t ? '-' + r.t : '')) });
   }
   notes.sort((a, b) => b.pri - a.pri);
   const top = notes[0];
   if (!top) return '';
-  return top.pri >= 3 || wk % 3 === 0 ? top.t : ''; // the big ones always, the rest here and there
+  return top.pri >= 3 || wk % 3 === 0 ? top.t() : ''; // the big ones always, the rest here and there
 }
 // Real hockey news by date ('offseason' = before week 1); only well-documented events
 const NEWS = {
@@ -325,41 +325,37 @@ for (const [id, S] of Object.entries(bySeason)) {
     const regWeeks = weeksNo[weeksNo.length - 1];
     if (wk === 1) recap.push(welcome(id, mgrs));
     let context = '';
-    if (dw && days > 8 && wk > 1 && covers(dw, '12-25')) context = `A ${words[Math.round(days / 7)] || Math.round(days / 7)}-week matchup over the holidays (${md(dw[0])} to ${md(dw[1])}). `;
+    const nWeeks = words[Math.round(days / 7)] || Math.round(days / 7);
+    if (dw && days > 8 && wk > 1 && covers(dw, '12-25')) context = V.holidayLong(nWeeks, md(dw[0]), md(dw[1]));
     else if (dw && days > 8 && wk > 1) {
       const feb = dw[0].slice(5, 7) === '02' || dw[1].slice(5, 7) === '02';
-      const label = feb && FEB_BREAK[id] ? FEB_BREAK[id] : 'All-Star';
-      context = `A ${words[Math.round(days / 7)] || Math.round(days / 7)}-week matchup (${md(dw[0])} to ${md(dw[1])}) to cover the ${label} break${kind === 'long' ? ', so the numbers run big' : ''}. `;
-    } else if (covers(dw, '12-25')) context = (days < 7 || kind === 'short') ? 'Merry Christmas from the RRDJ desk. The NHL\'s holiday break makes this a short week, so the scores run low. ' : 'Christmas week around the league, and somebody found a little something extra under the tree. ';
-    else if (covers(dw, '01-01')) context = `Happy New Year! ${dw[0].slice(0, 4)} goes out and ${dw[1].slice(0, 4)} comes in. `;
-    else if (kind === 'long' && wk > 1) context = 'A multi-week period this time, so the scores run high. ';
-    else if (kind === 'short') context = 'A short week, so the scores run low. ';
+      context = V.breakLong(nWeeks, md(dw[0]), md(dw[1]), feb && FEB_BREAK[id] ? FEB_BREAK[id] : 'All-Star', kind === 'long');
+    } else if (covers(dw, '12-25')) context = (days < 7 || kind === 'short') ? V.christmasShort() : V.christmas();
+    else if (covers(dw, '01-01')) context = V.newYear(dw[0].slice(0, 4), dw[1].slice(0, 4));
+    else if (kind === 'long' && wk > 1) context = V.longWeek();
+    else if (kind === 'short') context = V.shortWeek();
     const hsG = G[hsMgr];
     recap.push(context + (CAT
-      ? `${hsMgr} wins the most categories this week with ${f1(top)}` + (hsG.p > hsG.q ? `, beating ${hsG.opp} ${f1(hsG.p)}-${f1(hsG.q)}.` : hsG.p < hsG.q ? ` and somehow still loses to ${hsG.opp}, who took ${f1(hsG.q)}.` : `, and still only ties ${hsG.opp}.`)
-      : hsG.p > hsG.q ? (d => pick(id + wk + 'hs', [
-        `${hsMgr} lights the lamp for the week's high score, ${f1(top)}, and beats ${hsG.opp} by ${d}.`,
-        `Top of the scoresheet: ${hsMgr} with ${f1(top)}, good for ${an(d)} ${d}-point win over ${hsG.opp}.`,
-        `${hsMgr} goes off for ${f1(top)}, the best number on the board, and skates past ${hsG.opp} by ${d}.`,
-        `The big number this week belongs to ${hsMgr}: ${f1(top)}, in ${an(d)} ${d}-point win over ${hsG.opp}.`,
-        `${hsMgr} fills the net for ${f1(top)}, tops in the league, and leaves ${hsG.opp} ${d} behind.`]))(f1(hsG.p - hsG.q))
-      : hsG.p < hsG.q ? `${hsMgr} posts the week's high score with ${f1(top)} and somehow still loses to ${hsG.opp}, who put up ${f1(hsG.q)}. Hockey is cruel.`
-      : `${hsMgr} posts the week's high score with ${f1(top)}, and still only ties ${hsG.opp}.`));
+      ? (hsG.p > hsG.q ? V.catWin(hsMgr, f1(top), hsG.opp, f1(hsG.q)) : V.catTie(hsMgr, f1(top), hsG.opp))
+      : hsG.p > hsG.q ? V.hsWin(hsMgr, f1(top), hsG.opp, f1(hsG.p - hsG.q), hsG.p - hsG.q) : V.hsTie(hsMgr, f1(top), hsG.opp)));
     if (!CAT && normalWeek(id, wk) && seasonIds.indexOf(id) > 0) {
       const rec = recordBefore(id, wk), low = Math.min(...mgrs.map(m => G[m].p)), lowM = mgrs.find(m => G[m].p === low);
       const when = y => y === id ? 'earlier this season' : 'in ' + y;
-      if (rec.hi && top > rec.hi.pts) recap[recap.length - 1] += ` That's a new league record for a single week, topping ${rec.hi.m}'s ${f1(rec.hi.pts)} ${when(rec.hi.y)}. Frame that one.`;
-      else if (wk >= 6 && Object.keys(S.games).map(Number).filter(w => w < wk && normalWeek(id, w)).every(w => Math.max(...Object.values(S.games[w]).map(g => g.p)) < top)) recap[recap.length - 1] += ' Best score of the season so far.';
-      if (rec.lo && low < rec.lo.pts) recap[recap.length - 1] += ` At the other end, ${lowM}'s ${f1(low)} is the lowest score in league history, under ${rec.lo.m}'s ${f1(rec.lo.pts)} ${when(rec.lo.y)}. Woof.`;
+      if (rec.hi && top > rec.hi.pts) recap[recap.length - 1] += ' ' + V.record(rec.hi.m, f1(rec.hi.pts), when(rec.hi.y));
+      else if (wk >= 6 && Object.keys(S.games).map(Number).filter(w => w < wk && normalWeek(id, w)).every(w => Math.max(...Object.values(S.games[w]).map(g => g.p)) < top)) recap[recap.length - 1] += V.seasonBest();
+      if (rec.lo && low < rec.lo.pts) recap[recap.length - 1] += ' ' + V.recordLow(lowM, f1(low), rec.lo.m, f1(rec.lo.pts), when(rec.lo.y));
     }
     const decided = matchups.filter(x => x.ap !== x.bp).map(x => ({ w: x.ap > x.bp ? x.a : x.b, l: x.ap > x.bp ? x.b : x.a, wp: Math.max(x.ap, x.bp), lp: Math.min(x.ap, x.bp), d: Math.abs(x.ap - x.bp) }));
-    const close = decided.slice().sort((a, b) => a.d - b.d)[0], blow = decided.slice().sort((a, b) => b.d - a.d)[0];
+    // the lead already covers the high scorer's game, so the blowout line goes to a different game
+    const close = decided.slice().sort((a, b) => a.d - b.d)[0], blow = decided.filter(x => x.w !== hsMgr && x.l !== hsMgr).sort((a, b) => b.d - a.d)[0];
     const p2 = [];
-    if (close) p2.push((close.d < (CAT ? 2 : 5) ? pick(id + wk + 'pf', ['Photo finish', 'Down to the wire', 'Squeaker of the week', 'Bang-bang finish']) : 'Closest game') + tagOf(close.w, close.l) + `: ${close.w} edges ${close.l} ${f1(close.wp)} to ${f1(close.lp)}.` + (!CAT && close.d < 1 ? ` A margin of ${f1(close.d)}. Somebody get Toronto on the line for a review.` : ''));
-    if (blow && blow !== close) p2.push(pick(id + wk + 'bo', ['Blowout of the week', 'Woodshed special', 'Mercy rule watch', 'Not close']) + tagOf(blow.w, blow.l) + `: ${blow.w} over ${blow.l} by ${f1(blow.d)}${CAT ? ' categories' : ''}.` + (!CAT && blow.d >= 80 ? ' Somebody pull the goalie.' : ''));
+    if (close) p2.push(close.d < (CAT ? 2 : 5)
+      ? V.photo(tagOf(close.w, close.l), close.w, close.l, f1(close.wp), f1(close.lp)) + (!CAT && close.d < 1 ? V.inches(f1(close.d)) : '')
+      : V.closest(tagOf(close.w, close.l), close.w, close.l, f1(close.wp), f1(close.lp)));
+    if (blow && blow !== close) p2.push(V.blowout(tagOf(blow.w, blow.l), blow.w, blow.l, f1(blow.d) + (CAT ? ' categories' : '')) + (!CAT && blow.d >= 80 ? V.pullGoalie() : ''));
     if (wk > 1) {
       const up = decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 5).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l]))[0];
-      if (up) p2.push(pick(id + wk + 'up', ['Upset alert', 'Stop the presses', 'Shocker']) + `: ${up.w}, ${ord(prev[up.w])} coming in, knocks off ${up.l} (${ord(prev[up.l])}).`);
+      if (up) p2.push(V.upset(up.w, ord(prev[up.w]), up.l, ord(prev[up.l])));
     }
     recap.push(p2.join(' '));
     const p3 = [];
@@ -369,22 +365,22 @@ for (const [id, S] of Object.entries(bySeason)) {
     const perfect = mgrs.filter(m => tot[m].w === wk && wk >= 5), winless = mgrs.filter(m => tot[m].l === wk && wk >= 5);
     const bo = bestOpenBefore(id);
     // perfect starts: say so when it ties or breaks the league's best opening run, otherwise only now and then
-    for (const m of perfect) p3.push(bo.n && wk === bo.n + 1 ? `${m} is ${wk}-0, the best start in league history, passing ${bo.m}'s ${bo.n}-0 in ${bo.y}.` : bo.n && wk === bo.n ? `${m} is ${wk}-0, matching ${bo.m}'s ${bo.y} start for the best in league history.` : wk === 5 || wk % 3 === 0 ? `${m} is still perfect at ${wk}-0.` : '');
-    if (winless.length) p3.push(`${winless.join(' and ')} ${winless.length > 1 ? 'are' : 'is'} still looking for a first win (0-${wk}).`);
-    if (hot && !perfect.includes(hot.m)) p3.push(pick(id + wk + 'hot', [`${hot.m} is rolling with ${hot.s.n} straight wins.`, `${hot.m} is on a heater: ${hot.s.n} straight wins.`, `Make it ${hot.s.n} in a row for ${hot.m}.`]));
-    if (snap) p3.push(snap.s.k === 'L' ? `${snap.m} snaps ${an(snap.s.n)} ${snap.s.n}-game skid.` : `${snap.m}'s ${snap.s.n}-game win streak is over.`);
-    if (cold && (!snap || cold.m !== snap.m) && !winless.includes(cold.m)) p3.push(pick(id + wk + 'cold', [`${cold.m} has dropped ${cold.s.n} in a row.`, `${cold.m}'s skid hits ${cold.s.n}.`, `Somebody check on ${cold.m}: ${cold.s.n} straight losses.`]));
+    for (const m of perfect) p3.push(bo.n && wk === bo.n + 1 ? `${m} is ${wk}-0, the best start in league history, passing ${bo.m}'s ${bo.n}-0 in ${bo.y}.` : bo.n && wk === bo.n ? `${m} is ${wk}-0, matching ${bo.m}'s ${bo.y} start for the best in league history.` : wk === 5 || wk % 3 === 0 ? V.perfect(m, wk) : '');
+    if (winless.length) p3.push(V.winless(winless.join(' and '), winless.length > 1, wk));
+    if (hot && !perfect.includes(hot.m)) p3.push(V.hot(hot.m, hot.s.n));
+    if (snap) p3.push(snap.s.k === 'L' ? V.snapSkid(snap.m, snap.s.n) : V.snapWin(snap.m, snap.s.n));
+    if (cold && (!snap || cold.m !== snap.m) && !winless.includes(cold.m)) p3.push(V.cold(cold.m, cold.s.n));
     const prevY = prevOf(id), oldChamp = prevY && champOf(prevY);
-    if (wk === 1 && oldChamp && G[oldChamp]) p3.push(G[oldChamp].p > G[oldChamp].q ? `Title defense begins: ${oldChamp} opens with a win over ${G[oldChamp].opp}.` : G[oldChamp].p < G[oldChamp].q ? `Not the start ${oldChamp} wanted: the defending champ falls to ${G[oldChamp].opp} in the opener.` : `The defending champ ${oldChamp} opens with a tie.`);
+    if (wk === 1 && oldChamp && G[oldChamp]) p3.push(G[oldChamp].p > G[oldChamp].q ? V.defenseWin(oldChamp, G[oldChamp].opp) : G[oldChamp].p < G[oldChamp].q ? V.defenseLoss(oldChamp, G[oldChamp].opp) : `The defending champ ${oldChamp} opens with a tie.`);
     const runner = prevY && Object.keys(allFinals[prevY] || {}).find(m => allFinals[prevY][m] === 2);
     if (oldChamp && runner && G[oldChamp] && G[oldChamp].opp === runner && !weeksNo.some(w => w < wk && S.games[w][oldChamp] && S.games[w][oldChamp].opp === runner)) {
       const g = G[oldChamp];
-      p3.push(g.p > g.q ? `A rematch of last year's final, and ${oldChamp} beats ${runner} again, ${f1(g.p)} to ${f1(g.q)}.` : g.p < g.q ? `A rematch of last year's final, and this time ${runner} gets revenge on ${oldChamp}, ${f1(g.q)} to ${f1(g.p)}.` : `A rematch of last year's final ends in a tie.`);
+      p3.push(g.p > g.q ? V.rematchAgain(oldChamp, runner, f1(g.p), f1(g.q)) : g.p < g.q ? V.rematchRevenge(oldChamp, runner, f1(g.q), f1(g.p)) : `A rematch of last year's final ends in a tie.`);
     }
     if (wk === Math.ceil(regWeeks / 2) && prevY) {
       const lastM = lastPlaceOf(prevY), r1 = rank[lastM];
-      if (lastM && r1 && r1 <= 4) p3.push(`Remember ${lastM} finishing dead last a year ago? ${lastM} sits ${ord(r1)} at the turn.`);
-      if (oldChamp && rank[oldChamp] >= mgrs.length - 3) p3.push(`The defending champ is in trouble: ${oldChamp} is ${ord(rank[oldChamp])} at the halfway mark.`);
+      if (lastM && r1 && r1 <= 4) p3.push(V.lastToTop(lastM, ord(r1)));
+      if (oldChamp && rank[oldChamp] >= mgrs.length - 3) p3.push(V.champTrouble(oldChamp, ord(rank[oldChamp])));
     }
     const sn = CAT ? '' : seriesNote(decided, id, wk);
     if (sn) p3.push(sn);
@@ -395,9 +391,9 @@ for (const [id, S] of Object.entries(bySeason)) {
     const lastWk = wk === weeksNo[weeksNo.length - 1];
     const half = wk === Math.ceil(regWeeks / 2);
     recap.push(lastWk ? (Object.keys(S.post).length ? playoffPicture(S, standings) : cancelledFinish(id, leader))
-      : half ? `Halfway home: ${leader.mgr} leads at ${recStr(leader)}, ${standings[1].mgr} is right behind at ${recStr(standings[1])}, and ${bottom} has work to do in last place.`
-      : leader.mgr !== prevLeader && wk > 1 ? pick(id + wk + 'ld', [`${leader.mgr} takes over 1st at ${recStr(leader)}.`, `New sheriff in town: ${leader.mgr} grabs 1st at ${recStr(leader)}.`])
-        : pick(id + wk + 'ld', [`${leader.mgr} leads the way at ${recStr(leader)}.`, `${leader.mgr} still sits on top at ${recStr(leader)}.`, `Nobody has caught ${leader.mgr} yet: 1st at ${recStr(leader)}.`]) + (bottom !== prevLast && wk > 1 ? ` ${bottom} drops to ${ord(standings.length)}.` : ''));
+      : half ? V.halfway(leader.mgr, recStr(leader), standings[1].mgr, recStr(standings[1]), bottom)
+      : leader.mgr !== prevLeader && wk > 1 ? V.leaderNew(leader.mgr, recStr(leader))
+        : V.leaderStill(leader.mgr, recStr(leader)) + (bottom !== prevLast && wk > 1 ? V.dropsLast(bottom, ord(standings.length)) : ''));
     prevLeader = leader.mgr; prevLast = bottom;
 
     weeks.push({ week: wk, start: dw ? dw[0] : undefined, end: dw ? dw[1] : undefined, days: dw ? days : undefined, recap: recap.filter(Boolean), matchups, highScore: CAT ? null : { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally: CAT ? [] : highScoreTally, next });
