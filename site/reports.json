@@ -20,18 +20,20 @@
     "Will": "The Andy Moog Show"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2013-14-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2013-14-jefe.jpg",
+    "Joe": "logos/y2013-14-joe.png",
+    "Nick": "logos/y2013-14-nick.png",
+    "Ronnie": "logos/y2013-14-ronnie.png",
+    "Steve": "logos/y2013-14-steve.png",
+    "Tim": "logos/y2013-14-tim.jpg",
+    "Tom": "logos/y2013-14-tom.png",
+    "Vin": "logos/y2013-14-vin.png",
+    "Will": "logos/y2013-14-will.jpg",
+    "Zac": "logos/zac.webp",
+    "Patrick": "logos/y2013-14-patrick.jpg",
+    "Tara": "logos/y2013-14-tara.png"
    },
    "schedule": [
     [
@@ -6996,18 +6998,19 @@
     "Will": "Chara's In Charge"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2014-15-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
+    "Jefe": "logos/y2014-15-jefe.jpg",
     "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Nick": "logos/y2014-15-nick.png",
+    "Ronnie": "logos/y2014-15-ronnie.png",
+    "Steve": "logos/y2014-15-steve.png",
+    "Tim": "logos/y2014-15-tim.png",
+    "Tom": "logos/y2014-15-tom.png",
+    "Vin": "logos/y2014-15-vin.png",
+    "Will": "logos/y2014-15-will.jpg",
+    "Zac": "logos/zac.webp",
+    "Tara": "logos/y2014-15-tara.png"
    },
    "schedule": [
     [
@@ -11943,18 +11946,20 @@
     "Will": "Savardian Spinorama"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2015-16-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2015-16-jefe.jpg",
+    "Joe": "logos/y2015-16-joe.jpg",
+    "Nick": "logos/y2015-16-nick.png",
+    "Ronnie": "logos/y2015-16-ronnie.jpg",
+    "Steve": "logos/y2015-16-steve.png",
+    "Tim": "logos/y2015-16-tim.jpg",
+    "Tom": "logos/y2015-16-tom.png",
+    "Vin": "logos/y2015-16-vin.png",
+    "Will": "logos/y2015-16-will.jpg",
+    "Zac": "logos/zac.webp",
+    "Palagi": "logos/y2015-16-palagi.jpg",
+    "Tara": "logos/y2015-16-tara.png"
    },
    "schedule": [
     [
@@ -19048,18 +19053,20 @@
     "Will": "Make Toronto Great"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2016-17-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2016-17-jefe.jpg",
+    "Joe": "logos/y2016-17-joe.jpg",
+    "Nick": "logos/y2016-17-nick.jpg",
+    "Ronnie": "logos/y2016-17-ronnie.png",
+    "Steve": "logos/y2016-17-steve.png",
+    "Tim": "logos/y2016-17-tim.png",
+    "Tom": "logos/y2016-17-tom.png",
+    "Vin": "logos/y2016-17-vin.png",
+    "Will": "logos/y2016-17-will.jpg",
+    "Zac": "logos/zac.webp",
+    "Tara": "logos/y2016-17-tara.png",
+    "Palagi": "logos/y2016-17-palagi.png"
    },
    "schedule": [
     [
@@ -26159,18 +26166,19 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2017-18-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2017-18-jefe.jpg",
+    "Joe": "logos/y2017-18-joe.jpg",
+    "Nick": "logos/y2017-18-nick.jpg",
+    "Ronnie": "logos/y2017-18-ronnie.png",
+    "Steve": "logos/y2017-18-steve.png",
+    "Tim": "logos/y2017-18-tim.png",
+    "Tom": "logos/y2017-18-tom.png",
+    "Vin": "logos/y2017-18-vin.png",
+    "Will": "logos/y2017-18-will.jpg",
+    "Zac": "logos/y2017-18-zac.png",
+    "Palagi": "logos/y2017-18-palagi.jpg"
    },
    "schedule": [
     [
@@ -33312,18 +33320,19 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2018-19-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2018-19-jefe.jpg",
+    "Joe": "logos/y2018-19-joe.jpg",
+    "Nick": "logos/y2018-19-nick.jpg",
+    "Ronnie": "logos/y2018-19-ronnie.png",
+    "Steve": "logos/y2018-19-steve.png",
+    "Tim": "logos/y2018-19-tim.png",
+    "Tom": "logos/y2018-19-tom.png",
+    "Vin": "logos/y2018-19-vin.png",
+    "Will": "logos/y2018-19-will.jpg",
+    "Zac": "logos/y2018-19-zac.png",
+    "Palagi": "logos/y2018-19-palagi.jpg"
    },
    "schedule": [
     [
@@ -39999,18 +40008,19 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2019-20-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2019-20-jefe.jpg",
+    "Joe": "logos/y2019-20-joe.jpg",
+    "Nick": "logos/y2019-20-nick.jpg",
+    "Ronnie": "logos/y2019-20-ronnie.png",
+    "Steve": "logos/y2019-20-steve.png",
+    "Tim": "logos/y2019-20-tim.jpg",
+    "Tom": "logos/y2019-20-tom.png",
+    "Vin": "logos/y2019-20-vin.png",
+    "Will": "logos/y2019-20-will.jpg",
+    "Zac": "logos/y2019-20-zac.png",
+    "Palagi": "logos/y2019-20-palagi.jpg"
    },
    "schedule": [
     [
@@ -46611,18 +46621,19 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2020-21-danny.jpg",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2020-21-jefe.jpg",
+    "Joe": "logos/y2020-21-joe.png",
+    "Nick": "logos/y2020-21-nick.jpg",
+    "Ronnie": "logos/y2020-21-ronnie.png",
+    "Steve": "logos/y2020-21-steve.png",
+    "Tim": "logos/y2020-21-tim.jpg",
+    "Tom": "logos/y2020-21-tom.png",
+    "Vin": "logos/y2020-21-vin.png",
+    "Will": "logos/y2020-21-will.png",
+    "Zac": "logos/y2020-21-zac.png",
+    "Palagi": "logos/y2020-21-palagi.jpg"
    },
    "schedule": [
     [
@@ -50233,18 +50244,19 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2021-22-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2021-22-jefe.jpg",
+    "Joe": "logos/y2021-22-joe.png",
+    "Nick": "logos/y2021-22-nick.jpg",
+    "Ronnie": "logos/y2021-22-ronnie.png",
+    "Steve": "logos/y2021-22-steve.png",
+    "Tim": "logos/y2021-22-tim.jpg",
+    "Tom": "logos/y2021-22-tom.png",
+    "Vin": "logos/y2021-22-vin.png",
+    "Will": "logos/y2021-22-will.jpg",
+    "Zac": "logos/y2021-22-zac.png",
+    "Palagi": "logos/y2021-22-palagi.jpg"
    },
    "schedule": [
     [
@@ -57874,18 +57886,19 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
+    "Danny": "logos/y2022-23-danny.png",
     "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Jefe": "logos/y2022-23-jefe.jpg",
+    "Joe": "logos/y2022-23-joe.png",
+    "Nick": "logos/y2022-23-nick.jpg",
+    "Ronnie": "logos/y2022-23-ronnie.png",
+    "Steve": "logos/y2022-23-steve.png",
+    "Tim": "logos/y2022-23-tim.jpg",
+    "Tom": "logos/y2022-23-tom.png",
+    "Vin": "logos/y2022-23-vin.png",
+    "Will": "logos/y2022-23-will.jpg",
+    "Zac": "logos/y2022-23-zac.png",
+    "Palagi": "logos/y2022-23-palagi.jpg"
    },
    "schedule": [
     [
@@ -65103,18 +65116,18 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
-    "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Danny": "logos/y2023-24-danny.png",
+    "Hallie": "logos/y2023-24-hallie.png",
+    "Jefe": "logos/y2023-24-jefe.jpg",
+    "Joe": "logos/y2023-24-joe.jpg",
+    "Nick": "logos/y2023-24-nick.jpg",
+    "Ronnie": "logos/y2023-24-ronnie.png",
+    "Steve": "logos/y2023-24-steve.png",
+    "Tim": "logos/y2023-24-tim.jpg",
+    "Tom": "logos/y2023-24-tom.png",
+    "Vin": "logos/y2023-24-vin.png",
+    "Will": "logos/y2023-24-will.jpg",
+    "Zac": "logos/y2023-24-zac.png"
    },
    "schedule": [
     [
@@ -72194,18 +72207,18 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
-    "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Danny": "logos/y2024-25-danny.png",
+    "Hallie": "logos/y2024-25-hallie.png",
+    "Jefe": "logos/y2024-25-jefe.jpg",
+    "Joe": "logos/y2024-25-joe.png",
+    "Nick": "logos/y2024-25-nick.jpg",
+    "Ronnie": "logos/y2024-25-ronnie.png",
+    "Steve": "logos/y2024-25-steve.png",
+    "Tim": "logos/y2024-25-tim.jpg",
+    "Tom": "logos/y2024-25-tom.jpg",
+    "Vin": "logos/y2024-25-vin.png",
+    "Will": "logos/y2024-25-will.png",
+    "Zac": "logos/y2024-25-zac.png"
    },
    "schedule": [
     [
@@ -79244,18 +79257,18 @@
     "Zac": "Bite the Pillow"
    },
    "logos": {
-    "Danny": "logos/danny.webp",
-    "Hallie": "logos/hallie.webp",
-    "Jefe": "logos/jefe.webp",
-    "Joe": "logos/joe.webp",
-    "Nick": "logos/nick.webp",
-    "Ronnie": "logos/ronnie.webp",
-    "Steve": "logos/steve.webp",
-    "Tim": "logos/tim.webp",
-    "Tom": "logos/tom.webp",
-    "Vin": "logos/vin.webp",
-    "Will": "logos/will.webp",
-    "Zac": "logos/zac.webp"
+    "Danny": "logos/y2025-26-danny.jpg",
+    "Hallie": "logos/y2025-26-hallie.png",
+    "Jefe": "logos/y2025-26-jefe.jpg",
+    "Joe": "logos/y2025-26-joe.jpg",
+    "Nick": "logos/y2025-26-nick.jpg",
+    "Ronnie": "logos/y2025-26-ronnie.png",
+    "Steve": "logos/y2025-26-steve.png",
+    "Tim": "logos/y2025-26-tim.jpg",
+    "Tom": "logos/y2025-26-tom.jpg",
+    "Vin": "logos/y2025-26-vin.png",
+    "Will": "logos/y2025-26-will.png",
+    "Zac": "logos/y2025-26-zac.png"
    },
    "schedule": [
     [

@@ -711,9 +711,11 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const pct = r => { const n = r.gr != null ? r.gr : r.gp; return n ? (r.w + r.t / 2) / n : 0; };
     const order = mgrs.slice().sort((x, y) => A[y].pct - A[x].pct || A[y].pf - A[x].pf);
     const rec3 = r => r.w + "-" + r.l + "-" + r.t;
-    const who = (m, small) => h("span", { class: "who" }, avatar(m, logos[m], small ? 22 : 28, small ? "sm" : ""), h("span", { class: "mgr" }, m));
+    // lg: a season's own logos (past Yahoo seasons had their own team pictures); defaults to the current ones
+    const who = (m, small, lg) => h("span", { class: "who" }, avatar(m, (lg || logos)[m], small ? 22 : 28, small ? "sm" : ""), h("span", { class: "mgr" }, m));
+    const logosOf = y => ((DATA.seasons.find(x => x.id === y) || {}).logos) || logos;
     const go = (v, arg) => { showHistory(true, v, arg); window.scrollTo(0, 0); };
-    const whoLink = (m, small) => h("button", { type: "button", class: "golink", title: "Open " + m + "'s manager history", onclick: () => go("manager", m) }, who(m, small));
+    const whoLink = (m, small, lg) => h("button", { type: "button", class: "golink", title: "Open " + m + "'s manager history", onclick: () => go("manager", m) }, who(m, small, lg));
     const seasonLink = (y, tile) => h("button", { type: "button", class: "champ-go", title: "Open the " + y + " season history", onclick: () => go("seasons", y) }, tile);
 
     // Streaks within a season
@@ -745,7 +747,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         || Object.entries(cat[y] || {}).map(([m, r]) => ({ m, w: r[0], l: r[1], t: r[2], gp: r[0] + r[1] + r[2], pf: 0 })).sort((a, b) => pct(b) - pct(a))[0];
       return h("div", { class: "champ" },
         h("span", { class: "pos" }, y),
-        h("span", { class: "champ-name" }, who(champs[y] || byPlace[0][0])),
+        h("span", { class: "champ-name" }, who(champs[y] || byPlace[0][0], false, logosOf(y))),
         h("span", { class: "muted small" }, "Champion"),
         h("dl", { class: "champ-dl" },
           h("dt", null, "Runner-up"), h("dd", null, byPlace[1] ? byPlace[1][0] : "–"),
@@ -877,7 +879,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             label, k === key ? (sSort.dir < 0 ? " ▾" : " ▴") : ""))))),
         h("tbody", null, rows.map((r, i) => h("tr", null,
           h("td", { class: "num rk" }, i + 1),
-          h("td", null, whoLink(r.m)),
+          h("td", null, whoLink(r.m, false, logosOf(y))),
           h("td", { class: "r num" }, rec3(r)),
           h("td", { class: "r num" }, r.pct.toFixed(3).replace(/^0/, "")),
           h("td", { class: "r num" }, dash(r.pf, fmt)),

@@ -22,6 +22,9 @@ const r = JSON.parse(fs.readFileSync(reportsFile, 'utf8'));
 const odd = (r.history && r.history.odd) || {};
 const fantrax = new Set(r.seasons.filter(s => s.source !== 'sheet').map(s => s.id));
 const logos = (r.seasons.find(s => s.logos) || {}).logos || {};
+// Each Yahoo season's own team logos (yahoo_logos.json, from yahoo_logos.js); the current logos fill any gaps
+const yLogosFile = require('path').join(__dirname, 'yahoo_logos.json');
+const yLogos = fs.existsSync(yLogosFile) ? JSON.parse(fs.readFileSync(yLogosFile, 'utf8')) : {};
 const BROTHERS = [['Will', 'Tom', 'Tim', 'Danny'], ['Nick', 'Vin']];
 const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th');
 // Categories seasons (2014-15) score each week in categories won, so their numbers print as whole numbers
@@ -447,7 +450,7 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (late) recap.splice(recap.length - 1, 0, late);
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [], bracket: bracketGames(S) });
   }
-  seasonsOut.push({ id, label: id, source: 'sheet', scoring: CAT ? 'categories' : undefined, teams: teamNames[id] || {}, logos, schedule, weeks });
+  seasonsOut.push({ id, label: id, source: 'sheet', scoring: CAT ? 'categories' : undefined, teams: teamNames[id] || {}, logos: Object.assign({}, logos, yLogos[id] || {}), schedule, weeks });
 }
 
 r.seasons = r.seasons.filter(s => s.source !== 'sheet').concat(seasonsOut).sort((a, b) => (a.id < b.id ? -1 : 1));
