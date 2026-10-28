@@ -72137,6 +72137,22 @@
         "bp": 160.7
        },
        {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Hallie",
+        "b": "Will",
+        "ap": null,
+        "bp": null
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Tim",
+        "ap": null,
+        "bp": null
+       },
+       {
         "w": 23,
         "type": "Playoffs",
         "a": "Danny",
@@ -72167,6 +72183,22 @@
         "b": "Zac",
         "ap": 188.9,
         "bp": 174.8
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Hallie",
+        "b": "Tim",
+        "ap": null,
+        "bp": null
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Will",
+        "ap": null,
+        "bp": null
        },
        {
         "w": 24,
@@ -102459,6 +102491,24 @@
    ],
    [
     "2023-24",
+    22,
+    "Consolation",
+    "Hallie",
+    null,
+    "Will",
+    null
+   ],
+   [
+    "2023-24",
+    22,
+    "Consolation",
+    "Joe",
+    null,
+    "Tim",
+    null
+   ],
+   [
+    "2023-24",
     23,
     "Playoffs",
     "Danny",
@@ -102492,6 +102542,24 @@
     188.9,
     "Zac",
     174.8
+   ],
+   [
+    "2023-24",
+    23,
+    "Consolation",
+    "Hallie",
+    null,
+    "Tim",
+    null
+   ],
+   [
+    "2023-24",
+    23,
+    "Consolation",
+    "Joe",
+    null,
+    "Will",
+    null
    ],
    [
     "2023-24",

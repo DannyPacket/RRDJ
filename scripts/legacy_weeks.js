@@ -71,7 +71,8 @@ for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scorin
   const S = bySeason[season] = bySeason[season] || { rank: {}, games: {}, finals: {}, post: {} };
   const wk = Number(week);
   if (type === 'Playoffs' || type === 'Consolation') {
-    if (opp && pf !== '' && pa !== '') (S.post[wk] = S.post[wk] || {})[team] = { opp, p: num(pf), q: num(pa), type };
+    // consolation games can be known without their scores (null): the bracket takes the winner from the final places
+    if (opp && (type === 'Consolation' || (pf !== '' && pa !== ''))) (S.post[wk] = S.post[wk] || {})[team] = { opp, p: pf === '' ? null : num(pf), q: pa === '' ? null : num(pa), type };
     continue;
   }
   if (type && type !== 'Regular' && type !== 'Final') continue;

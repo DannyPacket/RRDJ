@@ -583,12 +583,13 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             const g = mine.find(x => x.w === wk);
             if (!g) { if (wk < first) rows.push(h("div", { class: "mh-row" }, h("span", { class: "num muted" }, "Wk " + wk), h("span", { class: "mh-res muted" }, "–"), h("span", { class: "muted" }, "Bye"), h("span", null, ""))); return; }
             const [p, q, opp] = g.a === m ? [g.ap, g.bp, g.b] : [g.bp, g.ap, g.a];
-            const res = p > q ? "W" : p < q ? "L" : "T";
+            const fin = Object.fromEntries(w.standings.map(r => [r.mgr, r.rank]));
+            const res = p == null ? ((fin[m] || 99) < (fin[opp] || 99) ? "W" : "L") : p > q ? "W" : p < q ? "L" : "T";
             rows.push(h("div", { class: "mh-row" },
               h("span", { class: "num muted" }, "Wk " + wk),
               h("span", { class: "mh-res " + (res === "W" ? "up" : res === "L" ? "down" : "muted") }, res),
               h("span", null, "vs ", h("span", { class: "mgr" }, opp), h("span", { class: "muted" }, " (" + (seed[opp] || "–") + ")")),
-              h("span", { class: "num" }, fmt(p) + "-" + fmt(q))));
+              h("span", { class: p == null ? "muted" : "num" }, p == null ? "score n/a" : fmt(p) + "-" + fmt(q))));
           });
         }
       }
@@ -706,7 +707,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const isCat = y => CG.some(g => g[0] === y);
     const cfmt = n => String(Math.round(n));
     const score = x => x.cat ? cfmt(x.p) + "-" + cfmt(x.q) : fmt(x.p) + "-" + fmt(x.q);
-    const res = x => x.p > x.q ? "W" : x.p < x.q ? "L" : "T";
+    const res = x => x.r || (x.p > x.q ? "W" : x.p < x.q ? "L" : "T");
     const top = {};
     sides.forEach(x => { const k = x.s + "|" + x.wk; top[k] = Math.max(top[k] == null ? -Infinity : top[k], x.p); });
     const isTop = x => x.p === top[x.s + "|" + x.wk];
@@ -1167,7 +1168,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     // 7. Playoff history: every playoff and consolation game from the sheet (2014-15 in categories won)
     const PG = H.playoffGames || [], regP = H.regular || {};
     const pside = PG.flatMap(g => [{ s: g[0], wk: g[1], type: g[2], m: g[3], p: g[4], opp: g[5], q: g[6] }, { s: g[0], wk: g[1], type: g[2], m: g[5], p: g[6], opp: g[3], q: g[4] }])
-      .map(x => Object.assign(x, { cat: isCat(x.s) }));
+      .map(x => Object.assign(x, { cat: isCat(x.s) }, x.p == null ? { r: ((finals[x.s] || {})[x.m] || 99) < ((finals[x.s] || {})[x.opp] || 99) ? "W" : "L" } : {}));
     const tside = pside.filter(x => x.type === "Playoffs"), pSeasons = [...new Set(PG.map(g => g[0]))].sort();
     const pinfo = {};
     pSeasons.forEach(y => {
@@ -1458,7 +1459,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       const NS = "http://www.w3.org/2000/svg";
       const area = h("div", { class: "br-area", style: "height:" + height + "px;width:" + (rounds.length * W + (rounds.length - 1) * GAP) + "px" });
       const svg = document.createElementNS(NS, "svg"); svg.setAttribute("aria-hidden", "true");
-      const row = (m, sc, cls) => h("div", { class: "br-row " + cls }, h("span", { class: "seed" }, seed[m] || ""), avatar(m, s.logos && s.logos[m], 16, "xs"), h("span", { class: "nm" }, m), h("span", { class: "sc" }, fmt(sc)));
+      const row = (m, sc, cls) => h("div", { class: "br-row " + cls }, h("span", { class: "seed" }, seed[m] || ""), avatar(m, s.logos && s.logos[m], 16, "xs"), h("span", { class: "nm" }, m), h("span", { class: "sc" }, sc == null ? "–" : fmt(sc)));
       placed.forEach(({ t, best }) => {
         const isTitle = type === "Playoffs" && best === 1;
         const draw = (n, parent) => {
@@ -1500,8 +1501,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
           return h("td", { class: "vs" }, later && !earlier ? "Bye" : "–");
         }
         const mine = g.a === m ? g.ap : g.bp, theirs = g.a === m ? g.bp : g.ap, opp = g.a === m ? g.b : g.a;
-        const res = mine > theirs ? "W" : mine < theirs ? "L" : "T";
-        return h("td", null, h("span", { class: "res " + res }, res), h("span", { class: "num" }, fmt(mine) + "–" + fmt(theirs)), " ", h("span", { class: "vs" }, "vs " + opp));
+        const res = mine == null ? (winner(g) === m ? "W" : "L") : mine > theirs ? "W" : mine < theirs ? "L" : "T";
+        return h("td", null, h("span", { class: "res " + res }, res), h("span", { class: "num" }, mine == null ? "score n/a" : fmt(mine) + "–" + fmt(theirs)), " ", h("span", { class: "vs" }, "vs " + opp));
       };
       const body = [];
       mgrs.forEach((m, i) => {

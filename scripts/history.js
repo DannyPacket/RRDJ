@@ -35,7 +35,8 @@ for (const [season, team, week, opp, place, , pf, pa, , cw, cl, ct, , , , type, 
   if (type === 'Playoffs' || type === 'Consolation') {
     // playoff and consolation games: [season, week, type, a, aPts, b, bPts] (categories seasons in categories won)
     const pk = season + '|' + wk + '|' + [team, opp].sort().join('|');
-    if (opp && pf !== '' && pa !== '' && !pseen.has(pk)) { pseen.add(pk); playoffGames.push([season, wk, type, team, num(pf), opp, num(pa)]); }
+    // a game whose scores aren't known yet keeps null scores; the site takes the winner from the final places
+    if (opp && !pseen.has(pk)) { pseen.add(pk); playoffGames.push([season, wk, type, team, pf === '' ? null : num(pf), opp, pa === '' ? null : num(pa)]); }
     continue;
   }
   if (type && type !== 'Regular') continue;
