@@ -23,13 +23,19 @@ const rows = fs.readFileSync(csvFile, 'utf8').split(/\r?\n/).filter(Boolean).map
   out.push(cur); return out;
 }).slice(1);
 const num = s => parseFloat(String(s).replace(/,/g, ''));
-const games = [], catGames = [], seen = new Set(), finals = {}, lastWk = {}, regular = {}, catRecords = {};
+const games = [], catGames = [], playoffGames = [], pseen = new Set(), seen = new Set(), finals = {}, lastWk = {}, regular = {}, catRecords = {};
 for (const [season, team, week, opp, place, , pf, pa, , cw, cl, ct, , , , type, scoring] of rows) {
   const wk = Number(week);
   if (wk === 100) {
     (finals[season] = finals[season] || {})[team] = Number(place);
     // categories seasons: keep the season W-L-T for display (finishes table), never for points stats
     if (scoring === 'Categories') (catRecords[season] = catRecords[season] || {})[team] = [Number(cw), Number(cl), Number(ct)];
+    continue;
+  }
+  if (type === 'Playoffs' || type === 'Consolation') {
+    // playoff and consolation games: [season, week, type, a, aPts, b, bPts] (categories seasons in categories won)
+    const pk = season + '|' + wk + '|' + [team, opp].sort().join('|');
+    if (opp && pf !== '' && pa !== '' && !pseen.has(pk)) { pseen.add(pk); playoffGames.push([season, wk, type, team, num(pf), opp, num(pa)]); }
     continue;
   }
   if (type && type !== 'Regular') continue;
@@ -41,6 +47,7 @@ for (const [season, team, week, opp, place, , pf, pa, , cw, cl, ct, , , , type, 
   seen.add(key);
   (scoring === 'Categories' ? catGames : games).push([season, wk, team, num(pf), opp, num(pa)]);
 }
+playoffGames.sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]));
 for (const g of [games, catGames]) g.sort((x, y) => (x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]));
 const champions = Object.fromEntries(Object.entries(finals).map(([s, f]) => [s, Object.keys(f).find(m => f[m] === 1)]).filter(([, m]) => m));
 const odd = {};
@@ -55,6 +62,6 @@ const r = JSON.parse(fs.readFileSync(reportsFile, 'utf8'));
 // Category totals and per-category records for categories seasons, pulled once from Yahoo's Team Stats page (cat_stats.json)
 const catFile = require('path').join(__dirname, 'cat_stats.json');
 const catStats = fs.existsSync(catFile) ? JSON.parse(fs.readFileSync(catFile, 'utf8')) : {};
-r.history = { games, catGames, finals, champions, odd, regular, catRecords, catStats };
+r.history = { games, catGames, playoffGames, finals, champions, odd, regular, catRecords, catStats };
 fs.writeFileSync(reportsFile, JSON.stringify(r, null, 1));
-console.log('games', games.length, '| categories games', catGames.length, '| finals', Object.keys(finals).join(', '), '| champions', JSON.stringify(champions), '| odd weeks', JSON.stringify(odd));
+console.log('games', games.length, '| categories games', catGames.length, '| playoff games', playoffGames.length, '| finals', Object.keys(finals).join(', '), '| champions', JSON.stringify(champions), '| odd weeks', JSON.stringify(odd));
