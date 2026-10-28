@@ -245,6 +245,33 @@ ul.plain.moves { gap: 0; }
 .export-actions button.primary { background: var(--ink); color: var(--board); border-color: var(--ink); }
 .export-status { font-size: 13px; color: var(--muted); margin-left: auto; }
 
+/* Playoff and consolation brackets (Final page) */
+.bracket-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
+.bracket { display: grid; gap: 6px; min-width: max-content; }
+.br-heads { display: flex; gap: var(--br-gap); }
+.br-heads > div { width: var(--br-w); font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.br-heads b { display: block; color: var(--ink); font: 800 16px var(--display); letter-spacing: .04em; }
+.br-tree { display: grid; gap: 4px; margin-top: 10px; }
+.br-label { font: 600 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.br-tree.br-champ .br-label { color: var(--red); }
+.br-area { position: relative; }
+.br-area svg { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.br-area svg path { fill: none; stroke: var(--line); stroke-width: 2; }
+.br-area svg path.hot { stroke: var(--red); stroke-width: 3; }
+.br-game { position: absolute; width: var(--br-w); background: var(--board); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.br-game.final-game { border: 2px solid var(--red); }
+.br-row { display: grid; grid-template-columns: 18px auto minmax(0, 1fr) auto; gap: 7px; align-items: center; height: 30px; padding: 0 9px; }
+.br-row + .br-row { border-top: 1px solid var(--line); }
+.br-row .seed { font: 600 11px var(--mono); color: var(--muted); text-align: right; }
+.br-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+.br-row .sc { font: 600 13px var(--mono); color: var(--muted); }
+.br-row.won .nm, .br-row.won .sc { font-weight: 700; color: var(--ink); }
+.br-row.won { background: color-mix(in srgb, var(--win) 10%, transparent); }
+.br-row.lost .nm { color: var(--muted); }
+.br-bye { position: absolute; width: var(--br-w); height: 30px; display: grid; grid-template-columns: 18px auto minmax(0, 1fr) auto; gap: 7px; align-items: center; padding: 0 9px; border: 1px dashed var(--line); border-radius: 8px; color: var(--muted); font-size: 13px; }
+.br-bye .seed { font: 600 11px var(--mono); text-align: right; }
+.br-bye .tag { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+
 /* Tabs */
 .tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
 .tabs button { font: 700 15px var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 8px 14px; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; }
@@ -544,8 +571,10 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
     $("content").replaceChildren(...[
       w.week === 100 ? podium(s, w) : null,
+      w.week === 100 ? bracket(s, w, "Playoffs") : null,
       h("div", { class: "cols top" }, h("div", null, left), h("div", null, right)),
       journey(s, w),
+      w.week === 100 ? bracket(s, w, "Consolation") : null,
       w.week === 100 ? null : h("div", { class: "pair" }, pair),
       ...stars,
       ...(fromSheet ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
@@ -1052,6 +1081,83 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       h("div", { class: "muted small", style: "margin-top:8px" }, "Rank after each week" + (w.week === 100 ? ", then the final place after the playoffs (dashed)" : "") + ". Dashed red line = playoff cut (top 8). Click a line or a name to follow a manager.")));
   }
 
+  // Brackets for the Final page. Each place game (a game neither team plays past) is the root of a tree; a team's
+  // previous-round game hangs off it only if they won it, so the title game shows the whole winners' path and the
+  // 3rd/5th/7th place games show just how those teams got there. A team with no earlier game in the bracket had a bye.
+  function bracket(s, w, type) {
+    const all = ((w.bracket || {}).games || []).filter(g => g.type === type);
+    if (!all.length) return null;
+    const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
+    const seed = last ? Object.fromEntries(last.standings.map(r => [r.mgr, r.rank])) : {};
+    const place = Object.fromEntries(w.standings.map(r => [r.mgr, r.rank]));
+    const rounds = [...new Set(all.map(g => g.w))].sort((a, b) => a - b);
+    const at = {}; all.forEach(g => { (at[g.w] = at[g.w] || {})[g.a] = g; at[g.w][g.b] = g; });
+    const winner = g => g.ap > g.bp ? g.a : g.bp > g.ap ? g.b : (place[g.a] || 99) < (place[g.b] || 99) ? g.a : g.b;
+    const top = g => (seed[g.a] || 99) <= (seed[g.b] || 99) ? [g.a, g.b] : [g.b, g.a];
+    const playsLater = (m, r) => rounds.slice(r + 1).some(x => at[x] && at[x][m]);
+    const playedBefore = (m, r) => rounds.slice(0, r).some(x => at[x] && at[x][m]);
+    const node = (g, r) => ({ g, r, kids: r === 0 ? [] : top(g).map(m => {
+      const prev = at[rounds[r - 1]] && at[rounds[r - 1]][m];
+      if (prev) return winner(prev) === m ? node(prev, r - 1) : null;
+      return playedBefore(m, r) ? null : { bye: m, r: r - 1 };
+    }).filter(Boolean) });
+    const roots = all.filter(g => !playsLater(g.a, rounds.indexOf(g.w)) && !playsLater(g.b, rounds.indexOf(g.w)))
+      .map(g => ({ t: node(g, rounds.indexOf(g.w)), best: Math.min(place[g.a] || 99, place[g.b] || 99) }))
+      .sort((a, b) => a.best - b.best);
+
+    const W = 232, GAP = 52, SLOT = 74, GH = 62, BH = 30;
+    const NS = "http://www.w3.org/2000/svg";
+    const isFinal = r => type === "Playoffs" && r === rounds.length - 1;
+    const roundName = r => type === "Playoffs" ? (["Final", "Semifinals", "Quarterfinals"][rounds.length - 1 - r] || "Round " + (r + 1)) : "Round " + (r + 1);
+    const champ = w.standings.find(r => r.rank === 1);
+    const row = (m, sc, cls) => h("div", { class: "br-row " + cls },
+      h("span", { class: "seed" }, seed[m] || ""),
+      avatar(m, s.logos && s.logos[m], 22, "sm"),
+      h("span", { class: "nm" }, m),
+      h("span", { class: "sc" }, fmt(sc)));
+    const drawTree = ({ t, best }) => {
+      let leaf = 0;
+      const lay = n => {
+        if (n.bye || !n.kids.length) { n.y = leaf++ * SLOT; return; }
+        n.kids.forEach(lay);
+        n.y = n.kids.reduce((a, k) => a + k.y, 0) / n.kids.length;
+      };
+      lay(t);
+      const height = Math.max(leaf, 1) * SLOT - (SLOT - GH);
+      const area = h("div", { class: "br-area", style: "height:" + height + "px;width:" + (rounds.length * W + (rounds.length - 1) * GAP) + "px" });
+      const svg = document.createElementNS(NS, "svg");
+      svg.setAttribute("aria-hidden", "true");
+      const x = r => r * (W + GAP);
+      const hotPath = n => n.g && champ && winner(n.g) === champ.mgr;
+      const draw = (n, parent) => {
+        if (n.bye) {
+          area.append(h("div", { class: "br-bye", style: "left:" + x(n.r) + "px;top:" + (n.y + (GH - BH) / 2) + "px" },
+            h("span", { class: "seed" }, seed[n.bye] || ""), avatar(n.bye, s.logos && s.logos[n.bye], 22, "sm"), h("span", { class: "nm" }, n.bye), h("span", { class: "tag" }, "Bye")));
+        } else {
+          const [a, b] = top(n.g), wn = winner(n.g), score = m => m === n.g.a ? n.g.ap : n.g.bp;
+          area.append(h("div", { class: "br-game" + (isFinal(n.r) && best === 1 ? " final-game" : ""), style: "left:" + x(n.r) + "px;top:" + n.y + "px", title: "Week " + n.g.w },
+            row(a, score(a), a === wn ? "won" : "lost"), row(b, score(b), b === wn ? "won" : "lost")));
+          n.kids.forEach(k => draw(k, n));
+        }
+        if (parent) {
+          const y1 = n.y + GH / 2, y2 = parent.y + GH / 2, x1 = x(n.r) + W, x2 = x(parent.r), xm = x1 + GAP / 2;
+          const path = document.createElementNS(NS, "path");
+          path.setAttribute("d", "M" + x1 + " " + y1 + "H" + xm + "V" + y2 + "H" + x2);
+          if (best === 1 && hotPath(n)) path.setAttribute("class", "hot");
+          svg.append(path);
+        }
+      };
+      draw(t, null);
+      area.prepend(svg);
+      const label = best === 1 ? "Championship" : best < 99 ? ord(best) + " place" : "Placement game";
+      return h("div", { class: "br-tree" + (best === 1 ? " br-champ" : "") }, h("div", { class: "br-label" }, label + (best === 1 && champ ? " · 🏆 " + champ.mgr : "")), area);
+    };
+    const heads = h("div", { class: "br-heads" }, rounds.map((wk, r) => h("div", null, h("b", null, roundName(r)), "Week " + wk)));
+    const note = type === "Playoffs" ? "Seeds are regular-season finishes. Winners in bold; the red line traces the champion's run." : "The teams that missed the playoffs, playing for 7th place on down.";
+    return sec(type === "Playoffs" ? s.label + " playoff bracket" : "Consolation bracket",
+      h("div", { class: "bracket-scroll" }, h("div", { class: "bracket", style: "--br-w:" + W + "px;--br-gap:" + GAP + "px" }, heads, roots.map(drawTree))),
+      h("div", { class: "muted small" }, note));
+  }
   function podium(s, w) {
     const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
     const regRank = last ? Object.fromEntries(last.standings.map(r => [r.mgr, r.rank])) : {};

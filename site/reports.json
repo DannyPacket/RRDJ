@@ -6852,7 +6852,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 148.8,
+        "bp": 130.3
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Tara",
+        "ap": 94.6,
+        "bp": 123.3
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Patrick",
+        "b": "Tom",
+        "ap": 76.6,
+        "bp": 84.2
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Will",
+        "ap": 120.4,
+        "bp": 151.7
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Jefe",
+        "ap": 187.1,
+        "bp": 134.6
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Patrick",
+        "ap": 94.1,
+        "bp": 69.3
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Tara",
+        "ap": 170.3,
+        "bp": 157.3
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Vin",
+        "ap": 146.2,
+        "bp": 127.5
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Will",
+        "ap": 143.9,
+        "bp": 149.7
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 149.4,
+        "bp": 75.1
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Will",
+        "ap": 126.1,
+        "bp": 125.6
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Steve",
+        "ap": 114.6,
+        "bp": 107.2
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Tim",
+        "ap": 140.5,
+        "bp": 91.5
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Tara",
+        "b": "Tom",
+        "ap": 114.8,
+        "bp": 129.3
+       }
+      ]
+     }
     }
    ]
   },
@@ -13834,7 +13955,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Jefe",
+        "ap": 114,
+        "bp": 83.8
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Tim",
+        "ap": 121.3,
+        "bp": 78.9
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Tara",
+        "ap": 155.5,
+        "bp": 138
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Tom",
+        "b": "Will",
+        "ap": 76.8,
+        "bp": 95
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Vin",
+        "ap": 120.6,
+        "bp": 114.8
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Tara",
+        "ap": 111.5,
+        "bp": 89.2
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Nick",
+        "ap": 114,
+        "bp": 85.2
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Palagi",
+        "b": "Steve",
+        "ap": 153.3,
+        "bp": 120.9
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Will",
+        "ap": 98.2,
+        "bp": 81.6
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 102.3,
+        "bp": 57.4
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Palagi",
+        "ap": 102.1,
+        "bp": 141.9
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Ronnie",
+        "ap": 127.2,
+        "bp": 96.7
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Will",
+        "ap": 95.9,
+        "bp": 109.1
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Vin",
+        "ap": 135,
+        "bp": 130.4
+       }
+      ]
+     }
     }
    ]
   },
@@ -20821,7 +21063,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Steve",
+        "ap": 123.3,
+        "bp": 121.5
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Ronnie",
+        "ap": 71.1,
+        "bp": 90.5
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Palagi",
+        "ap": 87.8,
+        "bp": 73.4
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Tara",
+        "b": "Tim",
+        "ap": 87,
+        "bp": 136.6
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Jefe",
+        "ap": 138.6,
+        "bp": 150.7
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Steve",
+        "ap": 90,
+        "bp": 141.6
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Tom",
+        "ap": 117.5,
+        "bp": 146.5
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Palagi",
+        "b": "Tara",
+        "ap": 112.1,
+        "bp": 90.8
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Vin",
+        "ap": 118,
+        "bp": 125
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Will",
+        "ap": 150.5,
+        "bp": 138.7
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Ronnie",
+        "ap": 130.3,
+        "bp": 93.2
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 112.8,
+        "bp": 103.9
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Will",
+        "ap": 125.7,
+        "bp": 85
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 122.6,
+        "bp": 71.7
+       }
+      ]
+     }
     }
    ]
   },
@@ -27589,7 +27952,7 @@
      "recap": [
       "Palagi wins the 2017-18 championship as the No. 3 seed! Palagi beat Steve (6) in the quarterfinals, beat Jefe (2) in the semifinals and beat Vin (1) in the final, 316.6 to 295.8.",
       "Vin settles for 2nd, and Nick takes 3rd by beating Jefe 232.5 to 165.7.",
-      "Upset of the playoffs: No. 5 Nick knocks off No. 2 Jefe in the final. Vin won the regular season at 18-3 but fell to Palagi in the final.",
+      "Vin won the regular season at 18-3 but fell to Palagi in the final.",
       "At the other end, Ronnie finishes 12th. See you next season."
      ],
      "matchups": [],
@@ -27851,7 +28214,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Ronnie",
+        "ap": 111,
+        "bp": 110.4
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Tim",
+        "ap": 154,
+        "bp": 87.8
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Palagi",
+        "b": "Steve",
+        "ap": 144,
+        "bp": 90.2
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Tom",
+        "b": "Zac",
+        "ap": 96.8,
+        "bp": 116.2
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Danny",
+        "b": "Joe",
+        "ap": 118,
+        "bp": 116.3
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Palagi",
+        "ap": 133.2,
+        "bp": 134.8
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Vin",
+        "ap": 123.6,
+        "bp": 128.9
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Tom",
+        "ap": 70.3,
+        "bp": 102.2
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Tim",
+        "ap": 105.1,
+        "bp": 131
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Will",
+        "b": "Zac",
+        "ap": 111,
+        "bp": 135.9
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 279.5,
+        "bp": 265.1
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Nick",
+        "ap": 165.7,
+        "bp": 232.5
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Joe",
+        "b": "Will",
+        "ap": 158.3,
+        "bp": 192.3
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Palagi",
+        "b": "Vin",
+        "ap": 316.6,
+        "bp": 295.8
+       }
+      ]
+     }
     }
    ]
   },
@@ -34415,7 +34899,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       21,
+       22,
+       23
+      ],
+      "games": [
+       {
+        "w": 21,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Palagi",
+        "ap": 111.4,
+        "bp": 108.7
+       },
+       {
+        "w": 21,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Zac",
+        "ap": 96.2,
+        "bp": 98.1
+       },
+       {
+        "w": 21,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Tom",
+        "ap": 120,
+        "bp": 100.6
+       },
+       {
+        "w": 21,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Will",
+        "ap": 96,
+        "bp": 114.4
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 122.2,
+        "bp": 132
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Joe",
+        "ap": 173,
+        "bp": 115.1
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Palagi",
+        "ap": 137.9,
+        "bp": 126.8
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Will",
+        "ap": 129.9,
+        "bp": 110.8
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Vin",
+        "ap": 113.3,
+        "bp": 114.1
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 115.9,
+        "bp": 109.9
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Joe",
+        "ap": 125.9,
+        "bp": 104.8
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Zac",
+        "ap": 117,
+        "bp": 116.5
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Vin",
+        "ap": 126.1,
+        "bp": 128
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Will",
+        "ap": 136.2,
+        "bp": 79
+       }
+      ]
+     }
     }
    ]
   },
@@ -44526,7 +45131,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       12,
+       13,
+       14
+      ],
+      "games": [
+       {
+        "w": 12,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Palagi",
+        "ap": 157.9,
+        "bp": 175.9
+       },
+       {
+        "w": 12,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Ronnie",
+        "ap": 117.9,
+        "bp": 145.1
+       },
+       {
+        "w": 12,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 123.6,
+        "bp": 206.7
+       },
+       {
+        "w": 12,
+        "type": "Playoffs",
+        "a": "Vin",
+        "b": "Will",
+        "ap": 194.6,
+        "bp": 162.2
+       },
+       {
+        "w": 13,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Will",
+        "ap": 133.5,
+        "bp": 185.2
+       },
+       {
+        "w": 13,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 157.6,
+        "bp": 178.6
+       },
+       {
+        "w": 13,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Palagi",
+        "ap": 180.7,
+        "bp": 161.1
+       },
+       {
+        "w": 13,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Tim",
+        "ap": 101.5,
+        "bp": 127
+       },
+       {
+        "w": 13,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Steve",
+        "ap": 105.8,
+        "bp": 138.3
+       },
+       {
+        "w": 13,
+        "type": "Consolation",
+        "a": "Tom",
+        "b": "Zac",
+        "ap": 179.6,
+        "bp": 129.1
+       },
+       {
+        "w": 14,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Palagi",
+        "ap": 157.7,
+        "bp": 137.1
+       },
+       {
+        "w": 14,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Vin",
+        "ap": 135.1,
+        "bp": 144.9
+       },
+       {
+        "w": 14,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Zac",
+        "ap": 123.2,
+        "bp": 160.1
+       },
+       {
+        "w": 14,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Tom",
+        "ap": 216.2,
+        "bp": 161.1
+       }
+      ]
+     }
     }
    ]
   },
@@ -52043,7 +52769,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       23,
+       24,
+       25
+      ],
+      "games": [
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Nick",
+        "ap": 160.7,
+        "bp": 165.4
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Palagi",
+        "b": "Ronnie",
+        "ap": 168.3,
+        "bp": 157.6
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Will",
+        "ap": 199.4,
+        "bp": 177.2
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Tom",
+        "ap": 180,
+        "bp": 168.6
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Danny",
+        "b": "Palagi",
+        "ap": 149.4,
+        "bp": 134.8
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Nick",
+        "ap": 279.2,
+        "bp": 160.7
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Will",
+        "ap": 238.3,
+        "bp": 211.1
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Tom",
+        "ap": 138.1,
+        "bp": 164.5
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Vin",
+        "ap": 208.5,
+        "bp": 212.7
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Tim",
+        "b": "Zac",
+        "ap": 138.1,
+        "bp": 148.7
+       },
+       {
+        "w": 25,
+        "type": "Consolation",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 169.7,
+        "bp": 147.8
+       },
+       {
+        "w": 25,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 189,
+        "bp": 142
+       },
+       {
+        "w": 25,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Steve",
+        "ap": 136.6,
+        "bp": 149
+       },
+       {
+        "w": 25,
+        "type": "Consolation",
+        "a": "Palagi",
+        "b": "Tim",
+        "ap": 127.7,
+        "bp": 170.8
+       }
+      ]
+     }
     }
    ]
   },
@@ -59149,7 +59996,128 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Jefe",
+        "ap": 185.2,
+        "bp": 230.1
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Zac",
+        "ap": 238.6,
+        "bp": 201.3
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Steve",
+        "ap": 143.7,
+        "bp": 162.8
+       },
+       {
+        "w": 22,
+        "type": "Consolation",
+        "a": "Tom",
+        "b": "Will",
+        "ap": 177.5,
+        "bp": 153.5
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 135.2,
+        "bp": 162.9
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Tim",
+        "ap": 161.9,
+        "bp": 187.4
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Vin",
+        "ap": 179.9,
+        "bp": 206.5
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Nick",
+        "b": "Will",
+        "ap": 185.7,
+        "bp": 136.6
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Palagi",
+        "b": "Steve",
+        "ap": 161.7,
+        "bp": 156.3
+       },
+       {
+        "w": 23,
+        "type": "Consolation",
+        "a": "Ronnie",
+        "b": "Tom",
+        "ap": 178.2,
+        "bp": 130.2
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Joe",
+        "ap": 168.8,
+        "bp": 158.8
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Palagi",
+        "b": "Ronnie",
+        "ap": 121.4,
+        "bp": 196.7
+       },
+       {
+        "w": 24,
+        "type": "Consolation",
+        "a": "Steve",
+        "b": "Tom",
+        "ap": 175.1,
+        "bp": 111.3
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Tim",
+        "b": "Vin",
+        "ap": 194.2,
+        "bp": 204.2
+       }
+      ]
+     }
     }
    ]
   },
@@ -65882,7 +66850,7 @@
      "recap": [
       "Nick wins the 2023-24 championship as the No. 1 seed! Nick beat Tom (8) in the quarterfinals, beat Steve (5) in the semifinals and beat Vin (2) in the final, 175.4 to 165.3.",
       "Vin settles for 2nd, and Steve takes 3rd by beating Zac 151.1 to 136.5.",
-      "Upset of the playoffs: No. 7 Jefe knocks off No. 4 Ronnie in the final. Nick did it all, winning the regular season at 17-4 too.",
+      "Nick did it all, winning the regular season at 17-4 too.",
       "At the other end, Joe finishes 12th. See you next season."
      ],
      "matchups": [],
@@ -66134,7 +67102,112 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 158.1,
+        "bp": 168.4
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 187.9,
+        "bp": 230.5
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Tom",
+        "ap": 166.8,
+        "bp": 139.3
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Steve",
+        "ap": 119.7,
+        "bp": 160.7
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Jefe",
+        "ap": 171.2,
+        "bp": 195.7
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Steve",
+        "ap": 189.9,
+        "bp": 185.1
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Tom",
+        "ap": 156.9,
+        "bp": 138.3
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Vin",
+        "b": "Zac",
+        "ap": 188.9,
+        "bp": 174.8
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Tom",
+        "ap": 183.7,
+        "bp": 159.2
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Ronnie",
+        "ap": 147.4,
+        "bp": 147.1
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Vin",
+        "ap": 175.4,
+        "bp": 165.3
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Steve",
+        "b": "Zac",
+        "ap": 151.1,
+        "bp": 136.5
+       }
+      ]
+     }
     }
    ]
   },
@@ -72824,7 +73897,7 @@
      "recap": [
       "Jefe wins the 2024-25 championship as the No. 1 seed! Jefe beat Vin (8) in the quarterfinals, beat Steve (4) in the semifinals and beat Danny (2) in the final, 210.3 to 135.0.",
       "Danny settles for 2nd, and Steve takes 3rd by beating Ronnie 202.5 to 161.2.",
-      "Upset of the playoffs: No. 8 Vin knocks off No. 3 Hallie in the final. Jefe did it all, winning the regular season at 17-3-1 too.",
+      "Upset of the playoffs: No. 6 Ronnie knocks off No. 3 Hallie in the quarterfinals. Jefe did it all, winning the regular season at 17-3-1 too.",
       "Around the league: Alex Ovechkin scored goal 895, passing Wayne Gretzky for the most in NHL history.",
       "At the other end, Tim finishes 12th. See you next season."
      ],
@@ -73077,7 +74150,112 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       22,
+       23,
+       24
+      ],
+      "games": [
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 175,
+        "bp": 143.9
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Hallie",
+        "b": "Ronnie",
+        "ap": 131.2,
+        "bp": 155.7
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 175.6,
+        "bp": 144.8
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Steve",
+        "ap": 149.8,
+        "bp": 164.6
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Ronnie",
+        "ap": 180.9,
+        "bp": 134
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Hallie",
+        "b": "Zac",
+        "ap": 196.4,
+        "bp": 167.7
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Steve",
+        "ap": 179.5,
+        "bp": 165.2
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Vin",
+        "ap": 161.8,
+        "bp": 182.9
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Jefe",
+        "ap": 135,
+        "bp": 210.3
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Hallie",
+        "b": "Vin",
+        "ap": 112.6,
+        "bp": 138.2
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Zac",
+        "ap": 150.1,
+        "bp": 142.7
+       },
+       {
+        "w": 24,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Steve",
+        "ap": 161.2,
+        "bp": 202.5
+       }
+      ]
+     }
     }
    ]
   },
@@ -79799,7 +80977,112 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "bracket": {
+      "weeks": [
+       21,
+       22,
+       23
+      ],
+      "games": [
+       {
+        "w": 21,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Zac",
+        "ap": 188.6,
+        "bp": 191.5
+       },
+       {
+        "w": 21,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Ronnie",
+        "ap": 186.5,
+        "bp": 182.8
+       },
+       {
+        "w": 21,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Vin",
+        "ap": 172.8,
+        "bp": 191
+       },
+       {
+        "w": 21,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Will",
+        "ap": 172.4,
+        "bp": 167.1
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Joe",
+        "ap": 140.2,
+        "bp": 173.3
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Nick",
+        "ap": 185.3,
+        "bp": 159.7
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Ronnie",
+        "b": "Will",
+        "ap": 166.6,
+        "bp": 145.1
+       },
+       {
+        "w": 22,
+        "type": "Playoffs",
+        "a": "Vin",
+        "b": "Zac",
+        "ap": 181.1,
+        "bp": 164.2
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Danny",
+        "b": "Will",
+        "ap": 186.2,
+        "bp": 217.5
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Jefe",
+        "b": "Vin",
+        "ap": 187,
+        "bp": 172
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Joe",
+        "b": "Ronnie",
+        "ap": 205.6,
+        "bp": 170.5
+       },
+       {
+        "w": 23,
+        "type": "Playoffs",
+        "a": "Nick",
+        "b": "Zac",
+        "ap": 203.7,
+        "bp": 221.2
+       }
+      ]
+     }
     }
    ]
   },

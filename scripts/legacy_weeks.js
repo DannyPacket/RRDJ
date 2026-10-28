@@ -117,6 +117,15 @@ function bracketOf(S) {
   const firstPlaying = new Set(Object.entries(S.post[pw[0]] || {}).filter(([, g]) => g.type === 'Playoffs').map(([m]) => m));
   return { pw, teams: [...teams], byes: [...teams].filter(m => !firstPlaying.has(m)) };
 }
+// Every playoff and consolation game once, for the bracket on the Final page (the page lays out the tree)
+function bracketGames(S) {
+  const { pw } = bracketOf(S), games = [];
+  for (const w of pw) for (const [m, g] of Object.entries(S.post[w])) {
+    if (m > g.opp && S.post[w][g.opp]) continue;
+    games.push({ w, type: g.type, a: m, b: g.opp, ap: g.p, bp: g.q });
+  }
+  return { weeks: pw, games };
+}
 function playoffPicture(S, standings) {
   const { teams, byes } = bracketOf(S), seed = seedsOf(standings);
   const field = teams.slice().sort((a, b) => seed[a] - seed[b]);
@@ -146,7 +155,10 @@ function championStory(id, S, regStandings, fin) {
   const third3 = games(third).find(x => roundOf(x.w) === 'final' && x.g.p > x.g.q);
   out.push(`${second} settles for 2nd` + (third3 ? `, and ${third} takes 3rd by beating ${third3.g.opp} ${f1(third3.g.p)} to ${f1(third3.g.q)}.` : `, and ${third} finishes 3rd.`));
   // biggest seed upset of the bracket
-  const ups = []; pw.forEach(w => Object.entries(S.post[w] || {}).forEach(([m, g]) => { if (g.type === 'Playoffs' && g.p > g.q && seed[m] - seed[g.opp] >= 3) ups.push({ w, m, g, gap: seed[m] - seed[g.opp] }); }));
+  // only games between two teams that were both still alive for the title (not the 3rd/5th/7th place games)
+  const out_ = {}; pw.forEach(w => Object.entries(S.post[w] || {}).forEach(([m, g]) => { if (g.type === 'Playoffs' && g.p < g.q) out_[m] = out_[m] ?? w; }));
+  const alive = (m, w) => out_[m] === undefined || out_[m] >= w;
+  const ups = []; pw.forEach(w => Object.entries(S.post[w] || {}).forEach(([m, g]) => { if (g.type === 'Playoffs' && g.p > g.q && alive(m, w) && alive(g.opp, w) && seed[m] - seed[g.opp] >= 3) ups.push({ w, m, g, gap: seed[m] - seed[g.opp] }); }));
   const up = ups.sort((a, b) => b.gap - a.gap)[0];
   const extra = [];
   if (up && up.m !== champ) extra.push(`Upset of the playoffs: No. ${seed[up.m]} ${up.m} knocks off No. ${seed[up.g.opp]} ${up.g.opp} in the ${roundOf(up.w)}.`);
@@ -310,7 +322,7 @@ for (const [id, S] of Object.entries(bySeason)) {
     const recap = championStory(id, S, last.standings, fin);
     const late = newsAfter(id, last.end);
     if (late) recap.splice(recap.length - 1, 0, late);
-    weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [] });
+    weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [], bracket: bracketGames(S) });
   }
   seasonsOut.push({ id, label: id, source: 'sheet', teams: teamNames[id] || {}, logos, schedule, weeks });
 }
