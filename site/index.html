@@ -890,6 +890,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       const y = hSeason = seasonSel.value, k = sSort.key;
       if (view === "seasons") setHash("seasons-" + y);
       const catY = isCat(y), dash = (v, f) => catY ? "–" : f(v);
+      // playoff cut: the size of that season's playoff field (the current season uses this year's 8-team format)
+      const field = new Set((H.playoffGames || []).filter(g => g[0] === y && g[2] === "Playoffs").flatMap(g => [g[3], g[5]])).size;
+      const cut = field || (live(y) ? 8 : 0);
       const rows = Object.values(S[y] || {}).map(r => Object.assign({}, r, { pct: pct(r), net: catY ? null : r.pf - r.pa, avg: catY ? null : r.gp ? r.pf / r.gp : 0, pf: catY ? null : r.pf, pa: catY ? null : r.pa, hs: catY ? null : r.hs,
         reg: (regPlace[y] || {})[r.m], post: (finals[y] || {})[r.m] }));
       rows.sort((a, b) => (k === "m" ? sSort.dir * (a.m < b.m ? -1 : a.m > b.m ? 1 : 0)
@@ -898,7 +901,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("thead", null, h("tr", null, h("th", null, "#"), scols.map(([key, label, r]) => h("th", { class: r ? "r" : null, "aria-sort": k === key ? (sSort.dir < 0 ? "descending" : "ascending") : null },
           h("button", { type: "button", class: "sort", onclick: () => { sSort = { key, dir: k === key ? -sSort.dir : (["m", "reg", "post", "pa"].includes(key) ? 1 : -1) }; drawSeason(); } },
             label, k === key ? (sSort.dir < 0 ? " ▾" : " ▴") : ""))))),
-        h("tbody", null, rows.map((r, i) => h("tr", null,
+        h("tbody", null, rows.map((r, i) => h("tr", { class: cut && k === "reg" && sSort.dir > 0 && r.reg === cut ? "playoff-cut" : null },
           h("td", { class: "num rk" }, i + 1),
           h("td", null, whoLink(r.m, false, logosOf(y), teamsOf(y)[r.m])),
           h("td", { class: "r num" }, rec3(r)),
@@ -1027,8 +1030,11 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         logos[m] ? h("img", { class: "logo xl", src: logos[m], alt: "", width: "72", height: "72", onerror: e => e.target.remove() }) : null,
         h("div", null, h("div", { class: "champ-name" }, m),
           h("div", { class: "muted" }, latest.teams && latest.teams[m] ? latest.teams[m] : "Inactive"),
-          h("div", { class: "small", style: "margin-top:4px" }, titles.length ? "🏆 Champion " + titles.join(", ") : "Still chasing a first title"),
-          [[2, "🥈 Runner-up "], [3, "🥉 Third "]].map(([pl, label]) => { const ys = done.filter(y => finals[y][m] === pl); return ys.length ? h("div", { class: "small" }, label + ys.join(", ")) : null; })));
+          [[1, "🏆 Champion: "], [2, "🥈 Runner-up: "], [3, "🥉 Third place: "]].map(([pl, label], i) => {
+            const ys = done.filter(y => finals[y][m] === pl);
+            return ys.length ? h("div", { class: "small", style: i ? null : "margin-top:4px" }, label + ys.join(", ") + (ys.length > 1 ? " (" + ys.length + ")" : ""))
+              : pl === 1 ? h("div", { class: "small", style: "margin-top:4px" }, "Still chasing a first title") : null;
+          })));
       const tiles = h("div", { class: "tiles" },
         tile("All-time record", rec3(a), ord(order.indexOf(m) + 1) + " of " + mgrs.length + " all-time"),
         tile("Win %", a.pct.toFixed(3).replace(/^0/, ""), a.gr + " games"),
@@ -1271,7 +1277,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       foot);
     if (view === "seasons") return $("content").replaceChildren(
       sec("Season history", panel(h("div", { class: "picker", style: "margin-bottom:14px" }, h("label", { for: "season-view" }, "Season"), seasonSel), seasonBody),
-        h("div", { class: "muted small" }, "Regular season = place after the last regular-season week. Postseason = final place including playoffs. Single-week records leave out multi-week periods and short weeks.")),
+        h("div", { class: "muted small" }, "Red line = playoff cut (shown when sorted by regular season). Regular season = place after the last regular-season week. Postseason = final place including playoffs. Single-week records leave out multi-week periods and short weeks.")),
       foot);
     if (view === "manager") return $("content").replaceChildren(
       h("div", { class: "picker" }, h("label", { for: "manager-view" }, "Manager"), mgrSel), mgrBody, foot);
