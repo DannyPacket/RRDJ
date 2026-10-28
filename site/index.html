@@ -246,31 +246,48 @@ ul.plain.moves { gap: 0; }
 .export-status { font-size: 13px; color: var(--muted); margin-left: auto; }
 
 /* Playoff and consolation brackets (Final page) */
-.bracket-scroll { overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
-.bracket { display: grid; gap: 6px; min-width: max-content; }
+.br-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.br-toggle { margin-left: auto; display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.br-toggle button { font: 600 12px var(--mono); padding: 5px 10px; border: 0; background: var(--board); color: var(--muted); cursor: pointer; }
+.br-toggle button[aria-pressed="true"] { background: var(--ink); color: var(--board); }
+.export-sheet .br-toggle { display: none; }
+.bracket-scroll { overflow-x: auto; overflow-y: hidden; }
+.bracket { display: grid; gap: 4px; min-width: max-content; }
+.br-sub { font: 800 15px var(--display); letter-spacing: .06em; text-transform: uppercase; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
 .br-heads { display: flex; gap: var(--br-gap); }
-.br-heads > div { width: var(--br-w); font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
-.br-heads b { display: block; color: var(--ink); font: 800 16px var(--display); letter-spacing: .04em; }
-.br-tree { display: grid; gap: 4px; margin-top: 10px; }
-.br-label { font: 600 12px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.br-tree.br-champ .br-label { color: var(--red); }
+.br-heads > div { width: var(--br-w); font: 600 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.br-heads b { color: var(--ink); font: 800 14px var(--display); letter-spacing: .04em; margin-right: 6px; }
 .br-area { position: relative; }
 .br-area svg { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
-.br-area svg path { fill: none; stroke: var(--line); stroke-width: 2; }
-.br-area svg path.hot { stroke: var(--red); stroke-width: 3; }
-.br-game { position: absolute; width: var(--br-w); background: var(--board); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.br-area svg path { fill: none; stroke: var(--line); stroke-width: 1.5; }
+.br-area svg path.hot { stroke: var(--red); stroke-width: 2.5; }
+.br-label { position: absolute; font: 600 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.br-label.champ-l { color: var(--red); }
+.br-game { position: absolute; width: var(--br-w); background: var(--board); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
 .br-game.final-game { border: 2px solid var(--red); }
-.br-row { display: grid; grid-template-columns: 18px auto minmax(0, 1fr) auto; gap: 7px; align-items: center; height: 30px; padding: 0 9px; }
+.br-row, .br-bye { display: grid; grid-template-columns: 14px 16px minmax(0, 1fr) auto; gap: 5px; align-items: center; height: 22px; padding: 0 7px; font-size: 13px; }
 .br-row + .br-row { border-top: 1px solid var(--line); }
-.br-row .seed { font: 600 11px var(--mono); color: var(--muted); text-align: right; }
-.br-row .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
-.br-row .sc { font: 600 13px var(--mono); color: var(--muted); }
+.br-row .seed, .br-bye .seed { font: 600 10px var(--mono); color: var(--muted); text-align: right; }
+.br-row .nm, .br-bye .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.br-row .sc { font: 600 12px var(--mono); color: var(--muted); }
 .br-row.won .nm, .br-row.won .sc { font-weight: 700; color: var(--ink); }
 .br-row.won { background: color-mix(in srgb, var(--win) 10%, transparent); }
 .br-row.lost .nm { color: var(--muted); }
-.br-bye { position: absolute; width: var(--br-w); height: 30px; display: grid; grid-template-columns: 18px auto minmax(0, 1fr) auto; gap: 7px; align-items: center; padding: 0 9px; border: 1px dashed var(--line); border-radius: 8px; color: var(--muted); font-size: 13px; }
-.br-bye .seed { font: 600 11px var(--mono); text-align: right; }
-.br-bye .tag { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.br-bye { position: absolute; width: var(--br-w); border: 1px dashed var(--line); border-radius: 6px; color: var(--muted); }
+.br-bye .tag { margin: 0; font-size: 10px; padding: 1px 5px; }
+.logo.xs { width: 16px; height: 16px; }
+.logo.initial.xs { font-size: 10px; }
+table.br-table { font-size: 13px; min-width: 640px; }
+table.br-table td { height: auto; padding: 4px 6px; white-space: nowrap; }
+table.br-table th small { display: block; font-size: 10px; letter-spacing: .06em; color: var(--muted); }
+table.br-table th b { color: var(--ink); }
+table.br-table tr.grp td { font: 800 13px var(--display); letter-spacing: .06em; text-transform: uppercase; padding-top: 12px; border-bottom: 2px solid var(--line); }
+table.br-table .res { display: inline-block; width: 18px; font: 700 11px var(--mono); }
+table.br-table .res.W { color: var(--win); } table.br-table .res.L { color: var(--loss); } table.br-table .res.T { color: var(--muted); }
+table.br-table .vs { color: var(--muted); font-size: 12px; }
+table.br-table .br-who { display: inline-flex; align-items: center; gap: 6px; }
+table.br-table .logo.xs { width: 18px; height: 18px; }
+table.br-table .seedn { color: var(--muted); font: 600 11px var(--mono); }
 
 /* Tabs */
 .tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--line); }
@@ -571,10 +588,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
     $("content").replaceChildren(...[
       w.week === 100 ? podium(s, w) : null,
-      w.week === 100 ? bracket(s, w, "Playoffs") : null,
+      w.week === 100 ? playoffs(s, w) : null,
       h("div", { class: "cols top" }, h("div", null, left), h("div", null, right)),
       journey(s, w),
-      w.week === 100 ? bracket(s, w, "Consolation") : null,
       w.week === 100 ? null : h("div", { class: "pair" }, pair),
       ...stars,
       ...(fromSheet ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
@@ -1084,79 +1100,134 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
   // Brackets for the Final page. Each place game (a game neither team plays past) is the root of a tree; a team's
   // previous-round game hangs off it only if they won it, so the title game shows the whole winners' path and the
   // 3rd/5th/7th place games show just how those teams got there. A team with no earlier game in the bracket had a bye.
-  function bracket(s, w, type) {
-    const all = ((w.bracket || {}).games || []).filter(g => g.type === type);
-    if (!all.length) return null;
+  // Trees are packed column by column so the smaller place games sit under the final instead of below everything.
+  let brView = (() => { try { return localStorage.getItem("rrdj-bracket-view") || "bracket"; } catch (e) { return "bracket"; } })();
+  function playoffs(s, w) {
+    const games = (w.bracket || {}).games || [];
+    if (!games.length) return null;
     const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
     const seed = last ? Object.fromEntries(last.standings.map(r => [r.mgr, r.rank])) : {};
     const place = Object.fromEntries(w.standings.map(r => [r.mgr, r.rank]));
-    const rounds = [...new Set(all.map(g => g.w))].sort((a, b) => a - b);
-    const at = {}; all.forEach(g => { (at[g.w] = at[g.w] || {})[g.a] = g; at[g.w][g.b] = g; });
+    const champ = (w.standings.find(r => r.rank === 1) || {}).mgr;
     const winner = g => g.ap > g.bp ? g.a : g.bp > g.ap ? g.b : (place[g.a] || 99) < (place[g.b] || 99) ? g.a : g.b;
     const top = g => (seed[g.a] || 99) <= (seed[g.b] || 99) ? [g.a, g.b] : [g.b, g.a];
-    const playsLater = (m, r) => rounds.slice(r + 1).some(x => at[x] && at[x][m]);
-    const playedBefore = (m, r) => rounds.slice(0, r).some(x => at[x] && at[x][m]);
-    const node = (g, r) => ({ g, r, kids: r === 0 ? [] : top(g).map(m => {
-      const prev = at[rounds[r - 1]] && at[rounds[r - 1]][m];
-      if (prev) return winner(prev) === m ? node(prev, r - 1) : null;
-      return playedBefore(m, r) ? null : { bye: m, r: r - 1 };
-    }).filter(Boolean) });
-    const roots = all.filter(g => !playsLater(g.a, rounds.indexOf(g.w)) && !playsLater(g.b, rounds.indexOf(g.w)))
-      .map(g => ({ t: node(g, rounds.indexOf(g.w)), best: Math.min(place[g.a] || 99, place[g.b] || 99) }))
-      .sort((a, b) => a.best - b.best);
+    const types = ["Playoffs", "Consolation"].filter(t => games.some(g => g.type === t));
+    const roundsOf = t => [...new Set(games.filter(g => g.type === t).map(g => g.w))].sort((a, b) => a - b);
+    const roundName = (t, r, n) => t === "Playoffs" ? (["Final", "Semis", "Quarters"][n - 1 - r] || "Round " + (r + 1)) : "Round " + (r + 1);
+    const placeName = n => n === 1 ? "Final" : n < 99 ? ord(n) + " place" : "Placement";
 
-    const W = 232, GAP = 52, SLOT = 74, GH = 62, BH = 30;
-    const NS = "http://www.w3.org/2000/svg";
-    const isFinal = r => type === "Playoffs" && r === rounds.length - 1;
-    const roundName = r => type === "Playoffs" ? (["Final", "Semifinals", "Quarterfinals"][rounds.length - 1 - r] || "Round " + (r + 1)) : "Round " + (r + 1);
-    const champ = w.standings.find(r => r.rank === 1);
-    const row = (m, sc, cls) => h("div", { class: "br-row " + cls },
-      h("span", { class: "seed" }, seed[m] || ""),
-      avatar(m, s.logos && s.logos[m], 22, "sm"),
-      h("span", { class: "nm" }, m),
-      h("span", { class: "sc" }, fmt(sc)));
-    const drawTree = ({ t, best }) => {
-      let leaf = 0;
-      const lay = n => {
-        if (n.bye || !n.kids.length) { n.y = leaf++ * SLOT; return; }
-        n.kids.forEach(lay);
-        n.y = n.kids.reduce((a, k) => a + k.y, 0) / n.kids.length;
-      };
-      lay(t);
-      const height = Math.max(leaf, 1) * SLOT - (SLOT - GH);
-      const area = h("div", { class: "br-area", style: "height:" + height + "px;width:" + (rounds.length * W + (rounds.length - 1) * GAP) + "px" });
-      const svg = document.createElementNS(NS, "svg");
-      svg.setAttribute("aria-hidden", "true");
+    function tree(type) {
+      const all = games.filter(g => g.type === type), rounds = roundsOf(type);
+      const at = {}; all.forEach(g => { (at[g.w] = at[g.w] || {})[g.a] = g; at[g.w][g.b] = g; });
+      const playsLater = (m, r) => rounds.slice(r + 1).some(x => at[x] && at[x][m]);
+      const playedBefore = (m, r) => rounds.slice(0, r).some(x => at[x] && at[x][m]);
+      const node = (g, r) => ({ g, r, kids: r === 0 ? [] : top(g).map(m => {
+        const prev = at[rounds[r - 1]] && at[rounds[r - 1]][m];
+        if (prev) return winner(prev) === m ? node(prev, r - 1) : null;
+        return playedBefore(m, r) ? null : { bye: m, r: r - 1, kids: [] };
+      }).filter(Boolean) });
+      const roots = all.filter(g => !playsLater(g.a, rounds.indexOf(g.w)) && !playsLater(g.b, rounds.indexOf(g.w)))
+        .map(g => ({ t: node(g, rounds.indexOf(g.w)), best: Math.min(place[g.a] || 99, place[g.b] || 99) }))
+        .sort((a, b) => a.best - b.best);
+      const W = 176, GAP = 24, GH = 47, SLOT = 52, LAB = 15, PAD = 10;
       const x = r => r * (W + GAP);
-      const hotPath = n => n.g && champ && winner(n.g) === champ.mgr;
-      const draw = (n, parent) => {
-        if (n.bye) {
-          area.append(h("div", { class: "br-bye", style: "left:" + x(n.r) + "px;top:" + (n.y + (GH - BH) / 2) + "px" },
-            h("span", { class: "seed" }, seed[n.bye] || ""), avatar(n.bye, s.logos && s.logos[n.bye], 22, "sm"), h("span", { class: "nm" }, n.bye), h("span", { class: "tag" }, "Bye")));
-        } else {
-          const [a, b] = top(n.g), wn = winner(n.g), score = m => m === n.g.a ? n.g.ap : n.g.bp;
-          area.append(h("div", { class: "br-game" + (isFinal(n.r) && best === 1 ? " final-game" : ""), style: "left:" + x(n.r) + "px;top:" + n.y + "px", title: "Week " + n.g.w },
-            row(a, score(a), a === wn ? "won" : "lost"), row(b, score(b), b === wn ? "won" : "lost")));
-          n.kids.forEach(k => draw(k, n));
+      // lay out each tree on its own, then drop it as high as it fits without overlapping earlier trees in any column
+      const used = {}; let height = 0;
+      const placed = roots.map(R => {
+        let leaf = 0; const nodes = [];
+        const lay = n => { nodes.push(n); if (!n.kids.length) { n.y = leaf++ * SLOT; return; } n.kids.forEach(lay); n.y = n.kids.reduce((a, k) => a + k.y, 0) / n.kids.length; };
+        lay(R.t);
+        const ext = {};
+        nodes.forEach(n => { const e = ext[n.r] = ext[n.r] || [Infinity, -Infinity]; e[0] = Math.min(e[0], n.y - (n === R.t ? LAB : 0)); e[1] = Math.max(e[1], n.y + GH); });
+        let off = Math.max(0, ...Object.values(ext).map(e => -e[0])), moved = true;
+        while (moved) {
+          moved = false;
+          for (const c in ext) for (const [a, b] of used[c] || []) {
+            if (ext[c][0] + off < b + PAD && ext[c][1] + off > a - PAD) { off = b + PAD - ext[c][0]; moved = true; }
+          }
         }
-        if (parent) {
-          const y1 = n.y + GH / 2, y2 = parent.y + GH / 2, x1 = x(n.r) + W, x2 = x(parent.r), xm = x1 + GAP / 2;
-          const path = document.createElementNS(NS, "path");
-          path.setAttribute("d", "M" + x1 + " " + y1 + "H" + xm + "V" + y2 + "H" + x2);
-          if (best === 1 && hotPath(n)) path.setAttribute("class", "hot");
-          svg.append(path);
-        }
-      };
-      draw(t, null);
+        for (const c in ext) (used[c] = used[c] || []).push([ext[c][0] + off, ext[c][1] + off]);
+        nodes.forEach(n => { n.y += off; });
+        height = Math.max(height, ...Object.values(ext).map(e => e[1] + off));
+        return R;
+      });
+      const NS = "http://www.w3.org/2000/svg";
+      const area = h("div", { class: "br-area", style: "height:" + height + "px;width:" + (rounds.length * W + (rounds.length - 1) * GAP) + "px" });
+      const svg = document.createElementNS(NS, "svg"); svg.setAttribute("aria-hidden", "true");
+      const row = (m, sc, cls) => h("div", { class: "br-row " + cls }, h("span", { class: "seed" }, seed[m] || ""), avatar(m, s.logos && s.logos[m], 16, "xs"), h("span", { class: "nm" }, m), h("span", { class: "sc" }, fmt(sc)));
+      placed.forEach(({ t, best }) => {
+        const isTitle = type === "Playoffs" && best === 1;
+        const draw = (n, parent) => {
+          if (n.bye) area.append(h("div", { class: "br-bye", style: "left:" + x(n.r) + "px;top:" + (n.y + (GH - 22) / 2) + "px" },
+            h("span", { class: "seed" }, seed[n.bye] || ""), avatar(n.bye, s.logos && s.logos[n.bye], 16, "xs"), h("span", { class: "nm" }, n.bye), h("span", { class: "tag" }, "Bye")));
+          else {
+            const [a, b] = top(n.g), wn = winner(n.g), score = m => m === n.g.a ? n.g.ap : n.g.bp;
+            area.append(h("div", { class: "br-game" + (isTitle && !parent ? " final-game" : ""), style: "left:" + x(n.r) + "px;top:" + n.y + "px", title: "Week " + n.g.w },
+              row(a, score(a), a === wn ? "won" : "lost"), row(b, score(b), b === wn ? "won" : "lost")));
+            n.kids.forEach(k => draw(k, n));
+          }
+          if (parent) {
+            const y1 = n.y + GH / 2, y2 = parent.y + GH / 2, x1 = x(n.r) + W, x2 = x(parent.r), xm = x1 + GAP / 2;
+            const path = document.createElementNS(NS, "path");
+            path.setAttribute("d", "M" + x1 + " " + y1 + "H" + xm + "V" + y2 + "H" + x2);
+            if (isTitle && n.g && winner(n.g) === champ) path.setAttribute("class", "hot");
+            svg.append(path);
+          }
+        };
+        draw(t, null);
+        area.append(h("div", { class: "br-label" + (isTitle ? " champ-l" : ""), style: "left:" + x(t.r) + "px;top:" + (t.y - LAB) + "px" }, placeName(best) + (isTitle && champ ? " · 🏆 " + champ : "")));
+      });
       area.prepend(svg);
-      const label = best === 1 ? "Championship" : best < 99 ? ord(best) + " place" : "Placement game";
-      return h("div", { class: "br-tree" + (best === 1 ? " br-champ" : "") }, h("div", { class: "br-label" }, label + (best === 1 && champ ? " · 🏆 " + champ.mgr : "")), area);
+      return [
+        type === "Consolation" ? h("div", { class: "br-sub" }, "Consolation") : null,
+        h("div", { class: "br-heads" }, rounds.map((wk, r) => h("div", null, h("b", null, roundName(type, r, rounds.length)), "Wk " + wk))),
+        area];
+    }
+
+    function table() {
+      const weeks = [...new Set(games.map(g => g.w))].sort((a, b) => a - b), pr = roundsOf("Playoffs");
+      const typeOf = m => games.some(g => g.type === "Playoffs" && (g.a === m || g.b === m)) ? "Playoffs" : "Consolation";
+      const mgrs = [...new Set(games.flatMap(g => [g.a, g.b]))].sort((a, b) => (place[a] || 99) - (place[b] || 99));
+      const medal = n => n === 1 ? "🥇" : n === 2 ? "🥈" : n === 3 ? "🥉" : "";
+      const cell = (m, wk) => {
+        const g = games.find(g => g.w === wk && (g.a === m || g.b === m));
+        if (!g) {
+          const later = games.some(x => x.w > wk && x.type === typeOf(m) && (x.a === m || x.b === m)), earlier = games.some(x => x.w < wk && (x.a === m || x.b === m));
+          return h("td", { class: "vs" }, later && !earlier ? "Bye" : "–");
+        }
+        const mine = g.a === m ? g.ap : g.bp, theirs = g.a === m ? g.bp : g.ap, opp = g.a === m ? g.b : g.a;
+        const res = mine > theirs ? "W" : mine < theirs ? "L" : "T";
+        return h("td", null, h("span", { class: "res " + res }, res), h("span", { class: "num" }, fmt(mine) + "–" + fmt(theirs)), " ", h("span", { class: "vs" }, "vs " + opp));
+      };
+      const body = [];
+      mgrs.forEach((m, i) => {
+        if (typeOf(m) === "Consolation" && (i === 0 || typeOf(mgrs[i - 1]) !== "Consolation")) body.push(h("tr", { class: "grp" }, h("td", { colspan: String(weeks.length + 2) }, "Consolation")));
+        body.push(h("tr", null,
+          h("td", { class: "num" }, (medal(place[m]) ? medal(place[m]) + " " : "") + (place[m] ? ord(place[m]) : "")),
+          h("td", null, h("span", { class: "br-who" }, avatar(m, s.logos && s.logos[m], 18, "xs"), h("span", { class: "mgr" }, m), h("span", { class: "seedn" }, "(" + (seed[m] || "–") + ")"))),
+          weeks.map(wk => cell(m, wk))));
+      });
+      return h("div", { class: "tablewrap" }, h("table", { class: "br-table" },
+        h("thead", null, h("tr", null, h("th", null, "Finish"), h("th", null, "Manager (seed)"),
+          weeks.map(wk => h("th", null, h("b", null, "Week " + wk), pr.includes(wk) ? h("small", null, roundName("Playoffs", pr.indexOf(wk), pr.length)) : null)))),
+        h("tbody", null, body)));
+    }
+
+    const body = h("div"), note = h("div", { class: "muted small" });
+    const btns = {};
+    const show = v => {
+      brView = v; try { localStorage.setItem("rrdj-bracket-view", v); } catch (e) {}
+      Object.entries(btns).forEach(([k, b]) => b.setAttribute("aria-pressed", k === v ? "true" : "false"));
+      note.textContent = "Seeds are regular-season finishes. " + (v === "table" ? "Rows are in final order; each week shows the score and opponent." : "Winners in bold; the red line traces the champion's run.") + (types.includes("Consolation") ? " Consolation is the teams that missed the playoffs, playing for 7th on down." : "");
+      body.replaceChildren(v === "table" ? table() : h("div", { class: "bracket-scroll" },
+        h("div", { class: "bracket", style: "--br-w:176px;--br-gap:24px" }, types.flatMap(tree))));
     };
-    const heads = h("div", { class: "br-heads" }, rounds.map((wk, r) => h("div", null, h("b", null, roundName(r)), "Week " + wk)));
-    const note = type === "Playoffs" ? "Seeds are regular-season finishes. Winners in bold; the red line traces the champion's run." : "The teams that missed the playoffs, playing for 7th place on down.";
-    return sec(type === "Playoffs" ? s.label + " playoff bracket" : "Consolation bracket",
-      h("div", { class: "bracket-scroll" }, h("div", { class: "bracket", style: "--br-w:" + W + "px;--br-gap:" + GAP + "px" }, heads, roots.map(drawTree))),
-      h("div", { class: "muted small" }, note));
+    const toggle = h("div", { class: "br-toggle", role: "group", "aria-label": "Playoff view" },
+      ["bracket", "table"].map(v => btns[v] = h("button", { type: "button", onclick: () => show(v) }, v === "bracket" ? "Bracket" : "Table")));
+    show(brView);
+    return h("section", null,
+      h("div", { class: "br-top" }, h("h2", null, s.label + " playoffs"), toggle),
+      body, note);
   }
   function podium(s, w) {
     const last = [...s.weeks].filter(x => x.week !== 100).sort((a, b) => b.week - a.week)[0];
