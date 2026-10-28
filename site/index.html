@@ -116,11 +116,12 @@ td { height: 48px; }
 ul.plain.games-next { gap: 0; }
 .games-next li { display: grid; gap: 2px; padding: 8px 0; border-top: 1px solid var(--line); }
 .games-next li:first-child { border-top: 0; padding-top: 0; }
-.standings tbody tr.row { cursor: pointer; }
-.standings tbody tr.row:hover td, .standings tbody tr.row.open td { background: var(--chip); }
-.standings tbody tr.row:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
-.standings tr.row.open td { border-bottom-color: transparent; }
-.standings tr.detail td { height: auto; padding: 4px 10px 14px; background: var(--chip); }
+.standings tbody tr.row, table.rivals tbody tr.row { cursor: pointer; }
+.standings tbody tr.row:hover td, .standings tbody tr.row.open td, table.rivals tbody tr.row:hover td, table.rivals tbody tr.row.open td { background: var(--chip); }
+.standings tbody tr.row:focus-visible, table.rivals tbody tr.row:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.standings tr.row.open td, table.rivals tr.row.open td { border-bottom-color: transparent; }
+table.rivals .mh { max-width: 520px; }
+.standings tr.detail td, table.rivals tr.detail td { height: auto; padding: 4px 10px 14px; background: var(--chip); }
 .mh { display: grid; gap: 0; }
 .mh-row { display: grid; grid-template-columns: 3.4em 1.6em minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
 .mh-row:first-child { border-top: 0; }
@@ -1039,18 +1040,38 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         gs.concat(csides.filter(x => x.m === m && x.opp === o)).forEach(x => r[res(x).toLowerCase()]++);
         const n = r.w + r.l + r.t, np = gs.length, last = gs[gs.length - 1];
         const next = (latest.schedule || []).find(([wk, x, y]) => wk > played && ((x === m && y === o) || (x === o && y === m)));
-        return { o, r, n, share: n ? (r.w + r.t / 2) / n : 0, pf: np ? gs.reduce((t, x) => t + x.p, 0) / np : 0, pa: np ? gs.reduce((t, x) => t + x.q, 0) / np : 0, last, next: next && next[0] };
+        const all = gs.concat(csides.filter(x => x.m === m && x.opp === o));
+        return { o, r, n, all, share: n ? (r.w + r.t / 2) / n : 0, pf: np ? gs.reduce((t, x) => t + x.p, 0) / np : 0, pa: np ? gs.reduce((t, x) => t + x.q, 0) / np : 0, last, next: next && next[0] };
       }).sort((x, y) => y.share - x.share || y.r.w - x.r.w);
       const rivalTable = h("div", { class: "tablewrap" }, h("table", { class: "alltime rivals" },
         h("thead", null, h("tr", null, ["Opponent", "W-L-T", "Win %", "Avg for", "Avg against", "Last meeting", "Next"].map((t, i) => h("th", { class: i ? "r" : null }, t)))),
-        h("tbody", null, rivals.map(x => h("tr", null,
+        h("tbody", null, rivals.flatMap(x => {
+          const ys = [...new Set(x.all.map(g => g.s))].sort().reverse();
+          const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: "7" }, h("div", { class: "mh" }, ys.flatMap(y => {
+            const gs = x.all.filter(g => g.s === y).sort((a, b) => a.wk - b.wk), rr = { w: 0, l: 0, t: 0 };
+            gs.forEach(g => rr[res(g).toLowerCase()]++);
+            return [h("div", { class: "mh-div" }, y + (isCat(y) ? " (categories)" : "") + " · " + rec3(rr)),
+              ...gs.map(g => h("div", { class: "mh-row" },
+                h("span", { class: "num muted" }, "Wk " + g.wk),
+                h("span", { class: "mh-res " + (res(g) === "W" ? "up" : res(g) === "L" ? "down" : "muted") }, res(g)),
+                h("span", null, !g.cat && isTop(g) ? h("span", { class: "tag hs" }, "High score") : null),
+                h("span", { class: "num" }, score(g))))];
+          }))));
+          const toggle = e => {
+            const row = e.currentTarget, open = row.classList.contains("open");
+            row.closest("tbody").querySelectorAll("tr.row.open").forEach(t => { t.classList.remove("open"); t.setAttribute("aria-expanded", "false"); t.nextSibling.hidden = true; });
+            if (!open) { row.classList.add("open"); row.setAttribute("aria-expanded", "true"); detail.hidden = false; }
+          };
+          return [h("tr", { class: "row", tabindex: "0", role: "button", "aria-expanded": "false", title: "Show every meeting with " + x.o, onclick: toggle,
+            onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(e); } } },
           h("td", null, who(x.o)),
           h("td", { class: "r num" }, rec3(x.r)),
           h("td", { class: "r num " + (x.share > .5 ? "up" : x.share < .5 ? "down" : "") }, x.n ? x.share.toFixed(3).replace(/^0/, "") : "–"),
           h("td", { class: "r num" }, x.n ? fmt(x.pf) : "–"),
           h("td", { class: "r num" }, x.n ? fmt(x.pa) : "–"),
           h("td", { class: "r num" }, x.last ? h("span", null, h("span", { class: res(x.last) === "W" ? "up" : res(x.last) === "L" ? "down" : "muted" }, res(x.last)), " " + fmt(x.last.p) + "-" + fmt(x.last.q) + " ", h("span", { class: "muted" }, "(" + when(x.last) + ")")) : "–"),
-          h("td", { class: "r num" }, x.next ? "wk " + x.next : "–"))))));
+          h("td", { class: "r num" }, x.next ? "wk " + x.next : "–")), detail];
+        }))));
 
       // personal records (single-week ones leave out odd-length periods)
       const myStreaks = streaks.filter(x => x.m === m);
@@ -1086,7 +1107,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
       mgrBody.replaceChildren(head, tiles,
         sec("Season by season", panel(seasonTable, h("div", { class: "muted small", style: "margin-top:10px" }, "* season in progress." + (seasons.some(y => S[y] && S[y][m] && S[y][m].cat) ? " † categories season (shaded)." : "")))),
-        sec("Rivals", panel(rivalTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Every regular-season meeting, best record first. W-L-T includes the 2014-15 categories season; the scoring averages don't. Next = the next meeting this season."))),
+        sec("Rivals", panel(rivalTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Every regular-season meeting, best record first. Click a row to see each season's games. W-L-T includes the 2014-15 categories season; the scoring averages don't. Next = the next meeting this season."))),
         sec("Personal records", h("div", { class: "recs" }, mrec), h("div", { class: "muted small" }, "Single-week records leave out multi-week periods and short weeks.")),
         sec("Game log", panel(h("div", { class: "picker", style: "margin-bottom:12px" }, h("label", { for: "log-season" }, "Season"), logSel), logBody)));
     };
