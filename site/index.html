@@ -353,7 +353,9 @@ tr.catrow td { background: color-mix(in srgb, var(--chip) 80%, transparent); }
 tr.catrow td:first-child { box-shadow: inset 3px 0 0 var(--muted); }
 .who-txt { display: grid; line-height: 1.2; }
 .who-txt .team-sub { font-size: 12px; color: var(--muted); font-weight: 400; }
-table.ptable td { height: auto; padding: 7px 6px; }
+table.ptable td { height: 46px; padding: 0 6px; }
+table.ptable tr.group th { padding-bottom: 6px; }
+table.ptable thead tr:not(.group) th { padding-top: 10px; }
 table.finals td { height: auto; padding: 7px 6px; white-space: nowrap; }
 table.finals .seedn { color: var(--muted); font: 600 11px var(--mono); }
 .nowrap-who { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
@@ -368,6 +370,10 @@ table.finals .seedn { color: var(--muted); font: 600 11px var(--mono); }
 .prival .pgames[hidden] { display: none; }
 .prival .pgames .mh-row { grid-template-columns: 7.5em 9.5em minmax(0, 1fr) auto; }
 .prival .pgames .mh-row > span:first-child { white-space: nowrap; }
+img.logo { vertical-align: middle; }
+button.golink { display: inline-flex; align-items: center; line-height: 1.2; vertical-align: middle; }
+table.h2h button.cell { white-space: nowrap; }
+table.finishes td { height: 48px; }
 button.golink { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: inherit; }
 button.golink:hover .mgr, button.golink:focus-visible .mgr { text-decoration: underline; text-underline-offset: 3px; }
 button.champ-go { display: block; width: 100%; font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; text-align: left; border-radius: 10px; }
@@ -840,7 +846,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("tbody", null, rows.map(m => h("tr", null, h("td", null, whoLink(m, true)), seasons.map(y => {
           const p = placeOf(y, m), r = recOf(y, m);
           return h("td", { class: "r" + (live(y) ? " cur" : "") }, p ? h("span", { class: "place p" + Math.min(p, 4) + (finals[y] ? "" : " now") }, ord(p)) : "–",
-            r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "")) : null);
+            r ? h("span", { class: "num muted tiny" }, r.w + "-" + r.l + (r.t ? "-" + r.t : "") + ((live(y) ? curStand[m] : (regPlace0[y] || {})[m]) ? " (" + ord(live(y) ? curStand[m] : regPlace0[y][m]) + ")" : "")) : null);
         }))))));
     };
     drawFinishes();
@@ -1284,7 +1290,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     $("content").replaceChildren(
       sec("Champions", h("div", { class: "champs" }, champCards)),
       sec("All-time standings", panel(standWrap, h("div", { class: "muted small", style: "margin-top:10px" }, "Regular-season games only. The 2014-15 categories season counts for seasons, W-L-T, win %, titles and places, but not for PF, PA, Net, Avg or high scores."))),
-      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place, with the regular-season record under it. Click a season to sort by it. * current season. † categories season. ‡ no playoffs: regular-season place."))),
+      sec("Finishes by season", panel(finishTable, h("div", { class: "muted small", style: "margin-top:10px" }, "Final place, with the regular-season record and place under it. Click a season to sort by it. * current season. † categories season. ‡ no playoffs: regular-season place."))),
       sec("Record book", h("div", { class: "recs" }, records),
         h("div", { class: "muted small" }, "Single-week records leave out multi-week and short weeks and include the current season; red tags mark this season's entries. Season records count completed seasons. 2014-15 (categories season) isn't included.")),
       sec("Head to head", panel(grid, detail), h("div", { class: "muted small" }, "Each square is the row manager's record against the column manager, including the 2014-15 categories season (shaded in the list, with its category scores).")),
