@@ -349,6 +349,8 @@ ul.plain.runners { margin-top: 8px; padding-top: 8px; border-top: 1px dashed var
 .runners .rw { display: grid; line-height: 1.3; min-width: 0; }
 .runners .rw .mgr { font-size: 13px; }
 table.finishes td { height: auto; padding: 6px; }
+table.seasonal td:first-child, table.seasonal td:nth-child(2) { white-space: nowrap; }
+tr.overall td { font-weight: 700; border-top: 2px solid var(--ink); border-bottom: 0; }
 tr.catrow td { background: color-mix(in srgb, var(--chip) 80%, transparent); }
 tr.catrow td:first-child { box-shadow: inset 3px 0 0 var(--muted); }
 .who-txt { display: grid; line-height: 1.2; }
@@ -1068,7 +1070,18 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       });
       const seasonTable = h("div", { class: "tablewrap" }, h("table", { class: "alltime seasonal" },
         h("thead", null, h("tr", null, ["Season", "Team", "W-L-T", "Win %", "PF", "PA", "Net", "Avg", "High scores", "Regular season", "Postseason"].map((t, i) => h("th", { class: i > 1 ? "r" : null }, t)))),
-        h("tbody", null, seasonRows)));
+        h("tbody", null, seasonRows),
+        // career totals: W-L-T and win % include 2014-15; the points columns don't
+        h("tfoot", null, h("tr", { class: "overall" },
+          h("td", null, "Overall"), h("td", { class: "muted small" }, a.n + " seasons"),
+          h("td", { class: "r num" }, rec3(a)),
+          h("td", { class: "r num" }, a.pct.toFixed(3).replace(/^0/, "")),
+          h("td", { class: "r num" }, fmt(a.pf)),
+          h("td", { class: "r num" }, fmt(a.pa)),
+          h("td", { class: "r num " + (a.net >= 0 ? "up" : "down") }, (a.net > 0 ? "+" : "") + fmt(a.net)),
+          h("td", { class: "r num" }, fmt(a.avg)),
+          h("td", { class: "r num" }, a.hs),
+          h("td", null, ""), h("td", null, "")))));
 
       // rivals
       const played = Math.max(0, ...G.filter(g => g[0] === latest.id).map(g => g[1]));
