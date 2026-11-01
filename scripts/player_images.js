@@ -14,8 +14,8 @@ const POS = { F: ['C', 'L', 'R'], D: ['D'], G: ['G'] };
 
 async function save(url, out) {
   if (fs.existsSync(out)) return true;
-  const res = await fetch(url);
-  if (!res.ok) return false;
+  const res = await fetch(url).catch(() => null);
+  if (!res || !res.ok) return false;
   fs.writeFileSync(out, Buffer.from(await res.arrayBuffer()));
   return true;
 }
@@ -43,7 +43,9 @@ async function findId(p, group) {
       const shot = path.join(dir, 'players', p.pid + '.png');
       if (!fs.existsSync(shot)) {
         const land = await fetch(`https://api-web.nhle.com/v1/player/${p.pid}/landing`).then(x => x.json()).catch(() => null);
-        if (!land || !land.headshot || !(await save(land.headshot, shot))) { missing.push(p.name + ' (no headshot)'); continue; }
+        // fall back to that season's photo with that team (assets.nhle.com/mugs/nhl/<season>/<team>/<id>.png)
+        const mug = p.nhl && /^\d{4}-\d{2}$/.test(s.id) ? `https://assets.nhle.com/mugs/nhl/${s.id.slice(0, 4)}${+s.id.slice(0, 4) + 1}/${p.nhl}/${p.pid}.png` : null;
+        if (!((land && land.headshot && await save(land.headshot, shot)) || (mug && await save(mug, shot)))) { missing.push(p.name + ' (no headshot)'); continue; }
       }
       found++;
     }

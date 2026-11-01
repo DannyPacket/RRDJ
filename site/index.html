@@ -530,20 +530,25 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("span", null, t.entries.map((e, i) => h("span", null, i ? ", " : "", h("span", { class: "mgr" }, e.mgr), " ", h("span", { class: "muted num small" }, "(wk " + e.weeks.join(", ") + ")"))))))))));
     }
     const moves = w.moves || [], trades = w.trades || [];
-    const tt = s.tradeTracker && s.tradeTracker.trades || [];
+    // A trade shows from the week it happened onward. Past seasons store each player's points by week (byWeek),
+    // so an earlier week only counts points through that week; the current season stores a running total (pts).
+    const tt = (s.tradeTracker && s.tradeTracker.trades || []).filter(t => !w.end || t.date <= w.end);
+    const ptsOf = p => p.byWeek ? Object.entries(p.byWeek).filter(([k]) => w.week === 100 || +k <= w.week).reduce((a, [, v]) => a + v, 0) : p.pts;
+    const gpOf = p => p.gpByWeek ? Object.entries(p.gpByWeek).filter(([k]) => w.week === 100 || +k <= w.week).reduce((a, [, v]) => a + v, 0) : p.gp;
+    const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
     const tracker = t => {
-      const totals = t.sides.map(sd => sd.gets.reduce((a, p) => a + (p.pts || 0), 0));
+      const totals = t.sides.map(sd => sd.gets.reduce((a, p) => a + (ptsOf(p) || 0), 0));
       const best = Math.max(...totals), lead = totals.filter(x => x === best).length === 1 && best > 0 ? totals.indexOf(best) : -1;
       return h("div", { class: "tt" },
         h("div", { class: "muted small" }, "Traded " + day(t.date) + " · fantasy points since the trade"),
         h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
           h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt(totals[i]))),
           sd.gets.map(p => h("div", { class: "tt-p" }, h("span", null, ...player(p)),
-            h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
+            h("span", { class: "num muted small" }, (ptsOf(p) == null ? "–" : fmt(ptsOf(p))) + " pts" + (gpOf(p) != null ? " · " + gpOf(p) + " GP" : "") + (p.left && (!w.end || p.left <= w.end) ? " · until " + day(p.left) : "")))),
           i === lead ? h("span", { class: "tag hs" }, "Ahead by " + fmt(best - Math.min(...totals))) : null))));
     };
     const trackerSec = sec("Trade tracker", panel(tt.length
-      ? h("div", { style: "display:grid;gap:12px" }, h("div", { class: "subhead" }, "Every trade this season · through " + day(s.tradeTracker.through)), tt.map(tracker))
+      ? h("div", { style: "display:grid;gap:12px" }, h("div", { class: "subhead" }, "Every trade this season · through " + day(ttThrough)), tt.map(tracker))
       : h("div", { class: "empty" }, "No trades yet this season")));
     const movementSec = sec("Movement", panel(h("div", { style: "display:grid;gap:18px" },
       h("div", { class: "trade" }, h("div", { class: "subhead" }, "Trades"),
@@ -651,6 +656,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(w.players.high[k], names[k], "hi", w.players.faHigh && w.players.faHigh[k]))),
         h("div", { class: "subhead", style: "margin-top:6px" }, "Lowest scoring (" + label + ")"),
         h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(w.players.low[k], names[k], "lo"))),
+        fromSheet ? h("div", { class: "muted small" }, "Yahoo season: each player's points are what he scored for his manager this week (only days in the starting lineup count), among every player on that roster during the week; lowest needs at least 1 game counted. Yahoo doesn't keep weekly stats for unowned players in past seasons, so there's no free-agent comparison.") :
         h("div", { class: "muted small" }, "Players on a roster at the week's roster lock (puck drop of the first game), with at least 1 game played, credited to that manager for the whole week even if dropped or traded later. If a free agent (unowned, or picked up after the cutoff) beat the top score, he's noted in small text on that card.")));
     }
 
@@ -661,7 +667,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       journey(s, w),
       w.week === 100 ? null : h("div", { class: "pair" }, pair),
       ...stars,
-      ...(fromSheet ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
+      ...(fromSheet && !w.moves ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
       h("footer", null, fromSheet ? "Rebuilt from the league sheet (Yahoo season). Write-ups are generated from the scores." + (cat ? " 2014-15 was a categories season: scores are categories won each week (CW/CL in the standings), there were no weekly high scores, and it's left out of the all-time stats." : "") : "Scores and stats from Fantrax. Fantrax can apply stat corrections after a week ends.")].filter(Boolean));
   }
 

@@ -73131,7 +73131,308 @@
        "Steve",
        "Vin"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Mark Scheifele",
+        "nhl": "WPG",
+        "pos": "C",
+        "pts": 23.9,
+        "mgr": "Nick",
+        "pid": "8476460"
+       },
+       "D": {
+        "name": "MacKenzie Weegar",
+        "nhl": "CGY",
+        "pos": "D",
+        "pts": 19.7,
+        "mgr": "Steve",
+        "pid": "8477346"
+       },
+       "G": {
+        "name": "Connor Hellebuyck",
+        "nhl": "WPG",
+        "pos": "G",
+        "pts": 32.2,
+        "mgr": "Hallie",
+        "pid": "8476945"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Zach Hyman",
+        "nhl": "EDM",
+        "pos": "LW",
+        "pts": -1.1,
+        "mgr": "Tom",
+        "pid": "8475786"
+       },
+       "D": {
+        "name": "Brent Burns",
+        "nhl": "CAR",
+        "pos": "D",
+        "pts": -0.4,
+        "mgr": "Ronnie",
+        "pid": "8470613"
+       },
+       "G": {
+        "name": "Alexandar Georgiev",
+        "nhl": "COL",
+        "pos": "G",
+        "pts": -4.6,
+        "mgr": "Zac",
+        "pid": "8480382"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Evander Kane",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Arturs Silovs",
+        "nhl": "VAN",
+        "pos": "G",
+        "note": "waivers"
+       },
+       "drop": {
+        "name": "Joey Daccord",
+        "nhl": "SEA",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Ryan Pulock",
+        "nhl": "NYI",
+        "pos": "D",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Luke Hughes",
+        "nhl": "NJD",
+        "pos": "D",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Tyler Bertuzzi",
+        "nhl": "CHI",
+        "pos": "LW/RW",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Valeri Nichushkin",
+        "nhl": "COL",
+        "pos": "LW/RW",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Shayne Gostisbehere",
+        "nhl": "CAR",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Brandt Clarke",
+        "nhl": "LAK",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Kevin Lankinen",
+        "nhl": "VAN",
+        "pos": "G",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Travis Sanheim",
+        "nhl": "PHI",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Ronnie",
+       "add": {
+        "name": "Seth Jones",
+        "nhl": "CHI",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Nick Robertson",
+        "nhl": "TOR",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Ross Colton",
+        "nhl": "COL",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Dylan Guenther",
+        "nhl": "UTA",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "JJ Peterka",
+        "nhl": "BUF",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Rasmus Andersson",
+        "nhl": "CGY",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Mikael Backlund",
+        "nhl": "CGY",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Joey Daccord",
+        "nhl": "SEA",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Philipp Grubauer",
+        "nhl": "SEA",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Filip Gustavsson",
+        "nhl": "MIN",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Joonas Korpisalo",
+        "nhl": "BOS",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Nikita Zadorov",
+        "nhl": "BOS",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Matt Roy",
+        "nhl": "WSH",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Logan Stankoven",
+        "nhl": "DAL",
+        "pos": "C/RW"
+       },
+       "drop": {
+        "name": "Jonathan Drouin",
+        "nhl": "COL",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Logan Cooley",
+        "nhl": "UTA",
+        "pos": "C"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Sam Bennett",
+        "nhl": "FLA",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Blake Coleman",
+        "nhl": "CGY",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Sean Durzi",
+        "nhl": "UTA",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Dylan DeMelo",
+        "nhl": "WPG",
+        "pos": "D"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 2,
@@ -73359,7 +73660,328 @@
        "Will",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Sam Reinhart",
+        "nhl": "FLA",
+        "pos": "C",
+        "pts": 32.5,
+        "mgr": "Ronnie",
+        "pid": "8477933"
+       },
+       "D": {
+        "name": "Cale Makar",
+        "nhl": "COL",
+        "pos": "D",
+        "pts": 24,
+        "mgr": "Zac",
+        "pid": "8480069"
+       },
+       "G": {
+        "name": "Igor Shesterkin",
+        "nhl": "NYR",
+        "pos": "G",
+        "pts": 21,
+        "mgr": "Joe",
+        "pid": "8478048"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Jack Quinn",
+        "nhl": "BUF",
+        "pos": "RW",
+        "pts": 0.2,
+        "mgr": "Joe",
+        "pid": "8482097"
+       },
+       "D": {
+        "name": "Thomas Harley",
+        "nhl": "DAL",
+        "pos": "D",
+        "pts": 2.1,
+        "mgr": "Steve",
+        "pid": "8481581"
+       },
+       "G": {
+        "name": "Cam Talbot",
+        "nhl": "DET",
+        "pos": "G",
+        "pts": -2.2,
+        "mgr": "Steve",
+        "pid": "8475660"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Erik Haula",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Frank Vatrano",
+        "nhl": "ANA",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Jonathan Huberdeau",
+        "nhl": "CGY",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Casey DeSmith",
+        "nhl": "DAL",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Morgan Geekie",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Seamus Casey",
+        "nhl": "NJD",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Ryan Pulock",
+        "nhl": "NYI",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": null,
+       "drop": {
+        "name": "Mikael Granlund",
+        "nhl": "SJS",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Tim",
+       "add": {
+        "name": "Kaiden Guhle",
+        "nhl": "MTL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Tim",
+       "add": {
+        "name": "Alex Laferriere",
+        "nhl": "LAK",
+        "pos": "RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "JJ Peterka",
+        "nhl": "BUF",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Tyson Foerster",
+        "nhl": "PHI",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Jordan Greenway",
+        "nhl": "BUF",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Gabriel Vilardi",
+        "nhl": "WPG",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Ross Colton",
+        "nhl": "COL",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Jonathan Quick",
+        "nhl": "NYR",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": null,
+       "drop": {
+        "name": "Boone Jenner",
+        "nhl": "CBJ",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Mark Kastelic",
+        "nhl": "BOS",
+        "pos": "C/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Bobby McMann",
+        "nhl": "TOR",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Jack Quinn",
+        "nhl": "BUF",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Casey Mittelstadt",
+        "nhl": "COL",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Pierre-Luc Dubois",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": null,
+       "drop": {
+        "name": "Sean Durzi",
+        "nhl": "UTA",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": null,
+       "drop": {
+        "name": "Drew Doughty",
+        "nhl": "LAK",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Cole Koepke",
+        "nhl": "BOS",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Nick Robertson",
+        "nhl": "TOR",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Nick Foligno",
+        "nhl": "CHI",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Pavel Zacha",
+        "nhl": "BOS",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Barrett Hayton",
+        "nhl": "UTA",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Logan Cooley",
+        "nhl": "UTA",
+        "pos": "C"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Joel Hofer",
+        "nhl": "STL",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Ilya Samsonov",
+        "nhl": "VGK",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Lukas Dostal",
+        "nhl": "ANA",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Tristan Jarry",
+        "nhl": "PIT",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Petr Mrazek",
+        "nhl": "CHI",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Hallie",
+       "add": {
+        "name": "Jamie Oleksiak",
+        "nhl": "SEA",
+        "pos": "D"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 3,
@@ -73618,7 +74240,271 @@
        "Ronnie",
        "Steve"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Nico Hischier",
+        "nhl": "NJD",
+        "pos": "C",
+        "pts": 23.4,
+        "mgr": "Jefe",
+        "pid": "8480002"
+       },
+       "D": {
+        "name": "Alex Pietrangelo",
+        "nhl": "VGK",
+        "pos": "D",
+        "pts": 21.1,
+        "mgr": "Ronnie",
+        "pid": "8474565"
+       },
+       "G": {
+        "name": "Juuse Saros",
+        "nhl": "NSH",
+        "pos": "G",
+        "pts": 23,
+        "mgr": "Will",
+        "pid": "8477424"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Tyler Toffoli",
+        "nhl": "SJS",
+        "pos": "C",
+        "pts": -1.1,
+        "mgr": "Tim",
+        "pid": "8475726"
+       },
+       "D": {
+        "name": "Charlie McAvoy",
+        "nhl": "BOS",
+        "pos": "D",
+        "pts": 0.9,
+        "mgr": "Will",
+        "pid": "8479325"
+       },
+       "G": {
+        "name": "Connor Ingram",
+        "nhl": "UTA",
+        "pos": "G",
+        "pts": -2.2,
+        "mgr": "Vin",
+        "pid": "8478971"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Johnathan Kovacevic",
+        "nhl": "NJD",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Seamus Casey",
+        "nhl": "NJD",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Stefan Noesen",
+        "nhl": "NJD",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Jordan Greenway",
+        "nhl": "BUF",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Paul Cotter",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Josh Norris",
+        "nhl": "OTT",
+        "pos": "C"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Michael Kesselring",
+        "nhl": "UTA",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Owen Power",
+        "nhl": "BUF",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Philip Broberg",
+        "nhl": "STL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Pavel Zacha",
+        "nhl": "BOS",
+        "pos": "C/LW",
+        "note": "waivers"
+       },
+       "drop": {
+        "name": "Zach Benson",
+        "nhl": "BUF",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Will Cuylle",
+        "nhl": "NYR",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Tyler Bertuzzi",
+        "nhl": "CHI",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": {
+        "name": "Mikael Granlund",
+        "nhl": "SJS",
+        "pos": "C/LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Ronnie",
+       "add": {
+        "name": "Frank Vatrano",
+        "nhl": "ANA",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Kiefer Sherwood",
+        "nhl": "VAN",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Jeff Skinner",
+        "nhl": "EDM",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Nino Niederreiter",
+        "nhl": "WPG",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Dylan Guenther",
+        "nhl": "UTA",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Jordan Eberle",
+        "nhl": "SEA",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Erik Haula",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Jacob Middleton",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Johnathan Kovacevic",
+        "nhl": "NJD",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": null,
+       "drop": {
+        "name": "Semyon Varlamov",
+        "nhl": "NYI",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Justus Annunen",
+        "nhl": "COL",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Luke Hughes",
+        "nhl": "NJD",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Hallie",
+       "add": null,
+       "drop": {
+        "name": "Evan Rodrigues",
+        "nhl": "FLA",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Nick Schmaltz",
+        "nhl": "UTA",
+        "pos": "C/RW"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 4,
@@ -73889,7 +74775,213 @@
        "Tom",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Alex Ovechkin",
+        "nhl": "WSH",
+        "pos": "LW",
+        "pts": 30.5,
+        "mgr": "Jefe",
+        "pid": "8471214"
+       },
+       "D": {
+        "name": "Josh Morrissey",
+        "nhl": "WPG",
+        "pos": "D",
+        "pts": 23,
+        "mgr": "Ronnie",
+        "pid": "8477504"
+       },
+       "G": {
+        "name": "Igor Shesterkin",
+        "nhl": "NYR",
+        "pos": "G",
+        "pts": 26.2,
+        "mgr": "Joe",
+        "pid": "8478048"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Matvei Michkov",
+        "nhl": "PHI",
+        "pos": "RW",
+        "pts": -0.2,
+        "mgr": "Will",
+        "pid": "8484387"
+       },
+       "D": {
+        "name": "Jakob Chychrun",
+        "nhl": "WSH",
+        "pos": "D",
+        "pts": 0.5,
+        "mgr": "Tom",
+        "pid": "8479345"
+       },
+       "G": {
+        "name": "Joel Hofer",
+        "nhl": "STL",
+        "pos": "G",
+        "pts": -1.8,
+        "mgr": "Zac",
+        "pid": "8480981"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Tom",
+       "add": null,
+       "drop": {
+        "name": "Joseph Woll",
+        "nhl": "TOR",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Fabian Zetterlund",
+        "nhl": "SJS",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Eeli Tolvanen",
+        "nhl": "SEA",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Jake Walman",
+        "nhl": "SJS",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Michael Kesselring",
+        "nhl": "UTA",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Dylan Holloway",
+        "nhl": "STL",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Erik Haula",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Dylan Cozens",
+        "nhl": "BUF",
+        "pos": "C"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Jordan Greenway",
+        "nhl": "BUF",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Arturs Silovs",
+        "nhl": "VAN",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Rickard Rakell",
+        "nhl": "PIT",
+        "pos": "C/LW/RW"
+       },
+       "drop": {
+        "name": "Jonathan Huberdeau",
+        "nhl": "CGY",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Josh Norris",
+        "nhl": "OTT",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Paul Cotter",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Ryker Evans",
+        "nhl": "SEA",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Adam Larsson",
+        "nhl": "SEA",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Connor McMichael",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "J.T. Compher",
+        "nhl": "DET",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Paul Cotter",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Mats Zuccarello",
+        "nhl": "MIN",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Jordan Greenway",
+        "nhl": "BUF",
+        "pos": "LW"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 5,
@@ -74160,7 +75252,168 @@
        "Tim",
        "Will"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Nathan MacKinnon",
+        "nhl": "COL",
+        "pos": "C",
+        "pts": 25.7,
+        "mgr": "Steve",
+        "pid": "8477492"
+       },
+       "D": {
+        "name": "Jack Hughes",
+        "nhl": "NJD",
+        "pos": "C",
+        "pts": 24.1,
+        "mgr": "Danny",
+        "pid": "8481559"
+       },
+       "G": {
+        "name": "Connor Hellebuyck",
+        "nhl": "WPG",
+        "pos": "G",
+        "pts": 37.6,
+        "mgr": "Hallie",
+        "pid": "8476945"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Cole Caufield",
+        "nhl": "MTL",
+        "pos": "RW",
+        "pts": 0.5,
+        "mgr": "Tom",
+        "pid": "8481540"
+       },
+       "D": {
+        "name": "Mattias Ekholm",
+        "nhl": "EDM",
+        "pos": "D",
+        "pts": 2.1,
+        "mgr": "Zac",
+        "pid": "8475218"
+       },
+       "G": {
+        "name": "Igor Shesterkin",
+        "nhl": "NYR",
+        "pos": "G",
+        "pts": -3.6,
+        "mgr": "Joe",
+        "pid": "8478048"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Tim",
+       "add": null,
+       "drop": {
+        "name": "Artturi Lehkonen",
+        "nhl": "COL",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Alex Nedeljkovic",
+        "nhl": "PIT",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Tom",
+       "add": null,
+       "drop": {
+        "name": "Andrei Kuzmenko",
+        "nhl": "CGY",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Artturi Lehkonen",
+        "nhl": "COL",
+        "pos": "LW/RW",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": null,
+       "drop": {
+        "name": "Cole Koepke",
+        "nhl": "BOS",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Anton Forsberg",
+        "nhl": "OTT",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Joel Hofer",
+        "nhl": "STL",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Connor Murphy",
+        "nhl": "CHI",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Steve",
+       "add": null,
+       "drop": {
+        "name": "Ryan Hartman",
+        "nhl": "MIN",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Vladislav Namestnikov",
+        "nhl": "WPG",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Tanner Jeannot",
+        "nhl": "LAK",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": null,
+       "drop": {
+        "name": "Brock Nelson",
+        "nhl": "NYI",
+        "pos": "C"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 6,
@@ -74423,7 +75676,157 @@
        "Vin",
        "Will"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Mason Marchment",
+        "nhl": "DAL",
+        "pos": "LW",
+        "pts": 28.3,
+        "mgr": "Danny",
+        "pid": "8478975"
+       },
+       "D": {
+        "name": "Elias Pettersson",
+        "nhl": "VAN",
+        "pos": "C",
+        "pts": 26,
+        "mgr": "Nick",
+        "pid": "8480012"
+       },
+       "G": {
+        "name": "Joey Daccord",
+        "nhl": "SEA",
+        "pos": "G",
+        "pts": 25.6,
+        "mgr": "Jefe",
+        "pid": "8478916"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Connor Bedard",
+        "nhl": "CHI",
+        "pos": "C",
+        "pts": -0.6,
+        "mgr": "Will",
+        "pid": "8484144"
+       },
+       "D": {
+        "name": "Brandon Carlo",
+        "nhl": "BOS",
+        "pos": "D",
+        "pts": 0.7,
+        "mgr": "Hallie",
+        "pid": "8478443"
+       },
+       "G": {
+        "name": "Ukko-Pekka Luukkonen",
+        "nhl": "BUF",
+        "pos": "G",
+        "pts": -1.2,
+        "mgr": "Vin",
+        "pid": "8480045"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Dylan Cozens",
+        "nhl": "BUF",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Connor Murphy",
+        "nhl": "CHI",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Gabriel Vilardi",
+        "nhl": "WPG",
+        "pos": "C/RW"
+       },
+       "drop": {
+        "name": "Alex Nedeljkovic",
+        "nhl": "PIT",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Jean-Gabriel Pageau",
+        "nhl": "NYI",
+        "pos": "C/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Kyle Palmieri",
+        "nhl": "NYI",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Trent Frederic",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Rasmus Sandin",
+        "nhl": "WSH",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Thomas Harley",
+        "nhl": "DAL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": null,
+       "drop": {
+        "name": "Philip Broberg",
+        "nhl": "STL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Joseph Woll",
+        "nhl": "TOR",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Pierre-Luc Dubois",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 7,
@@ -74699,7 +76102,241 @@
        "Tim",
        "Tom"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Connor McDavid",
+        "nhl": "EDM",
+        "pos": "C",
+        "pts": 23.9,
+        "mgr": "Ronnie",
+        "pid": "8478402"
+       },
+       "D": {
+        "name": "Zach Werenski",
+        "nhl": "CBJ",
+        "pos": "D",
+        "pts": 25.9,
+        "mgr": "Zac",
+        "pid": "8478460"
+       },
+       "G": {
+        "name": "Joseph Woll",
+        "nhl": "TOR",
+        "pos": "G",
+        "pts": 21.8,
+        "mgr": "Zac",
+        "pid": "8479361"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Zach Hyman",
+        "nhl": "EDM",
+        "pos": "LW",
+        "pts": -0.4,
+        "mgr": "Tom",
+        "pid": "8475786"
+       },
+       "D": {
+        "name": "Alex Pietrangelo",
+        "nhl": "VGK",
+        "pos": "D",
+        "pts": 1.3,
+        "mgr": "Ronnie",
+        "pid": "8474565"
+       },
+       "G": {
+        "name": "Connor Ingram",
+        "nhl": "UTA",
+        "pos": "G",
+        "pts": -2.2,
+        "mgr": "Vin",
+        "pid": "8478971"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Scott Laughton",
+        "nhl": "PHI",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Dylan Holloway",
+        "nhl": "STL",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Thomas Chabot",
+        "nhl": "OTT",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Jake Walman",
+        "nhl": "SJS",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Anders Lee",
+        "nhl": "NYI",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Mark Kastelic",
+        "nhl": "BOS",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Anthony Cirelli",
+        "nhl": "TBL",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Yegor Sharangovich",
+        "nhl": "CGY",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Mikey Anderson",
+        "nhl": "LAK",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Jake Sanderson",
+        "nhl": "OTT",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": {
+        "name": "Jake Walman",
+        "nhl": "SJS",
+        "pos": "D",
+        "note": "waivers"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": null,
+       "drop": {
+        "name": "Anton Forsberg",
+        "nhl": "OTT",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Keegan Kolesar",
+        "nhl": "VGK",
+        "pos": "RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Connor Clifton",
+        "nhl": "BUF",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "David Rittich",
+        "nhl": "LAK",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Lukas Dostal",
+        "nhl": "ANA",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Gabriel Landeskog",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Jordan Eberle",
+        "nhl": "SEA",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Yegor Sharangovich",
+        "nhl": "CGY",
+        "pos": "C/LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Olen Zellweger",
+        "nhl": "ANA",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Barrett Hayton",
+        "nhl": "UTA",
+        "pos": "C"
+       }
+      },
+      {
+       "mgr": "Hallie",
+       "add": {
+        "name": "Karel Vejmelka",
+        "nhl": "UTA",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Elvis Merzlikins",
+        "nhl": "CBJ",
+        "pos": "G"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 8,
@@ -74962,7 +76599,175 @@
        "Tom",
        "Vin"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Nico Hischier",
+        "nhl": "NJD",
+        "pos": "C",
+        "pts": 31,
+        "mgr": "Jefe",
+        "pid": "8480002"
+       },
+       "D": {
+        "name": "Jakob Chychrun",
+        "nhl": "WSH",
+        "pos": "D",
+        "pts": 25.5,
+        "mgr": "Tom",
+        "pid": "8479345"
+       },
+       "G": {
+        "name": "Kevin Lankinen",
+        "nhl": "VAN",
+        "pos": "G",
+        "pts": 29.2,
+        "mgr": "Jefe",
+        "pid": "8480947"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Chris Kreider",
+        "nhl": "NYR",
+        "pos": "LW",
+        "pts": 0.2,
+        "mgr": "Ronnie",
+        "pid": "8475184"
+       },
+       "D": {
+        "name": "Jamie Oleksiak",
+        "nhl": "SEA",
+        "pos": "D",
+        "pts": 1.7,
+        "mgr": "Hallie",
+        "pid": "8476467"
+       },
+       "G": {
+        "name": "Dustin Wolf",
+        "nhl": "CGY",
+        "pos": "G",
+        "pts": 3,
+        "mgr": "Tim",
+        "pid": "8481692"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Tim",
+       "add": {
+        "name": "Jonathan Drouin",
+        "nhl": "COL",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Gustav Nyquist",
+        "nhl": "NSH",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "John Gibson",
+        "nhl": "ANA",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Elvis Merzlikins",
+        "nhl": "CBJ",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Drew Doughty",
+        "nhl": "LAK",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Dante Fabbro",
+        "nhl": "CBJ",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Clayton Keller",
+        "nhl": "UTA",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Mike Matheson",
+        "nhl": "MTL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "JJ Peterka",
+        "nhl": "BUF",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Mathieu Olivier",
+        "nhl": "CBJ",
+        "pos": "RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Maxim Tsyplakov",
+        "nhl": "NYI",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Erik Haula",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": null,
+       "drop": {
+        "name": "Teuvo Teravainen",
+        "nhl": "CHI",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Lawson Crouse",
+        "nhl": "UTA",
+        "pos": "LW/RW"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 9,
@@ -75239,7 +77044,250 @@
        "Tim",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Matthew Tkachuk",
+        "nhl": "FLA",
+        "pos": "LW",
+        "pts": 37.2,
+        "mgr": "Zac",
+        "pid": "8479314"
+       },
+       "D": {
+        "name": "Vince Dunn",
+        "nhl": "SEA",
+        "pos": "D",
+        "pts": 18.7,
+        "mgr": "Zac",
+        "pid": "8478407"
+       },
+       "G": {
+        "name": "Samuel Montembeault",
+        "nhl": "MTL",
+        "pos": "G",
+        "pts": 26,
+        "mgr": "Vin",
+        "pid": "8478470"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Ryan O'Reilly",
+        "nhl": "NSH",
+        "pos": "C",
+        "pts": -0.1,
+        "mgr": "Steve",
+        "pid": "8475158"
+       },
+       "D": {
+        "name": "Rasmus Dahlin",
+        "nhl": "BUF",
+        "pos": "D",
+        "pts": 0.6,
+        "mgr": "Jefe",
+        "pid": "8480839"
+       },
+       "G": {
+        "name": "Dustin Wolf",
+        "nhl": "CGY",
+        "pos": "G",
+        "pts": -1.6,
+        "mgr": "Tim",
+        "pid": "8481692"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Kirill Marchenko",
+        "nhl": "CBJ",
+        "pos": "RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Ronnie",
+       "add": {
+        "name": "Brock Nelson",
+        "nhl": "NYI",
+        "pos": "C"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": null,
+       "drop": {
+        "name": "Logan Stankoven",
+        "nhl": "DAL",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Elvis Merzlikins",
+        "nhl": "CBJ",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Justus Annunen",
+        "nhl": "COL",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Jack McBain",
+        "nhl": "UTA",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Quinton Byfield",
+        "nhl": "LAK",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Dmitri Voronkov",
+        "nhl": "CBJ",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Olen Zellweger",
+        "nhl": "ANA",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Conor Garland",
+        "nhl": "VAN",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Pierre-Luc Dubois",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Luke Schenn",
+        "nhl": "NSH",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Yegor Sharangovich",
+        "nhl": "CGY",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Braden Schneider",
+        "nhl": "NYR",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Dylan Holloway",
+        "nhl": "STL",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Will",
+       "add": null,
+       "drop": {
+        "name": "Scott Laughton",
+        "nhl": "PHI",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Shane Wright",
+        "nhl": "SEA",
+        "pos": "C/RW"
+       },
+       "drop": {
+        "name": "Kirill Marchenko",
+        "nhl": "CBJ",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Rasmus Ristolainen",
+        "nhl": "PHI",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "K'Andre Miller",
+        "nhl": "NYR",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Pierre-Luc Dubois",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Jason Robertson",
+        "nhl": "DAL",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": null,
+       "drop": {
+        "name": "Patrick Kane",
+        "nhl": "DET",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": null,
+       "drop": {
+        "name": "Brent Burns",
+        "nhl": "CAR",
+        "pos": "D"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 10,
@@ -75530,7 +77578,259 @@
        "Vin",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Leon Draisaitl",
+        "nhl": "EDM",
+        "pos": "C",
+        "pts": 28.8,
+        "mgr": "Hallie",
+        "pid": "8477934"
+       },
+       "D": {
+        "name": "Josh Morrissey",
+        "nhl": "WPG",
+        "pos": "D",
+        "pts": 19.6,
+        "mgr": "Ronnie",
+        "pid": "8477504"
+       },
+       "G": {
+        "name": "Linus Ullmark",
+        "nhl": "OTT",
+        "pos": "G",
+        "pts": 32.6,
+        "mgr": "Steve",
+        "pid": "8476999"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Mason Marchment",
+        "nhl": "DAL",
+        "pos": "LW",
+        "pts": 0.6,
+        "mgr": "Danny",
+        "pid": "8478975"
+       },
+       "D": {
+        "name": "Roman Josi",
+        "nhl": "NSH",
+        "pos": "D",
+        "pts": -0.5,
+        "mgr": "Joe",
+        "pid": "8474600"
+       },
+       "G": {
+        "name": "Elvis Merzlikins",
+        "nhl": "CBJ",
+        "pos": "G",
+        "pts": -0.2,
+        "mgr": "Zac",
+        "pid": "8478007"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Mackenzie Blackwood",
+        "nhl": "SJS",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Jason Robertson",
+        "nhl": "DAL",
+        "pos": "LW/RW",
+        "note": "waivers"
+       },
+       "drop": {
+        "name": "Bowen Byram",
+        "nhl": "BUF",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Mark Kastelic",
+        "nhl": "BOS",
+        "pos": "C/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Trent Frederic",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       },
+       "drop": {
+        "name": "Alex DeBrincat",
+        "nhl": "DET",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Damon Severson",
+        "nhl": "CBJ",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Justin Faulk",
+        "nhl": "STL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Dylan Guenther",
+        "nhl": "UTA",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "David Rittich",
+        "nhl": "LAK",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Lukas Dostal",
+        "nhl": "ANA",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Casey DeSmith",
+        "nhl": "DAL",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Jake Sanderson",
+        "nhl": "OTT",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Brandon Tanev",
+        "nhl": "SEA",
+        "pos": "LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Kent Johnson",
+        "nhl": "CBJ",
+        "pos": "C/LW/RW"
+       },
+       "drop": {
+        "name": "Matthew Knies",
+        "nhl": "TOR",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Luke Kunin",
+        "nhl": "SJS",
+        "pos": "C/LW/RW"
+       },
+       "drop": {
+        "name": "Dmitri Voronkov",
+        "nhl": "CBJ",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": null,
+       "drop": {
+        "name": "Rasmus Ristolainen",
+        "nhl": "PHI",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Keegan Kolesar",
+        "nhl": "VGK",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Eeli Tolvanen",
+        "nhl": "SEA",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Mikey Anderson",
+        "nhl": "LAK",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": null,
+       "drop": {
+        "name": "Hampus Lindholm",
+        "nhl": "BOS",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Mike Matheson",
+        "nhl": "MTL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Logan Cooley",
+        "nhl": "UTA",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Brady Skjei",
+        "nhl": "NSH",
+        "pos": "D"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 11,
@@ -75833,7 +78133,148 @@
        "Tom",
        "Will"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Sam Reinhart",
+        "nhl": "FLA",
+        "pos": "C",
+        "pts": 25.9,
+        "mgr": "Ronnie",
+        "pid": "8477933"
+       },
+       "D": {
+        "name": "Cale Makar",
+        "nhl": "COL",
+        "pos": "D",
+        "pts": 28.1,
+        "mgr": "Zac",
+        "pid": "8480069"
+       },
+       "G": {
+        "name": "Pyotr Kochetkov",
+        "nhl": "CAR",
+        "pos": "G",
+        "pts": 23.6,
+        "mgr": "Danny",
+        "pid": "8481611"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Matvei Michkov",
+        "nhl": "PHI",
+        "pos": "RW",
+        "pts": -1.7,
+        "mgr": "Will",
+        "pid": "8484387"
+       },
+       "D": {
+        "name": "Dante Fabbro",
+        "nhl": "CBJ",
+        "pos": "D",
+        "pts": 0.6,
+        "mgr": "Danny",
+        "pid": "8479371"
+       },
+       "G": {
+        "name": "Jordan Binnington",
+        "nhl": "STL",
+        "pos": "G",
+        "pts": 0.4,
+        "mgr": "Vin",
+        "pid": "8476412"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Kirill Marchenko",
+        "nhl": "CBJ",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Gabriel Vilardi",
+        "nhl": "WPG",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Victor Olofsson",
+        "nhl": "VGK",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Dakota Joshua",
+        "nhl": "VAN",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Braden Schneider",
+        "nhl": "NYR",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Nino Niederreiter",
+        "nhl": "WPG",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Kaapo Kakko",
+        "nhl": "SEA",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Kent Johnson",
+        "nhl": "CBJ",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Tristan Jarry",
+        "nhl": "PIT",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Casey Mittelstadt",
+        "nhl": "COL",
+        "pos": "C"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Brett Howden",
+        "nhl": "VGK",
+        "pos": "C/LW"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 12,
@@ -76137,7 +78578,175 @@
        "Steve",
        "Vin"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Dylan Holloway",
+        "nhl": "STL",
+        "pos": "C/LW",
+        "pts": 20.9,
+        "mgr": "Steve",
+        "pid": "8482077"
+       },
+       "D": {
+        "name": "Rasmus Dahlin",
+        "nhl": "BUF",
+        "pos": "D",
+        "pts": 20.1,
+        "mgr": "Jefe",
+        "pid": "8480839"
+       },
+       "G": {
+        "name": "Jacob Markstrom",
+        "nhl": "NJD",
+        "pos": "G",
+        "pts": 19.2,
+        "mgr": "Joe",
+        "pid": "8474593"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Matthew Tkachuk",
+        "nhl": "FLA",
+        "pos": "LW",
+        "pts": -0.9,
+        "mgr": "Zac",
+        "pid": "8479314"
+       },
+       "D": {
+        "name": "Damon Severson",
+        "nhl": "CBJ",
+        "pos": "D",
+        "pts": -0.5,
+        "mgr": "Nick",
+        "pid": "8476923"
+       },
+       "G": {
+        "name": "Igor Shesterkin",
+        "nhl": "NYR",
+        "pos": "G",
+        "pts": -3.4,
+        "mgr": "Joe",
+        "pid": "8478048"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Steve",
+       "add": null,
+       "drop": {
+        "name": "Lukas Dostal",
+        "nhl": "ANA",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Connor Murphy",
+        "nhl": "CHI",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Brock Faber",
+        "nhl": "MIN",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Morgan Geekie",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Clayton Keller",
+        "nhl": "UTA",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Morgan Geekie",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Ilya Samsonov",
+        "nhl": "VGK",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Cam Fowler",
+        "nhl": "STL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": null,
+       "drop": {
+        "name": "Nick Foligno",
+        "nhl": "CHI",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Gabriel Vilardi",
+        "nhl": "WPG",
+        "pos": "C/RW"
+       },
+       "drop": {
+        "name": "Mathew Barzal",
+        "nhl": "NYI",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Luke Hughes",
+        "nhl": "NJD",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Arber Xhekaj",
+        "nhl": "MTL",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Luke Hughes",
+        "nhl": "NJD",
+        "pos": "D"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 13,
@@ -76446,7 +79055,132 @@
        "Will",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Sean Monahan",
+        "nhl": "CBJ",
+        "pos": "C",
+        "pts": 25.4,
+        "mgr": "Vin",
+        "pid": "8477497"
+       },
+       "D": {
+        "name": "Zach Werenski",
+        "nhl": "CBJ",
+        "pos": "D",
+        "pts": 21.1,
+        "mgr": "Zac",
+        "pid": "8478460"
+       },
+       "G": {
+        "name": "Joseph Woll",
+        "nhl": "TOR",
+        "pos": "G",
+        "pts": 26.8,
+        "mgr": "Zac",
+        "pid": "8479361"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Brad Marchand",
+        "nhl": "BOS",
+        "pos": "LW",
+        "pts": 0.3,
+        "mgr": "Hallie",
+        "pid": "8473419"
+       },
+       "D": {
+        "name": "Kris Letang",
+        "nhl": "PIT",
+        "pos": "D",
+        "pts": 0.7,
+        "mgr": "Will",
+        "pid": "8471724"
+       },
+       "G": {
+        "name": "Igor Shesterkin",
+        "nhl": "NYR",
+        "pos": "G",
+        "pts": 0.2,
+        "mgr": "Joe",
+        "pid": "8478048"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Emil Heineman",
+        "nhl": "MTL",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Maxim Tsyplakov",
+        "nhl": "NYI",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Mathew Barzal",
+        "nhl": "NYI",
+        "pos": "C/RW",
+        "note": "waivers"
+       },
+       "drop": {
+        "name": "Ukko-Pekka Luukkonen",
+        "nhl": "BUF",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Jonathan Quick",
+        "nhl": "NYR",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Tom",
+       "add": null,
+       "drop": {
+        "name": "Pavel Zacha",
+        "nhl": "BOS",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": null,
+       "drop": {
+        "name": "Petr Mrazek",
+        "nhl": "CHI",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Tom",
+       "add": {
+        "name": "Connor Clifton",
+        "nhl": "BUF",
+        "pos": "D"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 14,
@@ -76750,7 +79484,227 @@
        "Ronnie",
        "Steve"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Vincent Trocheck",
+        "nhl": "NYR",
+        "pos": "C",
+        "pts": 26.5,
+        "mgr": "Jefe",
+        "pid": "8476389"
+       },
+       "D": {
+        "name": "Jack Hughes",
+        "nhl": "NJD",
+        "pos": "C",
+        "pts": 17.1,
+        "mgr": "Danny",
+        "pid": "8481559"
+       },
+       "G": {
+        "name": "Mackenzie Blackwood",
+        "nhl": "COL",
+        "pos": "G",
+        "pts": 21.2,
+        "mgr": "Tom",
+        "pid": "8478406"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Tyler Toffoli",
+        "nhl": "SJS",
+        "pos": "C",
+        "pts": -0.9,
+        "mgr": "Tim",
+        "pid": "8475726"
+       },
+       "D": {
+        "name": "Aaron Ekblad",
+        "nhl": "FLA",
+        "pos": "D",
+        "pts": 1.2,
+        "mgr": "Joe",
+        "pid": "8477932"
+       },
+       "G": {
+        "name": "Filip Gustavsson",
+        "nhl": "MIN",
+        "pos": "G",
+        "pts": -0.4,
+        "mgr": "Will",
+        "pid": "8479406"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Dmitri Voronkov",
+        "nhl": "CBJ",
+        "pos": "LW"
+       },
+       "drop": {
+        "name": "Connor McMichael",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Alex Lyon",
+        "nhl": "DET",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Alexandar Georgiev",
+        "nhl": "SJS",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Marco Rossi",
+        "nhl": "MIN",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Jack McBain",
+        "nhl": "UTA",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Kaapo Kakko",
+        "nhl": "SEA",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Brandon Tanev",
+        "nhl": "SEA",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Ukko-Pekka Luukkonen",
+        "nhl": "BUF",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Kevin Lankinen",
+        "nhl": "VAN",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": null,
+       "drop": {
+        "name": "Damon Severson",
+        "nhl": "CBJ",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Thomas Harley",
+        "nhl": "DAL",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Ryker Evans",
+        "nhl": "SEA",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Jonathan Quick",
+        "nhl": "NYR",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": {
+        "name": "Matthew Knies",
+        "nhl": "TOR",
+        "pos": "LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Alex DeBrincat",
+        "nhl": "DET",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Trent Frederic",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Jack McBain",
+        "nhl": "UTA",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Dylan Guenther",
+        "nhl": "UTA",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Lane Hutson",
+        "nhl": "MTL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Vasily Podkolzin",
+        "nhl": "EDM",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Matvei Michkov",
+        "nhl": "PHI",
+        "pos": "RW"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 15,
@@ -77047,7 +80001,158 @@
        "Tom",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Connor McDavid",
+        "nhl": "EDM",
+        "pos": "C",
+        "pts": 28.4,
+        "mgr": "Ronnie",
+        "pid": "8478402"
+       },
+       "D": {
+        "name": "Moritz Seider",
+        "nhl": "DET",
+        "pos": "D",
+        "pts": 18.7,
+        "mgr": "Jefe",
+        "pid": "8481542"
+       },
+       "G": {
+        "name": "Logan Thompson",
+        "nhl": "WSH",
+        "pos": "G",
+        "pts": 32.2,
+        "mgr": "Will",
+        "pid": "8480313"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Roope Hintz",
+        "nhl": "DAL",
+        "pos": "C",
+        "pts": -0.5,
+        "mgr": "Hallie",
+        "pid": "8478449"
+       },
+       "D": {
+        "name": "Mikhail Sergachev",
+        "nhl": "UTA",
+        "pos": "D",
+        "pts": 0.7,
+        "mgr": "Danny",
+        "pid": "8479410"
+       },
+       "G": {
+        "name": "Ilya Samsonov",
+        "nhl": "VGK",
+        "pos": "G",
+        "pts": -1.8,
+        "mgr": "Steve",
+        "pid": "8478492"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Conor Garland",
+        "nhl": "VAN",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Patrick Kane",
+        "nhl": "DET",
+        "pos": "RW"
+       },
+       "drop": {
+        "name": "Emil Heineman",
+        "nhl": "MTL",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Kevin Lankinen",
+        "nhl": "VAN",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "John Gibson",
+        "nhl": "ANA",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Connor Murphy",
+        "nhl": "CHI",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Leevi Meriläinen",
+        "nhl": "OTT",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Ronnie",
+       "add": null,
+       "drop": {
+        "name": "Matthew Knies",
+        "nhl": "TOR",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Ronnie",
+       "add": null,
+       "drop": {
+        "name": "Evgeni Malkin",
+        "nhl": "PIT",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Matty Beniers",
+        "nhl": "SEA",
+        "pos": "C"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Hallie",
+       "add": null,
+       "drop": {
+        "name": "Marc-Andre Fleury",
+        "nhl": "MIN",
+        "pos": "G"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 16,
@@ -77351,7 +80456,206 @@
        "Tim",
        "Will"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "David Pastrnak",
+        "nhl": "BOS",
+        "pos": "RW",
+        "pts": 24.9,
+        "mgr": "Tom",
+        "pid": "8477956"
+       },
+       "D": {
+        "name": "Brayden McNabb",
+        "nhl": "VGK",
+        "pos": "D",
+        "pts": 21.5,
+        "mgr": "Nick",
+        "pid": "8475188"
+       },
+       "G": {
+        "name": "Ilya Sorokin",
+        "nhl": "NYI",
+        "pos": "G",
+        "pts": 24,
+        "mgr": "Ronnie",
+        "pid": "8478009"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Patrick Kane",
+        "nhl": "DET",
+        "pos": "RW",
+        "pts": 0.1,
+        "mgr": "Jefe",
+        "pid": "8474141"
+       },
+       "D": {
+        "name": "Erik Karlsson",
+        "nhl": "PIT",
+        "pos": "D",
+        "pts": 0.2,
+        "mgr": "Ronnie",
+        "pid": "8474578"
+       },
+       "G": {
+        "name": "Jacob Markstrom",
+        "nhl": "NJD",
+        "pos": "G",
+        "pts": 0.2,
+        "mgr": "Joe",
+        "pid": "8474593"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Pavel Zacha",
+        "nhl": "BOS",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Tristan Jarry",
+        "nhl": "PIT",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": null,
+       "drop": {
+        "name": "Trevor Moore",
+        "nhl": "LAK",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": null,
+       "drop": {
+        "name": "Ivan Barbashev",
+        "nhl": "VGK",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Morgan Geekie",
+        "nhl": "BOS",
+        "pos": "C/LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Steve",
+       "add": {
+        "name": "Blake Coleman",
+        "nhl": "CGY",
+        "pos": "C/LW/RW"
+       },
+       "drop": {
+        "name": "Kyle Palmieri",
+        "nhl": "NYI",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Jake Allen",
+        "nhl": "NJD",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Shayne Gostisbehere",
+        "nhl": "CAR",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Anthony Stolarz",
+        "nhl": "TOR",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Bobby McMann",
+        "nhl": "TOR",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Samuel Ersson",
+        "nhl": "PHI",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Matt Roy",
+        "nhl": "WSH",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Arber Xhekaj",
+        "nhl": "MTL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "Kirby Dach",
+        "nhl": "MTL",
+        "pos": "C/RW"
+       },
+       "drop": {
+        "name": "Martin Pospisil",
+        "nhl": "CGY",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Noah Cates",
+        "nhl": "PHI",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Nick Schmaltz",
+        "nhl": "UTA",
+        "pos": "C/RW"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 17,
@@ -77667,6 +80971,237 @@
        "Vin",
        "Will"
       ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "J.T. Miller",
+        "nhl": "VAN",
+        "pos": "C",
+        "pts": 32,
+        "mgr": "Will",
+        "pid": "8476468"
+       },
+       "D": {
+        "name": "Brandon Montour",
+        "nhl": "SEA",
+        "pos": "D",
+        "pts": 19.9,
+        "mgr": "Vin",
+        "pid": "8477986"
+       },
+       "G": {
+        "name": "Ilya Sorokin",
+        "nhl": "NYI",
+        "pos": "G",
+        "pts": 30.2,
+        "mgr": "Ronnie",
+        "pid": "8478009"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Stefan Noesen",
+        "nhl": "NJD",
+        "pos": "LW/RW",
+        "pts": 1.6,
+        "mgr": "Will",
+        "pid": "8476474"
+       },
+       "D": {
+        "name": "Lane Hutson",
+        "nhl": "MTL",
+        "pos": "D",
+        "pts": 0.6,
+        "mgr": "Will",
+        "pid": "8483457"
+       },
+       "G": {
+        "name": "Igor Shesterkin",
+        "nhl": "NYR",
+        "pos": "G",
+        "pts": -0.8,
+        "mgr": "Joe",
+        "pid": "8478048"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Adam Fantilli",
+        "nhl": "CBJ",
+        "pos": "C"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Rasmus Ristolainen",
+        "nhl": "PHI",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Pavel Zacha",
+        "nhl": "BOS",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Brandon Montour",
+        "nhl": "SEA",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Boone Jenner",
+        "nhl": "CBJ",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Samuel Montembeault",
+        "nhl": "MTL",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Pavel Dorofeyev",
+        "nhl": "VGK",
+        "pos": "LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Darren Raddysh",
+        "nhl": "TBL",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Vasily Podkolzin",
+        "nhl": "EDM",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Jordan Staal",
+        "nhl": "CAR",
+        "pos": "C"
+       },
+       "drop": {
+        "name": "Paul Cotter",
+        "nhl": "NJD",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": null,
+       "drop": {
+        "name": "Darren Raddysh",
+        "nhl": "TBL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": null,
+       "drop": {
+        "name": "Ross Colton",
+        "nhl": "COL",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Dylan DeMelo",
+        "nhl": "WPG",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Shane Pinto",
+        "nhl": "OTT",
+        "pos": "C"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Leevi Meriläinen",
+        "nhl": "OTT",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Jack McBain",
+        "nhl": "UTA",
+        "pos": "C/LW"
+       }
+      }
+     ],
+     "trades": [
+      {
+       "date": "2025-01-31",
+       "sides": [
+        {
+         "mgr": "Vin",
+         "gets": [
+          {
+           "name": "Kirill Kaprizov",
+           "nhl": "MIN",
+           "pos": "LW"
+          },
+          {
+           "name": "Alexis Lafreniere",
+           "nhl": "NYR",
+           "pos": "LW/RW"
+          }
+         ]
+        },
+        {
+         "mgr": "Will",
+         "gets": [
+          {
+           "name": "Matt Boldy",
+           "nhl": "MIN",
+           "pos": "LW/RW"
+          },
+          {
+           "name": "Bryan Rust",
+           "nhl": "PIT",
+           "pos": "RW"
+          }
+         ]
+        }
+       ]
+      }
      ]
     },
     {
@@ -77985,7 +81520,140 @@
        "Tim",
        "Tom"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Brandon Hagel",
+        "nhl": "TBL",
+        "pos": "LW",
+        "pts": 31,
+        "mgr": "Zac",
+        "pid": "8479542"
+       },
+       "D": {
+        "name": "Cale Makar",
+        "nhl": "COL",
+        "pos": "D",
+        "pts": 21.8,
+        "mgr": "Zac",
+        "pid": "8480069"
+       },
+       "G": {
+        "name": "Andrei Vasilevskiy",
+        "nhl": "TBL",
+        "pos": "G",
+        "pts": 33.6,
+        "mgr": "Nick",
+        "pid": "8476883"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Tage Thompson",
+        "nhl": "BUF",
+        "pos": "C",
+        "pts": -0.6,
+        "mgr": "Nick",
+        "pid": "8479420"
+       },
+       "D": {
+        "name": "Kris Letang",
+        "nhl": "PIT",
+        "pos": "D",
+        "pts": 1.6,
+        "mgr": "Will",
+        "pid": "8471724"
+       },
+       "G": {
+        "name": "Frederik Andersen",
+        "nhl": "CAR",
+        "pos": "G",
+        "pts": 2.4,
+        "mgr": "Hallie",
+        "pid": "8475883"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Matthew Knies",
+        "nhl": "TOR",
+        "pos": "LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Victor Olofsson",
+        "nhl": "VGK",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Anthony Stolarz",
+        "nhl": "TOR",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Tony DeAngelo",
+        "nhl": "NYI",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Brandt Clarke",
+        "nhl": "LAK",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": null,
+       "drop": {
+        "name": "Noah Cates",
+        "nhl": "PHI",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Alex Nedeljkovic",
+        "nhl": "PIT",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Mathew Barzal",
+        "nhl": "NYI",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Dylan Guenther",
+        "nhl": "UTA",
+        "pos": "RW"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 19,
@@ -78304,7 +81972,203 @@
        "Tom",
        "Vin"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "J.T. Miller",
+        "nhl": "NYR",
+        "pos": "C",
+        "pts": 34.3,
+        "mgr": "Will",
+        "pid": "8476468"
+       },
+       "D": {
+        "name": "Colton Parayko",
+        "nhl": "STL",
+        "pos": "D",
+        "pts": 23.5,
+        "mgr": "Tom",
+        "pid": "8476892"
+       },
+       "G": {
+        "name": "Andrei Vasilevskiy",
+        "nhl": "TBL",
+        "pos": "G",
+        "pts": 41.4,
+        "mgr": "Nick",
+        "pid": "8476883"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Mason Marchment",
+        "nhl": "DAL",
+        "pos": "LW",
+        "pts": 0.5,
+        "mgr": "Danny",
+        "pid": "8478975"
+       },
+       "D": {
+        "name": "Quinn Hughes",
+        "nhl": "VAN",
+        "pos": "D",
+        "pts": 1.2,
+        "mgr": "Hallie",
+        "pid": "8480800"
+       },
+       "G": {
+        "name": "Jake Allen",
+        "nhl": "NJD",
+        "pos": "G",
+        "pts": 1.4,
+        "mgr": "Vin",
+        "pid": "8474596"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Joe",
+       "add": {
+        "name": "Casey DeSmith",
+        "nhl": "DAL",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Matty Beniers",
+        "nhl": "SEA",
+        "pos": "C"
+       }
+      },
+      {
+       "mgr": "Hallie",
+       "add": {
+        "name": "Martin Pospisil",
+        "nhl": "CGY",
+        "pos": "C/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Fabian Zetterlund",
+        "nhl": "SJS",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Mats Zuccarello",
+        "nhl": "MIN",
+        "pos": "RW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Cam Fowler",
+        "nhl": "STL",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Jeremy Lauzon",
+        "nhl": "NSH",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Lian Bichsel",
+        "nhl": "DAL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Will",
+       "add": {
+        "name": "Bowen Byram",
+        "nhl": "BUF",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Cole Perfetti",
+        "nhl": "WPG",
+        "pos": "C/LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Samuel Montembeault",
+        "nhl": "MTL",
+        "pos": "G"
+       },
+       "drop": {
+        "name": "Alex Lyon",
+        "nhl": "DET",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Will",
+       "add": null,
+       "drop": {
+        "name": "Pavel Dorofeyev",
+        "nhl": "VGK",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Erik Cernak",
+        "nhl": "TBL",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": null,
+       "drop": {
+        "name": "Mason Marchment",
+        "nhl": "DAL",
+        "pos": "LW"
+       }
+      },
+      {
+       "mgr": "Hallie",
+       "add": {
+        "name": "Esa Lindell",
+        "nhl": "DAL",
+        "pos": "D"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 20,
@@ -78617,7 +82481,140 @@
        "Tim",
        "Zac"
       ]
-     ]
+     ],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Tom Wilson",
+        "nhl": "WSH",
+        "pos": "RW",
+        "pts": 33.4,
+        "mgr": "Jefe",
+        "pid": "8476880"
+       },
+       "D": {
+        "name": "Cale Makar",
+        "nhl": "COL",
+        "pos": "D",
+        "pts": 21.8,
+        "mgr": "Zac",
+        "pid": "8480069"
+       },
+       "G": {
+        "name": "Sergei Bobrovsky",
+        "nhl": "FLA",
+        "pos": "G",
+        "pts": 20.8,
+        "mgr": "Danny",
+        "pid": "8475683"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Alex DeBrincat",
+        "nhl": "DET",
+        "pos": "LW/RW",
+        "pts": -0.7,
+        "mgr": "Nick",
+        "pid": "8479337"
+       },
+       "D": {
+        "name": "Morgan Rielly",
+        "nhl": "TOR",
+        "pos": "D",
+        "pts": -0.3,
+        "mgr": "Joe",
+        "pid": "8476853"
+       },
+       "G": {
+        "name": "Joseph Woll",
+        "nhl": "TOR",
+        "pos": "G",
+        "pts": -2.2,
+        "mgr": "Zac",
+        "pid": "8479361"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Lukas Dostal",
+        "nhl": "ANA",
+        "pos": "G"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Nick",
+       "add": null,
+       "drop": {
+        "name": "Kirby Dach",
+        "nhl": "MTL",
+        "pos": "C/RW"
+       }
+      },
+      {
+       "mgr": "Nick",
+       "add": {
+        "name": "JJ Peterka",
+        "nhl": "BUF",
+        "pos": "LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Danny",
+       "add": {
+        "name": "Ryan Donato",
+        "nhl": "CHI",
+        "pos": "C/LW/RW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Teuvo Teravainen",
+        "nhl": "CHI",
+        "pos": "LW/RW"
+       },
+       "drop": {
+        "name": "Luke Kunin",
+        "nhl": "SJS",
+        "pos": "C/LW/RW"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Brandon Montour",
+        "nhl": "SEA",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Mattias Ekholm",
+        "nhl": "EDM",
+        "pos": "D"
+       }
+      },
+      {
+       "mgr": "Joe",
+       "add": null,
+       "drop": {
+        "name": "Casey DeSmith",
+        "nhl": "DAL",
+        "pos": "G"
+       }
+      }
+     ],
+     "trades": []
     },
     {
      "week": 21,
@@ -78919,7 +82916,144 @@
        ]
       }
      ],
-     "next": []
+     "next": [],
+     "players": {
+      "high": {
+       "F": {
+        "name": "Dylan Cozens",
+        "nhl": "OTT",
+        "pos": "C",
+        "pts": 24.8,
+        "mgr": "Zac",
+        "pid": "8481528"
+       },
+       "D": {
+        "name": "Elias Pettersson",
+        "nhl": "VAN",
+        "pos": "C",
+        "pts": 27,
+        "mgr": "Nick",
+        "pid": "8480012"
+       },
+       "G": {
+        "name": "Darcy Kuemper",
+        "nhl": "LAK",
+        "pos": "G",
+        "pts": 35.6,
+        "mgr": "Jefe",
+        "pid": "8475311"
+       }
+      },
+      "low": {
+       "F": {
+        "name": "Connor Bedard",
+        "nhl": "CHI",
+        "pos": "C",
+        "pts": 0.3,
+        "mgr": "Will",
+        "pid": "8484144"
+       },
+       "D": {
+        "name": "Zach Werenski",
+        "nhl": "CBJ",
+        "pos": "D",
+        "pts": 1.4,
+        "mgr": "Zac",
+        "pid": "8478460"
+       },
+       "G": {
+        "name": "Jake Oettinger",
+        "nhl": "DAL",
+        "pos": "G",
+        "pts": 2,
+        "mgr": "Ronnie",
+        "pid": "8479979"
+       }
+      },
+      "faHigh": {
+       "F": null,
+       "D": null,
+       "G": null
+      }
+     },
+     "moves": [
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Mikey Anderson",
+        "nhl": "LAK",
+        "pos": "D"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Quinton Byfield",
+        "nhl": "LAK",
+        "pos": "C/LW/RW"
+       },
+       "drop": {
+        "name": "Jake Allen",
+        "nhl": "NJD",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Zac",
+       "add": {
+        "name": "Aliaksei Protas",
+        "nhl": "WSH",
+        "pos": "C/LW"
+       },
+       "drop": {
+        "name": "Teuvo Teravainen",
+        "nhl": "CHI",
+        "pos": "LW/RW"
+       }
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Jonathan Huberdeau",
+        "nhl": "CGY",
+        "pos": "C/LW"
+       },
+       "drop": null
+      },
+      {
+       "mgr": "Jefe",
+       "add": {
+        "name": "Nick Seeler",
+        "nhl": "PHI",
+        "pos": "D"
+       },
+       "drop": {
+        "name": "Brett Howden",
+        "nhl": "VGK",
+        "pos": "C/LW"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": null,
+       "drop": {
+        "name": "Connor Ingram",
+        "nhl": "UTA",
+        "pos": "G"
+       }
+      },
+      {
+       "mgr": "Vin",
+       "add": {
+        "name": "Jackson LaCombe",
+        "nhl": "ANA",
+        "pos": "D"
+       },
+       "drop": null
+      }
+     ],
+     "trades": []
     },
     {
      "week": 100,
@@ -79319,7 +83453,72 @@
       ]
      }
     }
-   ]
+   ],
+   "tradeTracker": {
+    "byWeek": true,
+    "through": "2025-03-16",
+    "trades": [
+     {
+      "date": "2025-01-31",
+      "sides": [
+       {
+        "mgr": "Vin",
+        "gets": [
+         {
+          "name": "Kirill Kaprizov",
+          "nhl": "MIN",
+          "pos": "LW",
+          "byWeek": {
+           "18": 0,
+           "19": 0,
+           "20": 0,
+           "21": 0
+          }
+         },
+         {
+          "name": "Alexis Lafreniere",
+          "nhl": "NYR",
+          "pos": "LW/RW",
+          "byWeek": {
+           "18": 4.2,
+           "19": 7,
+           "20": 8.3,
+           "21": 0
+          }
+         }
+        ]
+       },
+       {
+        "mgr": "Will",
+        "gets": [
+         {
+          "name": "Matt Boldy",
+          "nhl": "MIN",
+          "pos": "LW/RW",
+          "byWeek": {
+           "18": 10.9,
+           "19": 15.8,
+           "20": 6.4,
+           "21": 3.9
+          }
+         },
+         {
+          "name": "Bryan Rust",
+          "nhl": "PIT",
+          "pos": "RW",
+          "byWeek": {
+           "18": 5,
+           "19": 0,
+           "20": 0,
+           "21": 0
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   }
   },
   {
    "id": "2025-26",
