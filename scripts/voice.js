@@ -196,6 +196,42 @@ const V = {
   backIn: (names, many) => ' ' + say('back', [`${names} ${many ? 'are' : 'is'} back in the dance after missing last year.`, `${names} ${many ? 'return' : 'returns'} to the playoffs after a year away.`, `Welcome back to the postseason, ${names}.`]),
   playoffRun: (m, o) => ' ' + say('run', [`And ${m} is in for the ${o} straight season.`, `${m} makes it ${o} straight trips to the playoffs.`, `That's the ${o} straight playoff appearance for ${m}.`]),
 
+  // --- player of the week, close calls, upsets, points race (from the user's own write-ups)
+  playerOfWeek: (p, nhl, pts, m) => say('pow', [
+    `Player of the week: ${p}${nhl ? ' (' + nhl + ')' : ''} put up ${pts} for ${m}.`,
+    `${p} carried ${m} with ${pts} points.`,
+    `First star on the ice: ${p}, ${pts} points for ${m}.`,
+    `${m} can thank ${p} for ${pts} of those points.`,
+    `The best performance of the week belonged to ${p}: ${pts} for ${m}.`]),
+  hsCount: (m, n, tied, leader, ln) => ' ' + (tied ? say('hsTie', [`That's high score No. ${n} for ${m}, tying ${tied} for the most on the season.`, `${m} picks up high score No. ${n}, now tied with ${tied} for the league lead.`])
+    : leader === m ? say('hsLead', [`That's ${n} high scores on the season for ${m}, the most in the league.`, `${m} now has ${n} weekly high scores, tops in the league.`])
+    : say('hsChase', [`That's high score No. ${n} for ${m}, chasing ${leader} (${ln}).`, `${m} picks up high score No. ${n}; ${leader} still leads with ${ln}.`])),
+  closeCalls: list => say('cc', [`Other close calls: ${list}.`, `A few more nail-biters: ${list}.`, `Also coming down to the wire: ${list}.`, `More sweaty finishes: ${list}.`]),
+  upsets: list => say('ups', [`Upsets all over the board: ${list}.`, `Chaos in the standings: ${list}.`, `The underdogs ate this week: ${list}.`]),
+  seasonLow: (m, pts) => ' ' + say('sLow', [`${m}'s ${pts} is the lowest score of the season so far.`, `Rough one for ${m}: ${pts} is the season low.`, `${m} posts the season's lowest score, ${pts}. Moving on.`]),
+  pointsRace: (a, b, c, x, y, z) => say('pr', [
+    `Looking at points, ${a[0]} leads the league with ${a[1]} so far, followed by ${b[0]} (${b[1]}) and ${c[0]} (${c[1]}). On the other end, ${x[0]} has been scored on the most (${x[1]}), followed by ${y[0]} (${y[1]}) and ${z[0]} (${z[1]}).`,
+    `Points check: ${a[0]} (${a[1]}), ${b[0]} (${b[1]}) and ${c[0]} (${c[1]}) have scored the most, while ${x[0]} (${x[1]}), ${y[0]} (${y[1]}) and ${z[0]} (${z[1]}) have given up the most.`]),
+  // --- the wire and trades
+  wire: (n, busiest, bn) => say('wire', [`${n} moves on the wire this week${bn > 2 ? ', with ' + busiest + ' the busiest (' + bn + ')' : ''}.`, `Free agency saw ${n} moves${bn > 2 ? ', ' + bn + ' of them from ' + busiest : ''}.`, `A ${n}-move week on the waiver wire${bn > 2 ? ', led by ' + busiest + ' with ' + bn : ''}.`]),
+  wireQuiet: () => say('wireQ', ['A quiet week on the wire.', 'Nobody touched the waiver wire this week.']),
+  bestPickup: (m, p, nhl, pts) => ' ' + say('pick', [`Pick of the week: ${m} grabbed ${p}${nhl ? ' (' + nhl + ')' : ''}, who put up ${pts} for ${m} over the next four weeks.`, `Turned out to be a steal: ${p} gave ${m} ${pts} points over the next month.`, `${m} added ${p} and got ${pts} points out of it over the next four weeks.`]),
+  tradeAlert: (a, ag, b, bg) => say('trade', [`Trade alert! ${a} gets ${ag}, ${b} gets ${bg}.`, `Blockbuster: ${a} lands ${ag}, sending ${bg} to ${b}.`, `The phones were ringing: ${a} picks up ${ag} from ${b} for ${bg}.`]),
+  // --- playoff race and next week
+  bubble: (a, ar, arec, b, brec, g, left) => { const half = g % 1 ? (Math.floor(g) ? Math.floor(g) + ' and a half' : 'half a') : '', edge = g === 0 ? 'nothing but a tiebreaker' : g === 1 ? 'a one-game edge' : half ? (Math.floor(g) ? 'a ' + Math.floor(g) + '-and-a-half-game edge' : 'a half-game edge') : g + '-game edge', gap = g === 0 ? 'nothing but a tiebreaker' : g === 1 ? 'one game' : half ? half + (Math.floor(g) ? ' games' : ' game') : g + ' games'; return say('bub', [
+    `The race for the last playoff spot: ${a} (${ar}, ${arec}) holds ${edge} over ${b} (${brec}) with ${left} to go.`,
+    `Bubble watch: ${a} sits ${ar} at ${arec}, ${g === 0 ? 'level with' : gap + ' ahead of'} ${b} (${brec}), with ${left} left.`,
+    `Keep an eye on the cut line: ${a} (${arec}) and ${b} (${brec}) are separated by ${gap} with ${left} remaining.`]); },
+  preview: (a, ar, b, br, h2h) => say('prev', [`Matchup of the week: ${a} (${ar}) vs ${b} (${br}).${h2h}`, `The big one next week: ${a} (${ar}) takes on ${b} (${br}).${h2h}`, `Circle this one: ${a} (${ar}) vs ${b} (${br}).${h2h}`, `Next week's headliner: ${a} (${ar}) against ${b} (${br}).${h2h}`]),
+  // --- season in review (Final page)
+  reviewRecords: (hsM, hsN, hiM, hiP, hiW, stM, stN) => say('rev1', [
+    `The season in review: ${hsM} piled up ${hsN} weekly high scores, the most in the league. The biggest single week belonged to ${hiM} with ${hiP} in week ${hiW}${stN >= 5 ? ', and ' + stM + ' put together the longest win streak at ' + stN + ' straight' : ''}.`,
+    `Looking back on the year: ${hsN} high scores for ${hsM}, a season-best ${hiP} from ${hiM} in week ${hiW}${stN >= 5 ? ', and a ' + stN + '-game win streak from ' + stM : ''}.`]),
+  reviewPlayers: (top, second) => say('rev2', [`MVP of the year: ${top.name}, with ${top.pts} points for ${top.mgr}${second ? ', just ahead of ' + second.name + ' (' + second.pts + ' for ' + second.mgr + ')' : ''}.`, `Nobody scored more for their manager than ${top.name}: ${top.pts} for ${top.mgr}${second ? '. ' + second.name + ' was next with ' + second.pts + ' for ' + second.mgr : ''}.`]),
+  reviewPickup: (p) => ' ' + say('rev3', [`Best pickup of the year: ${p.name}, added by ${p.mgr} in week ${p.week}, went on to score ${p.pts} for ${p.mgr}.`, `The waiver steal of the season: ${p.mgr} grabbed ${p.name} in week ${p.week} and got ${p.pts} points the rest of the way.`]),
+  reviewTrade: (w, wp, l, lp) => ' ' + say('rev4', [`Trade of the year went to ${w}: ${wp} points from the deal to ${l}'s ${lp}.`, `On the trade front, ${w} came out ahead, ${wp} to ${lp} over ${l}.`]),
+  reviewWire: (m, n) => ' ' + say('rev5', [`Busiest manager on the wire: ${m}, with ${n} moves.`, `${m} wore out the waiver wire with ${n} moves.`]),
+
   // --- the final (once a season: sets of 8 to 12)
   champLow: (c, s, id) => s >= 6 ? say('chLong', [`Nobody saw this coming: No. ${s} seed ${c} wins the ${id} title!`, `Cinderella story: ${c}, seeded No. ${s}, wins the ${id} championship!`, `Bust up your brackets: No. ${s} seed ${c} is the ${id} champion!`])
     : say('chLow', [`From the No. ${s} seed, ${c} wins the ${id} championship!`, `The No. ${s} seed goes all the way: ${c} is your ${id} champion!`, `${c} wins the ${id} title from the No. ${s} seed!`, `No byes, no problem: No. ${s} seed ${c} wins the ${id} championship!`]),
@@ -241,6 +277,6 @@ const V = {
     `And ${m} holds down ${o}. Summer starts now.`,
     `${m} closes the book on ${id} in ${o}. See you next season.`,
     `${o} place: ${m}. That's a season. Goodnight, everybody.`,
-    `The basement belongs to ${m} this year, in ${o}. On to next season.`])
+    `The basement belongs to ${m} this year, in ${o}. On to next season.`]) + ' ' + say('draft', ['Next stop: the draft table.', 'See you at the draft.', 'Mock drafts start now.', 'The draft room awaits.'])
 };
 module.exports = { V, an };

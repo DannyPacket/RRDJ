@@ -211,6 +211,32 @@ function playoffPicture(S, standings) {
   if (run && run.n >= 4) t += V.playoffRun(run.m, ord(run.n));
   return t;
 }
+// The season in review for the Final page: high scores, the best week, the longest streak, and (Yahoo seasons)
+// the MVP, best pickup, trade of the year and busiest manager on the wire
+function seasonReview(id, S, weeks, yw) {
+  if (catSeasons.has(id)) return '';
+  const regular = weeks.filter(x => x.week !== 100), lastW = regular[regular.length - 1];
+  const tally = (lastW.highScoreTally || [])[0], hsM = tally ? tally.entries.map(e => e.mgr).join(' and ') : null;
+  let hi = null;
+  for (const [w, g] of Object.entries(S.games)) for (const [m, x] of Object.entries(g)) if (normalWeek(id, +w) && (!hi || x.p > hi.p)) hi = { m, p: x.p, w };
+  let st = { n: 0 };
+  for (const m of Object.keys(lastW.standings.reduce((o, r) => (o[r.mgr] = 1, o), {}))) {
+    let run = 0;
+    for (const w of Object.keys(S.games).map(Number).sort((a, b) => a - b)) { const g = S.games[w][m]; if (g && g.p > g.q) { run++; if (run > st.n) st = { n: run, m }; } else run = 0; }
+  }
+  let out = hsM && hi ? V.reviewRecords(hsM, tally.count, hi.m, f1(hi.p), hi.w, st.m, st.n) : '';
+  if (yw && yw.season) {
+    const se = yw.season;
+    if (se.top && se.top[0]) out += ' ' + V.reviewPlayers(se.top[0], se.top[1]);
+    if (se.pickups && se.pickups[0] && se.pickups[0].pts >= 100) out += V.reviewPickup(se.pickups[0]);
+    const trades = (yw.tradeTracker && yw.tradeTracker.trades || []).map(t => t.sides.map(sd => ({ mgr: sd.mgr, pts: sd.gets.reduce((a, g) => a + Object.values(g.byWeek || {}).reduce((x, y) => x + y, 0), 0) }))).filter(t => t.length === 2);
+    const big = trades.map(t => t.slice().sort((a, b) => b.pts - a.pts)).sort((a, b) => (b[0].pts - b[1].pts) - (a[0].pts - a[1].pts))[0];
+    if (big && big[0].pts - big[1].pts >= 20) out += V.reviewTrade(big[0].mgr, f1(big[0].pts), big[1].mgr, f1(big[1].pts));
+    const busy = Object.entries(se.moves || {}).sort((a, b) => b[1] - a[1])[0];
+    if (busy && busy[1] >= 15) out += V.reviewWire(busy[0], busy[1]);
+  }
+  return out.trim();
+}
 function cancelledFinish(id, leader) {
   if (id === '2019-20') return `Nobody knew it yet, but this was the last week of the season. The NHL paused on March 12, 2020, and the league never crowned a champion. ${leader.mgr} finishes on top at ${recStr(leader)}.`;
   return `That wraps the regular season, with ${leader.mgr} on top at ${recStr(leader)}.`;
@@ -375,6 +401,20 @@ for (const [id, S] of Object.entries(bySeason)) {
       if (rec.hi && top > rec.hi.pts) recap[recap.length - 1] += ' ' + V.record(rec.hi.m, f1(rec.hi.pts), when(rec.hi.y));
       else if (wk >= 6 && Object.keys(S.games).map(Number).filter(w => w < wk && normalWeek(id, w)).every(w => Math.max(...Object.values(S.games[w]).map(g => g.p)) < top)) recap[recap.length - 1] += V.seasonBest();
       if (rec.lo && low < rec.lo.pts) recap[recap.length - 1] += ' ' + V.recordLow(lowM, f1(low), rec.lo.m, f1(rec.lo.pts), when(rec.lo.y));
+      else if (wk >= 4) {
+        const prevLow = Math.min(...Object.keys(S.games).map(Number).filter(w => w < wk && normalWeek(id, w)).flatMap(w => Object.values(S.games[w]).map(g => g.p)));
+        if (low < prevLow) recap[recap.length - 1] += V.seasonLow(lowM, f1(low));
+      }
+    }
+    const ywk = yWeeks[id] && yWeeks[id].weeks[wk];
+    if (!CAT) {
+      const tally = mgrs.map(m => [m, hs[m].length]).sort((a, b) => b[1] - a[1]), n = hs[hsMgr].length;
+      const tied = tally.filter(t => t[0] !== hsMgr && t[1] === n).map(t => t[0]);
+      if (n >= 2) recap[recap.length - 1] += V.hsCount(hsMgr, n, tied.length ? tied.join(' and ') : null, tally[0][0], tally[0][1]);
+    }
+    if (ywk && ywk.players) {
+      const star = ['F', 'D', 'G'].map(k => ywk.players.high[k]).filter(Boolean).sort((a, b) => b.pts - a.pts)[0];
+      if (star) recap[recap.length - 1] += ' ' + V.playerOfWeek(star.name, star.nhl, f1(star.pts), star.mgr);
     }
     const decided = matchups.filter(x => x.ap !== x.bp).map(x => ({ w: x.ap > x.bp ? x.a : x.b, l: x.ap > x.bp ? x.b : x.a, wp: Math.max(x.ap, x.bp), lp: Math.min(x.ap, x.bp), d: Math.abs(x.ap - x.bp) }));
     // the lead already covers the high scorer's game, so the blowout line goes to a different game
@@ -385,9 +425,12 @@ for (const [id, S] of Object.entries(bySeason)) {
       : V.closest(tagOf(close.w, close.l), close.w, close.l, f1(close.wp), f1(close.lp)));
     if (blow && blow !== close) p2.push(V.blowout(tagOf(blow.w, blow.l), blow.w, blow.l, f1(blow.d) + (CAT ? ' categories' : '')) + (!CAT && blow.d >= 80 ? V.pullGoalie() : ''));
     if (wk > 1) {
-      const up = decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 5).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l]))[0];
-      if (up) p2.push(V.upset(up.w, ord(prev[up.w]), up.l, ord(prev[up.l])));
+      const ups = decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 4).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l]));
+      if (ups.length >= 2) p2.push(V.upsets(ups.map(x => `${x.w} (${ord(prev[x.w])}) over ${x.l} (${ord(prev[x.l])})`).join(', ')));
+      else if (ups.length && prev[ups[0].w] - prev[ups[0].l] >= 5) p2.push(V.upset(ups[0].w, ord(prev[ups[0].w]), ups[0].l, ord(prev[ups[0].l])));
     }
+    const others = decided.filter(x => x !== close && x !== blow && x.d < (CAT ? 2 : 10)).sort((a, b) => a.d - b.d).slice(0, 3);
+    if (others.length) p2.splice(1, 0, V.closeCalls(others.map(x => `${x.w} over ${x.l} by ${f1(x.d)}`).join(', ')));
     recap.push(p2.join(' '));
     const p3 = [];
     const hot = mgrs.map(m => ({ m, s: streakOf(m) })).filter(x => x.s.k === 'W' && x.s.n >= 3).sort((a, b) => b.s.n - a.s.n)[0];
@@ -426,9 +469,35 @@ for (const [id, S] of Object.entries(bySeason)) {
       if (lastM && r1 && r1 <= 4) p3.push(V.lastToTop(lastM, ord(r1)));
       if (oldChamp && rank[oldChamp] >= mgrs.length - 3) p3.push(V.champTrouble(oldChamp, ord(rank[oldChamp])));
     }
+    if (!CAT && (wk === 9 || wk === 15) && wk < regWeeks) {
+      const byPf = standings.slice().sort((a, b) => b.pf - a.pf), byPa = standings.slice().sort((a, b) => b.pa - a.pa), pr = x => [x.mgr, f1(x.pf)], pa = x => [x.mgr, f1(x.pa)];
+      p3.push(V.pointsRace(pr(byPf[0]), pr(byPf[1]), pr(byPf[2]), pa(byPa[0]), pa(byPa[1]), pa(byPa[2])));
+    }
+    const fieldN = Object.keys(S.post).length ? bracketOf(S).teams.length : 0, left = regWeeks - wk;
+    if (fieldN && left >= 1 && left <= 3) {
+      const inn = standings.find(x => x.rank === fieldN), out = standings.find(x => x.rank === fieldN + 1);
+      if (inn && out) {
+        const g = (inn.w + inn.t / 2) - (out.w + out.t / 2);
+        if (g <= left) p3.push(V.bubble(inn.mgr, ord(fieldN), recStr(inn), out.mgr, recStr(out), g, left === 1 ? 'one week' : words[left] + ' weeks'));
+      }
+    }
     const sn = CAT ? '' : seriesNote(decided, id, wk);
     if (sn) p3.push(sn);
     if (p3.filter(Boolean).length) recap.push(p3.filter(Boolean).join(' '));
+    if (ywk) {
+      const p4 = [];
+      for (const t of ywk.trades || []) if (t.sides.length === 2) p4.push(V.tradeAlert(t.sides[0].mgr, t.sides[0].gets.map(g => g.name).join(' and '), t.sides[1].mgr, t.sides[1].gets.map(g => g.name).join(' and ')));
+      const mv = ywk.moves || [];
+      if (mv.length) {
+        const by = {}; mv.forEach(m => by[m.mgr] = (by[m.mgr] || 0) + 1);
+        const busiest = Object.entries(by).sort((a, b) => b[1] - a[1])[0];
+        let line = V.wire(mv.length, busiest[0], busiest[1]);
+        const pick = mv.filter(m => m.add && m.add.next4 != null).sort((a, b) => b.add.next4 - a.add.next4)[0];
+        if (pick && pick.add.next4 >= 25) line += V.bestPickup(pick.mgr, pick.add.name, pick.add.nhl, f1(pick.add.next4));
+        p4.push(line);
+      }
+      if (p4.length) recap.push(p4.join(' '));
+    }
     const news = newsFor(id, wk, dw);
     if (news) recap.push(news);
     const leader = standings[0], bottom = standings[standings.length - 1].mgr;
@@ -439,6 +508,12 @@ for (const [id, S] of Object.entries(bySeason)) {
       : leader.mgr !== prevLeader && wk > 1 ? V.leaderNew(leader.mgr, recStr(leader))
         : V.leaderStill(leader.mgr, recStr(leader)) + (bottom !== prevLast && wk > 1 ? V.dropsLast(bottom, ord(standings.length)) : ''));
     prevLeader = leader.mgr; prevLast = bottom;
+    if (!lastWk && nextG) {
+      const pairs = next.map(([a, b]) => rank[a] <= rank[b] ? [a, b] : [b, a]).sort((x, y) => (rank[x[0]] + rank[x[1]]) - (rank[y[0]] + rank[y[1]]));
+      const [a, b] = pairs[0], r0 = seriesOf(a, b, id, wk);
+      const h2h = CAT ? '' : r0.n ? ' All-time, ' + (r0.aw === r0.bw ? 'the series is tied ' + r0.aw + '-' + r0.bw : (r0.aw > r0.bw ? a : b) + ' leads ' + Math.max(r0.aw, r0.bw) + '-' + Math.min(r0.aw, r0.bw)) + (r0.t ? '-' + r0.t : '') + '.' : ' Their first ever meeting.';
+      recap.push(V.preview(a, ord(rank[a]), b, ord(rank[b]), h2h));
+    }
 
     weeks.push({ week: wk, start: dw ? dw[0] : undefined, end: dw ? dw[1] : undefined, days: dw ? days : undefined, recap: recap.filter(Boolean), matchups, highScore: CAT ? null : { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally: CAT ? [] : highScoreTally, next });
   }
@@ -450,6 +525,8 @@ for (const [id, S] of Object.entries(bySeason)) {
     const regRank = Object.fromEntries(last.standings.map(x => [x.mgr, x.rank]));
     const standings = fin.map(m => Object.assign({}, last.standings.find(x => x.mgr === m), { rank: S.finals[m], prev: regRank[m] }));
     const recap = championStory(id, S, last.standings, fin);
+    const review = seasonReview(id, S, weeks, yWeeks[id]);
+    if (review) recap.splice(recap.length - 1, 0, review);
     const late = newsAfter(id, last.end);
     if (late) recap.splice(recap.length - 1, 0, late);
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [], bracket: bracketGames(S) });

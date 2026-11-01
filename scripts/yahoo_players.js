@@ -118,6 +118,12 @@ const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && 
     for (const p of t.players) {
       const r = await resolve(p.yid, iso), pl = { name: S.names[p.yid], nhl: r.nhl, pos: posText(p.yid, r) };
       if (/^Waiver/.test(p.how)) pl.note = 'waivers';
+      // for the write-ups: points an added player scored for his new team, over the next 4 weeks and the rest of the season
+      if (!/^To /.test(p.how)) {
+        let next4 = 0, rest = 0;
+        for (const k of wkNums.filter(k => k >= wk)) { const row = ((S.rosters[k] || {})[tid] || []).find(x => x[0] === p.yid); if (row) { rest += row[2]; if (k < wk + 4) next4 += row[2]; } }
+        pl.next4 = +next4.toFixed(1); pl.rest = +rest.toFixed(1);
+      }
       (/^To /.test(p.how) ? drops : adds).push(pl);
     }
     const n = Math.max(adds.length, drops.length);
@@ -157,6 +163,19 @@ const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && 
     }) })) };
   });
   out.tradeTracker = { byWeek: true, through: dates[lastWk][1], trades: tracked };
+  // season totals for the Final write-up: every player's points for each manager (counted days only), the top
+  // scorers, each team's MVP, the best pickups, and how busy each manager was on the wire
+  const tot = {};
+  for (const k of wkNums) for (const [tid, list] of Object.entries(S.rosters[k] || {})) for (const r of list || []) {
+    if (goalieVoid.has(k + '|' + r[0])) continue;
+    const key = tid + '|' + r[0]; tot[key] = (tot[key] || 0) + r[2];
+  }
+  const totals = Object.entries(tot).map(([key, pts]) => { const [tid, yid] = key.split('|'); return { name: S.names[yid], mgr: S.mgr[tid], pts: +pts.toFixed(1) }; }).sort((a, b) => b.pts - a.pts);
+  const mvp = {}; for (const t of totals) if (!mvp[t.mgr]) mvp[t.mgr] = { name: t.name, pts: t.pts };
+  const pickups = Object.entries(out.weeks).flatMap(([wk, w]) => w.moves.filter(m => m.add && m.add.rest != null).map(m => ({ name: m.add.name, mgr: m.mgr, week: +wk, pts: m.add.rest })))
+    .sort((a, b) => b.pts - a.pts).slice(0, 5);
+  const moves = {}; Object.values(out.weeks).forEach(w => w.moves.forEach(m => { moves[m.mgr] = (moves[m.mgr] || 0) + 1; }));
+  out.season = { top: totals.slice(0, 5), mvp, pickups, moves };
 
   fs.writeFileSync(cacheFile, JSON.stringify(cache));
   const outFile = path.join(__dirname, 'yahoo_weeks.json');
