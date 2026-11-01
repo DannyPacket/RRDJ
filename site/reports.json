@@ -1090,6 +1090,7 @@
        },
        "drop": {
         "name": "Sheldon Souray",
+        "nhl": "ANA",
         "pos": "D"
        }
       },
@@ -1590,6 +1591,7 @@
        },
        "drop": {
         "name": "Tomas Vokoun",
+        "nhl": "PIT",
         "pos": "G"
        }
       },
@@ -2880,6 +2882,7 @@
      "trades": [
       {
        "date": "2013-11-08",
+       "moved": "2013-11-11",
        "sides": [
         {
          "mgr": "Ronnie",
@@ -6115,10 +6118,11 @@
       "low": {
        "F": {
         "name": "Mike Cammalleri",
-        "pos": "",
+        "nhl": "CGY",
+        "pos": "LW",
         "pts": -1.6,
         "mgr": "Tom",
-        "pid": "8475984"
+        "pid": "8469500"
        },
        "D": {
         "name": "Jason Garrison",
@@ -6602,10 +6606,11 @@
       "low": {
        "F": {
         "name": "Alexander Syomin",
-        "pos": "",
+        "nhl": "CAR",
+        "pos": "RW",
         "pts": -0.8,
         "mgr": "Ronnie",
-        "pid": "8478494"
+        "pid": "8470120"
        },
        "D": {
         "name": "Keith Yandle",
@@ -9144,7 +9149,7 @@
       "low": {
        "F": {
         "name": "Thomas Vanek",
-        "nhl": "NYI",
+        "nhl": "MTL",
         "pos": "LW",
         "pts": -0.5,
         "mgr": "Joe",
@@ -10059,6 +10064,7 @@
     "trades": [
      {
       "date": "2013-11-08",
+      "moved": "2013-11-11",
       "sides": [
        {
         "mgr": "Ronnie",
@@ -19426,6 +19432,7 @@
        "mgr": "Danny",
        "add": {
         "name": "Mike Cammalleri",
+        "nhl": "NJD",
         "pos": "C/LW"
        },
        "drop": {
@@ -20676,6 +20683,7 @@
        },
        "drop": {
         "name": "Mike Cammalleri",
+        "nhl": "NJD",
         "pos": "C/LW"
        }
       },
@@ -21622,6 +21630,7 @@
      "trades": [
       {
        "date": "2016-01-12",
+       "moved": "2016-01-18",
        "sides": [
         {
          "mgr": "Vin",
@@ -24227,7 +24236,7 @@
        },
        "D": {
         "name": "Christian Ehrhoff",
-        "nhl": "LAK",
+        "nhl": "CHI",
         "pos": "D",
         "pts": 2.5,
         "mgr": "Tom",
@@ -25180,6 +25189,7 @@
     "trades": [
      {
       "date": "2016-01-12",
+      "moved": "2016-01-18",
       "sides": [
        {
         "mgr": "Vin",
@@ -29278,6 +29288,7 @@
        "mgr": "Nick",
        "add": {
         "name": "Mike Cammalleri",
+        "nhl": "NJD",
         "pos": "LW/RW"
        },
        "drop": {
@@ -30594,6 +30605,7 @@
      "trades": [
       {
        "date": "2016-12-31",
+       "moved": "2017-01-02",
        "sides": [
         {
          "mgr": "Vin",
@@ -31856,6 +31868,7 @@
        "mgr": "Steve",
        "add": {
         "name": "Pat Maroon",
+        "nhl": "EDM",
         "pos": "LW"
        },
        "drop": {
@@ -32331,6 +32344,7 @@
        },
        "drop": {
         "name": "Mike Cammalleri",
+        "nhl": "NJD",
         "pos": "LW/RW"
        }
       },
@@ -34000,7 +34014,7 @@
        },
        "G": {
         "name": "Peter Budaj",
-        "nhl": "LAK",
+        "nhl": "TBL",
         "pos": "G",
         "pts": 2,
         "mgr": "Danny",
@@ -34088,6 +34102,7 @@
      "trades": [
       {
        "date": "2017-03-04",
+       "moved": "2017-03-06",
        "sides": [
         {
          "mgr": "Joe",
@@ -35344,6 +35359,7 @@
     "trades": [
      {
       "date": "2016-12-31",
+      "moved": "2017-01-02",
       "sides": [
        {
         "mgr": "Vin",
@@ -35420,6 +35436,7 @@
      },
      {
       "date": "2017-03-04",
+      "moved": "2017-03-06",
       "sides": [
        {
         "mgr": "Joe",
@@ -38269,7 +38286,7 @@
       "low": {
        "F": {
         "name": "Matt Duchene",
-        "nhl": "COL",
+        "nhl": "OTT",
         "pos": "C/RW",
         "pts": -0.7,
         "mgr": "Palagi",
@@ -38796,6 +38813,7 @@
      "trades": [
       {
        "date": "2017-11-18",
+       "moved": "2017-11-20",
        "sides": [
         {
          "mgr": "Vin",
@@ -39733,6 +39751,7 @@
        },
        "drop": {
         "name": "Pat Maroon",
+        "nhl": "EDM",
         "pos": "LW"
        }
       },
@@ -42179,6 +42198,7 @@
      "trades": [
       {
        "date": "2018-01-06",
+       "moved": "2018-01-08",
        "sides": [
         {
          "mgr": "Vin",
@@ -42683,6 +42703,7 @@
      "trades": [
       {
        "date": "2018-01-08",
+       "moved": "2018-01-15",
        "sides": [
         {
          "mgr": "Vin",
@@ -43268,6 +43289,7 @@
      "trades": [
       {
        "date": "2018-01-16",
+       "moved": "2018-01-22",
        "sides": [
         {
          "mgr": "Zac",
@@ -43293,6 +43315,7 @@
       },
       {
        "date": "2018-01-20",
+       "moved": "2018-01-22",
        "sides": [
         {
          "mgr": "Palagi",
@@ -44321,6 +44344,7 @@
      "trades": [
       {
        "date": "2018-02-11",
+       "moved": "2018-02-12",
        "sides": [
         {
          "mgr": "Vin",
@@ -44913,6 +44937,7 @@
        "mgr": "Danny",
        "add": {
         "name": "Zach Aston-Reese",
+        "nhl": "PIT",
         "pos": "C/RW"
        },
        "drop": {
@@ -45881,6 +45906,7 @@
        "add": null,
        "drop": {
         "name": "Zach Aston-Reese",
+        "nhl": "PIT",
         "pos": "C/RW"
        }
       },
@@ -46751,6 +46777,7 @@
     "trades": [
      {
       "date": "2017-11-18",
+      "moved": "2017-11-20",
       "sides": [
        {
         "mgr": "Vin",
@@ -46808,6 +46835,7 @@
      },
      {
       "date": "2018-01-06",
+      "moved": "2018-01-08",
       "sides": [
        {
         "mgr": "Vin",
@@ -46867,6 +46895,7 @@
      },
      {
       "date": "2018-01-08",
+      "moved": "2018-01-15",
       "sides": [
        {
         "mgr": "Vin",
@@ -46907,6 +46936,7 @@
      },
      {
       "date": "2018-01-16",
+      "moved": "2018-01-22",
       "sides": [
        {
         "mgr": "Zac",
@@ -46948,6 +46978,7 @@
      },
      {
       "date": "2018-01-20",
+      "moved": "2018-01-22",
       "sides": [
        {
         "mgr": "Palagi",
@@ -47063,6 +47094,7 @@
      },
      {
       "date": "2018-02-11",
+      "moved": "2018-02-12",
       "sides": [
        {
         "mgr": "Vin",
@@ -48627,6 +48659,7 @@
        "mgr": "Will",
        "add": {
         "name": "Max Comtois",
+        "nhl": "ANA",
         "pos": "LW"
        },
        "drop": {
@@ -48709,6 +48742,7 @@
        "mgr": "Joe",
        "add": {
         "name": "Max Lajoie",
+        "nhl": "OTT",
         "pos": "D"
        },
        "drop": {
@@ -48869,6 +48903,7 @@
      "trades": [
       {
        "date": "2018-10-21",
+       "moved": "2018-10-22",
        "sides": [
         {
          "mgr": "Vin",
@@ -49227,6 +49262,7 @@
        },
        "drop": {
         "name": "Max Comtois",
+        "nhl": "ANA",
         "pos": "LW"
        }
       },
@@ -49800,6 +49836,7 @@
        "add": null,
        "drop": {
         "name": "Max Lajoie",
+        "nhl": "OTT",
         "pos": "D"
        }
       },
@@ -50405,6 +50442,7 @@
      "trades": [
       {
        "date": "2018-11-06",
+       "moved": "2018-11-12",
        "sides": [
         {
          "mgr": "Vin",
@@ -50938,6 +50976,7 @@
      "trades": [
       {
        "date": "2018-11-16",
+       "moved": "2018-11-19",
        "sides": [
         {
          "mgr": "Vin",
@@ -50963,6 +51002,7 @@
       },
       {
        "date": "2018-11-17",
+       "moved": "2018-11-19",
        "sides": [
         {
          "mgr": "Danny",
@@ -52429,6 +52469,7 @@
      "trades": [
       {
        "date": "2018-12-09",
+       "moved": "2018-12-10",
        "sides": [
         {
          "mgr": "Vin",
@@ -53370,6 +53411,7 @@
        "add": null,
        "drop": {
         "name": "Stephen Johns",
+        "nhl": "DAL",
         "pos": "D"
        }
       },
@@ -53421,6 +53463,7 @@
        "mgr": "Jefe",
        "add": {
         "name": "Zach Aston-Reese",
+        "nhl": "PIT",
         "pos": "C/LW/RW"
        },
        "drop": {
@@ -54570,6 +54613,7 @@
      "trades": [
       {
        "date": "2019-01-05",
+       "moved": "2019-01-07",
        "sides": [
         {
          "mgr": "Jefe",
@@ -55064,6 +55108,7 @@
        },
        "drop": {
         "name": "Zach Aston-Reese",
+        "nhl": "PIT",
         "pos": "C/LW/RW"
        }
       },
@@ -55097,6 +55142,7 @@
      "trades": [
       {
        "date": "2019-01-08",
+       "moved": "2019-01-14",
        "sides": [
         {
          "mgr": "Tom",
@@ -55632,6 +55678,7 @@
      "trades": [
       {
        "date": "2019-01-19",
+       "moved": "2019-01-21",
        "sides": [
         {
          "mgr": "Jefe",
@@ -57382,6 +57429,7 @@
        "mgr": "Danny",
        "add": {
         "name": "Zach Aston-Reese",
+        "nhl": "PIT",
         "pos": "C/LW/RW"
        },
        "drop": null
@@ -58199,6 +58247,7 @@
     "trades": [
      {
       "date": "2018-10-21",
+      "moved": "2018-10-22",
       "sides": [
        {
         "mgr": "Vin",
@@ -58288,6 +58337,7 @@
      },
      {
       "date": "2018-11-06",
+      "moved": "2018-11-12",
       "sides": [
        {
         "mgr": "Vin",
@@ -58356,6 +58406,7 @@
      },
      {
       "date": "2018-11-16",
+      "moved": "2018-11-19",
       "sides": [
        {
         "mgr": "Vin",
@@ -58413,6 +58464,7 @@
      },
      {
       "date": "2018-11-17",
+      "moved": "2018-11-19",
       "sides": [
        {
         "mgr": "Danny",
@@ -58491,6 +58543,7 @@
      },
      {
       "date": "2018-12-09",
+      "moved": "2018-12-10",
       "sides": [
        {
         "mgr": "Vin",
@@ -58558,6 +58611,7 @@
      },
      {
       "date": "2019-01-05",
+      "moved": "2019-01-07",
       "sides": [
        {
         "mgr": "Jefe",
@@ -58624,6 +58678,7 @@
      },
      {
       "date": "2019-01-08",
+      "moved": "2019-01-14",
       "sides": [
        {
         "mgr": "Tom",
@@ -58665,6 +58720,7 @@
      },
      {
       "date": "2019-01-19",
+      "moved": "2019-01-21",
       "sides": [
        {
         "mgr": "Jefe",
@@ -59689,6 +59745,7 @@
        "mgr": "Zac",
        "add": {
         "name": "Samuel Blais",
+        "nhl": "STL",
         "pos": "LW/RW"
        },
        "drop": {
@@ -60275,6 +60332,7 @@
        "mgr": "Tim",
        "add": {
         "name": "Dustin Byfuglien",
+        "nhl": "WPG",
         "pos": "D"
        },
        "drop": null
@@ -61573,6 +61631,7 @@
        },
        "drop": {
         "name": "Dustin Byfuglien",
+        "nhl": "WPG",
         "pos": "D"
        }
       },
@@ -62166,6 +62225,7 @@
      "trades": [
       {
        "date": "2019-11-17",
+       "moved": "2019-11-18",
        "sides": [
         {
          "mgr": "Vin",
@@ -62605,6 +62665,7 @@
        "add": null,
        "drop": {
         "name": "Samuel Blais",
+        "nhl": "STL",
         "pos": "LW/RW"
        }
       },
@@ -65823,6 +65884,7 @@
      "trades": [
       {
        "date": "2020-01-05",
+       "moved": "2020-01-06",
        "sides": [
         {
          "mgr": "Nick",
@@ -66359,6 +66421,7 @@
      "trades": [
       {
        "date": "2020-01-08",
+       "moved": "2020-01-13",
        "sides": [
         {
          "mgr": "Jefe",
@@ -66399,6 +66462,7 @@
       },
       {
        "date": "2020-01-11",
+       "moved": "2020-01-13",
        "sides": [
         {
          "mgr": "Jefe",
@@ -67838,6 +67902,7 @@
        "mgr": "Vin",
        "add": {
         "name": "Zach Sanford",
+        "nhl": "STL",
         "pos": "C/LW"
        },
        "drop": {
@@ -69410,6 +69475,7 @@
        },
        "drop": {
         "name": "Zach Sanford",
+        "nhl": "STL",
         "pos": "C/LW"
        }
       },
@@ -69559,6 +69625,7 @@
     "trades": [
      {
       "date": "2019-11-17",
+      "moved": "2019-11-18",
       "sides": [
        {
         "mgr": "Vin",
@@ -69691,6 +69758,7 @@
      },
      {
       "date": "2020-01-05",
+      "moved": "2020-01-06",
       "sides": [
        {
         "mgr": "Nick",
@@ -69744,6 +69812,7 @@
      },
      {
       "date": "2020-01-08",
+      "moved": "2020-01-13",
       "sides": [
        {
         "mgr": "Jefe",
@@ -69824,6 +69893,7 @@
      },
      {
       "date": "2020-01-11",
+      "moved": "2020-01-13",
       "sides": [
        {
         "mgr": "Jefe",
@@ -70567,6 +70637,7 @@
        "mgr": "Danny",
        "add": {
         "name": "Jonathan Toews",
+        "nhl": "CHI",
         "pos": "C",
         "note": "waivers"
        },
@@ -70680,6 +70751,7 @@
        "add": null,
        "drop": {
         "name": "Corey Crawford",
+        "nhl": "CHI",
         "pos": "G"
        }
       },
@@ -70933,6 +71005,7 @@
        },
        "drop": {
         "name": "Pavel Francouz",
+        "nhl": "COL",
         "pos": "G"
        }
       },
@@ -71456,6 +71529,7 @@
        "add": null,
        "drop": {
         "name": "Jonathan Toews",
+        "nhl": "CHI",
         "pos": "C"
        }
       },
@@ -73331,6 +73405,7 @@
        "mgr": "Will",
        "add": {
         "name": "Max Comtois",
+        "nhl": "ANA",
         "pos": "LW/RW"
        },
        "drop": {
@@ -73444,6 +73519,7 @@
      "trades": [
       {
        "date": "2021-02-24",
+       "moved": "2021-03-01",
        "sides": [
         {
          "mgr": "Vin",
@@ -76174,6 +76250,7 @@
     "trades": [
      {
       "date": "2021-02-24",
+      "moved": "2021-03-01",
       "sides": [
        {
         "mgr": "Vin",
@@ -77274,6 +77351,7 @@
        "mgr": "Steve",
        "add": {
         "name": "Shea Weber",
+        "nhl": "MTL",
         "pos": "D"
        },
        "drop": null
@@ -77736,6 +77814,7 @@
        },
        "drop": {
         "name": "Max Comtois",
+        "nhl": "ANA",
         "pos": "LW/RW"
        }
       },
@@ -78359,6 +78438,7 @@
        "add": null,
        "drop": {
         "name": "Shea Weber",
+        "nhl": "MTL",
         "pos": "D"
        }
       },
@@ -83065,6 +83145,7 @@
      "trades": [
       {
        "date": "2022-01-16",
+       "moved": "2022-01-17",
        "sides": [
         {
          "mgr": "Vin",
@@ -87794,6 +87875,7 @@
      },
      {
       "date": "2022-01-16",
+      "moved": "2022-01-17",
       "sides": [
        {
         "mgr": "Vin",
@@ -89359,6 +89441,7 @@
        "mgr": "Will",
        "add": {
         "name": "Sean Couturier",
+        "nhl": "PHI",
         "pos": "C"
        },
        "drop": null
@@ -89907,6 +89990,7 @@
        "add": null,
        "drop": {
         "name": "Sean Couturier",
+        "nhl": "PHI",
         "pos": "C"
        }
       },
@@ -91497,6 +91581,7 @@
        "mgr": "Will",
        "add": {
         "name": "Freddy Gaudreau",
+        "nhl": "MIN",
         "pos": "C/LW/RW"
        },
        "drop": {
@@ -93279,6 +93364,7 @@
        },
        "drop": {
         "name": "Freddy Gaudreau",
+        "nhl": "MIN",
         "pos": "C/LW/RW"
        }
       },
@@ -93317,6 +93403,7 @@
        "mgr": "Steve",
        "add": {
         "name": "Matthew Benning",
+        "nhl": "SJS",
         "pos": "D"
        },
        "drop": {
@@ -98332,7 +98419,7 @@
       "low": {
        "F": {
         "name": "Patrick Kane",
-        "nhl": "CHI",
+        "nhl": "NYR",
         "pos": "RW",
         "pts": -1.4,
         "mgr": "Ronnie",
@@ -98340,7 +98427,7 @@
        },
        "D": {
         "name": "Erik Gustafsson",
-        "nhl": "WSH",
+        "nhl": "TOR",
         "pos": "D",
         "pts": 0.2,
         "mgr": "Palagi",
@@ -98494,6 +98581,7 @@
      "trades": [
       {
        "date": "2023-03-04",
+       "moved": "2023-03-06",
        "sides": [
         {
          "mgr": "Danny",
@@ -99352,6 +99440,7 @@
     "trades": [
      {
       "date": "2023-03-04",
+      "moved": "2023-03-06",
       "sides": [
        {
         "mgr": "Danny",
@@ -102387,6 +102476,7 @@
      "trades": [
       {
        "date": "2023-11-12",
+       "moved": "2023-11-13",
        "sides": [
         {
          "mgr": "Vin",
@@ -108449,6 +108539,7 @@
      "trades": [
       {
        "date": "2024-02-16",
+       "moved": "2024-02-19",
        "sides": [
         {
          "mgr": "Tim",
@@ -110324,6 +110415,7 @@
     "trades": [
      {
       "date": "2023-11-12",
+      "moved": "2023-11-13",
       "sides": [
        {
         "mgr": "Vin",
@@ -110446,6 +110538,7 @@
      },
      {
       "date": "2024-02-16",
+      "moved": "2024-02-19",
       "sides": [
        {
         "mgr": "Tim",
@@ -111442,6 +111535,7 @@
        "add": null,
        "drop": {
         "name": "Evander Kane",
+        "nhl": "EDM",
         "pos": "LW"
        }
       },
@@ -112695,6 +112789,7 @@
        "mgr": "Jefe",
        "add": {
         "name": "Jacob Middleton",
+        "nhl": "MIN",
         "pos": "D"
        },
        "drop": {
@@ -114528,6 +114623,7 @@
        "add": null,
        "drop": {
         "name": "Gabriel Landeskog",
+        "nhl": "COL",
         "pos": "LW"
        }
       },
@@ -119221,11 +119317,12 @@
       "high": {
        "F": {
         "name": "J.T. Miller",
-        "nhl": "VAN",
+        "nhl": "NYR",
         "pos": "C",
         "pts": 32,
         "mgr": "Will",
-        "pid": "8476468"
+        "pid": "8476468",
+        "nhl2": "VAN"
        },
        "D": {
         "name": "Brandon Montour",
@@ -119414,6 +119511,7 @@
      "trades": [
       {
        "date": "2025-01-31",
+       "moved": "2025-02-03",
        "sides": [
         {
          "mgr": "Vin",
@@ -121705,6 +121803,7 @@
     "trades": [
      {
       "date": "2025-01-31",
+      "moved": "2025-02-03",
       "sides": [
        {
         "mgr": "Vin",
@@ -125092,6 +125191,7 @@
        },
        "drop": {
         "name": "Jacob Middleton",
+        "nhl": "MIN",
         "pos": "D"
        }
       },

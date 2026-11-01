@@ -34,7 +34,12 @@ const weekOf = iso => { if (iso < dates[1][0]) return 1; const w = wkNums.find(k
 
 // --- NHL lookups: id, position, team on a date
 const posGroup = p => /G/.test(p) ? 'G' : /^D$|^D,|,D$/.test(p) && !/C|LW|RW|F/.test(p) ? 'D' : 'F';
-async function nhlPlayer(name) {
+// Yahoo and NHL.com spell some names differently
+const ALIAS = { 'Mike Cammalleri': 'Michael Cammalleri', 'Alexander Syomin': 'Alexander Semin', 'Max Comtois': 'Maxime Comtois', 'Max Lajoie': 'Maxime Lajoie',
+  'Pat Maroon': 'Patrick Maroon', 'Freddy Gaudreau': 'Frederick Gaudreau', 'Jacob Middleton': 'Jake Middleton', 'Samuel Blais': 'Sammy Blais',
+  'Zach Aston-Reese': 'Zachary Aston-Reese', 'Zach Sanford': 'Zachary Sanford', 'Matthew Benning': 'Matt Benning' };
+async function nhlPlayer(yName) {
+  const name = ALIAS[yName] || yName;
   if (cache.search[name] && cache.search[name].length) return cache.search[name];
   const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z]/g, '');
   // NHL.com's search ranks hyphenated names poorly ("Ryan Nugent-Hopkins"), so fall back to the last name alone
@@ -48,25 +53,32 @@ async function nhlPlayer(name) {
   if (found.length) cache.search[name] = found; // no match isn't cached, so the next run tries again
   return found;
 }
-async function gameLog(id) {
-  const k = id + '|' + nhlSeason;
+async function gameLog(id, season = nhlSeason) {
+  const k = id + '|' + season;
   if (cache.log[k] !== undefined) return cache.log[k];
-  const j = await getJSON(`https://api-web.nhle.com/v1/player/${id}/game-log/${nhlSeason}/2`);
+  const j = await getJSON(`https://api-web.nhle.com/v1/player/${id}/game-log/${season}/2`);
   if (!j) return []; // a failed request isn't cached, so the next run tries again
   return (cache.log[k] = j.gameLog ? j.gameLog.map(g => [g.gameDate, g.teamAbbrev]) : []);
 }
-// pick the NHL player (several can share a name) who played that season, and his team on that date
-async function resolve(yid, onDate) {
+// pick the NHL player (several can share a name) who played that season, and his team on that date.
+// With a date range, nhl2 is the other team when he was traded in the NHL during it (both logos show on the card).
+// A player who didn't play that season (hurt all year) gets the team he last played for.
+async function resolve(yid, onDate, toDate) {
   const name = S.names[yid];
   const cands = await nhlPlayer(name);
   let best = null;
   for (const c of cands) { const log = await gameLog(c.id); if (log.length && (!best || log.length > best.log.length)) best = { id: c.id, pos: c.pos, log }; }
-  if (!best && cands.length) best = { id: cands[0].id, pos: cands[0].pos, log: [] };
+  if (!best && cands.length) {
+    best = { id: cands[0].id, pos: cands[0].pos, log: [] };
+    for (let back = 1; back <= 3 && !best.log.length; back++) { const s0 = y0 - back; best.log = await gameLog(best.id, s0 + '' + (s0 + 1)); }
+  }
   if (!best) return { name };
   const games = best.log.slice().sort((a, b) => a[0] < b[0] ? -1 : 1);
-  const before = games.filter(g => g[0] <= onDate), after = games.filter(g => g[0] > onDate);
+  const before = games.filter(g => g[0] <= (toDate || onDate)), after = games.filter(g => g[0] > onDate);
   const team = (before.length ? before[before.length - 1] : after[0] || [])[1];
-  return { name, pid: String(best.id), nhl: team || undefined, nhlPos: best.pos };
+  const r = { name, pid: String(best.id), nhl: team || undefined, nhlPos: best.pos };
+  if (toDate) { const inWeek = [...new Set(games.filter(g => g[0] >= onDate && g[0] <= toDate).map(g => g[1]))]; if (inWeek.length > 1) r.nhl2 = inWeek.find(t => t !== team); }
+  return r;
 }
 const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && r.nhlPos === 'R' ? 'RW' : r && r.nhlPos) || '').replace(/,/g, '/');
 
@@ -82,7 +94,7 @@ const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && 
       for (const p of sorted) { const g = await groupOf(p); if (!res[g]) res[g] = p; if (res.F && res.D && res.G) break; }
       return res;
     };
-    const card = async p => { if (!p) return null; const r = await resolve(p.yid, dates[wk][0]); return { name: S.names[p.yid], nhl: r.nhl, pos: posText(p.yid, r), pts: p.pts, mgr: S.mgr[p.tid], pid: r.pid }; };
+    const card = async p => { if (!p) return null; const r = await resolve(p.yid, dates[wk][0], dates[wk][1]); const c = { name: S.names[p.yid], nhl: r.nhl, pos: posText(p.yid, r), pts: p.pts, mgr: S.mgr[p.tid], pid: r.pid }; if (r.nhl2) c.nhl2 = r.nhl2; return c; };
     const hi = await pick(all, 1), lo = await pick(all.filter(p => p.played), -1);
     const players = { high: {}, low: {}, faHigh: { F: null, D: null, G: null } };
     for (const k of ['F', 'D', 'G']) { players.high[k] = await card(hi[k]); players.low[k] = await card(lo[k]); }
@@ -119,14 +131,18 @@ const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && 
       sides.push({ mgr: S.mgr[t.to], tid: t.to, gets });
     }
     if (sides.length < 2) continue;
-    trades.push({ date: iso, sides });
-    out.weeks[wk].trades.push({ date: iso, sides: sides.map(sd => ({ mgr: sd.mgr, gets: sd.gets.map(({ yid, ...g }) => g) })) });
+    // Yahoo's timestamp is when it processed the trade; rosters lock weekly, so the players usually join their new
+    // teams the next Monday. moved = the Monday of the first week they show up on the new roster, when that's later.
+    const joinWk = Math.min(...sides.flatMap(sd => sd.gets.map(g => wkNums.filter(k => k >= wk).find(k => ((S.rosters[k] || {})[sd.tid] || []).some(r => r[0] === g.yid)) || 999)));
+    const moved = joinWk !== 999 && joinWk > wk ? dates[joinWk][0] : undefined;
+    trades.push({ date: iso, moved, sides });
+    out.weeks[wk].trades.push({ date: iso, moved, sides: sides.map(sd => ({ mgr: sd.mgr, gets: sd.gets.map(({ yid, ...g }) => g) })) });
   }
   trades.sort((a, b) => a.date < b.date ? -1 : 1);
   // --- trade tracker: points each traded player scored for his new team, week by week, from the trade week on
   const tracked = trades.map(tr => {
     const w0 = weekOf(tr.date);
-    return { date: tr.date, sides: tr.sides.map(sd => ({ mgr: sd.mgr, gets: sd.gets.map(g => {
+    return { date: tr.date, moved: tr.moved, sides: tr.sides.map(sd => ({ mgr: sd.mgr, gets: sd.gets.map(g => {
       const byWeek = {}; let last = null;
       for (const wk of wkNums.filter(k => k >= w0)) { const row = ((S.rosters[wk] || {})[sd.tid] || []).find(r => r[0] === g.yid); if (row) { byWeek[wk] = +row[2].toFixed(1); last = wk; } }
       const p = { name: g.name, nhl: g.nhl, pos: g.pos, byWeek };
