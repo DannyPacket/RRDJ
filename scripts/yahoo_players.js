@@ -20,7 +20,8 @@ const getJSON = async u => { for (let i = 0; i < 4; i++) { try { const r = await
 const rows = fs.readFileSync(masterFile, 'utf8').split(/\r?\n/).slice(1).filter(Boolean).map(l => { const o = []; let c = '', q = false; for (const ch of l) { if (ch == '"') q = !q; else if (ch == ',' && !q) { o.push(c); c = ''; } else c += ch; } o.push(c); return o; });
 const sheetPts = {}; rows.filter(r => r[0] === season && r[15] === 'Regular').forEach(r => sheetPts[r[2] + '|' + r[1]] = parseFloat(r[6].replace(/,/g, '')));
 const mismatches = [];
-for (const [wk, teams] of Object.entries(S.rosters)) for (const [tid, list] of Object.entries(teams)) {
+for (const [wk, teams] of Object.entries(S.rosters)) for (const tid of Object.keys(S.mgr)) {
+  const list = teams[tid] || [];
   const tot = list.reduce((a, r) => a + r[2], 0), want = sheetPts[wk + '|' + S.mgr[tid]];
   if (want == null || Math.abs(tot - want) > 0.05) mismatches.push(`wk${wk} ${S.mgr[tid]}: players ${tot.toFixed(2)} vs sheet ${want}`);
 }
@@ -34,11 +35,18 @@ const weekOf = iso => { if (iso < dates[1][0]) return 1; const w = wkNums.find(k
 // --- NHL lookups: id, position, team on a date
 const posGroup = p => /G/.test(p) ? 'G' : /^D$|^D,|,D$/.test(p) && !/C|LW|RW|F/.test(p) ? 'D' : 'F';
 async function nhlPlayer(name) {
-  if (cache.search[name] !== undefined) return cache.search[name];
-  const hits = await getJSON('https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=20&q=' + encodeURIComponent(name)) || [];
+  if (cache.search[name] && cache.search[name].length) return cache.search[name];
   const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z]/g, '');
-  const same = hits.filter(h => norm(h.name) === norm(name));
-  return (cache.search[name] = same.map(h => ({ id: h.playerId, pos: h.positionCode })));
+  // NHL.com's search ranks hyphenated names poorly ("Ryan Nugent-Hopkins"), so fall back to the last name alone
+  let same = [];
+  for (const q of [name, name.split(' ').slice(-1)[0], name.replace(/-/g, ' ')]) {
+    const hits = await getJSON('https://search.d3.nhle.com/api/v1/search/player?culture=en-us&limit=50&q=' + encodeURIComponent(q)) || [];
+    same = hits.filter(h => norm(h.name) === norm(name));
+    if (same.length) break;
+  }
+  const found = same.map(h => ({ id: h.playerId, pos: h.positionCode }));
+  if (found.length) cache.search[name] = found; // no match isn't cached, so the next run tries again
+  return found;
 }
 async function gameLog(id) {
   const k = id + '|' + nhlSeason;
@@ -67,7 +75,7 @@ const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && 
   // --- top & bottom players
   for (const wk of wkNums) {
     const teams = S.rosters[wk] || {}, all = [];
-    for (const [tid, list] of Object.entries(teams)) for (const [yid, slot, pts, played, gi] of list) all.push({ yid, tid, pts, played, goalie: gi === 1 });
+    for (const [tid, list] of Object.entries(teams)) for (const [yid, slot, pts, played, gi] of list || []) all.push({ yid, tid, pts, played, goalie: gi === 1 });
     const groupOf = async p => { if (p.goalie) return 'G'; if (S.pos[p.yid]) return posGroup(S.pos[p.yid]); const c = (await nhlPlayer(S.names[p.yid]))[0]; return c ? (c.pos === 'D' ? 'D' : c.pos === 'G' ? 'G' : 'F') : 'F'; };
     const pick = async (list, dir) => {
       const sorted = list.slice().sort((a, b) => dir * (b.pts - a.pts)), res = { F: null, D: null, G: null };
