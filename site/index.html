@@ -126,6 +126,12 @@ table.rivals .mh { max-width: 520px; }
 .mh-row { display: grid; grid-template-columns: 3.4em 1.6em minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
 .mh-row:first-child { border-top: 0; }
 .mh-res { font: 700 12px var(--mono); }
+.games-next.results .res-line { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; align-items: center; }
+.games-next.results .res-line > .res-side:last-child { text-align: right; }
+.res-side .mgr { font-weight: 400; color: var(--muted); }
+.res-side.won .mgr { font-weight: 700; color: var(--ink); }
+.res-score { white-space: nowrap; color: var(--muted); }
+.hs-star { color: #D9A514; margin-left: 4px; }
 .games-next .rec { font: 500 12px var(--mono); color: var(--muted); }
 
 /* Stars */
@@ -519,8 +525,15 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       h("ul", { class: "plain games-next" }, w.next.map(([a, b]) => h("li", null,
         h("span", null, h("span", { class: "mgr" }, a), h("span", { class: "muted small" }, rec(a)), " vs ", h("span", { class: "mgr" }, b), h("span", { class: "muted small" }, rec(b))),
         meet(a, b) ? h("span", { class: "rec" }, meet(a, b)) : null)))) : null;
-    if ((w.recap && w.recap.length) || upnext) left.push(sec("The week", panel(h("div", { class: "weekpanel" },
-      w.recap && w.recap.length ? h("div", { class: "recap" }, w.recap.map(p => h("p", null, p))) : null, upnext))));
+    // this week's results: winner in bold, a gold star on the week's high score
+    const hsMgrs = new Set((w.highScoreTally || []).flatMap(t => t.entries.filter(e => e.weeks.includes(w.week)).map(e => e.mgr)));
+    const side = (m, pts, won) => h("span", { class: "res-side" + (won ? " won" : "") }, h("span", { class: "mgr" }, m), hsMgrs.has(m) ? h("span", { class: "hs-star", title: "High score of the week" }, "★") : null);
+    const results = w.matchups && w.matchups.length ? h("div", { class: "upnext" },
+      h("div", { class: "subhead" }, "Results · Week " + w.week),
+      h("ul", { class: "plain games-next results" }, w.matchups.map(g => h("li", null,
+        h("span", { class: "res-line" }, side(g.a, g.ap, g.ap > g.bp), h("span", { class: "num res-score" }, fmt(g.ap) + " – " + fmt(g.bp)), side(g.b, g.bp, g.bp > g.ap)))))) : null;
+    if ((w.recap && w.recap.length) || upnext || results) left.push(sec("The week", panel(h("div", { class: "weekpanel" },
+      w.recap && w.recap.length ? h("div", { class: "recap" }, w.recap.map(p => h("p", null, p))) : null, results, upnext))));
     const st = (w.streaks || []).slice().sort((a, b) => (a.kind === b.kind ? b.n - a.n : a.kind === "W" ? -1 : 1));
     const pair = [];
     pair.push(sec("Streaks", panel(st.length ? h("ul", { class: "plain" }, st.map(x => h("li", { class: "streak" },
@@ -609,12 +622,14 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
     // Right column: standings
     const right = [];
+    // weekly high scores so far, per manager (from the high-score tally, which counts ties for both)
+    const hsCount = Object.fromEntries((w.highScoreTally || []).flatMap(t => t.entries.map(e => [e.mgr, e.weeks.length])));
     if (w.standings && w.standings.length) {
       right.push(sec("Standings", panel(h("div", { class: "tablewrap standings" }, h("table", null,
         h("colgroup", null, h("col", { style: "width:2.2em" }), h("col", { style: "width:3em" }), h("col"), h("col", { style: "width:4.6em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:3.2em" })),
-        h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r", title: cat ? "Categories won" : "Points for" }, cat ? "CW" : "PF"), h("th", { class: "r", title: cat ? "Categories lost" : "Points against" }, cat ? "CL" : "PA"), h("th", { class: "r" }, "Net"), h("th", { class: "r" }, "Strk"))),
+        h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r", title: cat ? "Categories won" : "Points for" }, cat ? "CW" : "PF"), h("th", { class: "r", title: cat ? "Categories lost" : "Points against" }, cat ? "CL" : "PA"), h("th", { class: "r" }, "Net"), cat ? null : h("th", { class: "r", title: "Weekly high scores so far" }, "HS"), h("th", { class: "r" }, "Strk"))),
         h("tbody", null, w.standings.flatMap(r => {
-          const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: "8" }, mgrWeeks(r.mgr)));
+          const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: cat ? "8" : "9" }, mgrWeeks(r.mgr)));
           const toggle = e => {
             const row = e.currentTarget, open = row.classList.contains("open");
             row.closest("tbody").querySelectorAll("tr.row.open").forEach(x => { x.classList.remove("open"); x.setAttribute("aria-expanded", "false"); x.nextSibling.hidden = true; });
@@ -634,6 +649,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
             h("td", { class: "r num" }, fmt(r.pf)),
             h("td", { class: "r num" }, r.pa != null ? fmt(r.pa) : "–"),
             h("td", { class: "r num " + (net == null ? "" : net >= 0 ? "up" : "down") }, net == null ? "–" : (net > 0 ? "+" : "") + fmt(net)),
+            cat ? null : h("td", { class: "r num" }, hsCount[r.mgr] || "–"),
             h("td", { class: "r num st-" + (r.streak || " ")[0] }, r.streak || "")), detail];
         }))), h("div", { class: "muted small no-export", style: "margin-top:10px" }, "Click a manager to see their weeks.")))));
     }
