@@ -19,11 +19,17 @@ const getJSON = async u => { for (let i = 0; i < 4; i++) { try { const r = await
 // --- check: every team's players add up to its score in Master
 const rows = fs.readFileSync(masterFile, 'utf8').split(/\r?\n/).slice(1).filter(Boolean).map(l => { const o = []; let c = '', q = false; for (const ch of l) { if (ch == '"') q = !q; else if (ch == ',' && !q) { o.push(c); c = ''; } else c += ch; } o.push(c); return o; });
 const sheetPts = {}; rows.filter(r => r[0] === season && r[15] === 'Regular').forEach(r => sheetPts[r[2] + '|' + r[1]] = parseFloat(r[6].replace(/,/g, '')));
-const mismatches = [];
+// Early seasons had a minimum number of goalie games: a team that missed it lost its goalie points for the week
+// (Yahoo prints "<team> did not meet minimum goalie requirements"). When the gap equals the team's goalie points,
+// those goalies are marked as not counted (their cards get a note) instead of being reported as a mismatch.
+const mismatches = [], goalieVoid = new Set(); // "week|yid"
 for (const [wk, teams] of Object.entries(S.rosters)) for (const tid of Object.keys(S.mgr)) {
   const list = teams[tid] || [];
   const tot = list.reduce((a, r) => a + r[2], 0), want = sheetPts[wk + '|' + S.mgr[tid]];
-  if (want == null || Math.abs(tot - want) > 0.05) mismatches.push(`wk${wk} ${S.mgr[tid]}: players ${tot.toFixed(2)} vs sheet ${want}`);
+  if (want != null && Math.abs(tot - want) <= 0.05) continue;
+  const goalies = list.filter(r => r[4] === 1), gpts = goalies.reduce((a, r) => a + r[2], 0);
+  if (want != null && Math.abs(tot - gpts - want) <= 0.05) { goalies.forEach(r => goalieVoid.add(wk + '|' + r[0])); continue; }
+  mismatches.push(`wk${wk} ${S.mgr[tid]}: players ${tot.toFixed(2)} vs sheet ${want}`);
 }
 
 // --- dates
@@ -94,7 +100,7 @@ const posText = (yid, r) => (S.pos[yid] || (r && r.nhlPos === 'L' ? 'LW' : r && 
       for (const p of sorted) { const g = await groupOf(p); if (!res[g]) res[g] = p; if (res.F && res.D && res.G) break; }
       return res;
     };
-    const card = async p => { if (!p) return null; const r = await resolve(p.yid, dates[wk][0], dates[wk][1]); const c = { name: S.names[p.yid], nhl: r.nhl, pos: posText(p.yid, r), pts: p.pts, mgr: S.mgr[p.tid], pid: r.pid }; if (r.nhl2) c.nhl2 = r.nhl2; return c; };
+    const card = async p => { if (!p) return null; const r = await resolve(p.yid, dates[wk][0], dates[wk][1]); const c = { name: S.names[p.yid], nhl: r.nhl, pos: posText(p.yid, r), pts: p.pts, mgr: S.mgr[p.tid], pid: r.pid }; if (r.nhl2) c.nhl2 = r.nhl2; if (goalieVoid.has(wk + '|' + p.yid)) c.note = "Didn't count: " + c.mgr + ' missed the goalie games minimum'; return c; };
     const hi = await pick(all, 1), lo = await pick(all.filter(p => p.played), -1);
     const players = { high: {}, low: {}, faHigh: { F: null, D: null, G: null } };
     for (const k of ['F', 'D', 'G']) { players.high[k] = await card(hi[k]); players.low[k] = await card(lo[k]); }
