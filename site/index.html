@@ -191,6 +191,10 @@ ul.plain.moves { gap: 0; }
 .jline.hv .jdot { fill: var(--blue); opacity: 1; }
 .jline.on .jpath { stroke: var(--red); opacity: 1; stroke-width: 3; }
 .jline.on .jdot { fill: var(--red); opacity: 1; r: 5; }
+/* the week a manager had the league's high score: a gold dot that stays visible on every line */
+.jline .jdot.hs, .jline.hv .jdot.hs, .jline.on .jdot.hs { fill: #E8B21C; opacity: 1; stroke: #8A6400; stroke-width: 1.5; r: 5.5; }
+.jline.on .jdot.hs { r: 6.5; }
+.jtip .hs-tag { color: #B98700; font-weight: 700; }
 .jlab { font: 500 13px var(--body); fill: var(--muted); cursor: pointer; }
 .jlab.hv { fill: var(--ink); }
 .jlab.on { fill: var(--ink); font-weight: 700; }
@@ -1346,6 +1350,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     if (!cols.some(c => c.by)) return null;
     const mgrs = w.standings.slice().sort((a, b) => a.rank - b.rank).map(r => r.mgr), n = mgrs.length;
     if (!mgrs.includes(jSel)) jSel = mgrs[0];
+    // weekly high scores through this week ("mgr|week"), from the high-score tally (it keeps ties)
+    const hsWeeks = new Set((w.highScoreTally || []).flatMap(t => t.entries.flatMap(e => e.weeks.map(k => e.mgr + "|" + k))));
     const W = 900, padL = 30, padR = 88, padT = 14, padB = 34, rowH = 28, H = padT + (n - 1) * rowH + padB;
     const xAt = i => padL + i * (W - padL - padR) / (cols.length - 1), yAt = r => padT + (r - 1) * rowH;
     const last = cols.map(c => !!c.by).lastIndexOf(true), cut = Math.min(8, n - 1);
@@ -1367,7 +1373,8 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const showTip = (e, m, c) => {
       const r = c.by[m], box = wrap.getBoundingClientRect();
       tip.replaceChildren(h("span", { class: "mgr" }, m), h("span", { class: "muted" }, " · " + c.title),
-        h("div", { class: "num" }, (c.final ? "Finished " : "") + ordn(r.rank) + (c.final ? "" : " · " + r.w + "-" + r.l + "-" + (r.t || 0))));
+        h("div", { class: "num" }, (c.final ? "Finished " : "") + ordn(r.rank) + (c.final ? "" : " · " + r.w + "-" + r.l + "-" + (r.t || 0))),
+        !c.final && hsWeeks.has(m + "|" + c.label) ? h("div", { class: "hs-tag" }, "★ High score of the week") : null);
       tip.hidden = false;
       const x = e.clientX - box.left, y = e.clientY - box.top;
       tip.style.left = Math.min(Math.max(x + 12, 0), box.width - 170) + "px";
@@ -1394,7 +1401,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         sv("path", { class: "jhit", d: d + (fin ? " " + fin.replace("M", "M") : ""), onclick: () => pick(m), onmouseenter: () => paint(m), onmouseleave: () => paint(null) }),
         sv("path", { class: "jpath", d }),
         fin ? sv("path", { class: "jpath jfin", d: fin }) : null,
-        pts.map(q => q && sv("circle", { class: "jdot", cx: q[0], cy: q[1], r: 4,
+        pts.map(q => q && sv("circle", { class: "jdot" + (!q[2].final && hsWeeks.has(m + "|" + q[2].label) ? " hs" : ""), cx: q[0], cy: q[1], r: 4,
           onmouseenter: e => { paint(m); showTip(e, m, q[2]); }, onmousemove: e => showTip(e, m, q[2]), onmouseleave: () => { paint(null); hideTip(); }, onclick: () => pick(m) })));
       groups[m] = g;
       plot.append(g);
@@ -1407,7 +1414,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     wrap.append(svg, tip);
     paint(null);
     return sec("Standings journey", panel(h("div", { class: "tablewrap" }, wrap),
-      h("div", { class: "muted small", style: "margin-top:8px" }, "Rank after each week" + (w.week === 100 ? ", then the final place after the playoffs (dashed)" : "") + ". Dashed red line = playoff cut (top 8). Click a line or a name to follow a manager.")));
+      h("div", { class: "muted small", style: "margin-top:8px" }, "Rank after each week" + (w.week === 100 ? ", then the final place after the playoffs (dashed)" : "") + ". Dashed red line = playoff cut (top 8). Gold dot = that week's high score. Click a line or a name to follow a manager.")));
   }
 
   // Brackets for the Final page. Each place game (a game neither team plays past) is the root of a tree; a team's
