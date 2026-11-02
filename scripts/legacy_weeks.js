@@ -69,7 +69,6 @@ const series = []; // [season, week, a, aPts, b, bPts], each game once
 const bySeason = {};
 for (const [season, team, week, opp, place, , pf, pa, , , , , , , , type, scoring] of rows) {
   if (Number(week) === 100) (allFinals[season] = allFinals[season] || {})[team] = Number(place);
-  if (fantrax.has(season)) continue;
   if (scoring === 'Categories') catSeasons.add(season);
   const S = bySeason[season] = bySeason[season] || { rank: {}, games: {}, finals: {}, post: {} };
   const wk = Number(week);
@@ -326,7 +325,8 @@ const NEWS = {
   '2022-23': [['2023-01-30', 'The Islanders landed Bo Horvat from Vancouver.'], ['2023-02-26', 'New Jersey added Timo Meier from San Jose ahead of the deadline.']],
   '2023-24': [['offseason', 'Connor Bedard made his NHL debut in Chicago.']],
   '2024-25': [['2025-01-24', 'Carolina stunned everyone, landing Mikko Rantanen from Colorado in a three-team deal.'], ['2025-02-15', 'Three fights in the first nine seconds of Canada vs. USA set the tone at the 4 Nations Face-Off.'], ['2025-02-20', 'Connor McDavid scored in overtime as Canada beat the USA 3-2 to win the 4 Nations Face-Off.'], ['2025-03-07', 'Carolina flipped Rantanen to Dallas only weeks after getting him.'], ['2025-04-06', 'Alex Ovechkin scored goal 895, passing Wayne Gretzky for the most in NHL history.']],
-  '2025-26': [['2026-02-10', 'NHL players are back on Olympic ice for the first time since 2014.']]
+  '2025-26': [['2026-02-10', 'NHL players are back on Olympic ice for the first time since 2014.']],
+  '2026-27': [['2026-10-01', 'Aleksander Barkov is out 10 to 12 weeks, a big early blow for Florida.'], ['2026-10-22', 'The Connor Hellebuyck saga is finally over: the Jets shipped him to the Devils.']]
 };
 function newsFor(y, wk, dw) {
   const items = (NEWS[y] || []).filter(([d]) => (d === 'offseason' && wk === 1) || (dw && d !== 'offseason' && dw[0] <= d && d <= dw[1]));
@@ -346,6 +346,10 @@ for (const [id, S] of Object.entries(bySeason)) {
   const hs = Object.fromEntries(mgrs.map(m => [m, []]));
   const schedule = [], weeks = [];
   let prevLeader = null, prevLast = null;
+  // the current season comes from Fantrax: its dates, schedule length and next-week pairings live in reports.json
+  const fx = r.seasons.find(x => x.id === id && x.source !== 'sheet');
+  const fxWeek = wk => fx && fx.weeks.find(x => x.week === wk);
+  const seasonLen = fx && fx.schedule && fx.schedule.length ? Math.max(...fx.schedule.map(x => x[0])) : null;
   for (const wk of weeksNo) {
     const G = S.games[wk], seen = new Set(), matchups = [];
     for (const m of mgrs) {
@@ -375,11 +379,12 @@ for (const [id, S] of Object.entries(bySeason)) {
     const highScoreTally = Object.entries(tallyMap).sort((a, b) => b[0] - a[0]).map(([count, entries]) => ({ count: Number(count), entries }));
     const nextG = S.games[wk + 1], next = [];
     if (nextG) { const s2 = new Set(); for (const m of mgrs) if (!s2.has(m)) { s2.add(m); s2.add(nextG[m].opp); next.push([m, nextG[m].opp]); } }
+    else if (fxWeek(wk) && fxWeek(wk).next) next.push(...fxWeek(wk).next);
 
     // Recap, written from the numbers only
-    const recap = [], kind = odd[id] && odd[id][wk], dw = (weekDates[id] || {})[wk];
+    const recap = [], kind = odd[id] && odd[id][wk], dw = (weekDates[id] || {})[wk] || (fxWeek(wk) && fxWeek(wk).start ? [fxWeek(wk).start, fxWeek(wk).end] : undefined);
     const days = dw ? Math.round((Date.parse(dw[1]) - Date.parse(dw[0])) / 86400000) + 1 : 7;
-    const regWeeks = weeksNo[weeksNo.length - 1];
+    const regWeeks = seasonLen || weeksNo[weeksNo.length - 1];
     if (wk === 1) recap.push(welcome(id, mgrs));
     let context = '';
     const nWeeks = words[Math.round(days / 7)] || Math.round(days / 7);
@@ -406,7 +411,7 @@ for (const [id, S] of Object.entries(bySeason)) {
         if (low < prevLow) recap[recap.length - 1] += V.seasonLow(lowM, f1(low));
       }
     }
-    const ywk = yWeeks[id] && yWeeks[id].weeks[wk];
+    const ywk = (yWeeks[id] && yWeeks[id].weeks[wk]) || fxWeek(wk);
     if (!CAT) {
       const tally = mgrs.map(m => [m, hs[m].length]).sort((a, b) => b[1] - a[1]), n = hs[hsMgr].length;
       const tied = tally.filter(t => t[0] !== hsMgr && t[1] === n).map(t => t[0]);
@@ -501,14 +506,14 @@ for (const [id, S] of Object.entries(bySeason)) {
     const news = newsFor(id, wk, dw);
     if (news) recap.push(news);
     const leader = standings[0], bottom = standings[standings.length - 1].mgr;
-    const lastWk = wk === weeksNo[weeksNo.length - 1];
+    const lastWk = wk === regWeeks;
     const half = wk === Math.ceil(regWeeks / 2);
     recap.push(lastWk ? (Object.keys(S.post).length ? playoffPicture(S, standings) : cancelledFinish(id, leader))
       : half ? V.halfway(leader.mgr, recStr(leader), standings[1].mgr, recStr(standings[1]), bottom)
       : leader.mgr !== prevLeader && wk > 1 ? V.leaderNew(leader.mgr, recStr(leader))
         : V.leaderStill(leader.mgr, recStr(leader)) + (bottom !== prevLast && wk > 1 ? V.dropsLast(bottom, ord(standings.length)) : ''));
     prevLeader = leader.mgr; prevLast = bottom;
-    if (!lastWk && nextG) {
+    if (!lastWk && next.length) {
       const pairs = next.map(([a, b]) => rank[a] <= rank[b] ? [a, b] : [b, a]).sort((x, y) => (rank[x[0]] + rank[x[1]]) - (rank[y[0]] + rank[y[1]]));
       const [a, b] = pairs[0], r0 = seriesOf(a, b, id, wk);
       const h2h = CAT ? '' : r0.n ? ' All-time, ' + (r0.aw === r0.bw ? 'the series is tied ' + r0.aw + '-' + r0.bw : (r0.aw > r0.bw ? a : b) + ' leads ' + Math.max(r0.aw, r0.bw) + '-' + Math.min(r0.aw, r0.bw)) + (r0.t ? '-' + r0.t : '') + '.' : ' Their first ever meeting.';
@@ -530,6 +535,10 @@ for (const [id, S] of Object.entries(bySeason)) {
     const late = newsAfter(id, last.end);
     if (late) recap.splice(recap.length - 1, 0, late);
     weeks.push({ week: 100, recap, matchups: [], highScore: null, standings, streaks: last.streaks, highScoreTally: last.highScoreTally, next: [], bracket: bracketGames(S) });
+  }
+  if (fx) {
+    for (const w of weeks) { const x = fxWeek(w.week); if (x) x.recap = w.recap; }
+    continue;
   }
   const yw = yWeeks[id];
   if (yw) for (const w of weeks) { const x = yw.weeks[w.week]; if (x) Object.assign(w, { players: x.players, moves: x.moves, trades: x.trades }); }
