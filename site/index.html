@@ -49,7 +49,8 @@ header.stuck .wrap { padding-block: 10px 10px; gap: 8px; }
 header.stuck .eyebrow, header.stuck .rink { display: none; }
 header.stuck h1 { font-size: 20px; }
 header.stuck .weekline .wk { font-size: 18px; }
-header.stuck .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+header.stuck .tabs { flex-wrap: nowrap; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; }
+header.stuck .tabs::-webkit-scrollbar { display: none; }
 header.stuck .tabs button { white-space: nowrap; }
 header.stuck .export-btn { display: none; }
 @media (max-width: 640px) { header.stuck h1 { display: none; } }
