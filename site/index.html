@@ -53,8 +53,12 @@ header.stuck .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin;
 header.stuck .tabs button { white-space: nowrap; }
 header.stuck .export-btn { display: none; }
 @media (max-width: 640px) { header.stuck h1 { display: none; } }
-.wk-nav { display: flex; align-items: center; gap: 6px; flex: 1 1 320px; min-width: 0; max-width: 100%; }
-.wk-nav .weeks { min-width: 0; flex: 0 1 auto; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; }
+header .picker { display: grid; gap: 10px; }
+.pick-row { display: flex; align-items: center; gap: 10px 16px; min-width: 0; }
+.pick-row .export-btn { margin-left: auto; }
+.pick-row > label { flex: none; min-width: 4.2em; }
+.wk-nav { display: flex; align-items: center; gap: 6px; flex: 1 1 auto; min-width: 0; }
+.wk-nav .weeks { min-width: 0; flex: 0 1 auto; }
 .wk-nav .weeks button { flex: none; }
 .wk-arrow { font: 700 15px var(--mono); width: 34px; height: 32px; flex: none; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
 .wk-arrow:hover:not(:disabled) { border-color: var(--blue); }
@@ -447,11 +451,11 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     <div class="rink" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
     <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button></nav>
     <div class="picker" id="picker">
-      <label for="season">Season</label>
+      <div class="pick-row"><label for="season">Season</label>
       <select id="season"></select>
-      <label>Week</label>
-      <div class="wk-nav"><button type="button" class="wk-arrow" id="wk-prev" aria-label="Previous week" title="Previous week (←)">‹</button><div class="weeks" id="weeks" role="group" aria-label="Week"></div><button type="button" class="wk-arrow" id="wk-next" aria-label="Next week" title="Next week (→)">›</button></div>
-      <button type="button" class="export-btn" id="export">Export image</button>
+      <button type="button" class="export-btn" id="export">Export image</button></div>
+      <div class="pick-row"><label>Week</label>
+      <div class="wk-nav"><button type="button" class="wk-arrow" id="wk-prev" aria-label="Previous week" title="Previous week (←)">‹</button><div class="weeks" id="weeks" role="group" aria-label="Week"></div><button type="button" class="wk-arrow" id="wk-next" aria-label="Next week" title="Next week (→)">›</button></div></div>
     </div>
   </div>
 </header>
@@ -511,8 +515,6 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const i = weeks.indexOf(w), si = DATA.seasons.indexOf(s);
     $("wk-prev").disabled = i === 0 && si === 0;
     $("wk-next").disabled = i === weeks.length - 1 && si === DATA.seasons.length - 1;
-    const on = $("weeks").querySelector('[aria-pressed="true"]');
-    if (on) $("weeks").scrollLeft = on.offsetLeft - $("weeks").offsetLeft - ($("weeks").clientWidth - on.offsetWidth) / 2;
     if (push) { try { history.replaceState(null, "", "#" + hashFor(s, w)); } catch (e) { location.hash = hashFor(s, w); } }
     render(s, w);
   }
