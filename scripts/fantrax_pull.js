@@ -1,7 +1,8 @@
 // Run in the built-in browser's javascript_tool on any fantrax.com page (user signed in).
-// Replace __PERIOD__ with the scoring period number and __LOCK__ with the period's first puck drop in Eastern
-// time ('YYYY-MM-DDTHH:MM', from nhl_lock.js). The first run also defines
-//   window.fxPull(period)             -> raw data for one period (same object this script returns)
+// Replace __PERIOD__ with the scoring period number, __LOCK__ with the period's first puck drop in Eastern
+// time ('YYYY-MM-DDTHH:MM', from nhl_lock.js) and __CUTOFF__ with the week's cutoff for moves and trades: the NEXT
+// period's first puck drop, or the time of the refresh if that comes first. The first run also defines
+//   window.fxPull(period, lock, cutoff) -> raw data for one period (same object this script returns)
 //   window.fxWeekEntry(out, prevOut)  -> the weeks[] entry for the league site's reports.json
 //                                        (prevOut = fxPull(period - 1), or null for week 1)
 //   window.fxTradeTracker(out)        -> the season-level tradeTracker object for reports.json
@@ -105,7 +106,7 @@ async function rosterPlayers(dates, sk, gl, groups, trades) {
 }
 
 
-window.fxPull = async function (PERIOD, LOCK) {
+window.fxPull = async function (PERIOD, LOCK, CUTOFF) {
   const out = { period: PERIOD };
 
   // 1. Schedule: scores for every period up to PERIOD (to catch stat corrections), and this period's dates.
@@ -127,9 +128,13 @@ window.fxPull = async function (PERIOD, LOCK) {
   const [y1, m1, d1] = out.dates.start.split('-').map(Number), [y2, m2, d2] = out.dates.end.split('-').map(Number);
   out.dates.lock = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(LOCK || '') ? LOCK : null;
   if (!out.dates.lock) out.warning = 'no roster-lock time given; using noon on ' + out.dates.start;
+  // Moves and trades belong to the week from this period's puck drop up to the next one (the user's rule,
+  // 2026-11-02), so a Monday-morning trade lands in the week that just ended. Without a lock, fall back to Mon-Sun.
+  out.dates.cutoff = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(CUTOFF || '') ? CUTOFF : out.dates.end + 'T23:59';
+  const winFrom = out.dates.lock || out.dates.start + 'T00:00';
   out.dates.days = Math.round((Date.UTC(y2, m2 - 1, d2) - Date.UTC(y1, m1 - 1, d1)) / 86400000) + 1;
   const periodStart = p => sched.tableList[p - 1] && parseCaptionDates(sched.tableList[p - 1].subCaption).start;
-  const inRange = s => { const iso = isoOf(s); return !!iso && iso >= out.dates.start && iso <= out.dates.end; };
+  const inRange = s => { const t = stamp(s); return !!t && t >= winFrom && t < out.dates.cutoff; };
 
   // 2. Standings as of PERIOD (rank, W-L-T, PF, PA, streak).
   const st = await fx('getStandings', { view: 'REGULAR_SEASON', timeframeType: 'BY_PERIOD', timeStartType: 'FROM_SEASON_START', period: String(PERIOD) });
@@ -151,7 +156,7 @@ window.fxPull = async function (PERIOD, LOCK) {
   }
   const sk = await players('HOCKEY_SKATING'), gl = await players('POS_201'); // today's rosters; step 7 rewinds to the lock
 
-  // 4. Adds/drops processed during the period's dates (Mon-Sun), grouped by transaction. Lineup changes left out.
+  // 4. Adds/drops processed between this period's puck drop and the cutoff, grouped by transaction. Lineup changes left out.
   const tx = await fx('getTransactionDetailsHistory', { maxResultsPerPage: '500' });
   const groups = []; let cur = null;
   for (const r of tx.table.rows) {
@@ -190,7 +195,8 @@ window.fxPull = async function (PERIOD, LOCK) {
   for (const g of Object.values(trades)) {
     if (g.moves.every(m => m.executed === false)) continue;
     const trIso = isoOf(g.date);
-    if (trIso && trIso > out.dates.end) continue; // trade made after this period
+    if (!trIso || stamp(g.date) >= out.dates.cutoff) continue; // trade made after this week's cutoff
+    const early = trIso > out.dates.end; // processed after Sunday but before the cutoff: nothing counted yet
     const t = { id: g.id, date: g.date, effectivePeriod: g.effectivePeriod, countedFrom: trIso, through: out.dates.end, moves: [] };
     for (const m of g.moves) {
       // Did the receiving team let him go later? Earliest later drop by that team, or later trade away from it.
@@ -199,7 +205,7 @@ window.fxPull = async function (PERIOD, LOCK) {
         ...Object.values(trades).filter(x => x !== g && x.moves.some(mv => mv.player === m.player && mv.from === m.to && mv.executed !== false)).map(x => isoOf(x.date))
       ].filter(x => x && x > trIso).sort();
       const end = leaves[0] && leaves[0] < out.dates.end ? leaves[0] : out.dates.end;
-      const r = m.scorerId ? await pointsFor(m, trIso, end) : { pts: null, gp: null, note: 'no player id' };
+      const r = early ? { pts: 0, gp: 0 } : m.scorerId ? await pointsFor(m, trIso, end) : { pts: null, gp: null, note: 'no player id' };
       t.moves.push(Object.assign({}, m, r, { through: end, left: leaves[0] && leaves[0] <= out.dates.end ? leaves[0] : undefined }));
     }
     out.tradeTracker.push(t);
@@ -271,5 +277,5 @@ window.fxTradeTracker = function (out) {
   };
 };
 
-window.__out = await window.fxPull(__PERIOD__, '__LOCK__');
+window.__out = await window.fxPull(__PERIOD__, '__LOCK__', '__CUTOFF__');
 window.__out;

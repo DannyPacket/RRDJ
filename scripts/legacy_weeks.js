@@ -28,19 +28,11 @@ const yLogos = fs.existsSync(yLogosFile) ? JSON.parse(fs.readFileSync(yLogosFile
 // Top & bottom players, movement and trades rebuilt from Yahoo (yahoo_weeks.json, from yahoo_players.js)
 const yWeeksFile = require('path').join(__dirname, 'yahoo_weeks.json');
 const yWeeks = fs.existsSync(yWeeksFile) ? JSON.parse(fs.readFileSync(yWeeksFile, 'utf8')) : {};
-const BROTHERS = [['Will', 'Tom', 'Tim', 'Danny'], ['Nick', 'Vin']];
 const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ['th', 'st', 'nd', 'rd'][n % 10] || 'th');
 // Categories seasons (2014-15) score each week in categories won, so their numbers print as whole numbers
 let CAT = false;
 const f1 = n => CAT ? String(Math.round(n)) : (Math.round(n * 10) / 10).toFixed(1);
 const catSeasons = new Set();
-const rel = (a, b) => {
-  if (BROTHERS.some(g => g.includes(a) && g.includes(b))) return 'brother vs. brother';
-  if ([a, b].includes('Hallie') && [a, b].includes('Will')) return 'husband vs. wife';
-  if ([a, b].includes('Hallie') && BROTHERS[0].some(x => [a, b].includes(x))) return 'in-law';
-  if ([a, b].includes('Zac') && ['Nick', 'Vin'].some(x => [a, b].includes(x))) return 'zac';
-  return null;
-};
 
 // Team names per season from the Teams tab (quoted CSV fields are allowed)
 const teamNames = {};
@@ -89,14 +81,11 @@ const champOf = y => { const f = allFinals[y] || {}; return Object.keys(f).find(
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const md = iso => { const [, m, d] = iso.split('-').map(Number); return MON[m - 1] + ' ' + d; };
 const covers = (dw, mmdd) => { if (!dw) return false; const [a, b] = dw; const y = a.slice(0, 4), y2 = b.slice(0, 4); return [y, y2].some(Y => a <= Y + '-' + mmdd && Y + '-' + mmdd <= b); };
-const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six'];
+const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
+// Fourth Thursday of November, for the Thanksgiving hook
+const thanksgiving = y => { const d = new Date(Date.UTC(y, 10, 1)); return `11-${String(1 + ((4 - d.getUTCDay() + 7) % 7) + 21).padStart(2, '0')}`; };
 // What the February break was each year (any other long winter week is the All-Star break)
 const FEB_BREAK = { '2013-14': 'Sochi Olympic', '2021-22': 'All-Star and Olympic', '2024-25': '4 Nations Face-Off', '2025-26': 'Milan-Cortina Olympic' };
-const tagOf = (a, b) => {
-  const k = rel(a, b);
-  return k === 'brother vs. brother' ? ' (brother vs. brother)' : k === 'husband vs. wife' ? ' (and it\'s husband vs. wife)' : k === 'in-law' ? ' (in-law edition)'
-    : k === 'zac' ? ' (Zac vs. one of the brothers who supposedly run his account)' : '';
-};
 const recStr = x => x.w + '-' + x.l + (x.t ? '-' + x.t : '');
 // Same phrase every rebuild: the pick is a hash of the key (season + week + slot), not random
 const { V, an } = require("./voice"); // announcer phrasing, rotated so lines don't repeat back to back
@@ -297,6 +286,20 @@ function seriesOf(a, b, y, wk) {
   });
   return { aw, bw, t, n: g.length, run, runBy, prevRun, prevBy };
 }
+// Flashback for the look-ahead: the most recent playoff game between a and b before season y
+function flashback(a, b, y) {
+  for (const py of seasonIds.filter(x => x < y).reverse()) {
+    const P = (bySeason[py] || {}).post || {};
+    for (const w of Object.keys(P).map(Number).sort((p, q) => q - p)) {
+      const g = P[w][a];
+      if (!g || g.opp !== b || g.type !== 'Playoffs' || g.p == null || g.q == null || g.p === g.q) continue;
+      const [win, lose, wp, lp] = g.p > g.q ? [a, b, g.p, g.q] : [b, a, g.q, g.p];
+      const fp = n => (Math.round(n * 10) / 10).toFixed(1);
+      return ' ' + V.flashback(win, lose, fp(wp), fp(lp), py);
+    }
+  }
+  return '';
+}
 // One all-time series note for the week, if anything stands out
 function seriesNote(decided, y, wk) {
   const notes = [];
@@ -326,8 +329,46 @@ const NEWS = {
   '2023-24': [['offseason', 'Connor Bedard made his NHL debut in Chicago.']],
   '2024-25': [['2025-01-24', 'Carolina stunned everyone, landing Mikko Rantanen from Colorado in a three-team deal.'], ['2025-02-15', 'Three fights in the first nine seconds of Canada vs. USA set the tone at the 4 Nations Face-Off.'], ['2025-02-20', 'Connor McDavid scored in overtime as Canada beat the USA 3-2 to win the 4 Nations Face-Off.'], ['2025-03-07', 'Carolina flipped Rantanen to Dallas only weeks after getting him.'], ['2025-04-06', 'Alex Ovechkin scored goal 895, passing Wayne Gretzky for the most in NHL history.']],
   '2025-26': [['2026-02-10', 'NHL players are back on Olympic ice for the first time since 2014.']],
-  '2026-27': [['2026-10-01', 'Aleksander Barkov is out 10 to 12 weeks, a big early blow for Florida.'], ['2026-10-22', 'The Connor Hellebuyck saga is finally over: the Jets shipped him to the Devils.']]
+  '2026-27': [
+    ['2026-10-01', 'Aleksander Barkov is out 10 to 12 weeks, a big early blow for Florida.'],
+    ['2026-10-01', "Igor Shesterkin scored a goal in the Rangers' home opener. A goalie. A goal."],
+    ['2026-10-02', 'Detroit fans booed Dylan Larkin at the home opener, with his summer trade request still hanging over everything.'],
+    ['2026-10-05', 'Alex Ovechkin announced 2026-27 will be his final NHL season, with plans to finish his career back home with Dynamo Moscow.'],
+    ['2026-10-23', 'The Connor Hellebuyck saga is finally over: after sitting out without pay, he was shipped from Winnipeg to New Jersey for Dawson Mercer, Alexander Command, Nick Bjugstad, Nico Daws and two picks.'],
+    ['2026-10-30', "Nikita Kucherov asked the Lightning for a trade. Tampa says it isn't moving him."],
+    ['2026-10-31', 'Patrick Kane became the first American-born player to reach 900 assists, and Sidney Crosby passed Ray Bourque for the most assists with one franchise.'],
+    ['2026-10-31', 'Tristan Jarry blanked the Islanders for his second straight shutout, the same day Danny plucked him off the wire.'],
+    ['2026-11-01', 'Pyotr Kochetkov shut out the Jets 7-0 for his 10th straight win, a Hurricanes record. Winnipeg, life after Hellebuyck, is winless in nine.'],
+    ['2026-11-01', 'Connor McDavid stretched his season-opening point streak to 15 games and became the fastest player ever to 30 assists.'],
+    ['2026-11-01', 'Bad news for Vin: Devin Cooley, his new goalie as of Tuesday, is out week to week for Calgary.']
+  ]
 };
+// Extra color for a specific trade, by season and the trade's date (the user's own jokes and context go here)
+const TRADE_NOTES = {
+  '2026-27': [['2026-11-02', "Hellebuyck finally got his ticket out of Winnipeg and Larkin is still waiting on his from Detroit, so this league handled it in-house: three moves in four days. Werenski recommitted to Columbus this summer and gets moved anyway. This league is now the official processing center for disgruntled Americans, and somewhere USA Hockey is asking for a group chat invite."]]
+};
+// The standings paragraph: the leader and the cushion (or the tie), the chase pack, the big movers, the basement,
+// and a points-for flag when the league's top scorer is stuck in the bottom half
+function standingsRead(standings, prev, isNew, newBottom) {
+  const wk = standings[0].w + standings[0].l + standings[0].t, wpts = x => x.w + x.t / 2;
+  const and = a => a.length > 1 ? a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1] : a[0];
+  const [l, s] = standings, tied = standings.filter(x => wpts(x) === wpts(l) && x.l === l.l);
+  let t;
+  if (tied.length >= 2) t = V.standTie(l.mgr, recStr(l), and(tied.slice(1).map(x => x.mgr)), isNew, tied.length > 2);
+  else { const g = wpts(l) - wpts(s); t = V.standLead(l.mgr, recStr(l), g === 0.5 ? 'half a game' : g === 1 ? 'a game' : g % 1 ? (words[Math.floor(g)] || Math.floor(g)) + ' and a half games' : (words[g] || g) + ' games', s.mgr, recStr(s), isNew); }
+  const back = standings.filter(x => wpts(l) - wpts(x) === 1);
+  if (back.length && back.length <= 4 && back.every(x => recStr(x) === recStr(back[0])) && !(tied.length < 2 && back.length === 1 && back[0] === s)) t += V.chasers(and(back.map(x => x.mgr)), recStr(back[0]));
+  const moves = standings.filter(x => prev[x.mgr]).map(x => ({ m: x.mgr, d: prev[x.mgr] - x.rank, r: x.rank }));
+  const up = moves.sort((a, b) => b.d - a.d)[0];
+  if (up && up.d >= 3) t += V.climber(up.m, up.d, ord(up.r));
+  const down = moves.sort((a, b) => a.d - b.d)[0];
+  if (down && down.d <= -3 && down.r !== standings.length) t += V.faller(down.m, -down.d, ord(down.r));
+  const b = standings[standings.length - 1];
+  if (newBottom || wk % 3 === 0) t += V.basement(b.mgr, recStr(b), newBottom);
+  const pf = standings.slice().sort((a, c) => c.pf - a.pf)[0];
+  if (!CAT && wk >= 3 && pf.rank > standings.length / 2) t += V.pfLuck(pf.mgr, f1(pf.pf), ord(pf.rank));
+  return t;
+}
 function newsFor(y, wk, dw) {
   const items = (NEWS[y] || []).filter(([d]) => (d === 'offseason' && wk === 1) || (dw && d !== 'offseason' && dw[0] <= d && d <= dw[1]));
   return items.length ? 'Around the league: ' + items.map(x => x[1]).join(' ') : '';
@@ -396,10 +437,49 @@ for (const [id, S] of Object.entries(bySeason)) {
     else if (covers(dw, '01-01')) context = V.newYear(dw[0].slice(0, 4), dw[1].slice(0, 4));
     else if (kind === 'long' && wk > 1) context = V.longWeek();
     else if (kind === 'short') context = V.shortWeek();
+    // How good a score was: how many teams it would have beaten, and the manager's earlier best this season
+    const beats = m => mgrs.filter(o => o !== m && G[o].p < G[m].p).length;
+    const scoreRank = m => 1 + mgrs.filter(o => G[o].p > G[m].p).length;
+    const earlierWeeks = Object.keys(S.games).map(Number).filter(w => w < wk && normalWeek(id, w));
+    const bestBefore = m => Math.max(-Infinity, ...earlierWeeks.map(w => S.games[w][m] ? S.games[w][m].p : -Infinity));
+    const decided = matchups.filter(x => x.ap !== x.bp).map(x => ({ w: x.ap > x.bp ? x.a : x.b, l: x.ap > x.bp ? x.b : x.a, wp: Math.max(x.ap, x.bp), lp: Math.min(x.ap, x.bp), d: Math.abs(x.ap - x.bp) }));
+    const ups = wk > 1 ? decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 4).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l])) : [];
+    const recOf = x => recStr(x);
+    const leaders = standings.filter(x => x.w === standings[0].w && x.l === standings[0].l && x.t === standings[0].t);
+
+    // Intro (every week after the first): where we are, a calendar hook, then the headline story
+    if (wk > 1) {
+      const intro = [V.intro(wk)];
+      if (context) intro.push(context.trim());
+      else if (covers(dw, '10-31')) intro.push(V.halloween());
+      else if (dw && covers(dw, thanksgiving(+dw[0].slice(0, 4)))) intro.push(V.thanksgiving());
+      else if (covers(dw, '02-14')) intro.push(V.valentine());
+      else if (covers(dw, '03-17')) intro.push(V.stPat());
+      if (leaders.length >= 3) intro.push(V.topTie(words[leaders.length], recOf(leaders[0]), leaders.map(x => x.mgr).join(', ').replace(/, ([^,]*)$/, ' and $1')));
+      else if (prevLeader && standings[0].mgr !== prevLeader) intro.push(V.newTop(standings[0].mgr));
+      else if (ups.length >= 3) intro.push(V.upsetWeek(words[ups.length]));
+      if (!CAT && normalWeek(id, wk) && earlierWeeks.length >= 2) {
+        const avgOf = w => { const v = Object.values(S.games[w]).map(g => g.p); return v.reduce((a, b) => a + b, 0) / v.length; };
+        const now = avgOf(wk), past = earlierWeeks.map(avgOf);
+        if (now > Math.max(...past)) intro.push(V.scoringHigh(f1(now)));
+        else if (now < Math.min(...past)) intro.push(V.scoringLow(f1(now)));
+      }
+      const tw = ((yWeeks[id] && yWeeks[id].weeks[wk]) || fxWeek(wk) || {}).trades || [];
+      if (tw.length) intro.push(V.tradeTease(tw.length, tw.some(t => t.date && dw && t.date > dw[1])));
+      recap.push(intro.join(' '));
+    }
+
     const hsG = G[hsMgr];
-    recap.push(context + (CAT
+    let lead = (wk === 1 ? context : '') + (CAT
       ? (hsG.p > hsG.q ? V.catWin(hsMgr, f1(top), hsG.opp, f1(hsG.q)) : V.catTie(hsMgr, f1(top), hsG.opp))
-      : hsG.p > hsG.q ? V.hsWin(hsMgr, f1(top), hsG.opp, f1(hsG.p - hsG.q), hsG.p - hsG.q) : V.hsTie(hsMgr, f1(top), hsG.opp)));
+      : hsG.p > hsG.q ? V.hsWin(hsMgr, f1(top), hsG.opp, f1(hsG.p - hsG.q), hsG.p - hsG.q) : V.hsTie(hsMgr, f1(top), hsG.opp));
+    if (!CAT) {
+      const k = beats(hsMgr), loserBest = hsG.p > hsG.q && wk >= 3 && hsG.q > bestBefore(hsG.opp);
+      if (wk >= 3 && earlierWeeks.length && top > bestBefore(hsMgr) && bestBefore(hsMgr) > 0) lead += V.mgrBest(hsMgr, f1(top - bestBefore(hsMgr)));
+      else if (k === mgrs.length - 1 && wk % 2 === 1) lead += V.allPlay(hsMgr, k, mgrs.length - 1);
+      if (loserBest) lead += V.loserBest(hsG.opp, f1(hsG.q));
+    }
+    recap.push(lead);
     if (!CAT && normalWeek(id, wk) && seasonIds.indexOf(id) > 0) {
       const rec = recordBefore(id, wk), low = Math.min(...mgrs.map(m => G[m].p)), lowM = mgrs.find(m => G[m].p === low);
       const when = y => y === id ? 'earlier this season' : 'in ' + y;
@@ -417,26 +497,55 @@ for (const [id, S] of Object.entries(bySeason)) {
       const tied = tally.filter(t => t[0] !== hsMgr && t[1] === n).map(t => t[0]);
       if (n >= 2) recap[recap.length - 1] += V.hsCount(hsMgr, n, tied.length ? tied.join(' and ') : null, tally[0][0], tally[0][1]);
     }
-    if (ywk && ywk.players) {
-      const star = ['F', 'D', 'G'].map(k => ywk.players.high[k]).filter(Boolean).sort((a, b) => b.pts - a.pts)[0];
-      if (star) recap[recap.length - 1] += ' ' + V.playerOfWeek(star.name, star.nhl, f1(star.pts), star.mgr);
-    }
-    const decided = matchups.filter(x => x.ap !== x.bp).map(x => ({ w: x.ap > x.bp ? x.a : x.b, l: x.ap > x.bp ? x.b : x.a, wp: Math.max(x.ap, x.bp), lp: Math.min(x.ap, x.bp), d: Math.abs(x.ap - x.bp) }));
     // the lead already covers the high scorer's game, so the blowout line goes to a different game
     const close = decided.slice().sort((a, b) => a.d - b.d)[0], blow = decided.filter(x => x.w !== hsMgr && x.l !== hsMgr).sort((a, b) => b.d - a.d)[0];
+    // One analyst note per featured game: a season-high in a loss, or how many teams the loser's score would have beaten
+    const noted = new Set([hsMgr, hsG.opp]);
+    const gameNote = x => {
+      if (CAT) return '';
+      noted.add(x.w); noted.add(x.l);
+      if (wk >= 3 && x.lp > bestBefore(x.l) && bestBefore(x.l) > 0) return V.loserBest(x.l, f1(x.lp));
+      const k = beats(x.l);
+      if (k >= mgrs.length / 2) return V.allPlay(x.l, k, mgrs.length - 1).replace(/^ That/, ` ${x.l}'s ${f1(x.lp)}`).replace(/^ Play it/, ` Play ${x.l}'s number`);
+      return '';
+    };
     const p2 = [];
-    if (close) p2.push(close.d < (CAT ? 2 : 5)
-      ? V.photo(tagOf(close.w, close.l), close.w, close.l, f1(close.wp), f1(close.lp)) + (!CAT && close.d < 1 ? V.inches(f1(close.d)) : '')
-      : V.closest(tagOf(close.w, close.l), close.w, close.l, f1(close.wp), f1(close.lp)));
-    if (blow && blow !== close) p2.push(V.blowout(tagOf(blow.w, blow.l), blow.w, blow.l, f1(blow.d) + (CAT ? ' categories' : '')) + (!CAT && blow.d >= 80 ? V.pullGoalie() : ''));
+    if (close) p2.push((close.d < (CAT ? 2 : 5)
+      ? V.photo('', close.w, close.l, f1(close.wp), f1(close.lp)) + (!CAT && close.d < 1 ? V.inches(f1(close.d)) : '')
+      : V.closest('', close.w, close.l, f1(close.wp), f1(close.lp))) + gameNote(close));
+    if (blow && blow !== close) { noted.add(blow.w); noted.add(blow.l); p2.push(V.blowout('', blow.w, blow.l, f1(blow.d) + (CAT ? ' categories' : '')) + (!CAT && blow.d >= 80 ? V.pullGoalie() : '')); }
     if (wk > 1) {
-      const ups = decided.filter(x => prev[x.w] && prev[x.l] && prev[x.w] - prev[x.l] >= 4).sort((a, b) => (prev[b.w] - prev[b.l]) - (prev[a.w] - prev[a.l]));
       if (ups.length >= 2) p2.push(V.upsets(ups.map(x => `${x.w} (${ord(prev[x.w])}) over ${x.l} (${ord(prev[x.l])})`).join(', ')));
       else if (ups.length && prev[ups[0].w] - prev[ups[0].l] >= 5) p2.push(V.upset(ups[0].w, ord(prev[ups[0].w]), ups[0].l, ord(prev[ups[0].l])));
     }
     const others = decided.filter(x => x !== close && x !== blow && x.d < (CAT ? 2 : 10)).sort((a, b) => a.d - b.d).slice(0, 3);
     if (others.length) p2.splice(1, 0, V.closeCalls(others.map(x => `${x.w} over ${x.l} by ${f1(x.d)}`).join(', ')));
+    if (!CAT) {
+      // tough-luck loser (a big score that lost) and the win that came with a small one, if no featured game covered them
+      const tough = decided.filter(x => !noted.has(x.l) && beats(x.l) >= Math.ceil((mgrs.length - 1) * 0.6)).sort((a, b) => b.lp - a.lp)[0];
+      if (tough) { p2.push(V.toughLuck(tough.l, f1(tough.lp), beats(tough.l), tough.w)); noted.add(tough.w); }
+      const ugly = decided.filter(x => !noted.has(x.w) && scoreRank(x.w) >= mgrs.length - 3).sort((a, b) => a.wp - b.wp)[0];
+      if (ugly) p2.push(V.wonUgly(ugly.w, f1(ugly.wp), ord(scoreRank(ugly.w))));
+    }
     recap.push(p2.join(' '));
+    // The week's best and worst players, with what they meant for their manager's result
+    if (ywk && ywk.players) {
+      const pp = [];
+      const star = ['F', 'D', 'G'].map(k => ywk.players.high[k]).filter(Boolean).sort((a, b) => b.pts - a.pts)[0];
+      if (star) {
+        const g = G[star.mgr];
+        pp.push(V.playerOfWeek(star.name, star.nhl, f1(star.pts), star.mgr) + (g && g.p !== g.q ? V.starResult(star.mgr, g.p > g.q, g.opp, Math.abs(g.p - g.q) < 10) : ''));
+      }
+      const dud = ['F', 'D', 'G'].map(k => (ywk.players.low || {})[k]).filter(Boolean).sort((a, b) => a.pts - b.pts)[0];
+      if (dud && dud.pts <= 0) {
+        // acquired in a trade earlier this season? Say so (the analyst always brings up the trade)
+        const tt = (fx && fx.tradeTracker) || (yWeeks[id] && yWeeks[id].tradeTracker);
+        const t = tt && (tt.trades || []).find(t => t.date && dw && t.date <= dw[1] && t.sides.some(sd => sd.mgr === dud.mgr && sd.gets.some(g => g.name === dud.name)));
+        const from = t && t.sides.find(sd => sd.mgr !== dud.mgr);
+        pp.push(V.worstPlayer(dud.name, dud.nhl, f1(dud.pts), dud.mgr, from ? ', the ' + (/G/.test((t.sides.find(sd => sd.mgr === dud.mgr).gets.find(g => g.name === dud.name) || {}).pos || '') ? 'goalie' : 'player') + ' ' + dud.mgr + ' got from ' + from.mgr + ' in a trade' : ''));
+      }
+      if (pp.length) recap.push(pp.join(' '));
+    }
     const p3 = [];
     const hot = mgrs.map(m => ({ m, s: streakOf(m) })).filter(x => x.s.k === 'W' && x.s.n >= 3).sort((a, b) => b.s.n - a.s.n)[0];
     const cold = mgrs.map(m => ({ m, s: streakOf(m) })).filter(x => x.s.k === 'L' && x.s.n >= 3).sort((a, b) => b.s.n - a.s.n)[0];
@@ -491,12 +600,31 @@ for (const [id, S] of Object.entries(bySeason)) {
     if (p3.filter(Boolean).length) recap.push(p3.filter(Boolean).join(' '));
     if (ywk) {
       const p4 = [];
-      for (const t of ywk.trades || []) if (t.sides.length === 2) p4.push(V.tradeAlert(t.sides[0].mgr, t.sides[0].gets.map(g => g.name).join(' and '), t.sides[1].mgr, t.sides[1].gets.map(g => g.name).join(' and ')));
       const mv = ywk.moves || [];
+      const names = gets => gets.map(g => g.name).join(' and ');
+      for (const t of ywk.trades || []) {
+        if (t.sides.length !== 2) continue;
+        const [A, B] = t.sides;
+        // a trade made after Sunday but before the next puck drop still belongs to this week (the user's cutoff rule)
+        let line = V.tradeLead(A.mgr, names(A.gets), B.mgr, names(B.gets), !!(t.date && dw && t.date > dw[1]));
+        // players who changed hands on the wire earlier in the same week
+        for (const sd of t.sides) for (const g of sd.gets) {
+          const dropBy = mv.find(m => m.drop && m.drop.name === g.name), addBy = mv.find(m => m.add && m.add.name === g.name);
+          if (!addBy) continue;
+          const steps = [dropBy && dropBy.mgr !== addBy.mgr ? 'dropped by ' + dropBy.mgr : null, (addBy.add.note === 'waivers' ? 'claimed off waivers by ' : 'picked up by ') + addBy.mgr, 'then flipped to ' + sd.mgr].filter(Boolean);
+          line += V.tradeTrail(g.name, steps.join(', '));
+        }
+        for (const [d, text] of TRADE_NOTES[id] || []) if (d === t.date) line += ' ' + text;
+        p4.push(line);
+      }
       if (mv.length) {
-        const by = {}; mv.forEach(m => by[m.mgr] = (by[m.mgr] || 0) + 1);
-        const busiest = Object.entries(by).sort((a, b) => b[1] - a[1])[0];
-        let line = V.wire(mv.length, busiest[0], busiest[1]);
+        const by = {}; mv.forEach(m => (by[m.mgr] = by[m.mgr] || []).push(m));
+        const busiest = Object.entries(by).sort((a, b) => b[1].length - a[1].length)[0];
+        let line = V.wire(mv.length, busiest[0], 0);
+        const goalies = mv.filter(m => m.add && /(^|\/)G($|\/)/.test(m.add.pos || ''));
+        if (new Set(goalies.map(m => m.mgr)).size >= 3) line += V.goalieShop(goalies.map(m => `${m.mgr} (${m.add.name})`).join(', ').replace(/, ([^,]*)$/, ' and $1'));
+        const busyAdds = busiest[1].filter(m => m.add).map(m => m.add.name);
+        if (busiest[1].length >= 3 && busyAdds.length) line += V.busiest(busiest[0], busiest[1].length, busyAdds.join(', ').replace(/, ([^,]*)$/, ' and $1'));
         const pick = mv.filter(m => m.add && m.add.next4 != null).sort((a, b) => b.add.next4 - a.add.next4)[0];
         if (pick && pick.add.next4 >= 25) line += V.bestPickup(pick.mgr, pick.add.name, pick.add.nhl, f1(pick.add.next4));
         p4.push(line);
@@ -510,14 +638,30 @@ for (const [id, S] of Object.entries(bySeason)) {
     const half = wk === Math.ceil(regWeeks / 2);
     recap.push(lastWk ? (Object.keys(S.post).length ? playoffPicture(S, standings) : cancelledFinish(id, leader))
       : half ? V.halfway(leader.mgr, recStr(leader), standings[1].mgr, recStr(standings[1]), bottom)
-      : leader.mgr !== prevLeader && wk > 1 ? V.leaderNew(leader.mgr, recStr(leader))
-        : V.leaderStill(leader.mgr, recStr(leader)) + (bottom !== prevLast && wk > 1 ? V.dropsLast(bottom, ord(standings.length)) : ''));
+      : wk === 1 ? V.leaderStill(leader.mgr, recStr(leader))
+      : standingsRead(standings, prev, leader.mgr !== prevLeader, bottom !== prevLast));
     prevLeader = leader.mgr; prevLast = bottom;
     if (!lastWk && next.length) {
+      const h2hOf = (a, b) => { const r0 = seriesOf(a, b, id, wk); return CAT ? '' : r0.n ? ' All-time, ' + (r0.aw === r0.bw ? 'the series is tied ' + r0.aw + '-' + r0.bw : (r0.aw > r0.bw ? a : b) + ' leads ' + Math.max(r0.aw, r0.bw) + '-' + Math.min(r0.aw, r0.bw)) + (r0.t ? '-' + r0.t : '') + '.' : ' Their first ever meeting.'; };
       const pairs = next.map(([a, b]) => rank[a] <= rank[b] ? [a, b] : [b, a]).sort((x, y) => (rank[x[0]] + rank[x[1]]) - (rank[y[0]] + rank[y[1]]));
-      const [a, b] = pairs[0], r0 = seriesOf(a, b, id, wk);
-      const h2h = CAT ? '' : r0.n ? ' All-time, ' + (r0.aw === r0.bw ? 'the series is tied ' + r0.aw + '-' + r0.bw : (r0.aw > r0.bw ? a : b) + ' leads ' + Math.max(r0.aw, r0.bw) + '-' + Math.min(r0.aw, r0.bw)) + (r0.t ? '-' + r0.t : '') + '.' : ' Their first ever meeting.';
-      recap.push(V.preview(a, ord(rank[a]), b, ord(rank[b]), h2h));
+      const [a, b] = pairs[0];
+      let look = V.preview(a, ord(rank[a]), b, ord(rank[b]), h2hOf(a, b));
+      const used = new Set([a, b]);
+      // Undercard: the game with the best history behind it (a playoff flashback, a long run in the series, a lopsided series)
+      const story = ([x, y]) => {
+        const fb = flashback(x, y, id);
+        if (fb) return { pri: 3, t: fb };
+        const r = seriesOf(x, y, id, wk);
+        if (r.runBy && r.run >= 4) return { pri: 2, t: ' ' + V.seriesRun(r.runBy, r.runBy === x ? y : x, r.run) };
+        if (r.n >= 8 && Math.abs(r.aw - r.bw) >= 5) return { pri: 1, t: h2hOf(x, y) };
+        return null;
+      };
+      const under = pairs.slice(1).map(p => ({ p, s: story(p) })).filter(x => x.s).sort((a, b) => b.s.pri - a.s.pri)[0];
+      if (under) { look += V.undercard(under.p[0], under.p[1], '', under.s.t); used.add(under.p[0]); used.add(under.p[1]); }
+      const opp = Object.fromEntries(next.flatMap(([x, y]) => [[x, y], [y, x]]));
+      const st = mgrs.filter(m => !used.has(m) && opp[m]).map(m => ({ m, s: streakOf(m) })).filter(x => x.s.n >= 3 && x.s.k !== 'T').sort((p, q) => q.s.n - p.s.n)[0];
+      if (st) look += V.streakLine(st.m, st.s.n, st.s.k, opp[st.m]);
+      recap.push(look + V.signoff());
     }
 
     weeks.push({ week: wk, start: dw ? dw[0] : undefined, end: dw ? dw[1] : undefined, days: dw ? days : undefined, recap: recap.filter(Boolean), matchups, highScore: CAT ? null : { mgr: hsMgr, pts: top }, standings, streaks, highScoreTally: CAT ? [] : highScoreTally, next });

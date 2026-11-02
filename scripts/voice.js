@@ -43,9 +43,9 @@ const V = {
     `Word around the league is ${c} spent the summer taking the trophy to every backyard barbecue that would have it.`,
     `Sources say ${c} has watched the replay of that final more times than is healthy.`,
     `${c} reportedly had the ${team || 'team'} logo printed on a golf shirt. Several golf shirts.`,
-    `Rumor has it ${c}'s name in the family group chat has been "Champ" since April.`,
+    `Rumor has it ${c}'s name in the league group chat has been "Champ" since April.`,
     `${r} has been heard muttering about that final all summer.`,
-    `The trophy, we're told, spent July on ${c}'s mantel, right in front of the family photos.`,
+    `The trophy, we're told, spent July on ${c}'s mantel, right next to the TV.`,
     `${c} has been signing every text "Defending Champ" since the spring.`,
     `Over the summer, ${c} tried to get the league to rename the trophy "the ${c} Cup." The motion failed.`,
     `${c} reportedly framed the final box score and hung it in the hallway.`,
@@ -70,6 +70,28 @@ const V = {
     `${names} ${many ? 'hang' : 'hangs'} up the skates. The league will miss the trash talk.`,
     `So long to ${names}. The group chat just got a little quieter.`,
     `${names} ${many ? 'head' : 'heads'} into fantasy retirement. The jersey isn't going to the rafters, but still.`]),
+
+  // --- the week's intro (every week after the first): where we are, a calendar hook, the headline story
+  intro: wk => say('intro', [
+    `Week ${wk} is in the books, so let's get to it.`,
+    `Welcome back to the RRDJ desk. Week ${wk} is final, and there's plenty to unpack.`,
+    `Good evening, and welcome to the week ${wk} wrap.`,
+    `Pull up a chair: week ${wk} is done, and it left a mark on the standings.`,
+    `Another week, another pile of storylines. Here's how week ${wk} played out.`,
+    `Week ${wk} has wrapped up around the league, and we've got the highlights.`,
+    `That's the final horn on week ${wk}. Let's go around the league.`,
+    `Welcome back. Week ${wk} is in the rearview, and it didn't disappoint.`,
+    `From the RRDJ studio, it's your week ${wk} roundup.`]),
+  halloween: () => say('hallo', ['Halloween week brought a few frights, and not just at the front door.', 'It was Halloween week, and a few lineups looked like they showed up in costume.', 'Trick or treat: Halloween week handed out both around the league.']),
+  thanksgiving: () => say('thanks', ['Thanksgiving week, so some managers have more to be thankful for than others.', "It's Thanksgiving week. Pass the gravy and the box scores.", 'Thanksgiving week around the league: a few teams feasted, a few got carved up.']),
+  valentine: () => say('valen', ["Valentine's week, and not everybody felt the love.", "It was Valentine's week. Some teams got roses, others got heartbreak.", "Valentine's week around the league, and a few matchups were anything but sweet."]),
+  stPat: () => say('stpat', ["St. Patrick's week: a few managers found the pot of gold, others are still looking for it.", "It was St. Patrick's week, and luck played its part.", "St. Patrick's week, and the luck of the Irish wasn't evenly shared."]),
+  topTie: (n, rec, list) => say('topTie', [`It's crowded at the top: ${n} teams are ${rec}, ${list}.`, `We have a logjam up top, with ${list} all sitting at ${rec}.`, `${n} teams share the best record in the league at ${rec}: ${list}.`, `The top of the table is a ${n}-way tie at ${rec} between ${list}.`]),
+  newTop: m => say('newTop', [`And we have a new No. 1: ${m}.`, `The big headline: ${m} is your new league leader.`, `There's a new team on top, and it's ${m}.`]),
+  scoringHigh: a => say('scHi', [`The goal lights were busy, too: the league averaged ${a} a team, the best week of the season.`, `Scoring was way up across the board, ${a} per team, the highest-scoring week so far.`, `It was a big week on the scoresheet: ${a} per team, a season high.`]),
+  scoringLow: a => say('scLo', [`Scoring dried up, though: the league averaged just ${a} a team, the lowest of the season.`, `It was a grind on the scoresheet, ${a} per team, the quietest week so far.`, `The goalies won this week: the league averaged only ${a} a team, a season low.`]),
+  tradeTease: (n, monday) => say('trTease', [`${monday ? 'And the trade market woke up before Monday puck drop' : n > 1 ? 'And the trade market was busy' : 'And we have a trade to break down'}, so stick around.`, `Plus, ${n > 1 ? n + ' trades' : 'a trade'} to get to${monday ? (n > 1 ? ', one of them' : ',') + ' hot off the Monday-morning wire' : ''}.`, `Stay tuned for the trade${n > 1 ? 's' : ''} at the end.`]),
+  upsetWeek: n => say('upWk', [`The standings got shaken up, with ${n} upsets on the card.`, `Underdogs had a big week: ${n} upsets.`, `Expect the unexpected: ${n} teams knocked off somebody well above them.`]),
 
   // --- the week's lead: who had the high score
   hsWin: (x, p, o, d, margin) => say('hsOpen', [
@@ -201,7 +223,7 @@ const V = {
     `Player of the week: ${p}${nhl ? ' (' + nhl + ')' : ''} put up ${pts} for ${m}.`,
     `${p} carried ${m} with ${pts} points.`,
     `First star on the ice: ${p}, ${pts} points for ${m}.`,
-    `${m} can thank ${p} for ${pts} of those points.`,
+    `Nobody on the ice did more than ${p}: ${pts} points for ${m}.`,
     `The best performance of the week belonged to ${p}: ${pts} for ${m}.`]),
   hsCount: (m, n, tied, leader, ln) => ' ' + (tied ? say('hsTie', [`That's high score No. ${n} for ${m}, tying ${tied} for the most on the season.`, `${m} picks up high score No. ${n}, now tied with ${tied} for the league lead.`])
     : leader === m ? say('hsLead', [`That's ${n} high scores on the season for ${m}, the most in the league.`, `${m} now has ${n} weekly high scores, tops in the league.`])
@@ -212,7 +234,38 @@ const V = {
   pointsRace: (a, b, c, x, y, z) => say('pr', [
     `Looking at points, ${a[0]} leads the league with ${a[1]} so far, followed by ${b[0]} (${b[1]}) and ${c[0]} (${c[1]}). On the other end, ${x[0]} has been scored on the most (${x[1]}), followed by ${y[0]} (${y[1]}) and ${z[0]} (${z[1]}).`,
     `Points check: ${a[0]} (${a[1]}), ${b[0]} (${b[1]}) and ${c[0]} (${c[1]}) have scored the most, while ${x[0]} (${x[1]}), ${y[0]} (${y[1]}) and ${z[0]} (${z[1]}) have given up the most.`]),
+  // --- substance on the games (the analyst's angle: how good a score really was)
+  allPlay: (x, k, all) => ' ' + (k === all ? say('apAll', [`That number would have beaten every team in the league this week.`, `Nobody in the league could have stayed with that score this week.`, `Run it against the whole league and ${x} goes ${all}-0.`])
+    : say('apMost', [`That would have beaten ${k} teams this week.`, `Play it against the whole league and it wins ${k} of ${all}.`])),
+  mgrBest: (x, d) => ' ' + say('mgrBest', [`It's ${x}'s best week of the season, by ${d}.`, `${x} tops a previous season best by ${d}.`, `A new season high for ${x}, ${d} better than anything before it.`]),
+  starResult: (m, won, o, close) => ' ' + (won ? (close ? say('stWc', [`${m} needed every one of them to get past ${o}.`, `Good thing, too: ${m} only got by ${o} by a hair.`]) : say('stW', [`${m} rode that to a win over ${o}.`, `It powered ${m} past ${o}.`, `${m} cashed it in for a win over ${o}.`]))
+    : say('stL', [`It wasn't enough: ${m} still fell to ${o}.`, `The bad news for ${m}: a loss to ${o} anyway.`, `${m} lost to ${o} regardless. Tough one.`])),
+  worstPlayer: (p, nhl, pts, m, via) => say('wst', [`The other side of the coin: ${p} (${nhl}) went ${pts} for ${m}${via}.`, `Least valuable player: ${p} (${nhl}), ${pts} for ${m}${via}.`, `On the wrong end of the stat sheet, ${p} (${nhl}) put up ${pts} for ${m}${via}.`]),
+  toughLuck: (l, p, k, w) => say('tl', [`Tough-luck loss of the week: ${l}'s ${p} would have beaten ${k} teams, but ran into ${w}.`, `Hard-luck story: ${l} put up ${p}, good enough to beat ${k} teams this week, and still lost to ${w}.`, `${l} deserved better: ${p} beats ${k} teams most weeks, just not ${w} this week.`]),
+  wonUgly: (w, p, r) => say('ugly', [`${w} won ugly, with ${p}, only the ${r}-best score of the week. A win's a win.`, `Style points don't count: ${w} won with ${p}, just the ${r}-best score of the week.`, `${w} grinds one out with ${p}, the ${r}-best score on the board. They all count the same.`]),
+  loserBest: (l, p) => ' ' + say('lBest', [`${l} put up a season-high ${p} and still lost.`, `That's a season best for ${l}, too, in a losing effort.`, `${l}'s ${p} was a season high. Wrong week for it.`]),
+  // --- standings paragraph
+  standLead: (m, rec, gap, s, srec, isNew) => (isNew ? say('stNewLd', [`${m} takes over 1st at ${rec}`, `${m} moves to the top at ${rec}`, `${m} climbs into 1st at ${rec}`]) : say('stLd', [`${m} holds 1st at ${rec}`, `${m} stays on top at ${rec}`, `${m} keeps the top spot at ${rec}`, `${m} remains the team to beat at ${rec}`]))
+    + (gap ? ', ' + gap + ' clear of ' + s + ' (' + srec + ').' : '.'),
+  standTie: (m, rec, others, isNew, many) => { const are = many ? 'are' : 'is'; return say(isNew ? 'stTieN' : 'stTie', isNew
+    ? [`${m} takes over 1st, but only on points for: ${others} ${are} also ${rec}.`, `${m} moves into 1st on the points-for tiebreaker, level at ${rec} with ${others}.`]
+    : [`${m} holds 1st on points for, but ${others} ${are} right there at ${rec} too.`, `${m} keeps the top spot only on the tiebreaker, with ${others} also ${rec}.`, `It's ${m} in 1st by points for. ${others} ${are} level at ${rec}.`]); },
+  chasers: (list, rec) => ' ' + say('chase', [`${list} sit a game back at ${rec}.`, `One game back: ${list}, at ${rec}.`, `${list} lurk a game off the pace at ${rec}.`]),
+  climber: (m, d, o) => ' ' + say('climb', [`Biggest mover: ${m}, up ${d} spots to ${o}.`, `${m} jumps ${d} spots to ${o}.`, `${m} is climbing, up ${d} to ${o}.`]),
+  faller: (m, d, o) => ' ' + say('fall', [`${m} slides ${d} spots to ${o}.`, `Going the other way, ${m} drops ${d} to ${o}.`, `${m} tumbles ${d} spots to ${o}.`]),
+  basement: (m, rec, isNew) => ' ' + (isNew ? say('baseN', [`${m} drops into the basement at ${rec}.`, `${m} falls to last at ${rec}.`, `${m} slides into 12th at ${rec}.`]) : say('base', [`${m} is still in the basement at ${rec}.`, `${m} props up the table at ${rec}.`, `${m} remains in last at ${rec}.`])),
+  pfLuck: (m, pf, o) => ' ' + say('pfL', [`Keep an eye on ${m}: the league's most points for (${pf}) but only ${o} in the standings, so the luck should turn.`, `${m} leads the league in points for (${pf}) and sits ${o}. The record doesn't tell the whole story.`, `Nobody has scored more than ${m} (${pf}), yet ${m} is ${o}. That won't last.`]),
+  // --- look-ahead and sign-off
+  undercard: (a, b, tag, h2h) => ' ' + say('under', [`Also on the card: ${a} vs. ${b}${tag}.${h2h}`, `Don't sleep on ${a} vs. ${b}${tag}.${h2h}`, `Keep an eye on ${a} against ${b}${tag}.${h2h}`]),
+  streakLine: (m, n, kind, o) => ' ' + (kind === 'W' ? say('slW', [`${m} puts a ${n}-game win streak on the line against ${o}.`, `Can ${o} cool off ${m}? The streak is at ${n}.`]) : say('slL', [`${m} tries to stop a ${n}-game skid against ${o}.`, `${m} needs a win badly, ${n} straight losses heading into ${o}.`])),
+  signoff: () => ' ' + say('signoff', ["That's the week. Set those lineups, and we'll see you at puck drop.", "That's all from the desk. Check your goalie starts.", "We'll do it all again next week. Good luck out there.", 'Back to you in the studio.', "That's a wrap. Enjoy the games.", "That'll do it for this week. Don't forget your lineups.", 'See you next week, same time, same place.']),
   // --- the wire and trades
+  tradeLead: (a, ag, b, bg, monday) => say('trLead', [`${monday ? 'Monday-morning blockbuster: ' : 'Trade alert! '}${a} lands ${ag} from ${b}, and ${b} gets ${bg} in return.`, `${monday ? 'Before the puck dropped on Monday, the phones lit up: ' : 'The phones were ringing: '}${a} picks up ${ag}, sending ${bg} to ${b}.`, `${monday ? 'Late breaking, Monday morning: ' : 'Deal done: '}${b} sends ${ag} to ${a} for ${bg}.`]),
+  tradeTrail: (p, steps) => ` ${p} has had quite a week: ${steps}.`,
+  flashback: (w, l, wp, lp, y) => say('flash', [`Flashback: the last time these two met in the playoffs, ${w} sent ${l} home, ${wp} to ${lp} in ${y}.`, `${l} hasn't forgotten the ${y} playoffs, when ${w} won their meeting ${wp} to ${lp}.`, `Remember ${y}? ${w} beat ${l} ${wp} to ${lp} in the playoffs.`]),
+  goalieShop: list => ' ' + say('gShop', [`Goalie shopping was the theme: ${list}.`, `A run on goalies, too: ${list}.`, `The crease was in demand: ${list}.`]),
+  busiest: (m, n, adds) => ' ' + say('busy', [`${m} was the busiest manager, with ${n} moves, adding ${adds}.`, `${m} worked the phones hardest: ${n} moves, adding ${adds}.`, `Nobody was busier than ${m}: ${n} moves in all, bringing in ${adds}.`]),
+  // --- the wire and trades (short forms)
   wire: (n, busiest, bn) => say('wire', [`${n} moves on the wire this week${bn > 2 ? ', with ' + busiest + ' the busiest (' + bn + ')' : ''}.`, `Free agency saw ${n} moves${bn > 2 ? ', ' + bn + ' of them from ' + busiest : ''}.`, `A ${n}-move week on the waiver wire${bn > 2 ? ', led by ' + busiest + ' with ' + bn : ''}.`]),
   wireQuiet: () => say('wireQ', ['A quiet week on the wire.', 'Nobody touched the waiver wire this week.']),
   bestPickup: (m, p, nhl, pts) => ' ' + say('pick', [`Pick of the week: ${m} grabbed ${p}${nhl ? ' (' + nhl + ')' : ''}, who put up ${pts} for ${m} over the next four weeks.`, `Turned out to be a steal: ${p} gave ${m} ${pts} points over the next month.`, `${m} added ${p} and got ${pts} points out of it over the next four weeks.`]),

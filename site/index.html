@@ -212,9 +212,10 @@ ul.plain.moves { gap: 0; }
 .jaxis.fut { opacity: .45; }
 .jcut { stroke: var(--red); stroke-width: 1.5; stroke-dasharray: 5 4; opacity: .8; }
 .jline .jpath { fill: none; stroke: var(--muted); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; opacity: .32; }
+.jline .jpath { pointer-events: none; } /* clicks fall through to the wide .jhit path under it */
 .jline .jfin { stroke-dasharray: 4 4; }
 .jline .jdot { fill: var(--muted); opacity: .32; stroke: var(--board); stroke-width: 2; cursor: pointer; }
-.jline .jhit { fill: none; stroke: transparent; stroke-width: 14; cursor: pointer; }
+.jline .jhit { fill: none; stroke: transparent; stroke-width: 14; cursor: pointer; pointer-events: stroke; }
 .jline.hv .jpath { stroke: var(--blue); opacity: 1; stroke-width: 2.5; }
 .jline.hv .jdot { fill: var(--blue); opacity: 1; }
 .jline.on .jpath { stroke: var(--red); opacity: 1; stroke-width: 3; }
@@ -576,7 +577,9 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const moves = w.moves || [], trades = w.trades || [];
     // A trade shows from the week it happened onward. Past seasons store each player's points by week (byWeek),
     // so an earlier week only counts points through that week; the current season stores a running total (pts).
-    const tt = (s.tradeTracker && s.tradeTracker.trades || []).filter(t => !w.end || t.date <= w.end);
+    // A week runs until the next week's first puck drop, so a Monday-morning trade listed in this week counts here too.
+    const listed = new Set(s.weeks.filter(x => x.week <= w.week).flatMap(x => (x.trades || []).map(t => t.date)));
+    const tt = (s.tradeTracker && s.tradeTracker.trades || []).filter(t => !w.end || t.date <= w.end || listed.has(t.date));
     const ptsOf = p => p.byWeek ? Object.entries(p.byWeek).filter(([k]) => w.week === 100 || +k <= w.week).reduce((a, [, v]) => a + v, 0) : p.pts;
     const gpOf = p => p.gpByWeek ? Object.entries(p.gpByWeek).filter(([k]) => w.week === 100 || +k <= w.week).reduce((a, [, v]) => a + v, 0) : p.gp;
     const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
@@ -1406,16 +1409,16 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         labels[m].setAttribute("class", "jlab" + (on ? " on" : hv ? " hv" : ""));
         labels[m].setAttribute("aria-pressed", on ? "true" : "false");
       }
-      const top = groups[hover && hover !== jSel ? hover : jSel];
-      top.parentNode.append(top);
-      if (hover && hover !== jSel) groups[jSel].parentNode.append(groups[jSel]);
+      // Only the followed line is raised. Raising the hovered line moved it under the pointer mid-click, which
+      // swallowed clicks on the lines; hover is shown by color alone.
+      if (!hover && groups[jSel].nextSibling) groups[jSel].parentNode.append(groups[jSel]);
     };
     const pick = m => { jSel = m; paint(null); };
     const showTip = (e, m, c) => {
       const r = c.by[m], box = wrap.getBoundingClientRect();
-      tip.replaceChildren(h("span", { class: "mgr" }, m), h("span", { class: "muted" }, " · " + c.title),
+      tip.replaceChildren(...[h("span", { class: "mgr" }, m), h("span", { class: "muted" }, " · " + c.title),
         h("div", { class: "num" }, (c.final ? "Finished " : "") + ordn(r.rank) + (c.final ? "" : " · " + r.w + "-" + r.l + "-" + (r.t || 0))),
-        !c.final && hsWeeks.has(m + "|" + c.label) ? h("div", { class: "hs-tag" }, "★ High score of the week") : null);
+        !c.final && hsWeeks.has(m + "|" + c.label) ? h("div", { class: "hs-tag" }, "★ High score of the week") : null].filter(Boolean));
       tip.hidden = false;
       const x = e.clientX - box.left, y = e.clientY - box.top;
       tip.style.left = Math.min(Math.max(x + 12, 0), box.width - 170) + "px";
