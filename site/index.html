@@ -42,7 +42,23 @@ body { background: var(--ice); color: var(--ink); font-family: var(--body); font
 .wrap { max-width: 1200px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 
 /* Header */
-header { background: var(--board); border-bottom: 1px solid var(--line); }
+header { background: var(--board); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 30; }
+html { scroll-padding-top: 170px; }
+/* once you scroll, the header shrinks to the title line, tabs and pickers */
+header.stuck .wrap { padding-block: 10px 10px; gap: 8px; }
+header.stuck .eyebrow, header.stuck .rink { display: none; }
+header.stuck h1 { font-size: 20px; }
+header.stuck .weekline .wk { font-size: 18px; }
+header.stuck .tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+header.stuck .tabs button { white-space: nowrap; }
+header.stuck .export-btn { display: none; }
+@media (max-width: 640px) { header.stuck h1 { display: none; } }
+.wk-nav { display: flex; align-items: center; gap: 6px; flex: 1 1 320px; min-width: 0; max-width: 100%; }
+.wk-nav .weeks { min-width: 0; flex: 0 1 auto; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; padding-bottom: 2px; }
+.wk-nav .weeks button { flex: none; }
+.wk-arrow { font: 700 15px var(--mono); width: 34px; height: 32px; flex: none; border-radius: 6px; border: 1px solid var(--line); background: var(--chip); color: var(--ink); cursor: pointer; }
+.wk-arrow:hover:not(:disabled) { border-color: var(--blue); }
+.wk-arrow:disabled { opacity: .35; cursor: default; }
 header .wrap { padding-block: 28px 20px; display: grid; gap: 14px; }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 h1 { font-family: var(--display); font-weight: 900; font-size: clamp(34px, 7vw, 60px); line-height: .95; margin: 0; letter-spacing: .01em; text-transform: uppercase; text-wrap: balance; }
@@ -54,7 +70,8 @@ h1 { font-family: var(--display); font-weight: 900; font-size: clamp(34px, 7vw, 
 .rink i:nth-child(3) { background: var(--red); }
 
 /* Picker */
-.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; min-width: 0; }
+header .wrap > * { min-width: 0; }
 .picker label { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 select { font: 500 14px var(--body); color: var(--ink); background: var(--chip); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; }
 .weeks { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -104,7 +121,7 @@ tr.playoff-cut td { border-bottom: 2px solid var(--red); }
 .logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: none; background: var(--chip); border: 1px solid var(--line); }
 td.rk, td.mvcell, td.r { white-space: nowrap; }
 td { height: 48px; }
-.standings table { table-layout: fixed; min-width: 520px; }
+.standings table { table-layout: fixed; min-width: 560px; }
 .whotext { min-width: 0; }
 .whotext .mgr { display: block; white-space: nowrap; line-height: 1.25; }
 .team { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -433,7 +450,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       <label for="season">Season</label>
       <select id="season"></select>
       <label>Week</label>
-      <div class="weeks" id="weeks" role="group" aria-label="Week"></div>
+      <div class="wk-nav"><button type="button" class="wk-arrow" id="wk-prev" aria-label="Previous week" title="Previous week (←)">‹</button><div class="weeks" id="weeks" role="group" aria-label="Week"></div><button type="button" class="wk-arrow" id="wk-next" aria-label="Next week" title="Next week (→)">›</button></div>
       <button type="button" class="export-btn" id="export">Export image</button>
     </div>
   </div>
@@ -491,6 +508,11 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     setTab("week");
     $("season").value = s.id;
     $("weeks").replaceChildren(...weeks.map(x => h("button", { type: "button", "aria-pressed": x === w ? "true" : "false", onclick: () => pick(s.id, x.week, true) }, x.week === 100 ? "Final" : x.week)));
+    const i = weeks.indexOf(w), si = DATA.seasons.indexOf(s);
+    $("wk-prev").disabled = i === 0 && si === 0;
+    $("wk-next").disabled = i === weeks.length - 1 && si === DATA.seasons.length - 1;
+    const on = $("weeks").querySelector('[aria-pressed="true"]');
+    if (on) $("weeks").scrollLeft = on.offsetLeft - $("weeks").offsetLeft - ($("weeks").clientWidth - on.offsetWidth) / 2;
     if (push) { try { history.replaceState(null, "", "#" + hashFor(s, w)); } catch (e) { location.hash = hashFor(s, w); } }
     render(s, w);
   }
@@ -626,7 +648,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const hsCount = Object.fromEntries((w.highScoreTally || []).flatMap(t => t.entries.map(e => [e.mgr, e.weeks.length])));
     if (w.standings && w.standings.length) {
       right.push(sec("Standings", panel(h("div", { class: "tablewrap standings" }, h("table", null,
-        h("colgroup", null, h("col", { style: "width:2.2em" }), h("col", { style: "width:3em" }), h("col"), h("col", { style: "width:4.6em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:4.4em" }), h("col", { style: "width:3.2em" })),
+        h("colgroup", null, h("col", { style: "width:1.8em" }), h("col", { style: "width:2.4em" }), h("col"), h("col", { style: "width:4.4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), cat ? null : h("col", { style: "width:2.6em" }), h("col", { style: "width:3em" })),
         h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r", title: cat ? "Categories won" : "Points for" }, cat ? "CW" : "PF"), h("th", { class: "r", title: cat ? "Categories lost" : "Points against" }, cat ? "CL" : "PA"), h("th", { class: "r" }, "Net"), cat ? null : h("th", { class: "r", title: "Weekly high scores so far" }, "HS"), h("th", { class: "r" }, "Strk"))),
         h("tbody", null, w.standings.flatMap(r => {
           const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: cat ? "8" : "9" }, mgrWeeks(r.mgr)));
@@ -1691,6 +1713,26 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
   function boot(data) {
     $("export").addEventListener("click", exportWeek);
+    // step one week; past the ends of a season, carry on into the season before or after
+    const step = d => {
+      if (!cur.s) return;
+      const weeks = [...cur.s.weeks].sort((a, b) => a.week - b.week), i = weeks.indexOf(cur.w) + d;
+      if (weeks[i]) return pick(cur.s.id, weeks[i].week, true);
+      const s2 = DATA.seasons[DATA.seasons.indexOf(cur.s) + d];
+      if (!s2) return;
+      const w2 = [...s2.weeks].sort((a, b) => a.week - b.week);
+      pick(s2.id, (d < 0 ? w2[w2.length - 1] : w2[0]).week, true);
+    };
+    $("wk-prev").addEventListener("click", () => step(-1));
+    $("wk-next").addEventListener("click", () => step(1));
+    document.addEventListener("keydown", e => {
+      if ($("picker").hidden || e.altKey || e.ctrlKey || e.metaKey || /^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+      if (e.key === "ArrowLeft") step(-1); else if (e.key === "ArrowRight") step(1);
+    });
+    // shrink the sticky header once the page is scrolled (the gap between the two limits stops it flickering)
+    const hdr = document.querySelector("header");
+    const onScroll = () => { const y = window.scrollY; if (y > 140) hdr.classList.add("stuck"); else if (y < 30) hdr.classList.remove("stuck"); };
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
     DATA = data;
     $("league").textContent = data.league || "Fantasy hockey";
     const lastId = data.seasons[data.seasons.length - 1].id;
