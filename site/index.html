@@ -126,12 +126,12 @@ tr.playoff-cut td { border-bottom: 2px solid var(--red); }
 .logo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex: none; background: var(--chip); border: 1px solid var(--line); }
 td.rk, td.mvcell, td.r { white-space: nowrap; }
 td { height: 48px; }
-.standings table { table-layout: fixed; min-width: 560px; }
+.standings table { table-layout: fixed; min-width: 470px; }
 .whotext { min-width: 0; }
 .whotext .mgr { display: block; white-space: nowrap; line-height: 1.25; }
 .team { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-items: stretch; } }
+@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: stretch; } }
 .cols.top > div > section { grid-template-rows: auto 1fr; }
 .weekpanel { display: grid; gap: 18px; align-content: start; }
 .upnext { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
@@ -204,7 +204,13 @@ ul.plain.moves { gap: 0; }
 .tt-total { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1; }
 .tt-p { display: grid; gap: 2px; }
 .tt-row { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-.tt-stats { font-size: 11.5px; }
+table.tt-stat { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.tt-stat th, table.tt-stat td { padding: 2px 4px; height: auto; text-align: right; border: 0; white-space: nowrap; }
+table.tt-stat thead th { font: 600 10px var(--mono); letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+table.tt-stat tbody th { text-align: left; font: 600 10px var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding-left: 0; }
+table.tt-stat td.b { font-weight: 700; color: var(--ink); }
+table.tt-stat tr.wk td { color: var(--muted); border-top: 1px dashed var(--line); }
+table.tt-stat tr.wk th { border-top: 1px dashed var(--line); }
 .tt-wk { display: block; margin-top: 4px; font: 600 11px var(--mono); color: var(--muted); text-align: right; }
 /* Movement 1/3, trade tracker 2/3 */
 @media (min-width: 860px) { .cols.mv { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }
@@ -274,7 +280,7 @@ ul.plain.moves { gap: 0; }
 .export-sheet .export-body { padding: 24px 32px 0; display: grid; gap: 28px; }
 .export-sheet .export-foot { padding: 18px 32px 0; font: 500 12px var(--mono); color: var(--muted); display: flex; justify-content: space-between; }
 .export-sheet .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-.export-sheet .cols.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); align-items: stretch; }
+.export-sheet .cols.top { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: stretch; }
 .export-sheet .tablewrap { overflow: visible; }
 .export-sheet .journey { min-width: 0; }
 .export-sheet .no-export, .export-sheet .jtip, .export-sheet footer { display: none !important; }
@@ -592,9 +598,10 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const upToWeek = o => Object.entries(o || {}).filter(([k]) => w.week === 100 || +k <= w.week);
     const statsOf = p => { const t = {}; for (const [, st] of upToWeek(p.statsByWeek)) for (const [k, v] of Object.entries(st)) t[k] = (t[k] || 0) + v; return Object.keys(t).length ? t : null; };
     const signed = v => (+v > 0 ? "+" : "") + v;
-    const statLine = t => "W" in t
-      ? [t.W + " W", t.OL + " OTL", t.GA + " GA", (t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–") + " SV%", t.SHO + " SO"].join(" · ")
-      : [t.G + " G", t.A + " A", signed(t["+/-"]) + " +/-", t.SOG + " SOG", (t.PPG + t.PPA) + " PPP", t.Hit + " HIT", t.Blk + " BLK"].join(" · ");
+    // Stat columns for the tracker's per-player table: [header, value from a stat object]
+    const statCols = goalie => goalie
+      ? [["W", t => t.W], ["OTL", t => t.OL], ["GA", t => t.GA], ["SV%", t => t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–"], ["SO", t => t.SHO]]
+      : [["G", t => t.G], ["A", t => t.A], ["+/-", t => signed(t["+/-"])], ["SOG", t => t.SOG], ["PPP", t => t.PPG + t.PPA], ["HIT", t => t.Hit], ["BLK", t => t.Blk]];
     const wkPts = p => p.byWeek && w.week !== 100 && p.byWeek[w.week] != null ? p.byWeek[w.week] : null;
     const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
     const tracker = t => {
@@ -605,10 +612,16 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
           h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt(totals[i]),
             sd.gets.some(p => wkPts(p) != null) ? h("span", { class: "tt-wk" }, signed(fmt(sd.gets.reduce((a, p) => a + (wkPts(p) || 0), 0))) + " this week") : null)),
-          sd.gets.map(p => { const st = statsOf(p), wp = wkPts(p); return h("div", { class: "tt-p" },
-            h("div", { class: "tt-row" }, h("span", null, ...player(p)),
-              h("span", { class: "num muted small" }, (ptsOf(p) == null ? "–" : fmt(ptsOf(p))) + " pts" + (gpOf(p) != null ? " · " + gpOf(p) + " GP" : "") + (wp != null ? " · " + signed(fmt(wp)) + " this wk" : "") + (p.left && (!w.end || p.left <= w.end) ? " · until " + day(p.left) : ""))),
-            st ? h("div", { class: "tt-stats num small muted" }, statLine(st)) : null); }),
+          // Per player: a small table with the running total on top and this week's share under it, so the change is explained
+          sd.gets.map(p => { const st = statsOf(p), wp = wkPts(p), wst = p.statsByWeek && w.week !== 100 && p.statsByWeek[w.week], wgp = p.gpByWeek && p.gpByWeek[w.week];
+            const cols = st ? statCols("W" in st) : [], hasGP = gpOf(p) != null;
+            return h("div", { class: "tt-p" },
+              h("div", { class: "tt-row" }, h("span", null, ...player(p)), p.left && (!w.end || p.left <= w.end) ? h("span", { class: "muted small" }, "until " + day(p.left)) : null),
+              h("table", { class: "tt-stat num" },
+                h("thead", null, h("tr", null, h("th", null, ""), h("th", null, "PTS"), hasGP ? h("th", null, "GP") : null, cols.map(c => h("th", null, c[0])))),
+                h("tbody", null,
+                  h("tr", null, h("th", { scope: "row" }, "Total"), h("td", { class: "b" }, ptsOf(p) == null ? "–" : fmt(ptsOf(p))), hasGP ? h("td", null, gpOf(p)) : null, cols.map(c => h("td", null, c[1](st)))),
+                  wp != null ? h("tr", { class: "wk" }, h("th", { scope: "row" }, "This wk"), h("td", { class: "b" }, signed(fmt(wp))), hasGP ? h("td", null, wgp != null ? wgp : "–") : null, cols.map(c => h("td", null, wst ? c[1](wst) : "–"))) : null))); }),
           i === lead ? h("span", { class: "tag hs" }, "Ahead by " + fmt(best - Math.min(...totals))) : null))));
     };
     const trackerSec = sec("Trade tracker", panel(tt.length
