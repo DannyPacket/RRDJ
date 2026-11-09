@@ -250,7 +250,7 @@ const V = {
   standTie: (m, rec, others, isNew, many) => { const are = many ? 'are' : 'is'; return say(isNew ? 'stTieN' : 'stTie', isNew
     ? [`${m} takes over 1st, but only on points for: ${others} ${are} also ${rec}.`, `${m} moves into 1st on the points-for tiebreaker, level at ${rec} with ${others}.`]
     : [`${m} holds 1st on points for, but ${others} ${are} right there at ${rec} too.`, `${m} keeps the top spot only on the tiebreaker, with ${others} also ${rec}.`, `It's ${m} in 1st by points for. ${others} ${are} level at ${rec}.`]); },
-  chasers: (list, rec) => ' ' + say('chase', [`${list} sit a game back at ${rec}.`, `One game back: ${list}, at ${rec}.`, `${list} lurk a game off the pace at ${rec}.`]),
+  chasers: (list, rec) => { const one = !/ and |,/.test(list); return ' ' + say('chase', [`${list} ${one ? 'sits' : 'sit'} a game back at ${rec}.`, `One game back: ${list}, at ${rec}.`, `${list} ${one ? 'lurks' : 'lurk'} a game off the pace at ${rec}.`]); },
   climber: (m, d, o) => ' ' + say('climb', [`Biggest mover: ${m}, up ${d} spots to ${o}.`, `${m} jumps ${d} spots to ${o}.`, `${m} is climbing, up ${d} to ${o}.`]),
   faller: (m, d, o) => ' ' + say('fall', [`${m} slides ${d} spots to ${o}.`, `Going the other way, ${m} drops ${d} to ${o}.`, `${m} tumbles ${d} spots to ${o}.`]),
   basement: (m, rec, isNew) => ' ' + (isNew ? say('baseN', [`${m} drops into the basement at ${rec}.`, `${m} falls to last at ${rec}.`, `${m} slides into 12th at ${rec}.`]) : say('base', [`${m} is still in the basement at ${rec}.`, `${m} props up the table at ${rec}.`, `${m} remains in last at ${rec}.`])),

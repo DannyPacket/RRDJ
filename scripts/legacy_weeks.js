@@ -340,7 +340,14 @@ const NEWS = {
     ['2026-10-31', 'Tristan Jarry blanked the Islanders for his second straight shutout, the same day Danny plucked him off the wire.'],
     ['2026-11-01', 'Pyotr Kochetkov shut out the Jets 7-0 for his 10th straight win, a Hurricanes record. Winnipeg, life after Hellebuyck, is winless in nine.'],
     ['2026-11-01', 'Connor McDavid stretched his season-opening point streak to 15 games and became the fastest player ever to 30 assists.'],
-    ['2026-11-01', 'Bad news for Vin: Devin Cooley, his new goalie as of Tuesday, is out week to week for Calgary.']
+    ['2026-11-01', 'Bad news for Vin: Devin Cooley, his new goalie as of Tuesday, is out week to week for Calgary.'],
+    ['2026-11-02', "Nikita Kucherov finally spoke up: he won't sign an extension in Tampa and wants out. The Lightning still say they aren't trading him."],
+    ['2026-11-03', "Zac's Miro Heiskanen left Dallas's 6-5 win over Washington with an upper-body injury and was held out of Saturday's game."],
+    ['2026-11-03', "Will's Pyotr Kochetkov saw his season-opening win streak end at 10 in a 4-1 loss in Nashville."],
+    ['2026-11-07', "Danny's new pieces delivered: Zach Werenski tied Thursday's game for Columbus late, and Andrei Svechnikov scored twice in Carolina's 9-2 rout of Chicago. Meanwhile Sidney Crosby moved into sixth on the NHL's all-time points list."],
+    ['2026-11-07', 'Connor McDavid ran his season-opening point streak to 18 games.'],
+    ['2026-11-08', "Tom's Cutter Gauthier is on another planet: three hat tricks in five games, and the first player in NHL history with three hat tricks in the first ten days of a month."],
+    ['2026-11-08', "Tim's Connor Hellebuyck blanked Toronto 4-0 and is 5-0 as a Devil, but New Jersey won't start him in his return to Winnipeg on Tuesday."]
   ]
 };
 // Extra color for a specific trade, by season and the trade's date (the user's own jokes and context go here)
