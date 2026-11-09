@@ -1436,7 +1436,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 
   // Standings journey: a bump chart of every manager's rank, week by week (plus the final place on the Final page).
   // Emphasis form: every line is gray context, one followed manager is drawn in red. Click a line or name to follow.
-  let jSel = null;
+  let jSel = null, jSelFor = null;
   const SVG = "http://www.w3.org/2000/svg";
   function sv(tag, attrs, ...kids) {
     const el = document.createElementNS(SVG, tag);
@@ -1458,7 +1458,13 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     cols.push({ label: "Final", title: "Final", final: true, by: w.week === 100 ? Object.fromEntries(w.standings.map(r => [r.mgr, r])) : null });
     if (!cols.some(c => c.by)) return null;
     const mgrs = w.standings.slice().sort((a, b) => a.rank - b.rank).map(r => r.mgr), n = mgrs.length;
-    if (!mgrs.includes(jSel)) jSel = mgrs[0];
+    // Each newly opened week starts on that week's high scorer (the Final page: the champion, 1st after the playoffs).
+    // A clicked line stays followed until another week is opened.
+    const jKey = s.id + "|" + w.week;
+    if (jSelFor !== jKey || !mgrs.includes(jSel)) {
+      jSelFor = jKey;
+      jSel = w.week !== 100 && w.highScore && mgrs.includes(w.highScore.mgr) ? w.highScore.mgr : mgrs[0];
+    }
     // weekly high scores through this week ("mgr|week"), from the high-score tally (it keeps ties)
     const hsWeeks = new Set((w.highScoreTally || []).flatMap(t => t.entries.flatMap(e => e.weeks.map(k => e.mgr + "|" + k))));
     const W = 900, padL = 30, padR = 88, padT = 14, padB = 34, rowH = 28, H = padT + (n - 1) * rowH + padB;
@@ -1523,7 +1529,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     wrap.append(svg, tip);
     paint(null);
     return sec("Standings journey", panel(h("div", { class: "tablewrap" }, wrap),
-      h("div", { class: "muted small", style: "margin-top:8px" }, "Rank after each week" + (w.week === 100 ? ", then the final place after the playoffs (dashed)" : "") + ". Dashed red line = playoff cut (top 8). Gold dot = that week's high score. Click a line or a name to follow a manager.")));
+      h("div", { class: "muted small", style: "margin-top:8px" }, "Rank after each week" + (w.week === 100 ? ", then the final place after the playoffs (dashed)" : "") + ". Dashed red line = playoff cut (top 8). Gold dot = that week's high score. " + (w.week === 100 ? "The champion is highlighted" : w.highScore ? "The week's high scorer is highlighted" : "The leader is highlighted") + "; click a line or a name to follow another manager.")));
   }
 
   // Brackets for the Final page. Each place game (a game neither team plays past) is the root of a tree; a team's
