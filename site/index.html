@@ -127,6 +127,12 @@ tr.playoff-cut td { border-bottom: 2px solid var(--red); }
 td.rk, td.mvcell, td.r { white-space: nowrap; }
 td { height: 48px; }
 .standings table { table-layout: fixed; min-width: 470px; }
+/* Standings: logo + manager on one line, the team name underneath across the full cell so it fits */
+.standings .who { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 8px; row-gap: 1px; align-items: center; }
+.standings .whotext { display: contents; }
+.standings .whotext .mgr { font-size: 15px; }
+.standings .whotext .team { grid-column: 1 / -1; font-size: 11px; }
+.standings .who .logo, .standings .who .avatar { width: 24px; height: 24px; }
 .standings th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
 .standings th.sortable:hover { color: var(--ink); }
 .standings th[aria-sort]::after { content: " ▲"; font-size: 8px; color: var(--red); }
