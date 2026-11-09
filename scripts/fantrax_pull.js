@@ -277,5 +277,43 @@ window.fxTradeTracker = function (out) {
   };
 };
 
+// The trade tracker week by week (the user's request, 2026-11-09): each traded player's fantasy points, games and
+// stat line in every week since the trade, so each week's page shows the totals as of that week and that week's
+// change. Same window as fxTradeTracker: from the day the trade went through until the receiving team let him go.
+const STAT_KEYS = { skater: ['G', 'A', '+/-', 'SOG', 'PPG', 'PPA', 'Hit', 'Blk'], goalie: ['W', 'OL', 'GA', 'SV', 'SHO'] };
+async function weekStats(m, start, end) {
+  const isG = m.pos && m.pos.split(',').includes('G');
+  const d = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', searchName: m.player, positionOrGroup: isG ? 'POS_201' : 'HOCKEY_SKATING', startDate: start, endDate: end, timeframeTypeCode: 'BY_DATE', pageNumber: '1', maxResultsPerPage: '50' });
+  const hc = d.tableHeader.cells, row = d.statsTable.find(x => x.scorer.scorerId === m.scorerId);
+  if (!row) return null;
+  const col = name => hc.findIndex(c => c.shortName === name && /#/.test(c.key || ''));
+  const num = i => (i < 0 ? 0 : parseFloat(String(row.cells[i].content).replace(/,/g, '')) || 0);
+  const stats = {};
+  for (const k of STAT_KEYS[isG ? 'goalie' : 'skater']) stats[k] = num(col(k));
+  return { pts: r1(num(hc.findIndex(c => c.key === 'fpts'))), gp: num(col('GP')), stats };
+}
+window.fxTradeTrackerWeekly = async function (out) {
+  const sched = await fx('getStandings', { view: 'SCHEDULE' });
+  const weeks = sched.tableList.slice(0, out.period).map((t, i) => Object.assign({ week: i + 1 }, parseCaptionDates(t.subCaption)));
+  const base = fxTradeTracker(out);
+  base.byWeek = true;
+  for (const [ti, t] of out.tradeTracker.entries()) {
+    for (const m of t.moves) {
+      if (!m.scorerId || m.executed === false) continue;
+      const p = base.trades[ti].sides.find(sd => sd.mgr === m.to).gets.find(g => g.name === m.player);
+      const until = m.left && m.left < out.dates.end ? m.left : out.dates.end;
+      p.byWeek = {}; p.gpByWeek = {}; p.statsByWeek = {};
+      for (const w of weeks) {
+        const s = t.countedFrom > w.start ? t.countedFrom : w.start, e = until < w.end ? until : w.end;
+        if (s > e) continue;
+        const r = await weekStats(m, s, e);
+        if (!r) continue;
+        p.byWeek[w.week] = r.pts; p.gpByWeek[w.week] = r.gp; p.statsByWeek[w.week] = r.stats;
+      }
+    }
+  }
+  return base;
+};
+
 window.__out = await window.fxPull(__PERIOD__, '__LOCK__', '__CUTOFF__');
 window.__out;

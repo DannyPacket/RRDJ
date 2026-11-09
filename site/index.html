@@ -202,7 +202,13 @@ ul.plain.moves { gap: 0; }
 .tt-side .tag { justify-self: start; margin-left: 0; }
 .tt-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .tt-total { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1; }
-.tt-p { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.tt-p { display: grid; gap: 2px; }
+.tt-row { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.tt-stats { font-size: 11.5px; }
+.tt-wk { display: block; margin-top: 4px; font: 600 11px var(--mono); color: var(--muted); text-align: right; }
+/* Movement 1/3, trade tracker 2/3 */
+@media (min-width: 860px) { .cols.mv { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); } }
+.export-sheet .cols.mv { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); }
 /* Standings journey (bump chart) */
 .journey { position: relative; min-width: 640px; }
 .jsvg { display: block; width: 100%; height: auto; overflow: visible; }
@@ -582,6 +588,14 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const tt = (s.tradeTracker && s.tradeTracker.trades || []).filter(t => !w.end || t.date <= w.end || listed.has(t.date));
     const ptsOf = p => p.byWeek ? Object.entries(p.byWeek).filter(([k]) => w.week === 100 || +k <= w.week).reduce((a, [, v]) => a + v, 0) : p.pts;
     const gpOf = p => p.gpByWeek ? Object.entries(p.gpByWeek).filter(([k]) => w.week === 100 || +k <= w.week).reduce((a, [, v]) => a + v, 0) : p.gp;
+    // Stat lines and this week's change, for trackers stored week by week (statsByWeek: the current season)
+    const upToWeek = o => Object.entries(o || {}).filter(([k]) => w.week === 100 || +k <= w.week);
+    const statsOf = p => { const t = {}; for (const [, st] of upToWeek(p.statsByWeek)) for (const [k, v] of Object.entries(st)) t[k] = (t[k] || 0) + v; return Object.keys(t).length ? t : null; };
+    const signed = v => (+v > 0 ? "+" : "") + v;
+    const statLine = t => "W" in t
+      ? [t.W + " W", t.OL + " OTL", t.GA + " GA", (t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–") + " SV%", t.SHO + " SO"].join(" · ")
+      : [t.G + " G", t.A + " A", signed(t["+/-"]) + " +/-", t.SOG + " SOG", (t.PPG + t.PPA) + " PPP", t.Hit + " HIT", t.Blk + " BLK"].join(" · ");
+    const wkPts = p => p.byWeek && w.week !== 100 && p.byWeek[w.week] != null ? p.byWeek[w.week] : null;
     const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
     const tracker = t => {
       const totals = t.sides.map(sd => sd.gets.reduce((a, p) => a + (ptsOf(p) || 0), 0));
@@ -589,9 +603,12 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       return h("div", { class: "tt" },
         h("div", { class: "muted small" }, "Traded " + day(t.date) + (t.moved ? " · joined new teams " + day(t.moved) : "") + " · fantasy points since the trade"),
         h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
-          h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt(totals[i]))),
-          sd.gets.map(p => h("div", { class: "tt-p" }, h("span", null, ...player(p)),
-            h("span", { class: "num muted small" }, (ptsOf(p) == null ? "–" : fmt(ptsOf(p))) + " pts" + (gpOf(p) != null ? " · " + gpOf(p) + " GP" : "") + (p.left && (!w.end || p.left <= w.end) ? " · until " + day(p.left) : "")))),
+          h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt(totals[i]),
+            sd.gets.some(p => wkPts(p) != null) ? h("span", { class: "tt-wk" }, signed(fmt(sd.gets.reduce((a, p) => a + (wkPts(p) || 0), 0))) + " this week") : null)),
+          sd.gets.map(p => { const st = statsOf(p), wp = wkPts(p); return h("div", { class: "tt-p" },
+            h("div", { class: "tt-row" }, h("span", null, ...player(p)),
+              h("span", { class: "num muted small" }, (ptsOf(p) == null ? "–" : fmt(ptsOf(p))) + " pts" + (gpOf(p) != null ? " · " + gpOf(p) + " GP" : "") + (wp != null ? " · " + signed(fmt(wp)) + " this wk" : "") + (p.left && (!w.end || p.left <= w.end) ? " · until " + day(p.left) : ""))),
+            st ? h("div", { class: "tt-stats num small muted" }, statLine(st)) : null); }),
           i === lead ? h("span", { class: "tag hs" }, "Ahead by " + fmt(best - Math.min(...totals))) : null))));
     };
     const trackerSec = sec("Trade tracker", panel(tt.length
@@ -718,7 +735,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       journey(s, w),
       w.week === 100 ? null : h("div", { class: "pair" }, pair),
       ...stars,
-      ...(fromSheet && !w.moves ? [] : [h("div", { class: "cols" }, h("div", null, movementSec), h("div", null, trackerSec))]),
+      ...(fromSheet && !w.moves ? [] : [h("div", { class: "cols mv" }, h("div", null, movementSec), h("div", null, trackerSec))]),
       h("footer", null, fromSheet ? "Rebuilt from the league sheet (Yahoo season). Write-ups are generated from the scores." + (cat ? " 2014-15 was a categories season: scores are categories won each week (CW/CL in the standings), there were no weekly high scores, and it's left out of the all-time stats." : "") : "Scores and stats from Fantrax. Fantrax can apply stat corrections after a week ends.")].filter(Boolean));
   }
 
