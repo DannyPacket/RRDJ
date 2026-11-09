@@ -315,5 +315,23 @@ window.fxTradeTrackerWeekly = async function (out) {
   return base;
 };
 
+// The week's stat line for each top/bottom player card (the user's request, 2026-11-09): GP plus the same stat keys
+// as the trade tracker, over the week's dates. Adds `stats` to every card in entry.players (high, low, faHigh).
+window.fxCardStats = async function (entry) {
+  for (const kind of ['high', 'low', 'faHigh']) for (const pos of ['F', 'D', 'G']) {
+    const c = entry.players[kind] && entry.players[kind][pos];
+    if (!c) continue;
+    const isG = pos === 'G';
+    const d = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', searchName: c.name, positionOrGroup: isG ? 'POS_201' : 'HOCKEY_SKATING', startDate: entry.start, endDate: entry.end, timeframeTypeCode: 'BY_DATE', pageNumber: '1', maxResultsPerPage: '50' });
+    const hc = d.tableHeader.cells, rows = d.statsTable.filter(x => x.scorer.name === c.name), row = rows.find(x => x.scorer.teamShortName === c.nhl) || rows[0];
+    if (!row) continue;
+    const col = name => hc.findIndex(x => x.shortName === name && /#/.test(x.key || ''));
+    const num = i => (i < 0 ? 0 : parseFloat(String(row.cells[i].content).replace(/,/g, '')) || 0);
+    c.stats = { GP: num(col('GP')) };
+    for (const k of STAT_KEYS[isG ? 'goalie' : 'skater']) c.stats[k] = num(col(k));
+  }
+  return entry;
+};
+
 window.__out = await window.fxPull(__PERIOD__, '__LOCK__', '__CUTOFF__');
 window.__out;

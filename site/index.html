@@ -127,11 +127,17 @@ tr.playoff-cut td { border-bottom: 2px solid var(--red); }
 td.rk, td.mvcell, td.r { white-space: nowrap; }
 td { height: 48px; }
 .standings table { table-layout: fixed; min-width: 470px; }
+.standings th.sortable { cursor: pointer; user-select: none; }
+.standings th.sortable:hover { color: var(--ink); }
+.standings th[aria-sort]::after { content: " ▲"; font-size: 8px; color: var(--red); }
+.standings th[aria-sort="descending"]::after { content: " ▼"; }
 .whotext { min-width: 0; }
 .whotext .mgr { display: block; white-space: nowrap; line-height: 1.25; }
 .team { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: stretch; } }
+@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch; } }
+/* too narrow for the standings table beside the write-up: stack them */
+@media (min-width: 860px) and (max-width: 1079px) { .cols.top { grid-template-columns: minmax(0, 1fr); } }
 .cols.top > div > section { grid-template-rows: auto 1fr; }
 .weekpanel { display: grid; gap: 18px; align-content: start; }
 .upnext { display: grid; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line); }
@@ -208,6 +214,9 @@ table.tt-stat { width: 100%; border-collapse: collapse; font-size: 11.5px; }
 table.tt-stat th, table.tt-stat td { padding: 2px 4px; height: auto; text-align: right; border: 0; white-space: nowrap; }
 table.tt-stat thead th { font: 600 10px var(--mono); letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
 table.tt-stat tbody th { text-align: left; font: 600 10px var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding-left: 0; }
+table.card-stat { width: calc(100% + 78px); margin-top: 8px; border-top: 1px solid var(--line); }
+table.card-stat thead th { padding-top: 6px; }
+table.card-stat td { color: var(--ink); }
 table.tt-stat td.b { font-weight: 700; color: var(--ink); }
 table.tt-stat tr.wk td { color: var(--muted); border-top: 1px dashed var(--line); }
 table.tt-stat tr.wk th { border-top: 1px dashed var(--line); }
@@ -280,7 +289,7 @@ table.tt-stat tr.wk th { border-top: 1px dashed var(--line); }
 .export-sheet .export-body { padding: 24px 32px 0; display: grid; gap: 28px; }
 .export-sheet .export-foot { padding: 18px 32px 0; font: 500 12px var(--mono); color: var(--muted); display: flex; justify-content: space-between; }
 .export-sheet .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-.export-sheet .cols.top { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: stretch; }
+.export-sheet .cols.top { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch; }
 .export-sheet .tablewrap { overflow: visible; }
 .export-sheet .journey { min-width: 0; }
 .export-sheet .no-export, .export-sheet .jtip, .export-sheet footer { display: none !important; }
@@ -600,7 +609,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     const signed = v => (+v > 0 ? "+" : "") + v;
     // Stat columns for the tracker's per-player table: [header, value from a stat object]
     const statCols = goalie => goalie
-      ? [["W", t => t.W], ["OTL", t => t.OL], ["GA", t => t.GA], ["SV%", t => t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–"], ["SO", t => t.SHO]]
+      ? [["W", t => t.W], ["OTL", t => t.OL], ["GA", t => t.GA], ["SV", t => t.SV], ["SV%", t => t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–"], ["SO", t => t.SHO]]
       : [["G", t => t.G], ["A", t => t.A], ["+/-", t => signed(t["+/-"])], ["SOG", t => t.SOG], ["PPP", t => t.PPG + t.PPA], ["HIT", t => t.Hit], ["BLK", t => t.Blk]];
     const wkPts = p => p.byWeek && w.week !== 100 && p.byWeek[w.week] != null ? p.byWeek[w.week] : null;
     const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
@@ -683,10 +692,26 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
     // weekly high scores so far, per manager (from the high-score tally, which counts ties for both)
     const hsCount = Object.fromEntries((w.highScoreTally || []).flatMap(t => t.entries.map(e => [e.mgr, e.weeks.length])));
     if (w.standings && w.standings.length) {
+      // Sortable by any header: click once for the natural order (best first), again to flip it
+      const strkVal = r => { const m = (r.streak || "").match(/^([WLT])(\d+)/); return m ? (m[1] === "W" ? 1 : m[1] === "L" ? -1 : 0) * +m[2] : 0; };
+      const sortKeys = { rank: [r => r.rank, 1], mv: [r => r.prev ? r.prev - r.rank : 0, -1], mgr: [r => r.mgr.toLowerCase(), 1], wlt: [r => r.w + (r.t || 0) / 2 - r.l / 1000, -1],
+        pf: [r => r.pf, -1], pa: [r => r.pa == null ? -Infinity : r.pa, -1], net: [r => r.pa == null ? -Infinity : r.pf - r.pa, -1], hs: [r => hsCount[r.mgr] || 0, -1], strk: [r => strkVal(r), -1] };
+      let sortBy = "rank", sortDir = 1;
+      const sortStandings = (key, th) => {
+        if (sortBy === key) sortDir = -sortDir; else { sortBy = key; sortDir = 1; }
+        const [f, natural] = sortKeys[key], dir = natural * sortDir, tbody = th.closest("table").querySelector("tbody");
+        const pairs = Object.fromEntries([...tbody.querySelectorAll("tr.row")].map(tr => [tr.dataset.mgr, [tr, tr.nextElementSibling]]));
+        const order = w.standings.slice().sort((a, b) => { const x = f(a), y = f(b); return (x < y ? -1 : x > y ? 1 : 0) * dir || a.rank - b.rank; });
+        tbody.append(...order.flatMap(r => pairs[r.mgr]));
+        th.closest("tr").querySelectorAll("th").forEach(x => x.removeAttribute("aria-sort"));
+        th.setAttribute("aria-sort", dir > 0 ? "ascending" : "descending");
+      };
+      const sth = (key, label, attrs) => h("th", { class: "sortable" + (attrs && attrs.class ? " " + attrs.class : ""), title: (attrs && attrs.title ? attrs.title + " · " : "") + "Click to sort",
+        "aria-sort": key === "rank" ? "ascending" : null, onclick: e => sortStandings(key, e.currentTarget) }, label);
       right.push(sec("Standings", panel(h("div", { class: "tablewrap standings" }, h("table", null,
         h("colgroup", null, h("col", { style: "width:1.8em" }), h("col", { style: "width:2.4em" }), h("col"), h("col", { style: "width:4.4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), cat ? null : h("col", { style: "width:2.6em" }), h("col", { style: "width:3em" })),
-        h("thead", null, h("tr", null, h("th", null, "#"), h("th", null, h("span", { class: "sr" }, "Change")), h("th", null, "Manager"), h("th", { class: "r" }, "W-L-T"), h("th", { class: "r", title: cat ? "Categories won" : "Points for" }, cat ? "CW" : "PF"), h("th", { class: "r", title: cat ? "Categories lost" : "Points against" }, cat ? "CL" : "PA"), h("th", { class: "r" }, "Net"), cat ? null : h("th", { class: "r", title: "Weekly high scores so far" }, "HS"), h("th", { class: "r" }, "Strk"))),
-        h("tbody", null, w.standings.flatMap(r => {
+        h("thead", null, h("tr", null, sth("rank", "#"), sth("mv", h("span", { class: "sr" }, "Change")), sth("mgr", "Manager"), sth("wlt", "W-L-T", { class: "r" }), sth("pf", cat ? "CW" : "PF", { class: "r", title: cat ? "Categories won" : "Points for" }), sth("pa", cat ? "CL" : "PA", { class: "r", title: cat ? "Categories lost" : "Points against" }), sth("net", "Net", { class: "r" }), cat ? null : sth("hs", "HS", { class: "r", title: "Weekly high scores so far" }), sth("strk", "Strk", { class: "r" }))),
+        h("tbody", { class: "st-body" }, w.standings.flatMap(r => {
           const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: cat ? "8" : "9" }, mgrWeeks(r.mgr)));
           const toggle = e => {
             const row = e.currentTarget, open = row.classList.contains("open");
@@ -696,7 +721,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
           const mv = r.prev ? r.prev - r.rank : 0;
           const net = r.pa != null ? r.pf - r.pa : null;
           const logo = s.logos && s.logos[r.mgr];
-          return [h("tr", { class: "row", tabindex: "0", role: "button", "aria-expanded": "false", title: "Show " + r.mgr + "'s weeks", onclick: toggle,
+          return [h("tr", { class: "row", "data-mgr": r.mgr, tabindex: "0", role: "button", "aria-expanded": "false", title: "Show " + r.mgr + "'s weeks", onclick: toggle,
             onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(e); } } },
             h("td", { class: "num rk" }, r.rank),
             h("td", { class: "num mvcell" }, mv ? h("span", { class: "move " + (mv > 0 ? "up" : "down"), title: "Was " + r.prev }, (mv > 0 ? "▲" : "▼") + Math.abs(mv)) : h("span", { class: "move muted", "aria-hidden": "true" }, r.prev ? "–" : "")),
@@ -726,6 +751,10 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
         h("span", { class: "pos" }, pos), h("span", { class: "pts num" }, fmt(p.pts)),
         h("span", null, h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, p.nhl2 ? p.nhl2 + " → " + p.nhl : p.nhl)),
         h("span", { class: "muted small" }, h("span", { class: "mgr", style: "color:var(--ink)" }, p.mgr), team(p.mgr) ? " - " + team(p.mgr) : ""),
+        // The week's stat line behind the score (current season; Fantrax keeps stats by date)
+        p.stats ? (cs => h("table", { class: "tt-stat card-stat num" },
+          h("thead", null, h("tr", null, h("th", null, "GP"), cs.map(c => h("th", null, c[0])))),
+          h("tbody", null, h("tr", null, h("td", null, p.stats.GP), cs.map(c => h("td", null, c[1](p.stats)))))))(statCols("W" in p.stats)) : null,
         p.note ? h("span", { class: "tag note" }, p.note) : null,
         fa ? h("div", { class: "fa-note" },
           h("span", { class: "fa-label" }, "Free agent outscored him"),
