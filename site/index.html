@@ -127,7 +127,7 @@ tr.playoff-cut td { border-bottom: 2px solid var(--red); }
 td.rk, td.mvcell, td.r { white-space: nowrap; }
 td { height: 48px; }
 .standings table { table-layout: fixed; min-width: 470px; }
-.standings th.sortable { cursor: pointer; user-select: none; }
+.standings th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
 .standings th.sortable:hover { color: var(--ink); }
 .standings th[aria-sort]::after { content: " ▲"; font-size: 8px; color: var(--red); }
 .standings th[aria-sort="descending"]::after { content: " ▼"; }
@@ -135,7 +135,7 @@ td { height: 48px; }
 .whotext .mgr { display: block; white-space: nowrap; line-height: 1.25; }
 .team { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch; } }
+@media (min-width: 860px) { .cols.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; } }
 /* too narrow for the standings table beside the write-up: stack them */
 @media (min-width: 860px) and (max-width: 1079px) { .cols.top { grid-template-columns: minmax(0, 1fr); } }
 .cols.top > div > section { grid-template-rows: auto 1fr; }
@@ -289,7 +289,7 @@ table.tt-stat tr.wk th { border-top: 1px dashed var(--line); }
 .export-sheet .export-body { padding: 24px 32px 0; display: grid; gap: 28px; }
 .export-sheet .export-foot { padding: 18px 32px 0; font: 500 12px var(--mono); color: var(--muted); display: flex; justify-content: space-between; }
 .export-sheet .cols { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 28px; align-items: start; }
-.export-sheet .cols.top { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: stretch; }
+.export-sheet .cols.top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; }
 .export-sheet .tablewrap { overflow: visible; }
 .export-sheet .journey { min-width: 0; }
 .export-sheet .no-export, .export-sheet .jtip, .export-sheet footer { display: none !important; }
@@ -709,7 +709,7 @@ footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
       const sth = (key, label, attrs) => h("th", { class: "sortable" + (attrs && attrs.class ? " " + attrs.class : ""), title: (attrs && attrs.title ? attrs.title + " · " : "") + "Click to sort",
         "aria-sort": key === "rank" ? "ascending" : null, onclick: e => sortStandings(key, e.currentTarget) }, label);
       right.push(sec("Standings", panel(h("div", { class: "tablewrap standings" }, h("table", null,
-        h("colgroup", null, h("col", { style: "width:1.8em" }), h("col", { style: "width:2.4em" }), h("col"), h("col", { style: "width:4.4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), cat ? null : h("col", { style: "width:2.6em" }), h("col", { style: "width:3em" })),
+        h("colgroup", null, h("col", { style: "width:2.4em" }), h("col", { style: "width:2.4em" }), h("col"), h("col", { style: "width:4.4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), h("col", { style: "width:4em" }), cat ? null : h("col", { style: "width:2.6em" }), h("col", { style: "width:3em" })),
         h("thead", null, h("tr", null, sth("rank", "#"), sth("mv", h("span", { class: "sr" }, "Change")), sth("mgr", "Manager"), sth("wlt", "W-L-T", { class: "r" }), sth("pf", cat ? "CW" : "PF", { class: "r", title: cat ? "Categories won" : "Points for" }), sth("pa", cat ? "CL" : "PA", { class: "r", title: cat ? "Categories lost" : "Points against" }), sth("net", "Net", { class: "r" }), cat ? null : sth("hs", "HS", { class: "r", title: "Weekly high scores so far" }), sth("strk", "Strk", { class: "r" }))),
         h("tbody", { class: "st-body" }, w.standings.flatMap(r => {
           const detail = h("tr", { class: "detail", hidden: "" }, h("td", { colspan: cat ? "8" : "9" }, mgrWeeks(r.mgr)));
