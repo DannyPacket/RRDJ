@@ -11,9 +11,19 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/cs
 
 http.createServer((req, res) => {
   const url = decodeURIComponent(req.url.split('?')[0]);
+  // Data pulls run in the signed-in Yahoo/Fantrax tabs and drop their JSON here (CORS for those two sites only).
+  const origin = req.headers.origin || '';
+  const okOrigin = /^https:\/\/([\w-]+\.)*(yahoo\.com|fantrax\.com)$/.test(origin);
+  if (okOrigin) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Methods', 'PUT');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Private-Network', 'true');
+  }
+  if (req.method === 'OPTIONS') { res.writeHead(okOrigin ? 204 : 403); return res.end(); }
   if (req.method === 'PUT' && url.startsWith('/__upload/')) {
     const name = path.basename(url);
-    if (!/^[\w.-]+\.png$/.test(name)) { res.writeHead(400); return res.end('bad name'); }
+    if (!/^[\w.-]+\.(png|json)$/.test(name)) { res.writeHead(400); return res.end('bad name'); }
     fs.mkdirSync(uploads, { recursive: true });
     const chunks = [];
     req.on('data', c => chunks.push(c));
