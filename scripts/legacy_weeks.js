@@ -347,7 +347,12 @@ const NEWS = {
     ['2026-11-07', "Danny's new pieces delivered: Zach Werenski tied Thursday's game for Columbus late, and Andrei Svechnikov scored twice in Carolina's 9-2 rout of Chicago. Meanwhile Sidney Crosby moved into sixth on the NHL's all-time points list."],
     ['2026-11-07', 'Connor McDavid ran his season-opening point streak to 18 games.'],
     ['2026-11-08', "Tom's Cutter Gauthier is on another planet: three hat tricks in five games, and the first player in NHL history with three hat tricks in the first ten days of a month."],
-    ['2026-11-08', "Tim's Connor Hellebuyck blanked Toronto 4-0 and is 5-0 as a Devil, but New Jersey won't start him in his return to Winnipeg on Tuesday."]
+    ['2026-11-08', "Tim's Connor Hellebuyck blanked Toronto 4-0 and is 5-0 as a Devil, but New Jersey won't start him in his return to Winnipeg on Tuesday."],
+    ['2026-11-11', "Ronnie's John Carlson put up two goals and three assists in Tampa's 8-3 win over Buffalo and reached 800 career points, the fifth American-born defenseman to get there. Steve's Nikita Kucherov added a natural hat trick in the same game, trade request and all."],
+    ['2026-11-12', "Chris Kreider left Montreal's win over Boston with a leg injury and is out six to eight weeks. Vin cut him the next morning."],
+    ['2026-11-14', "Nick's Mark Scheifele passed Dale Hawerchuk to become the Jets' all-time leading scorer, with a goal and three assists against Chicago. Tim's Connor Hellebuyck made 43 saves against Washington and is 7-0 as a Devil."],
+    ['2026-11-15', "Tim's Connor McDavid stretched his season-opening point streak to 22 games, and Hallie's Leon Draisaitl became the first player to 20 goals. Tom's Cutter Gauthier scored again too: nine straight games with a goal."],
+    ['2026-11-15', "The Rangers put Igor Shesterkin on season-ending long-term injured reserve."]
   ]
 };
 // Extra color for a specific trade, by season and the trade's date (the user's own jokes and context go here)
