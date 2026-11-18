@@ -183,12 +183,25 @@ table.rivals .mh { max-width: 520px; }
 .tl-dark { display: none; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tl-light { display: none; } :root:not([data-theme="light"]) .tl-dark { display: inline; } }
 :root[data-theme="dark"] .tl-light { display: none; } :root[data-theme="dark"] .tl-dark { display: inline; }
+.star .slot { display: inline-block; margin-left: 8px; padding: 0 6px; border-radius: 4px; font: 700 10px var(--mono); letter-spacing: .06em; line-height: 16px; vertical-align: 1px; border: 1px solid var(--line); }
+.star .slot.active { color: var(--win); border-color: color-mix(in srgb, var(--win) 45%, transparent); }
+.star .slot.bench, .star .slot.ir { color: var(--muted); background: var(--chip); }
 .star .pos { font: 600 11px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .star .pts { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1; }
 .star.hi .pts { color: var(--win); } .star.lo .pts { color: var(--loss); }
 .star .tag.note { justify-self: start; margin: 4px 0 0; text-transform: none; letter-spacing: 0; font-weight: 500; }
 .fa-note { display: grid; gap: 1px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px; line-height: 1.35; }
 .fa-label { font: 600 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--blue); }
+/* "Best/Worst active" line on a bench card (Max view) */
+.act-note { display: grid; gap: 1px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 12px; line-height: 1.35; margin-right: -78px; }
+.act-note .fa-label { color: var(--win); }
+.star.lo .act-note .fa-label { color: var(--loss); }
+/* Max | Active switch on the Top & bottom section */
+.seg-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { font: 700 11px var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border: 0; background: none; color: var(--muted); cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--chip); color: var(--ink); }
 .subhead { font: 600 12px var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
 
 /* Lists */
@@ -211,7 +224,7 @@ ul.plain.moves { gap: 0; }
 .tt { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
 .subhead + .tt { border-top: 0; padding-top: 0; }
 .tt-sides { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
-.tt-side { display: grid; gap: 6px; align-content: start; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
+.tt-side { display: grid; gap: 6px; align-content: start; padding: 10px 8px; border: 1px solid var(--line); border-radius: 8px; min-width: 0; }
 .tt-side.lead { border-color: var(--red); }
 .tt-side .tag { justify-self: start; margin-left: 0; }
 .tt-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
@@ -219,8 +232,8 @@ ul.plain.moves { gap: 0; }
 .tt-p { display: grid; gap: 2px; }
 .tt-row { display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 table.tt-stat { width: 100%; border-collapse: collapse; font-size: 11.5px; }
-table.tt-stat th, table.tt-stat td { padding: 2px 4px; height: auto; text-align: right; border: 0; white-space: nowrap; }
-table.tt-stat thead th { font: 600 10px var(--mono); letter-spacing: .04em; color: var(--muted); text-transform: uppercase; }
+table.tt-stat th, table.tt-stat td { padding: 2px 2px; height: auto; text-align: right; border: 0; white-space: nowrap; }
+table.tt-stat thead th { font: 600 10px var(--mono); letter-spacing: 0; color: var(--muted); text-transform: uppercase; }
 table.tt-stat tbody th { text-align: left; font: 600 10px var(--mono); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding-left: 0; }
 table.card-stat { width: calc(100% + 78px); margin-top: 8px; border-top: 1px solid var(--line); }
 table.card-stat thead th { padding-top: 6px; }
@@ -470,6 +483,21 @@ ul.plain.h2h-list { gap: 0; max-width: 460px; }
 .h2h-list li.catrow { background: color-mix(in srgb, var(--chip) 80%, transparent); padding-left: 6px; padding-right: 6px; border-radius: 4px; }
 footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 #status { color: var(--muted); }
+/* League details */
+table.lscoring { min-width: 900px; font-size: 13px; }
+table.lscoring th, table.lscoring td { text-align: center; padding: 6px 4px; height: auto; }
+table.lscoring th[scope="row"] { text-align: left; position: sticky; left: 0; background: var(--board); z-index: 1; min-width: 170px; text-transform: none; letter-spacing: 0; font: 600 13px var(--body); color: var(--ink); }
+table.lscoring th[scope="row"] .lk { display: inline-block; min-width: 3.2em; font: 700 12px var(--mono); }
+table.lscoring th[scope="row"] .ln { font-size: 12px; font-weight: 400; }
+table.lscoring thead th:first-child { text-align: left; position: sticky; left: 0; background: var(--board); z-index: 1; }
+table.lscoring tr.lgrp th { text-align: left; font: 800 13px var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--ink); padding-top: 14px; border-bottom: 2px solid var(--line); position: static; }
+table.lscoring td.chg { background: color-mix(in srgb, var(--blue) 18%, transparent); font-weight: 700; border-radius: 4px; }
+table.lscoring td.off { color: var(--muted); opacity: .5; }
+table.lscoring td.cat, table.lscoring th.cat { background: color-mix(in srgb, var(--chip) 80%, transparent); }
+table.lbasics { min-width: 900px; } table.lbasics td { height: 40px; }
+ul.plain.lchanges { gap: 0; }
+.lchanges li { display: grid; grid-template-columns: 5.5em minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.lchanges li:last-child { border-bottom: 0; }
 /* Draft history: tier colors run from bust (red) through par (plain) to steal (green) */
 .dcell.t5 { --tint: color-mix(in srgb, var(--win) 34%, transparent); }
 .dcell.t4 { --tint: color-mix(in srgb, var(--win) 14%, transparent); }
@@ -510,9 +538,18 @@ dialog.ddlg::backdrop { background: rgb(5 10 16 / .6); }
 .ddlg .tile.up .tile-v { color: var(--win); } .ddlg .tile.down .tile-v { color: var(--loss); }
 .dh3 { font: 700 12px var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 0 0 6px; }
 table.dstat { font-size: 14px; } table.dstat td { color: var(--ink); font-weight: 600; }
-.dlater p { margin: 0; }
 @media (max-width: 520px) { .ddlg-head { flex-direction: column; align-items: flex-start; } .dmug { width: 96px; height: 96px; } }
 .dcell .dr { margin-left: auto; color: var(--ink); }
+.dcell .dmove { margin-top: 0; color: var(--ink); font-size: 10px; gap: 3px; letter-spacing: -.03em; }
+table.dboard td.dcell { padding-left: 4px; padding-right: 4px; }
+.dcell .darr { margin: 0 3px; color: var(--muted); }
+/* first-round grid: same square size as the draft board (scrolls sideways when the screen is narrower; width set below) */
+table.dfirsts td.dcell { padding-left: 4px; padding-right: 4px; position: relative; }
+.medal { margin-left: 4px; font-size: 13px; line-height: 1; }
+table.dfirsts td.dcell .medal { position: absolute; top: 3px; right: 3px; margin: 0; font-size: 12px; }
+table.dfirsts td.dcell .medal + .dn .fn { padding-right: 14px; }
+.dcell .dchg { margin-left: auto; font-weight: 700; }
+.dcell .dchg.gain { color: var(--win); } .dcell .dchg.drop { color: var(--loss); }
 .dmgr { display: inline-flex; align-items: center; gap: 6px; }
 .dmgr .logo.xs { width: 20px; height: 20px; }
 .dpick-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
@@ -528,6 +565,7 @@ table.dstat { font-size: 14px; } table.dstat td { color: var(--ink); font-weight
 .grade.gF { background: color-mix(in srgb, var(--loss) 32%, transparent); }
 table.dgrades { min-width: 560px; } table.dgrades td { height: 42px; }
 table.dgrades td.pos { color: var(--win); } table.dgrades td.neg { color: var(--loss); }
+table.dgrades .gain { color: var(--win); } table.dgrades .drop { color: var(--loss); }
 .dsb { display: grid; gap: 24px; align-content: start; }
 ul.plain.dlist { gap: 0; }
 .dlist li { display: grid; grid-template-columns: 1.4em minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); }
@@ -539,7 +577,15 @@ ul.plain.dlist { gap: 0; }
 .dlist .rv { font-weight: 700; }
 .dlist .steal .rv { color: var(--win); } .dlist .bust .rv { color: var(--loss); }
 table.dmgrs { min-width: 720px; } table.dmgrs td { height: 42px; } table.dmgrs td.b { font-weight: 700; }
-table.dfirsts { min-width: 1150px; table-layout: fixed; font-size: 12px; border-collapse: separate; border-spacing: 2px; }
+table.dmgrs tr.drow { cursor: pointer; }
+table.dmgrs tr.drow:hover td, table.dmgrs tr.drow:focus-visible td { background: var(--chip); outline: none; }
+table.dmgrs tr.drow .chev { display: inline-block; width: 10px; color: var(--muted); transition: transform .12s; }
+table.dmgrs tr.drow.open .chev { transform: rotate(90deg); }
+table.dmgrs tr.drow.open td { background: var(--chip); border-bottom: 0; }
+table.dmgrs tr.ddetail > td { height: auto; padding: 4px 10px 16px; background: color-mix(in srgb, var(--chip) 50%, transparent); }
+.dmgr-detail { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.dmgr-detail .dlist li.click { cursor: pointer; }
+table.dfirsts { min-width: 760px; table-layout: fixed; font-size: 12px; border-collapse: separate; border-spacing: 2px; }
 table.dfirsts th { padding: 0 4px 6px; }
 table.dfirsts thead th:first-child, table.dfirsts tbody th { width: 70px; position: sticky; left: 0; background: var(--board); z-index: 1; }
 table.dfirsts tbody th { font: 600 13px var(--body); color: var(--ink); text-transform: none; letter-spacing: 0; border-bottom: 0; }
@@ -556,7 +602,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     <h1 id="league">Rene Rancourt's Day Job</h1>
     <div class="weekline"><span class="wk" id="wk">Weekly report</span><span class="dates" id="dates"></span></div>
     <div class="rink" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button><button type="button" id="tab-drafts" aria-pressed="false">Draft history</button></nav>
+    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button><button type="button" id="tab-drafts" aria-pressed="false">Draft history</button><button type="button" id="tab-league" aria-pressed="false">League details</button></nav>
     <div class="picker" id="hpicker" hidden></div>
     <div class="picker" id="picker">
       <div class="pick-row"><label for="season">Season</label>
@@ -604,6 +650,9 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   const player = p => [h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, [p.nhl, p.pos].filter(Boolean).join(" · "))];
 
   let DATA = null, cur = { s: null, w: null };
+  // Top & bottom cards: "max" (every rostered player) or "active" (Active lineup slots only); remembered per viewer
+  let cardMode = "max";
+  try { if (localStorage.getItem("rrdj-cards") === "active") cardMode = "active"; } catch (e) {}
   const $ = id => document.getElementById(id);
 
   function hashFor(s, w) { return s.id + "-w" + w.week; }
@@ -692,10 +741,31 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const upToWeek = o => Object.entries(o || {}).filter(([k]) => w.week === 100 || +k <= w.week);
     const statsOf = p => { const t = {}; for (const [, st] of upToWeek(p.statsByWeek)) for (const [k, v] of Object.entries(st)) t[k] = (t[k] || 0) + v; return Object.keys(t).length ? t : null; };
     const signed = v => (+v > 0 ? "+" : "") + v;
-    // Stat columns for the tracker's per-player table: [header, value from a stat object]
-    const statCols = goalie => goalie
-      ? [["W", t => t.W], ["OTL", t => t.OL], ["GA", t => t.GA], ["SV", t => t.SV], ["SV%", t => t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–"], ["SO", t => t.SHO]]
-      : [["G", t => t.G], ["A", t => t.A], ["+/-", t => signed(t["+/-"])], ["SOG", t => t.SOG], ["PPP", t => t.PPG + t.PPA], ["HIT", t => t.Hit], ["BLK", t => t.Blk]];
+    // Stat columns for the cards and the tracker: every stat the league scores, but only the ones the player actually
+    // recorded (not 0) in the lines shown, so the stat line explains the fantasy points without empty columns.
+    // [label, raw number (also the zero test), optional display]
+    const n0 = v => v || 0;
+    const STAT_DEFS = {
+      skater: [["G", t => n0(t.G)], ["A", t => n0(t.A)], ["+/-", t => n0(t["+/-"]), v => signed(v)], ["SOG", t => n0(t.SOG)], ["PPP", t => n0(t.PPG) + n0(t.PPA)],
+        ["SHG", t => n0(t.SHG)], ["SHA", t => n0(t.SHA)], ["GWG", t => n0(t.GWG)], ["FOW", t => n0(t.FOW)], ["HIT", t => n0(t.Hit)], ["BLK", t => n0(t.Blk)], ["PIM", t => n0(t.PIM)]],
+      goalie: [["W", t => n0(t.W)], ["OTL", t => n0(t.OL)], ["GA", t => n0(t.GA)], ["SV", t => n0(t.SV)],
+        ["SV%", t => n0(t.SV), (v, t) => t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–"], ["SO", t => n0(t.SHO)],
+        ["G", t => n0(t.G)], ["A", t => n0(t.A)], ["PPP", t => n0(t.PPG) + n0(t.PPA)], ["SHG", t => n0(t.SHG)], ["SHA", t => n0(t.SHA)], ["PIM", t => n0(t.PIM)]]
+    };
+    // Top/bottom cards use a fixed set (the user's pick, 2026-11-18); GP is added in front by the card.
+    // SHP = SHG + SHA, PPP = PPG + PPA.
+    // Goalies also get G, A, PPP, SHP and PIM after SV%, but only when the goalie had any that week (st = his stat line)
+    const cardCols = (goalie, st) => goalie
+      ? [["W", t => n0(t.W)], ["OTL", t => n0(t.OL)], ["GA", t => n0(t.GA)], ["SV", t => n0(t.SV)], ["SO", t => n0(t.SHO)],
+         ["SV%", t => t.SV + t.GA ? (t.SV / (t.SV + t.GA)).toFixed(3).replace(/^0/, "") : "–"],
+         ...[["G", t => n0(t.G)], ["A", t => n0(t.A)], ["PPP", t => n0(t.PPG) + n0(t.PPA)], ["SHP", t => n0(t.SHG) + n0(t.SHA)], ["PIM", t => n0(t.PIM)]]
+           .filter(([, get]) => st && get(st) !== 0)]
+      : [["G", t => n0(t.G)], ["A", t => n0(t.A)], ["+/-", t => signed(n0(t["+/-"]))], ["PPP", t => n0(t.PPG) + n0(t.PPA)], ["SHP", t => n0(t.SHG) + n0(t.SHA)],
+         ["GWG", t => n0(t.GWG)], ["SOG", t => n0(t.SOG)], ["FOW", t => n0(t.FOW)], ["HIT", t => n0(t.Hit)], ["BLK", t => n0(t.Blk)]];
+    // samples: every stat line that will share these columns (a tracker's total and this week)
+    const statCols = (goalie, samples) => STAT_DEFS[goalie ? "goalie" : "skater"]
+      .filter(([, get]) => samples.some(t => t && get(t) !== 0))
+      .map(([label, get, show]) => [label, t => show ? show(get(t), t) : get(t)]);
     const wkPts = p => p.byWeek && w.week !== 100 && p.byWeek[w.week] != null ? p.byWeek[w.week] : null;
     const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
     const tracker = t => {
@@ -708,7 +778,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
             sd.gets.some(p => wkPts(p) != null) ? h("span", { class: "tt-wk" }, signed(fmt(sd.gets.reduce((a, p) => a + (wkPts(p) || 0), 0))) + " this week") : null)),
           // Per player: a small table with the running total on top and this week's share under it, so the change is explained
           sd.gets.map(p => { const st = statsOf(p), wp = wkPts(p), wst = p.statsByWeek && w.week !== 100 && p.statsByWeek[w.week], wgp = p.gpByWeek && p.gpByWeek[w.week];
-            const cols = st ? statCols("W" in st) : [], hasGP = gpOf(p) != null;
+            const cols = st ? statCols("W" in st, [st, wst]) : [], hasGP = gpOf(p) != null;
             return h("div", { class: "tt-p" },
               h("div", { class: "tt-row" }, h("span", null, ...player(p)), p.left && (!w.end || p.left <= w.end) ? h("span", { class: "muted small" }, "until " + day(p.left)) : null),
               h("table", { class: "tt-stat num" },
@@ -832,27 +902,40 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
         p.pid ? h("img", { class: "face", src: "players/" + p.pid + ".png", alt: "", width: "68", height: "68", loading: "lazy", onerror: e => e.target.remove() }) : null,
         h("span", { class: "badge" }, tlogo(p.nhl)),
         p.nhl2 ? h("span", { class: "badge b2", title: "Traded in the NHL that week: " + p.nhl2 + " to " + p.nhl }, tlogo(p.nhl2)) : null);
-      const card = (p, pos, kind, fa) => p ? h("div", { class: "star " + kind }, shot(p),
-        h("span", { class: "pos" }, pos), h("span", { class: "pts num" }, fmt(p.pts)),
+      // act = the Active-only pick for this spot, noted on a bench card (option B)
+      const card = (p, pos, kind, fa, act) => p ? h("div", { class: "star " + kind }, shot(p),
+        // where he sat in the manager's lineup that week (Fantrax roster status: Active / Bench / IR)
+        h("span", { class: "pos" }, pos, p.slot ? h("span", { class: "slot " + p.slot.toLowerCase(), title: p.slot === "Bench" ? "On " + p.mgr + "'s bench this week: his points didn't count toward the team score" : p.slot === "IR" ? "On " + p.mgr + "'s injured reserve this week" : "In " + p.mgr + "'s active lineup this week" }, p.slot === "IR" ? "Inj Res" : p.slot) : null),
+        h("span", { class: "pts num" }, fmt(p.pts)),
         h("span", null, h("span", { class: "mgr" }, p.name), " ", h("span", { class: "muted small" }, p.nhl2 ? p.nhl2 + " → " + p.nhl : p.nhl)),
         h("span", { class: "muted small" }, h("span", { class: "mgr", style: "color:var(--ink)" }, p.mgr), team(p.mgr) ? " - " + team(p.mgr) : ""),
         // The week's stat line behind the score (current season; Fantrax keeps stats by date)
         p.stats ? (cs => h("table", { class: "tt-stat card-stat num" },
           h("thead", null, h("tr", null, h("th", null, "GP"), cs.map(c => h("th", null, c[0])))),
-          h("tbody", null, h("tr", null, h("td", null, p.stats.GP), cs.map(c => h("td", null, c[1](p.stats)))))))(statCols("W" in p.stats)) : null,
+          h("tbody", null, h("tr", null, h("td", null, p.stats.GP), cs.map(c => h("td", null, c[1](p.stats)))))))(cardCols("W" in p.stats, p.stats)) : null,
         p.note ? h("span", { class: "tag note" }, p.note) : null,
         fa ? h("div", { class: "fa-note" },
           h("span", { class: "fa-label" }, "Free agent outscored him"),
           h("span", null, h("span", { class: "mgr" }, fa.name), " ", h("span", { class: "muted" }, fa.nhl), " ", h("span", { class: "num" }, fmt(fa.pts))),
-          h("span", { class: "muted" }, fa.mgr ? "Picked up by " + fa.mgr + " after the cutoff · " + (fa.note || "").replace(/^(Free agent pickup|Waiver claim) /, "") : "Not on any roster")) : null) : null;
+          h("span", { class: "muted" }, fa.mgr ? "Picked up by " + fa.mgr + " after the cutoff · " + (fa.note || "").replace(/^(Free agent pickup|Waiver claim) /, "") : "Not on any roster")) : null,
+        act && p.slot === "Bench" && act.name !== p.name ? h("div", { class: "act-note" },
+          h("span", { class: "fa-label" }, (kind === "hi" ? "Best" : "Worst") + " active"),
+          h("span", null, h("span", { class: "mgr" }, act.name), " ", h("span", { class: "muted" }, act.nhl), " ", h("span", { class: "num" }, fmt(act.pts)), h("span", { class: "muted" }, " · " + act.mgr))) : null) : null;
       const names = { F: "Forward", D: "Defense", G: "Goalie" };
+      // Option A: Max (every rostered player, as before) or Active (only players in an Active lineup slot)
+      const A = w.players.active, mode = A && cardMode === "active" ? "active" : "max";
+      const toggle = A ? h("div", { class: "seg", role: "group", "aria-label": "Which players" },
+        [["max", "Max", "Everyone on a roster, bench included"], ["active", "Active", "Only players in an Active lineup slot"]].map(([v, l, t]) =>
+          h("button", { type: "button", title: t, "aria-pressed": mode === v ? "true" : "false", onclick: () => { cardMode = v; try { localStorage.setItem("rrdj-cards", v); } catch (e) {} const y = window.scrollY; pick(s.id, w.week, false); window.scrollTo(0, y); } }, l))) : null;
+      const src = mode === "active" ? A : w.players;
       stars.push(sec("Top & bottom players",
-        h("div", { class: "subhead" }, "Highest scoring (" + label + ")"),
-        h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(w.players.high[k], names[k], "hi", w.players.faHigh && w.players.faHigh[k]))),
-        h("div", { class: "subhead", style: "margin-top:6px" }, "Lowest scoring (" + label + ")"),
-        h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(w.players.low[k], names[k], "lo"))),
+        h("div", { class: "subhead seg-row" }, h("span", null, "Highest scoring (" + label + ")" + (mode === "active" ? " · active lineups" : "")), toggle),
+        h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(src.high[k], names[k], "hi", mode === "max" && w.players.faHigh && w.players.faHigh[k], mode === "max" && A && A.high[k]))),
+        h("div", { class: "subhead", style: "margin-top:6px" }, "Lowest scoring (" + label + ")" + (mode === "active" ? " · active lineups" : "")),
+        h("div", { class: "stars" }, ["F", "D", "G"].map(k => card(src.low[k], names[k], "lo", null, mode === "max" && A && A.low[k]))),
         fromSheet ? h("div", { class: "muted small" }, "Yahoo season: each player's points are what he scored for his manager this week (only days in the starting lineup count), among every player on that roster during the week; lowest needs at least 1 game counted. Yahoo doesn't keep weekly stats for unowned players in past seasons, so there's no free-agent comparison.") :
-        h("div", { class: "muted small" }, "Players on a roster at the week's roster lock (puck drop of the first game), with at least 1 game played, credited to that manager for the whole week even if dropped or traded later. If a free agent (unowned, or picked up after the cutoff) beat the top score, he's noted in small text on that card.")));
+        h("div", { class: "muted small" }, "Players on a roster at the week's roster lock (puck drop of the first game), with at least 1 game played, credited to that manager for the whole week even if dropped or traded later. If a free agent (unowned, or picked up after the cutoff) beat the top score, he's noted in small text on that card." +
+          (w.players.active ? " Max counts everyone on a roster, bench included; Active counts only players in an Active lineup slot that week. In Max, a bench card also names the best (or worst) active player." : ""))));
     }
 
     $("content").replaceChildren(...[
@@ -870,7 +953,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
   let fSort = { key: "m", dir: 1 }, hSort = { key: "pct", dir: -1 }, hPair = null, hSeason = null, sSort = { key: "reg", dir: 1 }, hMgr = null, hLog = null, pSort = { key: "titles", dir: -1 };
 
-  const TABS = ["week", "history", "seasons", "manager", "playoffs", "drafts"];
+  const TABS = ["week", "history", "seasons", "manager", "playoffs", "drafts", "league"];
   function setTab(view) {
     TABS.forEach(t => $("tab-" + t).setAttribute("aria-pressed", t === view ? "true" : "false"));
     $("picker").hidden = view !== "week";
@@ -902,7 +985,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   // Each pick: [mgr, player, pos, nhl, pts, gp, rank, value, posRank]. pts = the player's whole regular season scored with that
   // year's league settings (season so far for the live year); rank = finish among every NHL player; value = pts minus what the
   // Nth-best player scored, N = the pick number. 2014-15 (categories) uses a category value score instead of points.
-  let DRAFTS = null, dSeason = null, dSort = { key: "gpa", dir: -1 };
+  let DRAFTS = null, dSeason = null, dSort = { key: "gpa", dir: -1 }, dMgrOpen = null;
   const GRADES = ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"];
   const gradeOf = (rank, n) => GRADES[Math.min(11, Math.floor((rank - 1) * 12 / n))];
   const gpa = g => ({ "A+": 4.3, A: 4, "A-": 3.7, "B+": 3.3, B: 3, "B-": 2.7, "C+": 2.3, C: 2, "C-": 1.7, "D+": 1.3, D: 1, F: 0 })[g];
@@ -958,6 +1041,18 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       const i = p.name.indexOf(" "), first = i > 0 ? p.name.slice(0, i) : "", last = i > 0 ? p.name.slice(i + 1) : p.name;
       return h("span", { class: "dn" }, teamLogo(sid, p.dteam, 16), h("span", { class: "fn" }, first || " "), h("span", { class: "ln" + (last.length > 11 ? " long" : "") }, last));
     }
+    // 🥇🥈🥉 for the season's final top three (completed seasons; history.finals = final places after the playoffs)
+    function medal(sid, m) {
+      const place = ((DATA.history || {}).finals || {})[sid] && DATA.history.finals[sid][m];
+      const icon = { 1: "🥇", 2: "🥈", 3: "🥉" }[place];
+      return icon ? h("span", { class: "medal", title: (place === 1 ? "Champion" : place === 2 ? "Finished 2nd" : "Finished 3rd") + " in " + sid, "aria-label": place === 1 ? "champion" : "finished " + (place === 2 ? "2nd" : "3rd") }, icon) : null;
+    }
+    // "#27→#3 +24": overall pick, finish rank, and spots gained (green) or lost (red)
+    function moveLine(p) {
+      const d = p.rank ? p.pick - p.rank : null;
+      return h("span", { class: "dm dmove", title: "Drafted #" + p.pick + (p.rank ? ", finished #" + p.rank : ", didn't play") }, h("span", { class: "num" }, "#" + p.pick, h("span", { class: "darr" }, "→"), p.rank ? "#" + p.rank : "DNP"),
+        d == null ? null : h("span", { class: "num dchg " + (d > 0 ? "gain" : d < 0 ? "drop" : "") }, (d > 0 ? "+" : "") + d));
+    }
     function clickPick(p, cls) {
       return { class: cls + " click", tabindex: "0", role: "button", "aria-label": p.name + ", pick " + p.pick + " by " + p.mgr + ". Details",
         onclick: () => openPick(p), onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPick(p); } } };
@@ -972,7 +1067,6 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       const mug = mugs.length ? h("img", { class: "dmug", src: mugs[0], alt: "", width: "120", height: "120", onerror: e => { const i = mugs.indexOf(e.target.getAttribute("src")); if (i < mugs.length - 1) e.target.src = mugs[i + 1]; else e.target.replaceWith(h("span", { class: "dmug none" }, p.name.split(" ").map(w => w[0]).join(""))); } })
         : h("span", { class: "dmug none" }, p.name.split(" ").map(w => w[0]).join(""));
       const gap = p.rank ? p.pick - p.rank : null;
-      const later = s2.P.filter(q => q.pick > p.pick && q.pts != null).sort((a, b) => b.pts - a.pts)[0];
       const L = p.line, G = p.pos === "G";
       const statT = L ? h("table", { class: "tt-stat dstat" },
         h("thead", null, h("tr", null, ...(G ? ["GP", "W", "OTL", "GA", "SV", "SV%", "SO"] : ["GP", "G", "A", "P", "+/-", "PPP", "SOG", "HIT", "BLK"]).map(x => h("th", null, x)))),
@@ -997,10 +1091,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
           tile("Finished", p.rank ? "#" + p.rank : "DNP", p.posRank ? "#" + p.posRank + " " + (G ? "goalie" : p.pos === "D" ? "defenseman" : "forward") : null),
           tile("Pick vs. finish", gap == null ? "–" : (gap > 0 ? "+" : "") + gap, gap == null ? null : gap > 0 ? gap + " spots better than drafted" : gap < 0 ? -gap + " spots worse than drafted" : "right on the slot", gap > 0 ? "up" : gap < 0 ? "down" : null),
           tile("vs. slot", (p.value > 0 ? "+" : "") + n2(p.value).replace(/^\+/, ""), (cat2 ? "value" : "pts") + " vs. the #" + p.pick + " player", p.value > 0 ? "up" : p.value < 0 ? "down" : null)),
-        h("div", null, h("h3", { class: "dh3" }, "Season line" + (s2.live ? " so far" : "")), statT),
-        h("div", { class: "dlater" }, h("h3", { class: "dh3" }, "Best still on the board"),
-          later && later.pts > p.pts ? h("p", null, h("b", null, later.name), " " + [later.dteam, later.pos].join(" · ") + ", taken #" + later.pick + " by " + later.mgr + ": " + n2(later.pts) + " " + u2 + (later.rank ? ", finished #" + later.rank : "") + ".")
-            : h("p", null, "Nobody taken after him " + (s2.live ? "has scored" : "scored") + " more. 👏"))));
+        h("div", null, h("h3", { class: "dh3" }, "Season line" + (s2.live ? " so far" : "")), statT)));
       if (!dlg.open) dlg.showModal();
       dlg.onkeydown = e => { if (e.key === "ArrowLeft" && list[idx - 1]) openPick(list[idx - 1]); if (e.key === "ArrowRight" && list[idx + 1]) openPick(list[idx + 1]); };
     }
@@ -1013,25 +1104,34 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 
     // ---- draft board: rounds down, round-1 order across
     const board = h("table", { class: "dboard" },
-      h("thead", null, h("tr", null, h("th", { class: "rd" }, "Rd"), ...s.teams.map(m => h("th", null, h("span", { class: "dmgr" }, avatar(m, LG[m], 20, "xs"), m))))),
+      h("thead", null, h("tr", null, h("th", { class: "rd" }, "Rd"), ...s.teams.map(m => h("th", null, h("span", { class: "dmgr" }, avatar(m, LG[m], 20, "xs"), m, medal(s.id, m)))))),
       h("tbody", null, ...Array.from({ length: s.rounds }, (_, r) => {
         const row = s.P.filter(p => p.round === r + 1);
         const cells = s.teams.map(m => row.find(p => p.mgr === m));
         return h("tr", null, h("th", { class: "rd", scope: "row" }, r + 1), ...cells.map(p => p ? h("td", clickPick(p, "dcell " + p.tier),
           nameLines(s.id, p),
-          h("span", { class: "dm" }, h("span", null, p.pos), h("span", { class: "num" }, p.pts == null ? "–" : num(p.pts)), h("span", { class: "num dr" }, p.rank ? "#" + p.rank : "DNP"))) : h("td", { class: "dcell" })));
+          // position then fantasy points; then draft # → finish rank and the change
+          h("span", { class: "dm" }, h("span", null, p.pos), h("span", { class: "num" }, p.pts == null ? "–" : num(p.pts))),
+          moveLine(p)) : h("td", { class: "dcell" })));
       })));
     const legend = h("div", { class: "dlegend small" }, h("span", { class: "muted" }, "vs. draft slot:"),
       ...[["t5", "Steal"], ["t4", "Beat it"], ["t3", "Par"], ["t2", "Under"], ["t1", "Bust"]].map(([t, l]) => h("span", { class: "dkey " + t }, l)));
 
     // ---- grades
+    // "Leon Draisaitl 1.03 · #3 → #2 (+1)": round.pick, overall pick → overall finish, and the change (spots gained)
+    const pickLine = p => {
+      if (!p) return "–";
+      const d = p.rank ? p.pick - p.rank : null;
+      return [h("span", { class: "mgr" }, p.name),
+        h("span", { class: "muted small" }, " " + pickNo(p) + " · #" + p.pick + " → " + (p.rank ? "#" + p.rank : "DNP") + " "),
+        d == null ? null : h("span", { class: "small num " + (d > 0 ? "gain" : d < 0 ? "drop" : "muted") }, "(" + (d > 0 ? "+" : "") + d + ")")];
+    };
     const gradeRows = s.G.map(g => h("tr", null,
       h("td", null, h("span", { class: "grade g" + g.grade[0] }, g.grade)),
-      h("td", null, h("span", { class: "dmgr" }, avatar(g.mgr, LG[g.mgr], 22, "sm"), h("span", { class: "mgr" }, g.mgr))),
+      h("td", null, h("span", { class: "dmgr" }, avatar(g.mgr, LG[g.mgr], 22, "sm"), h("span", { class: "mgr" }, g.mgr), medal(s.id, g.mgr))),
       h("td", { class: "num" }, cat ? "–" : fmt(g.total)),
       h("td", { class: "num " + (g.rel >= 0 ? "pos" : "neg") }, sgn(g.rel)),
-      h("td", null, g.best ? [h("span", { class: "mgr" }, g.best.name), h("span", { class: "muted small" }, " " + pickNo(g.best) + " · " + (g.best.rank ? "#" + g.best.rank : "DNP"))] : "–"),
-      h("td", null, g.worst ? [h("span", { class: "mgr" }, g.worst.name), h("span", { class: "muted small" }, " " + pickNo(g.worst) + " · " + (g.worst.rank ? "#" + g.worst.rank : "DNP"))] : "–")));
+      h("td", null, pickLine(g.best)), h("td", null, pickLine(g.worst))));
     const grades = h("div", { class: "tablewrap" }, h("table", { class: "dgrades" },
       h("thead", null, h("tr", null, h("th", null, "Grade"), h("th", null, "Manager"), h("th", null, cat ? "" : "Draft pts"), h("th", null, "vs. avg"), h("th", null, "Best pick"), h("th", null, "Biggest miss (rds 1–8)"))),
       h("tbody", null, ...gradeRows)));
@@ -1071,22 +1171,49 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const mtable = h("div", { class: "tablewrap" }, h("table", { class: "dmgrs" },
       h("thead", null, h("tr", null, ...dcols.map(([k, l]) => h("th", { "aria-sort": dSort.key === k ? (dSort.dir > 0 ? "ascending" : "descending") : null },
         h("button", { type: "button", class: "sort", onclick: () => { dSort = { key: k, dir: dSort.key === k ? -dSort.dir : (k === "mgr" ? 1 : -1) }; renderDrafts(); } }, l))))),
-      h("tbody", null, ...mlist.map(m => h("tr", null,
-        h("td", null, h("span", { class: "dmgr" }, avatar(m.mgr, latestLogos[m.mgr], 22, "sm"), h("span", { class: "mgr" }, m.mgr))),
-        h("td", { class: "num" }, m.drafts), h("td", { class: "num b" }, m.gpa == null ? "–" : m.gpa.toFixed(2)),
-        h("td", { class: "num" }, m.a), h("td", { class: "num" }, m.f), h("td", { class: "num" }, m.steals), h("td", { class: "num" }, m.busts),
-        h("td", null, m.best ? [h("span", { class: "grade g" + m.best.grade[0] }, m.best.grade), " " + m.best.id] : "–"),
-        h("td", null, m.worst ? [h("span", { class: "grade g" + m.worst.grade[0] }, m.worst.grade), " " + m.worst.id] : "–"))))));
+      // click a manager: a row opens under him with his top 3 scorers, steals and busts (completed points seasons)
+      h("tbody", null, ...mlist.flatMap(m => {
+        const open = dMgrOpen === m.mgr;
+        const tr = h("tr", { class: "drow" + (open ? " open" : ""), tabindex: "0", role: "button", "aria-expanded": open ? "true" : "false", title: "Show " + m.mgr + "'s best picks, steals and busts",
+          onclick: () => { dMgrOpen = open ? null : m.mgr; const y = window.scrollY; renderDrafts(); window.scrollTo(0, y); },
+          onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.currentTarget.click(); } } },
+          h("td", null, h("span", { class: "dmgr" }, h("span", { class: "chev", "aria-hidden": "true" }, "›"), avatar(m.mgr, latestLogos[m.mgr], 22, "sm"), h("span", { class: "mgr" }, m.mgr))),
+          h("td", { class: "num" }, m.drafts), h("td", { class: "num b" }, m.gpa == null ? "–" : m.gpa.toFixed(2)),
+          h("td", { class: "num" }, m.a), h("td", { class: "num" }, m.f), h("td", { class: "num" }, m.steals), h("td", { class: "num" }, m.busts),
+          h("td", null, m.best ? [h("span", { class: "grade g" + m.best.grade[0] }, m.best.grade), " " + m.best.id] : "–"),
+          h("td", null, m.worst ? [h("span", { class: "grade g" + m.worst.grade[0] }, m.worst.grade), " " + m.worst.id] : "–"));
+        if (!open) return [tr];
+        const mine = pool.filter(p => p.mgr === m.mgr);
+        const item = (p, i, kind, show) => h("li", clickPick(p, "dpick " + kind),
+          h("span", { class: "rn num" }, i + 1),
+          h("span", { class: "rw" }, h("span", null, h("span", { class: "mgr" }, p.name), h("span", { class: "muted small" }, " " + [p.nhl, p.pos].filter(Boolean).join(" · "))),
+            h("span", { class: "muted small" }, p.s.id + " · pick " + pickNo(p) + " · #" + p.pick + " → " + (p.rank ? "#" + p.rank : "DNP"))),
+          h("span", { class: "rv num" }, show(p)));
+        const list = (title, ps, kind, show) => h("div", null, h("h3", { class: "dh3" }, title),
+          ps.length ? h("ul", { class: "plain dlist" }, ps.map((p, i) => item(p, i, kind, show))) : h("p", { class: "muted small" }, "None yet"));
+        const detail = h("tr", { class: "ddetail" }, h("td", { colspan: String(dcols.length) }, h("div", { class: "dmgr-detail" },
+          list("Top scorers drafted", mine.slice().sort((a, b) => b.pts - a.pts).slice(0, 3), "steal", p => fmt(p.pts)),
+          list("Biggest steals", mine.filter(p => p.value > 0).sort((a, b) => b.value - a.value).slice(0, 3), "steal", p => sgn(p.value)),
+          list("Biggest busts", mine.filter(p => p.value < 0).sort((a, b) => a.value - b.value).slice(0, 3), "bust", p => sgn(p.value)))));
+        return [tr, detail];
+      }))));
 
-    // ---- first-round picks: managers down, seasons across
+    // ---- first-round picks: one grid at draft-board square size (scrolls sideways; its width grows with each new season),
+    // plus the same picks flipped (seasons down, managers across)
+    const SQ = 102;  // square width, about the draft board's (room for "C/LW/RW 157.0")
+    const firstCell = (x, m, cur) => {
+      const p = mgrs[m] && mgrs[m].firsts[x.id];
+      // same layout as the draft board: name, position + points, pick → finish and the change
+      return p ? h("td", clickPick(p, "dcell " + p.tier + (cur ? " cur" : "")), medal(x.id, m), nameLines(x.id, p),
+        h("span", { class: "dm" }, h("span", null, p.pos), h("span", { class: "num" }, p.pts == null ? "–" : x.scoring === "categories" ? (p.pts > 0 ? "+" : "") + p.pts.toFixed(1) : fmt(p.pts))),
+        moveLine(p))
+        : h("td", { class: "dcell empty" + (cur ? " cur" : "") }, "");
+    };
     const fmgrs = mlist.map(m => m.mgr).sort();
-    const firsts = h("div", { class: "tablewrap" }, h("table", { class: "dfirsts" },
-      h("thead", null, h("tr", null, h("th", null, "Manager"), ...ids.map(id => h("th", { class: id === dSeason ? "cur" : null }, id.slice(2))))),
-      h("tbody", null, ...fmgrs.map(m => h("tr", null, h("th", { scope: "row" }, m), ...all.map(x => {
-        const p = mgrs[m].firsts[x.id];
-        return p ? h("td", clickPick(p, "dcell " + p.tier + (x.id === dSeason ? " cur" : "")), nameLines(x.id, p), h("span", { class: "dm" }, h("span", { class: "num" }, "#" + p.pick), h("span", { class: "num dr" }, p.rank ? "→ #" + p.rank : "DNP")))
-          : h("td", { class: "dcell empty" + (x.id === dSeason ? " cur" : "") }, "");
-      }))))));
+    const newestFirst = all.slice().reverse();   // newest season on the left
+    const firsts = h("div", { class: "tablewrap" }, h("table", { class: "dfirsts", style: "min-width:" + (70 + all.length * SQ) + "px" },
+      h("thead", null, h("tr", null, h("th", null, "Manager"), ...newestFirst.map(x => h("th", { class: x.id === dSeason ? "cur" : null }, x.id)))),
+      h("tbody", null, ...fmgrs.map(m => h("tr", null, h("th", { scope: "row" }, m), ...newestFirst.map(x => firstCell(x, m, x.id === dSeason)))))));
 
     const howNote = cat
       ? "2014-15 was a categories league, so each player gets a category value score instead of points (how far above or below average he was across G, A, +/-, PIM, PPP, SHP, SOG, FW, HIT, BLK; goalies W, GAA, SV%, SHO)."
@@ -1107,8 +1234,94 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
         sec("All-time busts", panel(h("ul", { class: "plain dlist" }, atBusts.map((p, i) => card(p, i, "bust")))))),
       h("div", { class: "muted small" }, "All-time lists use completed points seasons (" + done[0].id + " to " + done[done.length - 1].id + ", not 2014-15). Points scoring changed over the years, so the numbers compare best within a season."),
       sec("Manager draft report cards", panel(mtable, h("div", { class: "muted small", style: "margin-top:10px" }, "GPA from completed drafts (A+ = 4.3 … F = 0). Steals = picks that crushed their slot; early busts = rounds 1–5 picks that badly missed it. Click a column to sort."))),
-      sec("First-round picks", panel(firsts, h("div", { class: "muted small", style: "margin-top:10px" }, "Each manager's first pick every season: overall pick number → where the player finished. Colors as on the draft board."))),
+      sec("First-round picks", panel(firsts, h("div", { class: "muted small", style: "margin-top:10px" }, "Each manager's first pick every season: overall pick number → where the player finished, and the change. Colors as on the draft board; 🥇🥈🥉 = that manager's final place that season. Newest season on the left; scroll sideways for older ones."))),
       h("footer", null, "Drafts from Yahoo (2013-14 to 2025-26) and Fantrax (2026-27). Player stats from NHL.com; built " + D.built + "."));
+  }
+
+  // League details tab: each season's scoring settings and basics, for the record (data: reports.json leagueInfo,
+  // built by league_info.js from the scoring read off each Yahoo league's settings page and Fantrax's rules).
+  const CAT_NAMES = { G: "Goals", A: "Assists", "+/-": "Plus/minus", PIM: "Penalty minutes", PPG: "Power-play goals", PPA: "Power-play assists", PPP: "Power-play points",
+    SHG: "Short-handed goals", SHA: "Short-handed assists", SHP: "Short-handed points", GWG: "Game-winning goals", SOG: "Shots on goal", FOW: "Faceoffs won", HIT: "Hits", BLK: "Blocked shots",
+    W: "Wins", OTL: "Overtime losses", GA: "Goals against", SV: "Saves", SO: "Shutouts", GAA: "Goals-against average", "SV%": "Save percentage" };
+  const SK_ORDER = ["G", "A", "+/-", "PPG", "PPA", "PPP", "SHG", "SHA", "SHP", "GWG", "SOG", "FOW", "HIT", "BLK", "PIM"];
+  const GO_ORDER = ["W", "OTL", "GA", "SV", "SO", "GAA", "SV%", "G", "A", "PPG", "PPA", "SHG", "SHA", "PIM"];
+  function showLeague(push) {
+    setTab("league");
+    if (push) setHash("league");
+    renderLeague();
+  }
+  function renderLeague() {
+    const LI = DATA.leagueInfo;
+    $("wk").textContent = "League details";
+    if (!LI) return $("content").replaceChildren(h("p", { id: "status" }, "League details aren't built yet."));
+    const S = LI.seasons, finals = (DATA.history || {}).finals || {};
+    $("season-eyebrow").textContent = "League records · " + S[0].id + " to " + S[S.length - 1].id;
+    $("dates").textContent = S.length + " seasons · " + new Set(S.map(s => s.platform)).size + " platforms";
+    const val = v => v === true ? "✓" : v == null ? "" : (v < 0 ? "−" + String(-v) : String(v));
+    // the season before, skipping the categories year when comparing point values
+    const prevPoints = i => { for (let j = i - 1; j >= 0; j--) if (S[j].format === "points") return S[j]; return null; };
+
+    // ---- season basics
+    const basics = h("div", { class: "tablewrap" }, h("table", { class: "lbasics" },
+      h("thead", null, h("tr", null, ["Season", "Platform", "Teams", "Format", "Draft rounds", "Reg. season weeks", "Playoff teams", "Champion", "Runner-up", "3rd place"].map(x => h("th", null, x)))),
+      h("tbody", null, ...S.slice().reverse().map(s => h("tr", { class: s.format === "categories" ? "catrow" : null },
+        h("td", null, h("button", { type: "button", class: "golink", title: "Open the " + s.id + " season", onclick: () => { location.hash = s.id + "-w" + (finals[s.id] ? 100 : 1); window.scrollTo(0, 0); } }, h("span", { class: "mgr" }, s.id))),
+        h("td", null, s.platform), h("td", { class: "num" }, s.teams), h("td", null, s.format === "categories" ? "Head-to-head categories" : "Head-to-head points"),
+        h("td", { class: "num" }, s.draftRounds || "–"), h("td", { class: "num" }, s.live ? s.regularWeeks + " so far" : s.regularWeeks || "–"),
+        h("td", { class: "num" }, s.playoffTeams || "–"),
+        // champion, runner-up, 3rd from the final places after the playoffs (history.finals)
+        ...(s.live ? [h("td", { colspan: "3" }, h("span", { class: "muted" }, "In progress"))]
+          : !finals[s.id] ? [h("td", { colspan: "3" }, h("span", { class: "muted" }, s.id === "2019-20" ? "No playoffs: season cancelled (COVID)" : "–"))]
+          : [1, 2, 3].map(pl => { const m = Object.keys(finals[s.id]).find(k => finals[s.id][k] === pl);
+              return h("td", null, m ? h("span", { class: "mgr" }, m) : "–"); })))))));
+
+    // ---- scoring grid: categories down, seasons across; a highlighted cell changed from the season before
+    const row = (grp, k) => {
+      if (!S.some(s => s[grp] && s[grp][k] != null)) return null;
+      return h("tr", null, h("th", { scope: "row", title: CAT_NAMES[k] || k }, h("span", { class: "lk" }, k), h("span", { class: "ln muted" }, CAT_NAMES[k] || "")),
+        ...S.map((s, i) => {
+          const v = s[grp] && s[grp][k], p = s.format === "points" ? prevPoints(i) : null, pv = p && p[grp] ? p[grp][k] : undefined;
+          const changed = s.format === "points" && p && v !== pv;
+          return h("td", { class: "num" + (s.format === "categories" ? " cat" : "") + (changed ? " chg" : "") + (v == null ? " off" : ""),
+            title: changed ? s.id + ": " + (pv == null ? "added" : v == null ? "dropped (was " + val(pv) + ")" : "was " + val(pv)) : null }, v == null ? "·" : val(v));
+        }));
+    };
+    const grp = (label, g, order) => [h("tr", { class: "lgrp" }, h("th", { colspan: String(S.length + 1) }, label)), ...order.map(k => row(g, k)).filter(Boolean)];
+    const grid = h("div", { class: "tablewrap" }, h("table", { class: "lscoring" },
+      h("thead", null, h("tr", null, h("th", null, "Category"), ...S.map(s => h("th", { class: s.format === "categories" ? "cat" : null, title: s.platform + " · " + s.teams + " teams" }, s.id.slice(2))))),
+      h("tbody", null, ...grp("Skaters", "skater", SK_ORDER), ...grp("Goalies", "goalie", GO_ORDER))));
+
+    // ---- what changed each season
+    const changes = [];
+    S.forEach((s, i) => {
+      const items = [];
+      if (i > 0 && s.platform !== S[i - 1].platform) items.push("Moved from " + S[i - 1].platform + " to " + s.platform);
+      if (i > 0 && s.teams !== S[i - 1].teams) items.push(S[i - 1].teams + " teams → " + s.teams);
+      if (s.format === "categories") items.push("Switched to head-to-head categories: " + Object.keys(s.skater).concat(Object.keys(s.goalie)).join(", "));
+      else if (i > 0 && S[i - 1].format === "categories") items.push("Back to head-to-head points");
+      const p = s.format === "points" ? prevPoints(i) : null;
+      if (p) {
+        const gOwn = [];   // goalies' own skating stats, grouped into one line
+        for (const [g, order, who] of [["skater", SK_ORDER, ""], ["goalie", GO_ORDER, "goalie "]]) for (const k of order) {
+          const a = p[g][k], b = s[g][k];
+          if (a === b) continue;
+          if (g === "goalie" && a == null && SK_ORDER.includes(k)) { gOwn.push(k + " " + val(b)); continue; }
+          items.push(a == null ? who + k + " added (" + val(b) + ")" : b == null ? who + k + " dropped (was " + val(a) + ")" : who + k + " " + val(a) + " → " + val(b));
+        }
+        if (gOwn.length) items.push("goalies now score their own stats: " + gOwn.join(", "));
+      }
+      if (i > 0 && s.draftRounds && S[i - 1].draftRounds && s.draftRounds !== S[i - 1].draftRounds) items.push("Draft " + S[i - 1].draftRounds + " → " + s.draftRounds + " rounds");
+      if (i > 0 && s.playoffTeams && prevPO(i) && s.playoffTeams !== prevPO(i)) items.push("Playoff field " + prevPO(i) + " → " + s.playoffTeams + " teams");
+      if (items.length) changes.push(h("li", null, h("span", { class: "mgr" }, s.id), h("span", null, items.join(" · "))));
+    });
+    function prevPO(i) { for (let j = i - 1; j >= 0; j--) if (S[j].playoffTeams) return S[j].playoffTeams; return null; }
+
+    $("content").replaceChildren(
+      sec("Scoring by season", panel(grid, h("div", { class: "muted small", style: "margin-top:10px" },
+        "Fantasy points per stat, as set in each season's league settings. Highlighted = changed from the season before (hover for the old value); · = not scored. 2014-15 was a categories league: ✓ marks its categories (lowest GAA wins)."))),
+      sec("Rule changes", panel(h("ul", { class: "plain lchanges" }, changes))),
+      sec("Season basics", panel(basics, h("div", { class: "muted small", style: "margin-top:10px" }, "Weeks count regular-season scoring periods; playoff teams count the championship bracket. Click a season to open it."))),
+      h("footer", null, "Scoring read off each Yahoo league's settings page (2013-14 to 2025-26) and the Fantrax league rules (2026-27)."));
   }
 
   function renderHistory(view) {
@@ -2127,7 +2340,9 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     $("tab-manager").addEventListener("click", () => showHistory(true, "manager"));
     $("tab-playoffs").addEventListener("click", () => showHistory(true, "playoffs"));
     $("tab-drafts").addEventListener("click", () => showDrafts(true));
+    $("tab-league").addEventListener("click", () => showLeague(true));
     const route = () => {
+      if (/^#league$/.test(location.hash || "")) return showLeague(false);
       const dv = (location.hash || "").match(/^#drafts(?:-(.+))?$/);
       if (dv) return showDrafts(false, dv[1] && decodeURIComponent(dv[1]));
       const v = (location.hash || "").match(/^#(history|seasons|manager|playoffs)(?:-(.+))?$/);

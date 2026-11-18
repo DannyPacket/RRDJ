@@ -280,7 +280,10 @@ window.fxTradeTracker = function (out) {
 // The trade tracker week by week (the user's request, 2026-11-09): each traded player's fantasy points, games and
 // stat line in every week since the trade, so each week's page shows the totals as of that week and that week's
 // change. Same window as fxTradeTracker: from the day the trade went through until the receiving team let him go.
-const STAT_KEYS = { skater: ['G', 'A', '+/-', 'SOG', 'PPG', 'PPA', 'Hit', 'Blk'], goalie: ['W', 'OL', 'GA', 'SV', 'SHO'] };
+// Every stat the league scores (all added 2026-11-18 at the user's request, so a stat line adds up to the fantasy points;
+// goalies can score too: Shesterkin had a goal and an assist in week 1)
+const STAT_KEYS = { skater: ['G', 'A', '+/-', 'SOG', 'PPG', 'PPA', 'SHG', 'SHA', 'FOW', 'Hit', 'Blk', 'GWG', 'PIM'],
+  goalie: ['W', 'OL', 'GA', 'SV', 'SHO', 'G', 'A', 'PPG', 'PPA', 'SHG', 'SHA', 'PIM'] };
 async function weekStats(m, start, end) {
   const isG = m.pos && m.pos.split(',').includes('G');
   const d = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', searchName: m.player, positionOrGroup: isG ? 'POS_201' : 'HOCKEY_SKATING', startDate: start, endDate: end, timeframeTypeCode: 'BY_DATE', pageNumber: '1', maxResultsPerPage: '50' });
@@ -330,6 +333,65 @@ window.fxCardStats = async function (entry) {
     c.stats = { GP: num(col('GP')) };
     for (const k of STAT_KEYS[isG ? 'goalie' : 'skater']) c.stats[k] = num(col(k));
   }
+  return entry;
+};
+
+// Where each top/bottom card's player sat in his manager's lineup that period (the user's request, 2026-11-18):
+// Fantrax's period roster gives statusId 1 Active, 2 Bench, 3 Inj Res. Adds `slot` ("Active"/"Bench"/"IR") to each card
+// with a manager. A player no longer on that period's roster (rare) gets no slot.
+window.fxCardSlots = async function (entry) {
+  const SLOT = { 1: 'Active', 2: 'Bench', 3: 'IR' }, teamOf = Object.fromEntries(Object.entries(IDS).map(([id, m]) => [m, id])), rosters = {};
+  for (const kind of ['high', 'low', 'faHigh']) for (const pos of ['F', 'D', 'G']) {
+    const c = entry.players[kind] && entry.players[kind][pos];
+    if (!c || !c.mgr || !teamOf[c.mgr]) continue;
+    if (!rosters[c.mgr]) {
+      const d = await fx('getTeamRosterInfo', { teamId: teamOf[c.mgr], period: String(entry.week) });
+      rosters[c.mgr] = (d.tables || []).flatMap(t => t.rows || []).filter(r => r.scorer);
+    }
+    const r = rosters[c.mgr].find(x => x.scorer.name === c.name);
+    if (r && SLOT[r.statusId]) c.slot = SLOT[r.statusId];
+  }
+  return entry;
+};
+
+// The same top/bottom cards counting only players in an Active lineup slot that period (the site's Max | Active toggle,
+// the user's request 2026-11-18). Adds entry.players.active = { high: {F, D, G}, low: {F, D, G} }, each card with name,
+// nhl, pts, mgr, stats (STAT_KEYS) and slot "Active"; GP >= 1. Pages through the whole player pool (about 16 pages of 500):
+// "ALL_TAKEN" only knows current rosters, and players dropped since would be missed.
+window.fxActiveCards = async function (entry) {
+  const slot = {};
+  for (const [tid, mgr] of Object.entries(IDS)) {
+    const d = await fx('getTeamRosterInfo', { teamId: tid, period: String(entry.week) });
+    for (const r of (d.tables || []).flatMap(t => t.rows || [])) if (r.scorer) slot[r.scorer.scorerId] = { mgr, status: r.statusId };
+  }
+  const need = new Set(Object.keys(slot).filter(k => slot[k].status === '1')), found = new Set(), pl = [];
+  for (const grp of ['HOCKEY_SKATING', 'POS_201']) {
+    let pages = 1;
+    for (let pg = 1; pg <= pages; pg++) {
+      const t = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', positionOrGroup: grp, startDate: entry.start, endDate: entry.end, timeframeTypeCode: 'BY_DATE', pageNumber: String(pg), maxResultsPerPage: '500', sortType: 'SCORE' });
+      pages = (t.paginatedResultSet && t.paginatedResultSet.totalNumPages) || 1;
+      const hc = t.tableHeader.cells, col = n => hc.findIndex(x => x.shortName === n && /#/.test(x.key || '')), iF = hc.findIndex(c => c.key === 'fpts');
+      for (const r of t.statsTable) {
+        const sc = r.scorer;
+        if (!need.has(sc.scorerId)) continue;
+        found.add(sc.scorerId);
+        const num = i => (i < 0 ? 0 : parseFloat(String(r.cells[i].content).replace(/,/g, '')) || 0), isG = grp === 'POS_201';
+        const stats = { GP: num(col('GP')) };
+        for (const k of STAT_KEYS[isG ? 'goalie' : 'skater']) stats[k] = num(col(k));
+        if (!stats.GP) continue;
+        const pos = isG ? 'G' : (sc.posShortNames || '').split(',').every(p => p === 'D') ? 'D' : 'F';
+        pl.push({ name: sc.name, nhl: sc.teamShortName, pos, pts: num(iF), mgr: slot[sc.scorerId].mgr, stats, slot: 'Active' });
+      }
+      if ([...need].every(x => found.has(x))) break;
+    }
+  }
+  const act = { high: {}, low: {} };
+  for (const p of ['F', 'D', 'G']) {
+    const g = pl.filter(x => x.pos === p).sort((a, b) => b.pts - a.pts);
+    const strip = x => x && { name: x.name, nhl: x.nhl, pts: x.pts, mgr: x.mgr, stats: x.stats, slot: 'Active' };
+    act.high[p] = strip(g[0]); act.low[p] = strip(g[g.length - 1]);
+  }
+  entry.players.active = act;
   return entry;
 };
 

@@ -32,7 +32,10 @@ async function findId(p, group) {
   let found = 0, missing = [];
   for (const s of r.seasons) for (const w of s.weeks) {
     if (!w.players) continue;
-    for (const kind of ['high', 'low', 'faHigh']) for (const [group, p] of Object.entries(w.players[kind] || {})) {
+    // players.active = the same cards counting Active lineup slots only (the site's Active toggle, 2026-11-18)
+    const lists = ['high', 'low', 'faHigh'].map(k => w.players[k]);
+    if (w.players.active) lists.push(w.players.active.high, w.players.active.low);
+    for (const list of lists) for (const [group, p] of Object.entries(list || {})) {
       if (!p || !p.name) continue;
       if (p.nhl) for (const v of ['light', 'dark']) await save(`https://assets.nhle.com/logos/nhl/svg/${p.nhl}_${v}.svg`, path.join(dir, 'teams', `${p.nhl}_${v}.svg`));
       if (!p.pid) {
