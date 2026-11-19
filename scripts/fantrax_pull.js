@@ -395,5 +395,96 @@ window.fxActiveCards = async function (entry) {
   return entry;
 };
 
+// The site's Insights tab, Fantrax part (the user's request, 2026-11-18). Rebuilds the whole season each week:
+//   bench: { week: { mgr: { actual, optimal, left, missed: [[name, nhl, pos, pts]], sat: [[...]] } } }
+//     optimal = the best full lineup from that week's Active + Bench players (slot counts below, by eligibility). Every slot
+//     gets filled when the roster can fill it, so both goalie spots are always started even on a negative week (the user's
+//     rule, 2026-11-18). actual = the Active players' points (matches the official score within about 0.5).
+//     missed / sat carry the lineup slot (C, LW, RW, D, G) so the site can pair the swaps by position.
+//   wire: { through, hits: [{mgr, name, nhl, pos, date, waiver, dropped, activeWeeks, pts}],
+//           gone: [{mgr, name, nhl, pos, date, after, gp, by, byDate}] }
+//     hits = each pickup's points in that manager's Active lineup from the pickup week until he dropped him;
+//     gone = each drop's points after the drop (any team), and who picked him up next.
+// weeks = [[week, 'YYYY-MM-DD' start, end], ...] for every finished week; through = the last week's end date.
+// Paste the result into reports.json -> the season's `insights` ({ built, bench, wire }).
+window.fxInsights = async function (weeks, through) {
+  const SLOTS = { 206: 3, 203: 3, 204: 3, 202: 4, 201: 2 }, POS = { 206: 'C', 203: 'LW', 204: 'RW', 202: 'D', 201: 'G' }, r1 = x => Math.round(x * 10) / 10;
+  const best = players => { // greedy by points with augmenting paths: optimal for slot matching
+    const inSlot = {}, chosen = new Set();
+    for (const s in SLOTS) inSlot[s] = [];
+    const place = (p, seen) => {
+      for (const s of p.elig) {
+        if (!SLOTS[s] || seen.has(s)) continue;
+        seen.add(s);
+        if (inSlot[s].length < SLOTS[s]) { inSlot[s].push(p); return true; }
+        for (const q of inSlot[s]) if (place(q, seen)) { inSlot[s] = inSlot[s].filter(x => x !== q); inSlot[s].push(p); return true; }
+      }
+      return false;
+    };
+    // greedy over every player (negatives too) = the best lineup with every fillable slot filled (a matroid basis)
+    for (const p of players.slice().sort((a, b) => b.pts - a.pts)) if (place(p, new Set())) chosen.add(p);
+    for (const s in inSlot) for (const p of inSlot[s]) p.optSlot = s;
+    return Object.values(inSlot).flat();
+  };
+  const bench = {}, act = {};
+  for (const [wk, start, end] of weeks) {
+    const ros = {};
+    for (const [tid, mgr] of Object.entries(IDS)) {
+      const d = await fx('getTeamRosterInfo', { teamId: tid, period: String(wk) });
+      ros[mgr] = (d.tables || []).flatMap(t => t.rows || []).filter(r => r.scorer && (r.statusId === '1' || r.statusId === '2'))
+        .map(r => ({ id: r.scorer.scorerId, name: r.scorer.name, nhl: r.scorer.teamShortName, status: r.statusId, slot: r.posId, elig: (r.eligiblePosIds || []).filter(x => SLOTS[x]) }));
+    }
+    const need = new Set(Object.values(ros).flat().map(p => p.id)), pts = {}, found = new Set();
+    for (const grp of ['HOCKEY_SKATING', 'POS_201']) {
+      let pages = 1;
+      for (let pg = 1; pg <= pages; pg++) {
+        const t = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', positionOrGroup: grp, startDate: start, endDate: end, timeframeTypeCode: 'BY_DATE', pageNumber: String(pg), maxResultsPerPage: '500', sortType: 'SCORE' });
+        pages = t.paginatedResultSet.totalNumPages;
+        const iF = t.tableHeader.cells.findIndex(c => c.key === 'fpts');
+        for (const r of t.statsTable) if (need.has(r.scorer.scorerId)) { pts[r.scorer.scorerId] = parseFloat(String(r.cells[iF].content).replace(/,/g, '')) || 0; found.add(r.scorer.scorerId); }
+        if ([...need].every(x => found.has(x))) break;
+      }
+    }
+    bench[wk] = {};
+    for (const [m, ps] of Object.entries(ros)) {
+      ps.forEach(p => { p.pts = pts[p.id] || 0; });
+      const on = ps.filter(p => p.status === '1'), opt = best(ps);
+      const actual = on.reduce((a, p) => a + p.pts, 0), optimal = opt.reduce((a, p) => a + p.pts, 0);
+      bench[wk][m] = { actual: r1(actual), optimal: r1(optimal), left: r1(optimal - actual),
+        missed: opt.filter(p => p.status !== '1').sort((a, b) => b.pts - a.pts).map(p => [p.name, p.nhl, POS[p.optSlot] || '', r1(p.pts)]),
+        sat: on.filter(p => !opt.includes(p)).sort((a, b) => a.pts - b.pts).map(p => [p.name, p.nhl, POS[p.slot] || '', r1(p.pts)]) };
+      for (const p of on) (act[m + '|' + p.id] = act[m + '|' + p.id] || []).push([wk, p.pts]);
+    }
+  }
+  // every add and drop, with a sortable time stamp
+  const tsOf = s => { const d = isoOf(s), m = s && s.match(/(\d{1,2}):(\d{2})\s*([AP]M)/); return d ? d + 'T' + String(m ? +m[1] % 12 + (m[3] === 'PM' ? 12 : 0) : 0).padStart(2, '0') + ':' + (m ? m[2] : '00') : null; };
+  const tx = await fx('getTransactionDetailsHistory', { maxResultsPerPage: '500' });
+  const groups = []; let cur = null;
+  for (const r of tx.table.rows) {
+    const team = r.cells.find(c => c.key === 'team'), date = r.cells.find(c => c.key === 'date');
+    if (team || date || !cur || cur.id !== r.txSetId) { cur = { id: r.txSetId, mgr: team ? IDS[team.teamId] : (cur && cur.mgr), date: date ? date.content : (cur && cur.date), items: [] }; groups.push(cur); }
+    cur.items.push({ code: r.transactionCode, claim: r.claimType, name: r.scorer.name, id: r.scorer.scorerId, nhl: r.scorer.teamShortName, pos: (r.scorer.posShortNames || '').replace(/,/g, '/'), executed: r.executed });
+  }
+  const moves = [];
+  for (const g of groups) for (const i of g.items) if (i.executed !== false && (i.code === 'CLAIM' || i.code === 'DROP'))
+    moves.push({ kind: i.code, mgr: g.mgr, date: isoOf(g.date), t: tsOf(g.date), waiver: i.claim === 'WW', id: i.id, name: i.name, nhl: i.nhl, pos: i.pos });
+  const weekOf = d => { for (const [wk, , e] of weeks) if (d <= e) return wk; return weeks.length + 1; };
+  const next = (list, after) => list.filter(x => x.t > after).sort((a, b) => (a.t < b.t ? -1 : 1))[0];
+  const hits = moves.filter(x => x.kind === 'CLAIM').map(m => {
+    const drop = next(moves.filter(x => x.kind === 'DROP' && x.mgr === m.mgr && x.id === m.id), m.t);
+    const w0 = weekOf(m.date), w1 = drop ? weekOf(drop.date) : 99, wks = (act[m.mgr + '|' + m.id] || []).filter(([wk]) => wk >= w0 && wk <= w1);
+    return { mgr: m.mgr, name: m.name, nhl: m.nhl, pos: m.pos, date: m.date, waiver: m.waiver, dropped: drop ? drop.date : null, activeWeeks: wks.length, pts: r1(wks.reduce((a, x) => a + x[1], 0)) };
+  });
+  const gone = [];
+  for (const d of moves.filter(x => x.kind === 'DROP' && x.date < through)) {
+    const s = new Date(d.date + 'T12:00:00Z'); s.setUTCDate(s.getUTCDate() + 1);
+    const t = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', searchName: d.name, positionOrGroup: d.pos.split('/').includes('G') ? 'POS_201' : 'HOCKEY_SKATING', startDate: s.toISOString().slice(0, 10), endDate: through, timeframeTypeCode: 'BY_DATE', pageNumber: '1', maxResultsPerPage: '20' });
+    const iF = t.tableHeader.cells.findIndex(c => c.key === 'fpts'), iGP = t.tableHeader.cells.findIndex(c => c.shortName === 'GP'), row = t.statsTable.find(r => r.scorer.scorerId === d.id);
+    const pick = next(moves.filter(x => x.kind === 'CLAIM' && x.id === d.id), d.t);
+    gone.push({ mgr: d.mgr, name: d.name, nhl: d.nhl, pos: d.pos, date: d.date, after: row ? parseFloat(String(row.cells[iF].content).replace(/,/g, '')) || 0 : 0, gp: row ? parseInt(row.cells[iGP].content) || 0 : 0, by: pick ? pick.mgr : null, byDate: pick ? pick.date : null });
+  }
+  return { built: new Date().toISOString().slice(0, 10), bench, wire: { through, hits, gone } };
+};
+
 window.__out = await window.fxPull(__PERIOD__, '__LOCK__', '__CUTOFF__');
 window.__out;

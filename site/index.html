@@ -483,6 +483,12 @@ ul.plain.h2h-list { gap: 0; max-width: 460px; }
 .h2h-list li.catrow { background: color-mix(in srgb, var(--chip) 80%, transparent); padding-left: 6px; padding-right: 6px; border-radius: 4px; }
 footer { color: var(--muted); font-size: 12px; font-family: var(--mono); }
 #status { color: var(--muted); }
+/* Insights */
+table.iall { min-width: 640px; } table.iall td { height: 42px; } table.iall td.b { font-weight: 700; }
+table.iall .gain { color: var(--win); font-weight: 700; } table.iall .drop { color: var(--loss); font-weight: 700; }
+ul.plain.icost { gap: 0; }
+.icost li { display: grid; grid-template-columns: 3.4em minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.icost li:last-child { border-bottom: 0; }
 /* League details */
 table.lscoring { min-width: 900px; font-size: 13px; }
 table.lscoring th, table.lscoring td { text-align: center; padding: 6px 4px; height: auto; }
@@ -578,6 +584,7 @@ ul.plain.dlist { gap: 0; }
 .dlist .steal .rv { color: var(--win); } .dlist .bust .rv { color: var(--loss); }
 table.dmgrs { min-width: 720px; } table.dmgrs td { height: 42px; } table.dmgrs td.b { font-weight: 700; }
 table.dmgrs tr.drow { cursor: pointer; }
+table.dmgrs.iwire { min-width: 0; }
 table.dmgrs tr.drow:hover td, table.dmgrs tr.drow:focus-visible td { background: var(--chip); outline: none; }
 table.dmgrs tr.drow .chev { display: inline-block; width: 10px; color: var(--muted); transition: transform .12s; }
 table.dmgrs tr.drow.open .chev { transform: rotate(90deg); }
@@ -602,7 +609,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     <h1 id="league">Rene Rancourt's Day Job</h1>
     <div class="weekline"><span class="wk" id="wk">Weekly report</span><span class="dates" id="dates"></span></div>
     <div class="rink" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button><button type="button" id="tab-drafts" aria-pressed="false">Draft history</button><button type="button" id="tab-league" aria-pressed="false">League details</button></nav>
+    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button><button type="button" id="tab-drafts" aria-pressed="false">Draft history</button><button type="button" id="tab-insights" aria-pressed="false">Insights</button><button type="button" id="tab-league" aria-pressed="false">League details</button></nav>
     <div class="picker" id="hpicker" hidden></div>
     <div class="picker" id="picker">
       <div class="pick-row"><label for="season">Season</label>
@@ -953,7 +960,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
   let fSort = { key: "m", dir: 1 }, hSort = { key: "pct", dir: -1 }, hPair = null, hSeason = null, sSort = { key: "reg", dir: 1 }, hMgr = null, hLog = null, pSort = { key: "titles", dir: -1 };
 
-  const TABS = ["week", "history", "seasons", "manager", "playoffs", "drafts", "league"];
+  const TABS = ["week", "history", "seasons", "manager", "playoffs", "drafts", "insights", "league"];
   function setTab(view) {
     TABS.forEach(t => $("tab-" + t).setAttribute("aria-pressed", t === view ? "true" : "false"));
     $("picker").hidden = view !== "week";
@@ -1236,6 +1243,148 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       sec("Manager draft report cards", panel(mtable, h("div", { class: "muted small", style: "margin-top:10px" }, "GPA from completed drafts (A+ = 4.3 … F = 0). Steals = picks that crushed their slot; early busts = rounds 1–5 picks that badly missed it. Click a column to sort."))),
       sec("First-round picks", panel(firsts, h("div", { class: "muted small", style: "margin-top:10px" }, "Each manager's first pick every season: overall pick number → where the player finished, and the change. Colors as on the draft board; 🥇🥈🥉 = that manager's final place that season. Newest season on the left; scroll sideways for older ones."))),
       h("footer", null, "Drafts from Yahoo (2013-14 to 2025-26) and Fantrax (2026-27). Player stats from NHL.com; built " + D.built + "."));
+  }
+
+  // Insights tab: all-play standings and luck (every points season, from history.games), points left on the bench and
+  // wire hits (Fantrax seasons: season.insights, built from Fantrax's weekly lineups by fxInsights in fantrax_pull.js).
+  let iSeason = null, iSort = { key: "pct", dir: -1 }, iWireOpen = null;
+  function showInsights(push, arg) {
+    setTab("insights");
+    if (arg) iSeason = arg;
+    if (push) setHash(iSeason ? "insights-" + iSeason : "insights");
+    renderInsights();
+  }
+  function renderInsights() {
+    const H = DATA.history || {}, G = H.games || [];
+    const ids = [...new Set(G.map(g => g[0]))].sort();
+    // 2014-15 (categories) has no points to compare, so it isn't offered; an unknown season falls back to the latest
+    if (!iSeason || !ids.includes(iSeason)) { if (iSeason) setHash("insights"); iSeason = ids[ids.length - 1]; }
+    const sid = iSeason, season = DATA.seasons.find(s => s.id === sid) || {}, LG = season.logos || {}, live = !(H.finals || {})[sid] && sid === ids[ids.length - 1];
+    $("wk").textContent = "Insights";
+    $("season-eyebrow").textContent = sid + " season · " + (season.source === "sheet" ? "Yahoo" : "Fantrax");
+    const sel = h("select", { id: "insights-season", onchange: e => { iSeason = e.target.value; setHash("insights-" + iSeason); renderInsights(); } },
+      ...ids.slice().reverse().map(id => h("option", { value: id, selected: id === sid ? "selected" : null }, id + (id === ids[ids.length - 1] && live ? " (in progress)" : ""))));
+    headerFilter("Season", sel, true);
+    const mgrTag = m => h("span", { class: "dmgr" }, avatar(m, LG[m], 22, "sm"), h("span", { class: "mgr" }, m));
+
+    // ---- all-play: each week, every team against all the others; luck = actual wins minus expected wins
+    const gs = G.filter(g => g[0] === sid);
+    const weeks = [...new Set(gs.map(g => g[1]))].sort((a, b) => a - b);
+    const T = {};
+    const row = m => T[m] = T[m] || { m, w: 0, l: 0, t: 0, aw: 0, al: 0, at: 0, pf: 0, games: 0 };
+    for (const wk of weeks) {
+      const sc = []; for (const g of gs.filter(g => g[1] === wk)) { sc.push([g[2], g[3]], [g[4], g[5]]); }
+      for (const [m, p] of sc) {
+        const r = row(m); r.pf += p; r.games++;
+        for (const [o, q] of sc) if (o !== m) { if (p > q) r.aw++; else if (p < q) r.al++; else r.at++; }
+      }
+      for (const g of gs.filter(g => g[1] === wk)) { const a = row(g[2]), b = row(g[4]); if (g[3] > g[5]) { a.w++; b.l++; } else if (g[3] < g[5]) { a.l++; b.w++; } else { a.t++; b.t++; } }
+    }
+    const rows = Object.values(T).map(r => Object.assign(r, { pct: (r.aw + r.at / 2) / Math.max(1, r.aw + r.al + r.at) })).map(r => Object.assign(r, { exp: r.pct * r.games, luck: r.w + r.t / 2 - r.pct * r.games }));
+    const sorters = { m: r => r.m, rec: r => r.w + r.t / 2, pct: r => r.pct, exp: r => r.exp, luck: r => r.luck, pf: r => r.pf };
+    rows.sort((a, b) => { const x = sorters[iSort.key](a), y = sorters[iSort.key](b); return (x < y ? -1 : x > y ? 1 : 0) * iSort.dir; });
+    const icol = (k, l, title) => h("th", { "aria-sort": iSort.key === k ? (iSort.dir > 0 ? "ascending" : "descending") : null, title },
+      h("button", { type: "button", class: "sort", onclick: () => { iSort = { key: k, dir: iSort.key === k ? -iSort.dir : (k === "m" ? 1 : -1) }; renderInsights(); } }, l));
+    const rec = r => r.w + "-" + r.l + (r.t ? "-" + r.t : "");
+    const allPlay = h("div", { class: "tablewrap" }, h("table", { class: "iall" },
+      h("thead", null, h("tr", null, icol("m", "Manager"), icol("rec", "Record"), icol("pct", "All-play", "Every team against all 11 others, every week"), icol("exp", "Expected Wins", "Wins an average schedule would have given"), icol("luck", "Luck", "Actual wins minus expected wins"), icol("pf", "Points For"))),
+      h("tbody", null, ...rows.map(r => h("tr", null, h("td", null, mgrTag(r.m)), h("td", { class: "num" }, rec(r)),
+        h("td", { class: "num" }, r.aw + "-" + r.al + (r.at ? "-" + r.at : "") + " ", h("span", { class: "muted" }, "(" + r.pct.toFixed(3).replace(/^0/, "") + ")")),
+        h("td", { class: "num" }, r.exp.toFixed(1)),
+        h("td", { class: "num " + (r.luck > 0.25 ? "gain" : r.luck < -0.25 ? "drop" : "muted") }, (r.luck > 0 ? "+" : "") + r.luck.toFixed(1)),
+        h("td", { class: "num" }, fmt(r.pf)))))));
+    const byLuck = rows.slice().sort((a, b) => b.luck - a.luck);
+    const luckTiles = rows.length ? h("div", { class: "tiles" },
+      h("div", { class: "tile" }, h("span", { class: "pos" }, "Luckiest"), h("span", { class: "tile-v" }, byLuck[0].m), h("span", { class: "muted small" }, rec(byLuck[0]) + " with a " + byLuck[0].pct.toFixed(3).replace(/^0/, "") + " all-play · +" + byLuck[0].luck.toFixed(1) + " wins")),
+      h("div", { class: "tile" }, h("span", { class: "pos" }, "Unluckiest"), h("span", { class: "tile-v" }, byLuck[byLuck.length - 1].m), h("span", { class: "muted small" }, rec(byLuck[byLuck.length - 1]) + " with a " + byLuck[byLuck.length - 1].pct.toFixed(3).replace(/^0/, "") + " all-play · " + byLuck[byLuck.length - 1].luck.toFixed(1) + " wins")),
+      h("div", { class: "tile" }, h("span", { class: "pos" }, "Best all-play"), h("span", { class: "tile-v" }, rows.slice().sort((a, b) => b.pct - a.pct)[0].m), h("span", { class: "muted small" }, "would beat the most teams, week after week"))) : null;
+
+    const out = [sec("All-play & luck", luckTiles, panel(allPlay, h("div", { class: "muted small", style: "margin-top:10px" },
+      "All-play = each week's score against all 11 other teams, not just your opponent. Expected Wins = the wins that all-play rate is worth over the games played. Luck = actual wins minus expected: plus means the schedule has been kind. Regular season only. Click a column to sort.")))];
+
+    // ---- bench and wire (Fantrax seasons)
+    const I = season.insights;
+    if (I && I.bench) {
+      const bw = Object.keys(I.bench).map(Number).sort((a, b) => a - b);
+      const B = {};
+      const games = gs.reduce((o, g) => { (o[g[1]] = o[g[1]] || {})[g[2]] = [g[3], g[4], g[5]]; o[g[1]][g[4]] = [g[5], g[2], g[3]]; return o; }, {});
+      const costly = [];
+      // the swaps the best lineup makes, paired by position: forwards for forwards, D for D, G for G
+      const grpOf = p => p === "G" ? "G" : p === "D" ? "D" : "F";
+      const swapLines = t => h("div", { class: "muted small" }, ...["F", "D", "G"].map(g => {
+        const ins = t.missed.filter(x => grpOf(x[2]) === g), outs = t.sat.filter(x => grpOf(x[2]) === g);
+        if (!ins.length && !outs.length) return null;
+        const names = l => l.map(x => x[0] + " " + fmt(x[3])).join(", ");
+        const net = Math.round(10 * (ins.reduce((a, x) => a + x[3], 0) - outs.reduce((a, x) => a + x[3], 0))) / 10;
+        return h("div", null, h("b", null, g + ": "), ins.length ? "start " + names(ins) : "", ins.length && outs.length ? " over " : "", outs.length ? (ins.length ? "" : "bench ") + names(outs) : "",
+          " · ", h("span", { class: net > 0 ? "gain" : net < 0 ? "drop" : "" }, "net " + (net > 0 ? "+" : "") + fmt(net)));
+      }));
+      for (const wk of bw) for (const [m, t] of Object.entries(I.bench[wk])) {
+        const b = B[m] = B[m] || { m, left: 0, act: 0, opt: 0, weeks: 0, cost: 0, worst: null };
+        b.left += t.left; b.act += t.actual; b.opt += t.optimal; b.weeks++;
+        if (!b.worst || t.left > b.worst.left) b.worst = Object.assign({ wk }, t);
+        const gm = games[wk] && games[wk][m];
+        if (gm && gm[0] < gm[2] && gm[0] + t.left > gm[2]) { b.cost++; costly.push({ wk, m, me: gm[0], opp: gm[1], op: gm[2], t }); }
+      }
+      const brows = Object.values(B).sort((a, b) => b.left - a.left);
+      const benchT = h("div", { class: "tablewrap" }, h("table", { class: "iall" },
+        h("thead", null, h("tr", null, ["Manager", "Left on bench", "Per week", "Lineup efficiency", "Losses it cost", "Worst week"].map(x => h("th", null, x)))),
+        h("tbody", null, ...brows.map(b => h("tr", null, h("td", null, mgrTag(b.m)), h("td", { class: "num b" }, fmt(b.left)), h("td", { class: "num" }, fmt(b.left / b.weeks)),
+          h("td", { class: "num" }, (100 * b.act / b.opt).toFixed(1) + "%"), h("td", { class: "num" + (b.cost ? " drop" : "") }, b.cost),
+          h("td", null, "Wk " + b.worst.wk + ": " + fmt(b.worst.left), b.worst.missed[0] ? h("span", { class: "muted small" }, " · benched " + b.worst.missed[0][0] + " (" + fmt(b.worst.missed[0][3]) + ")") : null))))));
+      const costList = h("ul", { class: "plain icost" }, costly.sort((a, b) => b.wk - a.wk || b.t.left - a.t.left).map(c => h("li", null,
+        h("span", { class: "num muted" }, "Wk " + c.wk),
+        h("span", null, h("span", { class: "mgr" }, c.m), " lost to " + c.opp + " " + fmt(c.me) + " – " + fmt(c.op) + " with " + fmt(c.t.left) + " on the bench",
+          swapLines(c.t)))));
+      out.push(sec("Points left on the bench", panel(benchT, h("div", { class: "muted small", style: "margin-top:10px" },
+        "The best lineup each team could have set from its own Active and Bench players that week (3 C, 3 LW, 3 RW, 4 D, 2 G, by position eligibility), compared with the lineup it actually used. Hindsight, of course: nobody knew who'd score. Efficiency = points started ÷ best possible."))));
+      out.push(sec("Losses the bench cost", panel(costly.length ? costList : h("div", { class: "empty" }, "No losses yet that the best lineup would have flipped."))));
+    }
+    if (I && I.wire) {
+      const W = I.wire, d = x => x ? day(x) : "";
+      const hits = W.hits.filter(x => x.pts > 0).sort((a, b) => b.pts - a.pts).slice(0, 10);
+      const gone = W.gone.filter(x => x.after > 0).sort((a, b) => b.after - a.after).slice(0, 10);
+      const li = (x, i, main, sub, val, cls) => h("li", { class: "dpick " + cls }, h("span", { class: "rn num" }, i + 1),
+        h("span", { class: "rw" }, h("span", null, h("span", { class: "mgr" }, x.name), h("span", { class: "muted small" }, " " + [x.nhl, x.pos].filter(Boolean).join(" · "))), h("span", { class: "muted small" }, sub)),
+        h("span", { class: "rv num" }, val));
+      const hitList = h("ul", { class: "plain dlist" }, hits.map((x, i) => li(x, i, null,
+        x.mgr + " · " + (x.waiver ? "waiver claim " : "picked up ") + d(x.date) + (x.dropped ? " · dropped " + d(x.dropped) : "") + " · " + x.activeWeeks + " active wk" + (x.activeWeeks === 1 ? "" : "s"), fmt(x.pts), "steal")));
+      const goneList = h("ul", { class: "plain dlist" }, gone.map((x, i) => li(x, i, null,
+        x.mgr + " · dropped " + d(x.date) + (x.by ? (x.by === x.mgr ? " · picked back up " : " · picked up by " + x.by + " ") + d(x.byDate) : " · still a free agent") + " · " + x.gp + " GP since", fmt(x.after), "bust")));
+      const perMgr = {};
+      const pm = m => perMgr[m] = perMgr[m] || { m, adds: 0, pts: 0, drops: 0, after: 0 };
+      for (const x of W.hits) { const p = pm(x.mgr); p.adds++; p.pts += x.pts; }
+      for (const x of W.gone) { const p = pm(x.mgr); p.drops++; p.after += x.after; }
+      const per = (a, n) => n ? fmt(a / n) : "–";
+      // click a manager: a row opens under him with every pickup and drop (dates, active weeks, points)
+      const mgrT = h("div", { class: "tablewrap" }, h("table", { class: "iall dmgrs iwire" },
+        h("thead", null, h("tr", null, ["Manager", "Pickups", "Active pts from pickups", "Per pickup", "Drops", "Pts since drop", "Per drop"].map(x => h("th", null, x)))),
+        h("tbody", null, ...Object.values(perMgr).sort((a, b) => b.pts - a.pts).flatMap(p => {
+          const open = iWireOpen === p.m;
+          const tr = h("tr", { class: "drow" + (open ? " open" : ""), tabindex: "0", role: "button", "aria-expanded": open ? "true" : "false", title: "Show " + p.m + "'s pickups and drops",
+            onclick: () => { iWireOpen = open ? null : p.m; const y = window.scrollY; renderInsights(); window.scrollTo(0, y); },
+            onkeydown: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.currentTarget.click(); } } },
+            h("td", null, h("span", { class: "dmgr" }, h("span", { class: "chev", "aria-hidden": "true" }, "›"), mgrTag(p.m))),
+            h("td", { class: "num" }, p.adds), h("td", { class: "num b" }, fmt(p.pts)), h("td", { class: "num" }, per(p.pts, p.adds)),
+            h("td", { class: "num" }, p.drops), h("td", { class: "num b" }, fmt(p.after)), h("td", { class: "num" }, per(p.after, p.drops)));
+          if (!open) return [tr];
+          const adds = W.hits.filter(x => x.mgr === p.m).sort((a, b) => (a.date < b.date ? 1 : -1));
+          const drops = W.gone.filter(x => x.mgr === p.m).sort((a, b) => (a.date < b.date ? 1 : -1));
+          const list = (title, xs, fn) => h("div", null, h("h3", { class: "dh3" }, title),
+            xs.length ? h("ul", { class: "plain dlist" }, xs.map(fn)) : h("p", { class: "muted small" }, "None yet"));
+          return [tr, h("tr", { class: "ddetail" }, h("td", { colspan: "7" }, h("div", { class: "dmgr-detail" },
+            list("Pickups · active pts for " + p.m, adds, (x, i) => li(x, i, null,
+              (x.waiver ? "waiver claim " : "picked up ") + d(x.date) + (x.dropped ? " · dropped " + d(x.dropped) : "") + " · " + x.activeWeeks + " active wk" + (x.activeWeeks === 1 ? "" : "s"), fmt(x.pts), x.pts > 0 ? "steal" : "bust")),
+            list("Drops · pts since, any team", drops, (x, i) => li(x, i, null,
+              "dropped " + d(x.date) + (x.by ? (x.by === x.mgr ? " · picked back up " : " · picked up by " + x.by + " ") + d(x.byDate) : " · still a free agent") + " · " + x.gp + " GP since", fmt(x.after), x.after > 0 ? "bust" : "steal")))))];
+        }))));
+      out.push(h("div", { class: "cols top" },
+        sec("Wire hits", panel(hitList, h("div", { class: "muted small", style: "margin-top:10px" }, "Pickups ranked by the points they scored in their new manager's Active lineup, from the pickup until he was dropped (through " + d(W.through) + ")."))),
+        sec("The ones that got away", panel(goneList, h("div", { class: "muted small", style: "margin-top:10px" }, "Players dropped this season, ranked by the points they've scored since (through " + d(W.through) + "), for whoever had them.")))));
+      out.push(sec("Waiver wire by manager", panel(mgrT)));
+    } else if (season.source === "sheet") out.push(h("div", { class: "muted small" }, "Bench points and wire hits need weekly lineups, which only the Fantrax seasons (2026-27 on) have."));
+    $("dates").textContent = weeks.length + " weeks" + (live ? " so far" : "");
+    $("content").replaceChildren(...out, h("footer", null, "Scores from the league sheet; lineups and pickups from Fantrax."));
   }
 
   // League details tab: each season's scoring settings and basics, for the record (data: reports.json leagueInfo,
@@ -2341,8 +2490,11 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     $("tab-playoffs").addEventListener("click", () => showHistory(true, "playoffs"));
     $("tab-drafts").addEventListener("click", () => showDrafts(true));
     $("tab-league").addEventListener("click", () => showLeague(true));
+    $("tab-insights").addEventListener("click", () => showInsights(true));
     const route = () => {
       if (/^#league$/.test(location.hash || "")) return showLeague(false);
+      const iv = (location.hash || "").match(/^#insights(?:-(.+))?$/);
+      if (iv) return showInsights(false, iv[1] && decodeURIComponent(iv[1]));
       const dv = (location.hash || "").match(/^#drafts(?:-(.+))?$/);
       if (dv) return showDrafts(false, dv[1] && decodeURIComponent(dv[1]));
       const v = (location.hash || "").match(/^#(history|seasons|manager|playoffs)(?:-(.+))?$/);
