@@ -141,7 +141,7 @@ window.fxPull = async function (PERIOD, LOCK, CUTOFF) {
   const sh = st.tableList[0].header.cells.map(c => c.key);
   out.standings = st.tableList[0].rows.map(rw => {
     const c = k => rw.cells[sh.indexOf(k)].content;
-    return { rank: +rw.fixedCells[0].content, mgr: who(rw.fixedCells[1].teamId), w: +c('win'), l: +c('loss'), t: +c('tie'), pf: parseFloat(c('pointsFor')), pa: parseFloat(c('pointsAgainst')), streak: c('streak') };
+    return { rank: +rw.fixedCells[0].content, mgr: who(rw.fixedCells[1].teamId), w: +c('win'), l: +c('loss'), t: +c('tie'), pf: parseFloat(String(c('pointsFor')).replace(/,/g, '')), pa: parseFloat(String(c('pointsAgainst')).replace(/,/g, '')), streak: c('streak') };
   });
 
   // 3. Owned players over the period's dates, GP >= 1, top/bottom 3 for F / D / G.

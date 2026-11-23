@@ -352,8 +352,16 @@ const NEWS = {
     ['2026-11-12', "Chris Kreider left Montreal's win over Boston with a leg injury and is out six to eight weeks. Vin cut him the next morning."],
     ['2026-11-14', "Nick's Mark Scheifele passed Dale Hawerchuk to become the Jets' all-time leading scorer, with a goal and three assists against Chicago. Tim's Connor Hellebuyck made 43 saves against Washington and is 7-0 as a Devil."],
     ['2026-11-15', "Tim's Connor McDavid stretched his season-opening point streak to 22 games, and Hallie's Leon Draisaitl became the first player to 20 goals. Tom's Cutter Gauthier scored again too: nine straight games with a goal."],
-    ['2026-11-15', "The Rangers put Igor Shesterkin on season-ending long-term injured reserve."]
+    ['2026-11-15', "The Rangers put Igor Shesterkin on season-ending long-term injured reserve."],
+    ['2026-11-17', "Tim's Connor McDavid ran his season-opening point streak to 23 games, tying Wayne Gretzky's 1988-89 run for the third-longest ever. Tom's Cutter Gauthier added a hat trick in a loss to St. Louis: his fourth of the month, an NHL first for one calendar month. Will's Matthew Schaefer scored three too, joining Phil Housley and Hannu Virta as the only teenage defensemen with an NHL hat trick."],
+    ['2026-11-19', "Both streaks ended the same night: Tampa held Edmonton to one goal and McDavid's run stopped at 23, and Gauthier's goal streak ended at 10, one shy of Teemu Selanne's Ducks record. The Lightning put Jefe's Brandon Hagel on injured reserve."],
+    ['2026-11-21', "Rough day for the injury list: Ronnie's Nathan MacKinnon is out 12 weeks, and Jefe's Connor Bedard needs surgery on his right shoulder and could miss three months. On the ice, Joe's Elias Lindholm had four goals and an assist in Boston's 7-5 win over Washington, Tom's Sam Bennett had a hat trick, and Tom's Jake Neighbours tied the Blues record with five assists."],
+    ['2026-11-22', "Danny's Jake Oettinger blanked Pittsburgh 1-0, his fifth shutout of the season. Hallie's Leon Draisaitl reached 1,100 career points. And the big one: Detroit traded Vin's Dylan Larkin to Montreal for Samuel Montembeault, Kirby Dach, prospect Michael Hage and picks."]
   ]
+};
+// The user's own storyline for a week's headline game, by season and week; it prints right after the high-score lead
+const GAME_NOTES = {
+  '2026-27': [[8, "It was the highest-scoring game of the week, 354.9 combined, and it went right down to the final day before Danny pulled it out."]]
 };
 // Extra color for a specific trade, by season and the trade's date (the user's own jokes and context go here)
 const TRADE_NOTES = {
@@ -368,8 +376,9 @@ function standingsRead(standings, prev, isNew, newBottom) {
   let t;
   if (tied.length >= 2) t = V.standTie(l.mgr, recStr(l), and(tied.slice(1).map(x => x.mgr)), isNew, tied.length > 2);
   else { const g = wpts(l) - wpts(s); t = V.standLead(l.mgr, recStr(l), g === 0.5 ? 'half a game' : g === 1 ? 'a game' : g % 1 ? (words[Math.floor(g)] || Math.floor(g)) + ' and a half games' : (words[g] || g) + ' games', s.mgr, recStr(s), isNew); }
-  const back = standings.filter(x => wpts(l) - wpts(x) === 1);
-  if (back.length && back.length <= 4 && back.every(x => recStr(x) === recStr(back[0])) && !(tied.length < 2 && back.length === 1 && back[0] === s)) t += V.chasers(and(back.map(x => x.mgr)), recStr(back[0]));
+  // the lead line already names the runner-up, so the chase pack lists only the others a game back
+  const back = standings.filter(x => wpts(l) - wpts(x) === 1 && !(tied.length < 2 && x === s));
+  if (back.length && back.length <= 4 && back.every(x => recStr(x) === recStr(back[0]))) t += V.chasers(and(back.map(x => x.mgr)), recStr(back[0]));
   const moves = standings.filter(x => prev[x.mgr]).map(x => ({ m: x.mgr, d: prev[x.mgr] - x.rank, r: x.rank }));
   const up = moves.sort((a, b) => b.d - a.d)[0];
   if (up && up.d >= 3) t += V.climber(up.m, up.d, ord(up.r));
@@ -491,6 +500,7 @@ for (const [id, S] of Object.entries(bySeason)) {
       else if (k === mgrs.length - 1 && wk % 2 === 1) lead += V.allPlay(hsMgr, k, mgrs.length - 1);
       if (loserBest) lead += V.loserBest(hsG.opp, f1(hsG.q));
     }
+    for (const [w, text] of GAME_NOTES[id] || []) if (w === wk) lead += ' ' + text;
     recap.push(lead);
     if (!CAT && normalWeek(id, wk) && seasonIds.indexOf(id) > 0) {
       const rec = recordBefore(id, wk), low = Math.min(...mgrs.map(m => G[m].p)), lowM = mgrs.find(m => G[m].p === low);
