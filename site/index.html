@@ -600,6 +600,82 @@ table.dfirsts td.dcell { height: auto; padding: 4px 5px; border: 0; border-radiu
 table.dfirsts .cur { outline: 2px solid var(--blue); outline-offset: -1px; }
 table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chip) 0 6px, transparent 6px 12px); }
 @media (prefers-reduced-motion: no-preference) { .weeks button { transition: background .12s, color .12s, border-color .12s; } }
+
+/* Trade History tab: every trade as a "Trade accepted" card, with the trade tracker result on top and a story */
+.trades-list { display: grid; gap: 40px; }
+.tx { display: grid; gap: 12px; max-width: 1080px; width: 100%; justify-self: center; }
+.tx-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tx-top .export-btn { margin-left: auto; }
+.tx-track { display: grid; gap: 10px; }
+.tx-track .tt-sides { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.tx-track .tt-total { font-size: 30px; }
+.tx-track .tt-side.won { border-color: var(--win); box-shadow: inset 0 3px 0 var(--win); }
+.tx-track .tag.won { background: var(--win); color: var(--board); }
+.tx-bar { display: flex; height: 10px; border-radius: 99px; overflow: hidden; background: var(--chip); }
+.tx-card { position: relative; overflow: hidden; background: var(--board); border: 6px solid var(--ink); border-radius: 44px; padding: 32px 36px 26px; }
+.tx-card .rinkbg { position: absolute; inset: 0; pointer-events: none; }
+.tx-card .rinkbg .redl { position: absolute; top: 0; bottom: 0; left: calc(50% - 4px); width: 8px; background: var(--red); opacity: .13; }
+.tx-card .rinkbg .bl { position: absolute; top: 0; bottom: 0; width: 12px; background: var(--blue); opacity: .09; }
+.tx-card .rinkbg .circ { position: absolute; left: 50%; top: 260px; width: 280px; height: 280px; margin-left: -140px; border: 4px solid var(--blue); border-radius: 50%; opacity: .1; }
+.tx-card > *:not(.rinkbg) { position: relative; }
+.tx-eyb { font: 600 12px var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.tx-hero { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-top: 4px; }
+.tx-hero h3 { margin: 0; font: 900 clamp(48px, 9vw, 92px)/.84 var(--display); text-transform: uppercase; }
+.tx-hero h3 span { display: block; color: var(--red); }
+.tx-when { font: 600 13px var(--mono); color: var(--muted); margin-top: 10px; }
+.tx-stamp { flex: none; width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--red); color: var(--red); display: grid; place-items: center; text-align: center; transform: rotate(-11deg);
+  font: 800 13px/1.05 var(--display); letter-spacing: .1em; text-transform: uppercase; box-shadow: inset 0 0 0 3px var(--board), inset 0 0 0 5px var(--red); }
+.tx-stamp b { display: block; font-size: 30px; letter-spacing: .02em; line-height: .9; margin: 3px 0; }
+.tx-card .rink { margin: 18px 0 22px; }
+.tx-teams { display: grid; align-items: start; }
+.tx-mid { display: flex; justify-content: center; padding-top: 28px; }
+.tx-puck { width: 76px; height: 76px; border-radius: 50%; background: #0F1C2B; display: grid; place-items: center; box-shadow: 0 6px 0 #000, 0 10px 20px rgba(15,28,43,.3); }
+.tx-side { min-width: 0; }
+.tx-mh { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.tx-mh .logo.big { width: 96px; height: 96px; border: 5px solid var(--sc); box-shadow: 0 0 0 3px var(--board); }
+.tx-mh .logo.initial.big { font-size: 44px; color: var(--sc); }
+.tx-mname { font: 900 48px/.9 var(--display); text-transform: uppercase; color: var(--sc); }
+.tx-tname { font: 600 12px var(--mono); color: var(--muted); margin-top: 3px; }
+.tx-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tx-chips span { font: 700 12px var(--body); background: var(--chip); border-radius: 99px; padding: 2px 9px; }
+.tx-chips .gold { background: color-mix(in srgb, #E0A800 30%, var(--chip)); }
+.tx-gets { font: 800 17px var(--display); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.tx-gets::after { content: ""; flex: 1; height: 3px; background: var(--sc); opacity: .35; border-radius: 3px; }
+.tx-pc { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 12px; align-items: center; background: var(--ice); border-radius: 16px; padding: 11px 14px 11px 11px; margin-top: 11px; border-left: 7px solid var(--sc); }
+.tx-pc:nth-of-type(odd) { transform: rotate(-.6deg); } .tx-pc:nth-of-type(even) { transform: rotate(.5deg); }
+.tx-hs { position: relative; width: 76px; height: 76px; }
+.tx-hs .face { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; object-position: top; background: var(--chip); display: block; }
+.tx-hs .face.none { display: grid; place-items: center; font: 900 30px var(--display); color: var(--muted); }
+.tx-hs .badge { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 50%; background: var(--board); border: 1px solid var(--line); display: grid; place-items: center; }
+.tx-hs .badge .tlogo { width: 26px; height: 26px; }
+.tx-pn { font: 800 25px/.95 var(--display); text-transform: uppercase; }
+.tx-pn small { display: block; font-size: 15px; font-weight: 700; color: var(--muted); }
+.tx-pchips { margin-top: 5px; display: flex; gap: 5px; flex-wrap: wrap; }
+.tx-pchips span { font: 700 11px var(--mono); background: var(--chip); border-radius: 5px; padding: 1px 6px; }
+.tx-pchips .pos { background: var(--sc); color: var(--board); }
+.tx-big { text-align: right; }
+.tx-big b { display: block; font: 900 32px/.9 var(--display); }
+.tx-big small { display: block; font: 600 10px var(--mono); color: var(--muted); letter-spacing: .05em; margin-top: 3px; white-space: nowrap; }
+.tx-tot { margin-top: 12px; font: 600 13px var(--mono); color: var(--muted); }
+.tx-tot b { color: var(--ink); font-size: 15px; }
+.tx-tot i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; background: var(--sc); vertical-align: -1px; }
+.tx-story { margin-top: 24px; background: var(--ice); border-radius: 18px; padding: 18px 22px 20px; border-top: 5px solid var(--red); }
+.tx-kick { display: inline-flex; align-items: center; gap: 7px; background: var(--red); color: #fff; font: 900 16px var(--display); letter-spacing: .14em; text-transform: uppercase; padding: 3px 10px 2px; border-radius: 5px; }
+.tx-kick::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+.tx-shead { font: 800 30px/1 var(--display); text-transform: uppercase; margin: 10px 0 12px; }
+.tx-sbody { display: grid; column-gap: 26px; row-gap: 8px; font-size: 15px; line-height: 1.55; }
+.tx-sbody p { margin: 0; }
+.tx-sbody p.lede { grid-column: 1 / -1; font-size: 16px; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 2px solid var(--line); }
+.tx-sbody b { font-weight: 700; }
+@media (max-width: 760px) {
+  .tx-card { padding: 22px 16px 18px; border-radius: 28px; border-width: 4px; }
+  .tx-teams { grid-template-columns: 1fr !important; gap: 22px; }
+  .tx-mid { display: none; }
+  .tx-stamp { width: 86px; height: 86px; font-size: 10px; } .tx-stamp b { font-size: 21px; }
+  .tx-sbody { grid-template-columns: 1fr !important; }
+  .tx-mh .logo.big { width: 72px; height: 72px; } .tx-mname { font-size: 38px; }
+}
+.export-sheet.tx-sheet { width: 1080px; padding: 0; background: var(--ice); }
 </style>
 </head>
 <body>
@@ -609,7 +685,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     <h1 id="league">Rene Rancourt's Day Job</h1>
     <div class="weekline"><span class="wk" id="wk">Weekly report</span><span class="dates" id="dates"></span></div>
     <div class="rink" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button><button type="button" id="tab-drafts" aria-pressed="false">Draft history</button><button type="button" id="tab-insights" aria-pressed="false">Insights</button><button type="button" id="tab-league" aria-pressed="false">League details</button></nav>
+    <nav class="tabs" aria-label="View"><button type="button" id="tab-week" aria-pressed="true">Weekly report</button><button type="button" id="tab-history" aria-pressed="false">League history</button><button type="button" id="tab-seasons" aria-pressed="false">Season history</button><button type="button" id="tab-manager" aria-pressed="false">Manager history</button><button type="button" id="tab-playoffs" aria-pressed="false">Playoff history</button><button type="button" id="tab-drafts" aria-pressed="false">Draft history</button><button type="button" id="tab-trades" aria-pressed="false">Trade history</button><button type="button" id="tab-insights" aria-pressed="false">Insights</button><button type="button" id="tab-league" aria-pressed="false">League details</button></nav>
     <div class="picker" id="hpicker" hidden></div>
     <div class="picker" id="picker">
       <div class="pick-row"><label for="season">Season</label>
@@ -960,7 +1036,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   const ord = n => n + (n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] || "th");
   let fSort = { key: "m", dir: 1 }, hSort = { key: "pct", dir: -1 }, hPair = null, hSeason = null, sSort = { key: "reg", dir: 1 }, hMgr = null, hLog = null, pSort = { key: "titles", dir: -1 };
 
-  const TABS = ["week", "history", "seasons", "manager", "playoffs", "drafts", "insights", "league"];
+  const TABS = ["week", "history", "seasons", "manager", "playoffs", "drafts", "trades", "insights", "league"];
   function setTab(view) {
     TABS.forEach(t => $("tab-" + t).setAttribute("aria-pressed", t === view ? "true" : "false"));
     $("picker").hidden = view !== "week";
@@ -1394,6 +1470,147 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     W: "Wins", OTL: "Overtime losses", GA: "Goals against", SV: "Saves", SO: "Shutouts", GAA: "Goals-against average", "SV%": "Save percentage" };
   const SK_ORDER = ["G", "A", "+/-", "PPG", "PPA", "PPP", "SHG", "SHA", "SHP", "GWG", "SOG", "FOW", "HIT", "BLK", "PIM"];
   const GO_ORDER = ["W", "OTL", "GA", "SV", "SO", "GAA", "SV%", "G", "A", "PPG", "PPA", "SHG", "SHA", "PIM"];
+  // Trade History tab: trades.json (built by trade_history.js) is loaded the first time the tab opens.
+  // Each trade: the trade tracker result (fantasy points each side's players scored for their new team), then a
+  // "Trade accepted" card (managers, their record at the time and where they finished, the players with their points
+  // since the trade) and a story. Newest first; a season picker narrows it down. #trades, #trades-2018-19.
+  let TRADES = null, tSeason = "all";
+  function showTrades(push, arg) {
+    setTab("trades");
+    if (arg) tSeason = arg;
+    if (push) setHash(tSeason && tSeason !== "all" ? "trades-" + tSeason : "trades");
+    $("wk").textContent = "Trade history";
+    $("season-eyebrow").textContent = "Every trade since 2013-14";
+    $("dates").textContent = "";
+    if (TRADES) return renderTrades();
+    $("content").replaceChildren(h("p", { id: "status" }, "Loading the trades…"));
+    fetch("trades.json", { cache: "no-store" }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => { TRADES = d; if ($("tab-trades").getAttribute("aria-pressed") === "true") renderTrades(); })
+      .catch(() => { $("content").replaceChildren(h("p", { id: "status" }, "The trade history couldn't load. Refresh the page to try again.")); });
+  }
+  const TCOL = ["var(--blue)", "var(--red)", "#B07A00"];
+  const SWAP = () => { const ns = "http://www.w3.org/2000/svg", svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("width", "44"); svg.setAttribute("height", "44"); svg.setAttribute("viewBox", "0 0 52 52"); svg.setAttribute("aria-hidden", "true");
+    for (const d of ["M9 18h31M31 9l9 9-9 9", "M43 34H12M21 25l-9 9 9 9"]) { const p = document.createElementNS(ns, "path"); p.setAttribute("d", d);
+      p.setAttribute("fill", "none"); p.setAttribute("stroke", "#fff"); p.setAttribute("stroke-width", "5"); p.setAttribute("stroke-linecap", "round"); p.setAttribute("stroke-linejoin", "round"); svg.append(p); }
+    return svg; };
+  const mdText = text => String(text).split(/\*\*(.+?)\*\*/g).map((x, i) => i % 2 ? h("b", null, x) : x);
+  function renderTrades() {
+    const all = TRADES.trades, fmt1 = n => (Math.round(n * 10) / 10).toFixed(1);
+    const seasonsWith = [...new Set(all.map(t => t.season))];
+    const sel = h("select", { id: "trade-season", onchange: e => { tSeason = e.target.value; setHash(tSeason === "all" ? "trades" : "trades-" + tSeason); renderTrades(); } },
+      h("option", { value: "all" }, "All seasons (" + all.length + ")"),
+      seasonsWith.map(id => { const n = all.filter(t => t.season === id).length; return h("option", { value: id }, id + " (" + n + ")"); }));
+    if (tSeason !== "all" && !seasonsWith.includes(tSeason)) tSeason = "all";
+    sel.value = tSeason;
+    headerFilter("Season", sel, true);
+    const list = all.filter(t => tSeason === "all" || t.season === tSeason);
+    const leaders = {}; for (const t of all) for (const sd of t.sides) leaders[sd.mgr] = (leaders[sd.mgr] || 0) + 1;
+    const top = Object.entries(leaders).sort((a, b) => b[1] - a[1]);
+    const intro = panel(h("div", { class: "small" },
+      h("b", null, all.length + " trades"), " since 2013-14 (2014-15 had none). Most active: ",
+      top.slice(0, 3).map(([m, n], i) => h("span", null, i ? ", " : "", h("span", { class: "mgr" }, m), " " + n)),
+      ". The tracker counts the fantasy points each side's players scored for their new team after the trade",
+      " (Yahoo seasons, through 2025-26: only points scored in a started lineup)."));
+    $("content").replaceChildren(h("div", { class: "trades-list" }, intro, list.map(t => tradeBlock(t, fmt1))),
+      h("footer", null, "Trades, tracker points and drafts from the league's records (Yahoo through 2025-26, Fantrax since). Stories are written from those records."));
+  }
+  function tradeBlock(t, fmt1) {
+    const two = t.sides.length === 2;
+    const when = (() => { const x = d(t.date); return DOW[x.getUTCDay()] + ", " + MON[x.getUTCMonth()] + " " + x.getUTCDate() + ", " + x.getUTCFullYear(); })();
+    // --- trade tracker box ---
+    let track = null;
+    if (t.tracker) {
+      const tot = t.sides.map(sd => sd.total || 0), sum = tot.reduce((a, b) => a + b, 0) || 1;
+      const head = t.tracker.final ? "Final result · " + t.label + " regular season" : "Season to date · through " + day(t.tracker.through);
+      track = panel(h("div", { class: "tx-track" },
+        h("div", { class: "tt-head" }, h("span", { class: "subhead" }, "Trade tracker"), h("span", { class: "muted small" }, head)),
+        h("div", { class: "tx-bar", "aria-hidden": "true" }, t.sides.map((sd, i) => h("i", { style: "width:" + (tot[i] / sum * 100).toFixed(1) + "%;background:" + TCOL[i % 3] }))),
+        h("div", { class: "tt-sides" }, t.sides.map((sd, i) => {
+          const lead = t.tracker.leader === sd.mgr;
+          return h("div", { class: "tt-side" + (lead ? " won" : "") },
+            h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0))),
+            sd.gets.map(p => h("div", { class: "tt-p" }, h("span", null, h("span", { class: "mgr" }, p.name)),
+              h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt1(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
+            lead ? h("span", { class: "tag won" }, (t.tracker.final ? "Won by " : "Ahead by ") + fmt1(t.tracker.by)) : null);
+        }))));
+    } else {
+      track = panel(h("div", { class: "muted small" }, t.scoring === "categories" ? "Categories season: no points tracker." : "No points recorded in either team's lineup after this trade."));
+    }
+    // --- the card ---
+    const sideEl = (sd, i) => {
+      const chips = [];
+      if (sd.record) chips.push(h("span", null, ord(sd.record.rank) + " · " + sd.record.w + "-" + sd.record.l + (sd.record.t ? "-" + sd.record.t : "")));
+      if (sd.champion) chips.push(h("span", { class: "gold" }, "🏆 Won the title"));
+      else if (sd.finish) chips.push(h("span", null, "Finished " + ord(sd.finish)));
+      return h("div", { class: "tx-side", style: "--sc:" + TCOL[i % 3] },
+        h("div", { class: "tx-mh" }, avatar(sd.mgr, sd.logo, 96, "big"),
+          h("div", null, h("div", { class: "tx-mname" }, sd.mgr), sd.team ? h("div", { class: "tx-tname" }, sd.team) : null, h("div", { class: "tx-chips" }, chips))),
+        h("div", { class: "tx-gets" }, "Receives"),
+        sd.gets.map(p => {
+          const sp = p.name.indexOf(" "), first = sp < 0 ? "" : p.name.slice(0, sp), last = sp < 0 ? p.name : p.name.slice(sp + 1);
+          return h("div", { class: "tx-pc" },
+            h("div", { class: "tx-hs" },
+              p.pid ? h("img", { class: "face", src: "players/" + p.pid + ".png", alt: "", loading: "lazy", onerror: e => e.target.replaceWith(h("div", { class: "face none" }, last.charAt(0))) }) : h("div", { class: "face none" }, last.charAt(0)),
+              p.nhl ? h("span", { class: "badge" }, h("img", { class: "tlogo tl-light", src: "teams/" + p.nhl + "_light.svg", alt: p.nhl, loading: "lazy", onerror: e => e.target.remove() }),
+                h("img", { class: "tlogo tl-dark", src: "teams/" + p.nhl + "_dark.svg", alt: "", loading: "lazy", onerror: e => e.target.remove() })) : null),
+            h("div", { style: "min-width:0" }, h("div", { class: "tx-pn" }, h("small", null, first), last),
+              h("div", { class: "tx-pchips" }, String(p.pos || "").split(/[\/,]/).filter(Boolean).map(x => h("span", { class: "pos" }, x)), p.nhl ? h("span", null, p.nhl) : null)),
+            h("div", { class: "tx-big" }, h("b", null, p.pts == null ? "–" : fmt1(p.pts)), h("small", null, "PTS AFTER" + (p.gp != null ? " · " + p.gp + " GP" : "")), p.left ? h("small", null, "until " + day(p.left)) : null));
+        }),
+        h("div", { class: "tx-tot" }, h("i"), sd.mgr + " got ", h("b", null, sd.total == null ? "–" : fmt1(sd.total)), " pts after the trade"));
+    };
+    const cols = two ? "minmax(0,1fr) 110px minmax(0,1fr)" : "repeat(" + t.sides.length + ", minmax(0,1fr))";
+    const st = t.story;
+    const story = st ? h("div", { class: "tx-story" }, h("span", { class: "tx-kick" }, st.kicker || "Breaking news"), h("div", { class: "tx-shead" }, st.headline || ""),
+      h("div", { class: "tx-sbody", style: "grid-template-columns:repeat(" + Math.max(1, Math.min(3, (st.body || []).length - 1)) + ", minmax(0,1fr))" },
+        (st.body || []).map((p, i) => h("p", { class: i === 0 ? "lede" : null }, mdText(p))))) : null;
+    const card = h("div", { class: "tx-card" },
+      h("div", { class: "rinkbg", "aria-hidden": "true" }, h("i", { class: "bl", style: "left:24%" }), h("i", { class: "bl", style: "right:24%" }), h("i", { class: "redl" }), h("i", { class: "circ" })),
+      h("div", { class: "tx-eyb" }, "Rene Rancourt's Day Job · " + t.label + " season · " + t.source),
+      h("div", { class: "tx-hero" }, h("div", null, h("h3", null, "Trade", h("span", null, "accepted")),
+        h("div", { class: "tx-when" }, t.sides.map(x => x.mgr).join(" ⇄ ") + " · " + when + (t.week ? " · week " + t.week : ""))),
+        h("div", { class: "tx-stamp", "aria-hidden": "true" }, h("div", null, "RRDJ", h("b", null, "Deal"), "#" + t.noAllTime))),
+      h("div", { class: "rink", "aria-hidden": "true" }, h("i"), h("i"), h("i"), h("i"), h("i")),
+      h("div", { class: "tx-teams", style: "grid-template-columns:" + cols },
+        two ? [sideEl(t.sides[0], 0), h("div", { class: "tx-mid" }, h("div", { class: "tx-puck" }, SWAP())), sideEl(t.sides[1], 1)] : t.sides.map(sideEl)),
+      story,
+      h("div", { class: "rink", "aria-hidden": "true", style: "margin:22px 0 0" }, h("i"), h("i"), h("i"), h("i"), h("i")));
+    const block = h("article", { class: "tx", id: "trade-" + t.season + "-" + t.date },
+      h("div", { class: "tx-top" }, h("span", { class: "subhead" }, t.label + " · trade " + t.noInSeason + " of the season · No. " + t.noAllTime + " all-time"),
+        h("button", { type: "button", class: "export-btn no-export", onclick: e => exportTrade(e.currentTarget, block, t) }, "Export image")),
+      track, card);
+    return block;
+  }
+  async function exportTrade(btn, block, t) {
+    btn.disabled = true; btn.textContent = "Building…";
+    let holder = null;
+    try {
+      const lib = await loadExportLib();
+      const sheet = h("div", { class: "export-sheet tx-sheet" }, block.cloneNode(true));
+      sheet.querySelectorAll(".no-export").forEach(x => x.remove());
+      sheet.querySelectorAll("img").forEach(i => i.removeAttribute("loading"));
+      sheet.firstChild.style.maxWidth = "none"; sheet.firstChild.style.padding = "24px";
+      holder = h("div", { class: "export-holder", "aria-hidden": "true" }, sheet);
+      document.body.append(holder);
+      await Promise.all([...sheet.querySelectorAll("img")].map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
+      if (document.fonts && document.fonts.ready) await document.fonts.ready;
+      const fonts = await loadFontCSS();
+      const opts = { pixelRatio: 2, backgroundColor: getComputedStyle(document.body).backgroundColor, width: 1080 };
+      if (fonts) opts.fontEmbedCSS = fonts;
+      let blob;
+      try { blob = await lib.toBlob(sheet, opts); } catch (e) { blob = null; }
+      if (!blob) blob = await lib.toBlob(sheet, Object.assign({ skipFonts: true }, opts));
+      if (!blob) throw new Error("empty image");
+      showExport(blob, "rrdj-trade-" + t.season + "-" + t.date + ".png");
+    } catch (e) {
+      alert("The image couldn't be made. Try again in a moment.");
+    } finally {
+      if (holder) holder.remove();
+      btn.disabled = false; btn.textContent = "Export image";
+    }
+  }
+
   function showLeague(push) {
     setTab("league");
     if (push) setHash("league");
@@ -2489,12 +2706,15 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     $("tab-manager").addEventListener("click", () => showHistory(true, "manager"));
     $("tab-playoffs").addEventListener("click", () => showHistory(true, "playoffs"));
     $("tab-drafts").addEventListener("click", () => showDrafts(true));
+    $("tab-trades").addEventListener("click", () => showTrades(true));
     $("tab-league").addEventListener("click", () => showLeague(true));
     $("tab-insights").addEventListener("click", () => showInsights(true));
     const route = () => {
       if (/^#league$/.test(location.hash || "")) return showLeague(false);
       const iv = (location.hash || "").match(/^#insights(?:-(.+))?$/);
       if (iv) return showInsights(false, iv[1] && decodeURIComponent(iv[1]));
+      const tv = (location.hash || "").match(/^#trades(?:-(.+))?$/);
+      if (tv) return showTrades(false, tv[1] && decodeURIComponent(tv[1]));
       const dv = (location.hash || "").match(/^#drafts(?:-(.+))?$/);
       if (dv) return showDrafts(false, dv[1] && decodeURIComponent(dv[1]));
       const v = (location.hash || "").match(/^#(history|seasons|manager|playoffs)(?:-(.+))?$/);
