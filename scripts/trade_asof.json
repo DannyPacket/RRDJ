@@ -1,0 +1,2308 @@
+{
+ "2013-14|2013-11-08|Nick,Ronnie": {
+  "Matt Niskanen": {
+   "id": "8471702",
+   "gp": 16,
+   "pts": 52,
+   "line": {
+    "pos": "D",
+    "gp": 16,
+    "g": 1,
+    "a": 8,
+    "pm": 9,
+    "ppg": 1,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 27,
+    "pim": 13,
+    "hit": 18,
+    "blk": 19,
+    "fow": 0
+   }
+  },
+  "Bryan Little": {
+   "id": "8473412",
+   "gp": 17,
+   "pts": 77.9,
+   "line": {
+    "pos": "C",
+    "gp": 17,
+    "g": 8,
+    "a": 5,
+    "pm": 0,
+    "ppg": 1,
+    "ppa": 0,
+    "shg": 2,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 33,
+    "pim": 10,
+    "hit": 10,
+    "blk": 7,
+    "fow": 162
+   }
+  },
+  "Mason Raymond": {
+   "id": "8471664",
+   "gp": 15,
+   "pts": 39.4,
+   "line": {
+    "pos": "L",
+    "gp": 15,
+    "g": 5,
+    "a": 6,
+    "pm": 2,
+    "ppg": 1,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 39,
+    "pim": 2,
+    "hit": 9,
+    "blk": 5,
+    "fow": 2
+   }
+  },
+  "Semyon Varlamov": {
+   "id": "8473575",
+   "gp": 10,
+   "pts": 48.1,
+   "line": {
+    "pos": "G",
+    "gp": 10,
+    "w": 8,
+    "otl": 0,
+    "ga": 21,
+    "sv": 291,
+    "so": 0,
+    "g": 0,
+    "a": 1,
+    "pim": 2
+   }
+  }
+ },
+ "2015-16|2016-01-12|Nick,Vin": {
+  "Ryan Getzlaf": {
+   "id": "8470612",
+   "gp": 37,
+   "pts": 110,
+   "line": {
+    "pos": "C",
+    "gp": 37,
+    "g": 3,
+    "a": 22,
+    "pm": -2,
+    "ppg": 2,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 80,
+    "pim": 38,
+    "hit": 62,
+    "blk": 22,
+    "fow": 290
+   }
+  },
+  "Andrei Markov": {
+   "id": "8467496",
+   "gp": 43,
+   "pts": 87.5,
+   "line": {
+    "pos": "D",
+    "gp": 43,
+    "g": 2,
+    "a": 20,
+    "pm": 4,
+    "ppg": 2,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 59,
+    "pim": 14,
+    "hit": 30,
+    "blk": 67,
+    "fow": 0
+   }
+  },
+  "Dion Phaneuf": {
+   "id": "8470602",
+   "gp": 40,
+   "pts": 101,
+   "line": {
+    "pos": "D",
+    "gp": 40,
+    "g": 3,
+    "a": 17,
+    "pm": -4,
+    "ppg": 0,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 86,
+    "pim": 45,
+    "hit": 96,
+    "blk": 48,
+    "fow": 0
+   }
+  },
+  "Mike Hoffman": {
+   "id": "8474884",
+   "gp": 39,
+   "pts": 114.7,
+   "line": {
+    "pos": "C",
+    "gp": 39,
+    "g": 20,
+    "a": 16,
+    "pm": 11,
+    "ppg": 5,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 109,
+    "pim": 4,
+    "hit": 13,
+    "blk": 19,
+    "fow": 7
+   }
+  }
+ },
+ "2016-17|2016-12-31|Nick,Vin": {
+  "Cal Clutterbuck": {
+   "id": "8473504",
+   "gp": 34,
+   "pts": 95.7,
+   "line": {
+    "pos": "R",
+    "gp": 34,
+    "g": 3,
+    "a": 10,
+    "pm": 6,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 58,
+    "pim": 16,
+    "hit": 125,
+    "blk": 14,
+    "fow": 2
+   }
+  },
+  "Patrice Bergeron": {
+   "id": "8470638",
+   "gp": 35,
+   "pts": 100.1,
+   "line": {
+    "pos": "C",
+    "gp": 35,
+    "g": 6,
+    "a": 5,
+    "pm": 0,
+    "ppg": 2,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 122,
+    "pim": 8,
+    "hit": 27,
+    "blk": 23,
+    "fow": 461
+   }
+  },
+  "Milan Lucic": {
+   "id": "8473473",
+   "gp": 37,
+   "pts": 105.4,
+   "line": {
+    "pos": "L",
+    "gp": 37,
+    "g": 10,
+    "a": 15,
+    "pm": -3,
+    "ppg": 4,
+    "ppa": 8,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 91,
+    "pim": 18,
+    "hit": 91,
+    "blk": 9,
+    "fow": 4
+   }
+  },
+  "Steve Mason": {
+   "id": "8473461",
+   "gp": 31,
+   "pts": 140.6,
+   "line": {
+    "pos": "G",
+    "gp": 31,
+    "w": 14,
+    "otl": 4,
+    "ga": 78,
+    "sv": 743,
+    "so": 0,
+    "g": 0,
+    "a": 1,
+    "pim": 0
+   }
+  }
+ },
+ "2016-17|2017-03-04|Joe,Palagi": {
+  "John Gibson": {
+   "id": "8476434",
+   "gp": 48,
+   "pts": 269,
+   "line": {
+    "pos": "G",
+    "gp": 48,
+    "w": 23,
+    "otl": 8,
+    "ga": 101,
+    "sv": 1200,
+    "so": 5,
+    "g": 0,
+    "a": 1,
+    "pim": 4
+   }
+  },
+  "Sidney Crosby": {
+   "id": "8471675",
+   "gp": 57,
+   "pts": 284.4,
+   "line": {
+    "pos": "C",
+    "gp": 57,
+    "g": 34,
+    "a": 35,
+    "pm": 15,
+    "ppg": 11,
+    "ppa": 9,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 5,
+    "sog": 185,
+    "pim": 22,
+    "hit": 66,
+    "blk": 19,
+    "fow": 649
+   }
+  }
+ },
+ "2017-18|2017-11-18|Nick,Vin": {
+  "Wayne Simmonds": {
+   "id": "8474190",
+   "gp": 19,
+   "pts": 54.6,
+   "line": {
+    "pos": "R",
+    "gp": 19,
+    "g": 6,
+    "a": 6,
+    "pm": -2,
+    "ppg": 3,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 4,
+    "sog": 39,
+    "pim": 19,
+    "hit": 28,
+    "blk": 19,
+    "fow": 1
+   }
+  },
+  "Sean Couturier": {
+   "id": "8476461",
+   "gp": 19,
+   "pts": 86.1,
+   "line": {
+    "pos": "C",
+    "gp": 19,
+    "g": 11,
+    "a": 10,
+    "pm": 14,
+    "ppg": 2,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 62,
+    "pim": 4,
+    "hit": 20,
+    "blk": 10,
+    "fow": 121
+   }
+  }
+ },
+ "2017-18|2018-01-06|Vin,Zac": {
+  "Duncan Keith": {
+   "id": "8470281",
+   "gp": 40,
+   "pts": 64.5,
+   "line": {
+    "pos": "D",
+    "gp": 40,
+    "g": 0,
+    "a": 20,
+    "pm": -5,
+    "ppg": 0,
+    "ppa": 6,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 96,
+    "pim": 14,
+    "hit": 15,
+    "blk": 72,
+    "fow": 0
+   }
+  },
+  "Henrik Zetterberg": {
+   "id": "8468083",
+   "gp": 40,
+   "pts": 103.4,
+   "line": {
+    "pos": "C",
+    "gp": 40,
+    "g": 6,
+    "a": 22,
+    "pm": -2,
+    "ppg": 0,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 86,
+    "pim": 6,
+    "hit": 31,
+    "blk": 20,
+    "fow": 319
+   }
+  },
+  "Calle Jarnkrok": {
+   "id": "8475714",
+   "gp": 40,
+   "pts": 101.3,
+   "line": {
+    "pos": "C",
+    "gp": 40,
+    "g": 10,
+    "a": 10,
+    "pm": 10,
+    "ppg": 1,
+    "ppa": 2,
+    "shg": 2,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 57,
+    "pim": 6,
+    "hit": 16,
+    "blk": 21,
+    "fow": 238
+   }
+  },
+  "Torey Krug": {
+   "id": "8476792",
+   "gp": 34,
+   "pts": 69,
+   "line": {
+    "pos": "D",
+    "gp": 34,
+    "g": 6,
+    "a": 16,
+    "pm": -4,
+    "ppg": 1,
+    "ppa": 4,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 75,
+    "pim": 18,
+    "hit": 25,
+    "blk": 39,
+    "fow": 0
+   }
+  }
+ },
+ "2017-18|2018-01-08|Vin,Zac": {
+  "Roman Josi": {
+   "id": "8474600",
+   "gp": 38,
+   "pts": 102,
+   "line": {
+    "pos": "D",
+    "gp": 38,
+    "g": 8,
+    "a": 16,
+    "pm": 0,
+    "ppg": 5,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 1,
+    "gwg": 2,
+    "sog": 129,
+    "pim": 18,
+    "hit": 41,
+    "blk": 53,
+    "fow": 0
+   }
+  },
+  "Zach Werenski": {
+   "id": "8478460",
+   "gp": 39,
+   "pts": 87.5,
+   "line": {
+    "pos": "D",
+    "gp": 39,
+    "g": 11,
+    "a": 8,
+    "pm": 3,
+    "ppg": 2,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 112,
+    "pim": 6,
+    "hit": 26,
+    "blk": 47,
+    "fow": 0
+   }
+  }
+ },
+ "2017-18|2018-01-16|Nick,Zac": {
+  "Jacob Markstrom": {
+   "id": "8474593",
+   "gp": 33,
+   "pts": 148.8,
+   "line": {
+    "pos": "G",
+    "gp": 33,
+    "w": 12,
+    "otl": 5,
+    "ga": 87,
+    "sv": 864,
+    "so": 1,
+    "g": 0,
+    "a": 3,
+    "pim": 2
+   }
+  },
+  "Boone Jenner": {
+   "id": "8476432",
+   "gp": 39,
+   "pts": 110.5,
+   "line": {
+    "pos": "C",
+    "gp": 39,
+    "g": 4,
+    "a": 8,
+    "pm": -9,
+    "ppg": 1,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 100,
+    "pim": 31,
+    "hit": 113,
+    "blk": 50,
+    "fow": 160
+   }
+  }
+ },
+ "2017-18|2018-01-20|Nick,Palagi": {
+  "Brandon Montour": {
+   "id": "8477986",
+   "gp": 45,
+   "pts": 109,
+   "line": {
+    "pos": "D",
+    "gp": 45,
+    "g": 6,
+    "a": 14,
+    "pm": 12,
+    "ppg": 3,
+    "ppa": 4,
+    "shg": 1,
+    "sha": 1,
+    "gwg": 3,
+    "sog": 97,
+    "pim": 26,
+    "hit": 59,
+    "blk": 45,
+    "fow": 0
+   }
+  },
+  "Tyler Toffoli": {
+   "id": "8475726",
+   "gp": 46,
+   "pts": 107.1,
+   "line": {
+    "pos": "C",
+    "gp": 46,
+    "g": 18,
+    "a": 12,
+    "pm": 10,
+    "ppg": 5,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 146,
+    "pim": 6,
+    "hit": 33,
+    "blk": 6,
+    "fow": 6
+   }
+  },
+  "Kevin Shattenkirk": {
+   "id": "8474031",
+   "gp": 46,
+   "pts": 86.5,
+   "line": {
+    "pos": "D",
+    "gp": 46,
+    "g": 5,
+    "a": 18,
+    "pm": -14,
+    "ppg": 2,
+    "ppa": 10,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 94,
+    "pim": 44,
+    "hit": 44,
+    "blk": 65,
+    "fow": 0
+   }
+  }
+ },
+ "2017-18|2018-01-26|Ronnie,Vin": {
+  "Duncan Keith": {
+   "id": "8470281",
+   "gp": 49,
+   "pts": 80,
+   "line": {
+    "pos": "D",
+    "gp": 49,
+    "g": 0,
+    "a": 23,
+    "pm": -5,
+    "ppg": 0,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 116,
+    "pim": 18,
+    "hit": 21,
+    "blk": 89,
+    "fow": 0
+   }
+  },
+  "Carter Hutton": {
+   "id": "8475622",
+   "gp": 21,
+   "pts": 135.4,
+   "line": {
+    "pos": "G",
+    "gp": 21,
+    "w": 12,
+    "otl": 1,
+    "ga": 30,
+    "sv": 497,
+    "so": 2,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Dustin Byfuglien": {
+   "id": "8470834",
+   "gp": 38,
+   "pts": 113,
+   "line": {
+    "pos": "D",
+    "gp": 38,
+    "g": 2,
+    "a": 17,
+    "pm": 2,
+    "ppg": 1,
+    "ppa": 10,
+    "shg": 0,
+    "sha": 1,
+    "gwg": 0,
+    "sog": 87,
+    "pim": 59,
+    "hit": 96,
+    "blk": 56,
+    "fow": 0
+   }
+  },
+  "Sebastian Aho": {
+   "id": "8478427",
+   "gp": 45,
+   "pts": 102.2,
+   "line": {
+    "pos": "C",
+    "gp": 45,
+    "g": 16,
+    "a": 21,
+    "pm": -3,
+    "ppg": 4,
+    "ppa": 5,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 129,
+    "pim": 14,
+    "hit": 34,
+    "blk": 12,
+    "fow": 12
+   }
+  }
+ },
+ "2017-18|2018-02-11|Joe,Vin": {
+  "Jaden Schwartz": {
+   "id": "8475768",
+   "gp": 37,
+   "pts": 133.4,
+   "line": {
+    "pos": "L",
+    "gp": 37,
+    "g": 17,
+    "a": 23,
+    "pm": 25,
+    "ppg": 4,
+    "ppa": 2,
+    "shg": 1,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 81,
+    "pim": 14,
+    "hit": 29,
+    "blk": 16,
+    "fow": 19
+   }
+  },
+  "Ryan McDonagh": {
+   "id": "8474151",
+   "gp": 49,
+   "pts": 137,
+   "line": {
+    "pos": "D",
+    "gp": 49,
+    "g": 2,
+    "a": 24,
+    "pm": 7,
+    "ppg": 1,
+    "ppa": 8,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 77,
+    "pim": 20,
+    "hit": 53,
+    "blk": 129,
+    "fow": 0
+   }
+  },
+  "Adam Larsson": {
+   "id": "8476457",
+   "gp": 40,
+   "pts": 127.5,
+   "line": {
+    "pos": "D",
+    "gp": 40,
+    "g": 3,
+    "a": 3,
+    "pm": 0,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 52,
+    "pim": 26,
+    "hit": 148,
+    "blk": 83,
+    "fow": 0
+   }
+  },
+  "Leon Draisaitl": {
+   "id": "8477934",
+   "gp": 50,
+   "pts": 160.1,
+   "line": {
+    "pos": "C",
+    "gp": 50,
+    "g": 15,
+    "a": 33,
+    "pm": 9,
+    "ppg": 3,
+    "ppa": 3,
+    "shg": 2,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 127,
+    "pim": 20,
+    "hit": 27,
+    "blk": 19,
+    "fow": 391
+   }
+  }
+ },
+ "2018-19|2018-11-06|Tom,Vin": {
+  "Dustin Byfuglien": {
+   "id": "8470834",
+   "gp": 12,
+   "pts": 47.5,
+   "line": {
+    "pos": "D",
+    "gp": 12,
+    "g": 2,
+    "a": 9,
+    "pm": 2,
+    "ppg": 0,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 35,
+    "pim": 14,
+    "hit": 20,
+    "blk": 16,
+    "fow": 0
+   }
+  },
+  "Jack Campbell": {
+   "id": "8475789",
+   "gp": 10,
+   "pts": 47.8,
+   "line": {
+    "pos": "G",
+    "gp": 10,
+    "w": 4,
+    "otl": 0,
+    "ga": 23,
+    "sv": 239,
+    "so": 1,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Jacob Trouba": {
+   "id": "8476885",
+   "gp": 14,
+   "pts": 38,
+   "line": {
+    "pos": "D",
+    "gp": 14,
+    "g": 1,
+    "a": 6,
+    "pm": 1,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 24,
+    "pim": 16,
+    "hit": 21,
+    "blk": 27,
+    "fow": 0
+   }
+  }
+ },
+ "2018-19|2018-11-16|Nick,Vin": {
+  "Evander Kane": {
+   "id": "8475169",
+   "gp": 20,
+   "pts": 54.2,
+   "line": {
+    "pos": "L",
+    "gp": 20,
+    "g": 6,
+    "a": 7,
+    "pm": -5,
+    "ppg": 1,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 78,
+    "pim": 25,
+    "hit": 39,
+    "blk": 11,
+    "fow": 27
+   }
+  },
+  "Zach Parise": {
+   "id": "8470610",
+   "gp": 18,
+   "pts": 67.8,
+   "line": {
+    "pos": "L",
+    "gp": 18,
+    "g": 7,
+    "a": 9,
+    "pm": 8,
+    "ppg": 2,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 2,
+    "gwg": 1,
+    "sog": 53,
+    "pim": 6,
+    "hit": 15,
+    "blk": 21,
+    "fow": 3
+   }
+  }
+ },
+ "2018-19|2018-11-17|Danny,Tom": {
+  "T.J. Oshie": {
+   "id": "8471698",
+   "gp": 18,
+   "pts": 77.9,
+   "line": {
+    "pos": "R",
+    "gp": 18,
+    "g": 9,
+    "a": 5,
+    "pm": 6,
+    "ppg": 1,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 40,
+    "pim": 8,
+    "hit": 42,
+    "blk": 17,
+    "fow": 19
+   }
+  },
+  "Brendan Gallagher": {
+   "id": "8475848",
+   "gp": 19,
+   "pts": 62.3,
+   "line": {
+    "pos": "R",
+    "gp": 19,
+    "g": 9,
+    "a": 4,
+    "pm": 1,
+    "ppg": 1,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 63,
+    "pim": 12,
+    "hit": 35,
+    "blk": 10,
+    "fow": 8
+   }
+  },
+  "Ryan Getzlaf": {
+   "id": "8470612",
+   "gp": 15,
+   "pts": 66,
+   "line": {
+    "pos": "C",
+    "gp": 15,
+    "g": 4,
+    "a": 8,
+    "pm": -3,
+    "ppg": 0,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 36,
+    "pim": 6,
+    "hit": 38,
+    "blk": 17,
+    "fow": 135
+   }
+  }
+ },
+ "2018-19|2018-12-09|Vin,Zac": {
+  "Roman Josi": {
+   "id": "8474600",
+   "gp": 30,
+   "pts": 80.5,
+   "line": {
+    "pos": "D",
+    "gp": 30,
+    "g": 5,
+    "a": 16,
+    "pm": 1,
+    "ppg": 1,
+    "ppa": 5,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 111,
+    "pim": 6,
+    "hit": 22,
+    "blk": 43,
+    "fow": 0
+   }
+  },
+  "Mikael Granlund": {
+   "id": "8475798",
+   "gp": 29,
+   "pts": 92.4,
+   "line": {
+    "pos": "C",
+    "gp": 29,
+    "g": 11,
+    "a": 17,
+    "pm": 2,
+    "ppg": 1,
+    "ppa": 8,
+    "shg": 2,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 65,
+    "pim": 4,
+    "hit": 8,
+    "blk": 16,
+    "fow": 39
+   }
+  },
+  "Mikko Koskinen": {
+   "id": "8475156",
+   "gp": 13,
+   "pts": 86.8,
+   "line": {
+    "pos": "G",
+    "gp": 13,
+    "w": 8,
+    "otl": 1,
+    "ga": 28,
+    "sv": 344,
+    "so": 2,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Max Pacioretty": {
+   "id": "8474157",
+   "gp": 26,
+   "pts": 72.4,
+   "line": {
+    "pos": "L",
+    "gp": 26,
+    "g": 10,
+    "a": 7,
+    "pm": -3,
+    "ppg": 3,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 68,
+    "pim": 16,
+    "hit": 44,
+    "blk": 12,
+    "fow": 9
+   }
+  }
+ },
+ "2018-19|2019-01-05|Jefe,Palagi": {
+  "Anze Kopitar": {
+   "id": "8471685",
+   "gp": 41,
+   "pts": 145.4,
+   "line": {
+    "pos": "C",
+    "gp": 41,
+    "g": 9,
+    "a": 18,
+    "pm": 0,
+    "ppg": 0,
+    "ppa": 7,
+    "shg": 1,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 87,
+    "pim": 14,
+    "hit": 30,
+    "blk": 31,
+    "fow": 509
+   }
+  },
+  "Austin Watson": {
+   "id": "8475766",
+   "gp": 24,
+   "pts": 72.5,
+   "line": {
+    "pos": "L",
+    "gp": 24,
+    "g": 6,
+    "a": 2,
+    "pm": 2,
+    "ppg": 1,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 46,
+    "pim": 20,
+    "hit": 75,
+    "blk": 19,
+    "fow": 5
+   }
+  },
+  "Ian Cole": {
+   "id": "8474013",
+   "gp": 42,
+   "pts": 106.5,
+   "line": {
+    "pos": "D",
+    "gp": 42,
+    "g": 1,
+    "a": 8,
+    "pm": 5,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 45,
+    "pim": 56,
+    "hit": 60,
+    "blk": 113,
+    "fow": 0
+   }
+  },
+  "Ryan Nugent-Hopkins": {
+   "id": "8476454",
+   "gp": 40,
+   "pts": 125.3,
+   "line": {
+    "pos": "C",
+    "gp": 40,
+    "g": 14,
+    "a": 22,
+    "pm": -9,
+    "ppg": 4,
+    "ppa": 11,
+    "shg": 1,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 109,
+    "pim": 12,
+    "hit": 31,
+    "blk": 18,
+    "fow": 168
+   }
+  }
+ },
+ "2018-19|2019-01-08|Palagi,Tom": {
+  "Colton Sissons": {
+   "id": "8476925",
+   "gp": 37,
+   "pts": 125.2,
+   "line": {
+    "pos": "C",
+    "gp": 37,
+    "g": 8,
+    "a": 10,
+    "pm": 21,
+    "ppg": 1,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 1,
+    "gwg": 3,
+    "sog": 57,
+    "pim": 15,
+    "hit": 40,
+    "blk": 33,
+    "fow": 227
+   }
+  },
+  "David Krejci": {
+   "id": "8471276",
+   "gp": 42,
+   "pts": 111.2,
+   "line": {
+    "pos": "C",
+    "gp": 42,
+    "g": 7,
+    "a": 26,
+    "pm": -1,
+    "ppg": 1,
+    "ppa": 6,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 68,
+    "pim": 12,
+    "hit": 13,
+    "blk": 17,
+    "fow": 292
+   }
+  }
+ },
+ "2018-19|2019-01-19|Danny,Jefe": {
+  "Jacob Markstrom": {
+   "id": "8474593",
+   "gp": 35,
+   "pts": 187,
+   "line": {
+    "pos": "G",
+    "gp": 35,
+    "w": 18,
+    "otl": 5,
+    "ga": 99,
+    "sv": 980,
+    "so": 0,
+    "g": 0,
+    "a": 1,
+    "pim": 0
+   }
+  },
+  "David Pastrnak": {
+   "id": "8477956",
+   "gp": 48,
+   "pts": 180,
+   "line": {
+    "pos": "R",
+    "gp": 48,
+    "g": 27,
+    "a": 28,
+    "pm": 0,
+    "ppg": 13,
+    "ppa": 14,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 181,
+    "pim": 20,
+    "hit": 36,
+    "blk": 20,
+    "fow": 0
+   }
+  }
+ },
+ "2019-20|2019-11-17|Vin,Zac": {
+  "Ryan Ellis": {
+   "id": "8475176",
+   "gp": 19,
+   "pts": 68.5,
+   "line": {
+    "pos": "D",
+    "gp": 19,
+    "g": 3,
+    "a": 14,
+    "pm": 7,
+    "ppg": 0,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 34,
+    "pim": 9,
+    "hit": 20,
+    "blk": 35,
+    "fow": 0
+   }
+  },
+  "Taylor Hall": {
+   "id": "8475791",
+   "gp": 19,
+   "pts": 40.6,
+   "line": {
+    "pos": "L",
+    "gp": 19,
+    "g": 2,
+    "a": 15,
+    "pm": -6,
+    "ppg": 0,
+    "ppa": 8,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 70,
+    "pim": 14,
+    "hit": 14,
+    "blk": 5,
+    "fow": 6
+   }
+  },
+  "Sergei Bobrovsky": {
+   "id": "8475683",
+   "gp": 17,
+   "pts": 64.8,
+   "line": {
+    "pos": "G",
+    "gp": 17,
+    "w": 7,
+    "otl": 4,
+    "ga": 54,
+    "sv": 404,
+    "so": 1,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Bryan Rust": {
+   "id": "8475810",
+   "gp": 9,
+   "pts": 43.6,
+   "line": {
+    "pos": "R",
+    "gp": 9,
+    "g": 6,
+    "a": 4,
+    "pm": 7,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 1,
+    "sha": 1,
+    "gwg": 1,
+    "sog": 26,
+    "pim": 0,
+    "hit": 14,
+    "blk": 3,
+    "fow": 1
+   }
+  },
+  "Connor Hellebuyck": {
+   "id": "8476945",
+   "gp": 16,
+   "pts": 106.6,
+   "line": {
+    "pos": "G",
+    "gp": 16,
+    "w": 9,
+    "otl": 1,
+    "ga": 38,
+    "sv": 483,
+    "so": 1,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "James Neal": {
+   "id": "8471707",
+   "gp": 22,
+   "pts": 55.5,
+   "line": {
+    "pos": "L",
+    "gp": 22,
+    "g": 12,
+    "a": 3,
+    "pm": -11,
+    "ppg": 8,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 54,
+    "pim": 8,
+    "hit": 24,
+    "blk": 5,
+    "fow": 5
+   }
+  }
+ },
+ "2019-20|2020-01-05|Nick,Vin": {
+  "Alex Tuch": {
+   "id": "8477949",
+   "gp": 28,
+   "pts": 51.5,
+   "line": {
+    "pos": "R",
+    "gp": 28,
+    "g": 6,
+    "a": 7,
+    "pm": -5,
+    "ppg": 2,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 58,
+    "pim": 4,
+    "hit": 30,
+    "blk": 13,
+    "fow": 5
+   }
+  },
+  "Mackenzie Blackwood": {
+   "id": "8478406",
+   "gp": 32,
+   "pts": 156,
+   "line": {
+    "pos": "G",
+    "gp": 32,
+    "w": 14,
+    "otl": 5,
+    "ga": 86,
+    "sv": 845,
+    "so": 1,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Matthew Tkachuk": {
+   "id": "8479314",
+   "gp": 42,
+   "pts": 131,
+   "line": {
+    "pos": "L",
+    "gp": 42,
+    "g": 15,
+    "a": 21,
+    "pm": -8,
+    "ppg": 3,
+    "ppa": 9,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 4,
+    "sog": 114,
+    "pim": 34,
+    "hit": 82,
+    "blk": 11,
+    "fow": 0
+   }
+  }
+ },
+ "2019-20|2020-01-08|Jefe,Palagi": {
+  "Steven Stamkos": {
+   "id": "8474564",
+   "gp": 39,
+   "pts": 165,
+   "line": {
+    "pos": "C",
+    "gp": 39,
+    "g": 17,
+    "a": 25,
+    "pm": -3,
+    "ppg": 8,
+    "ppa": 8,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 4,
+    "sog": 124,
+    "pim": 14,
+    "hit": 41,
+    "blk": 24,
+    "fow": 270
+   }
+  },
+  "Anders Lee": {
+   "id": "8475314",
+   "gp": 42,
+   "pts": 129.6,
+   "line": {
+    "pos": "L",
+    "gp": 42,
+    "g": 13,
+    "a": 12,
+    "pm": 7,
+    "ppg": 1,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 4,
+    "sog": 105,
+    "pim": 35,
+    "hit": 78,
+    "blk": 29,
+    "fow": 41
+   }
+  },
+  "Jordan Staal": {
+   "id": "8473533",
+   "gp": 43,
+   "pts": 140.1,
+   "line": {
+    "pos": "C",
+    "gp": 43,
+    "g": 6,
+    "a": 11,
+    "pm": 1,
+    "ppg": 2,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 86,
+    "pim": 20,
+    "hit": 92,
+    "blk": 20,
+    "fow": 456
+   }
+  },
+  "Tomas Hertl": {
+   "id": "8476881",
+   "gp": 41,
+   "pts": 126.1,
+   "line": {
+    "pos": "C",
+    "gp": 41,
+    "g": 15,
+    "a": 18,
+    "pm": -19,
+    "ppg": 2,
+    "ppa": 5,
+    "shg": 2,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 97,
+    "pim": 14,
+    "hit": 24,
+    "blk": 22,
+    "fow": 381
+   }
+  },
+  "Jakob Chychrun": {
+   "id": "8479345",
+   "gp": 45,
+   "pts": 115,
+   "line": {
+    "pos": "D",
+    "gp": 45,
+    "g": 10,
+    "a": 9,
+    "pm": 3,
+    "ppg": 4,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 97,
+    "pim": 28,
+    "hit": 51,
+    "blk": 72,
+    "fow": 0
+   }
+  }
+ },
+ "2019-20|2020-01-11|Jefe,Joe,Zac": {
+  "Casey Cizikas": {
+   "id": "8475231",
+   "gp": 37,
+   "pts": 149.8,
+   "line": {
+    "pos": "C",
+    "gp": 37,
+    "g": 9,
+    "a": 4,
+    "pm": 11,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 3,
+    "sha": 2,
+    "gwg": 1,
+    "sog": 54,
+    "pim": 26,
+    "hit": 106,
+    "blk": 29,
+    "fow": 293
+   }
+  },
+  "Dougie Hamilton": {
+   "id": "8476462",
+   "gp": 44,
+   "pts": 178,
+   "line": {
+    "pos": "D",
+    "gp": 44,
+    "g": 14,
+    "a": 26,
+    "pm": 29,
+    "ppg": 2,
+    "ppa": 10,
+    "shg": 0,
+    "sha": 1,
+    "gwg": 3,
+    "sog": 160,
+    "pim": 28,
+    "hit": 48,
+    "blk": 56,
+    "fow": 0
+   }
+  },
+  "Mark Stone": {
+   "id": "8475913",
+   "gp": 47,
+   "pts": 145.9,
+   "line": {
+    "pos": "R",
+    "gp": 47,
+    "g": 16,
+    "a": 27,
+    "pm": 3,
+    "ppg": 6,
+    "ppa": 6,
+    "shg": 0,
+    "sha": 1,
+    "gwg": 3,
+    "sog": 125,
+    "pim": 19,
+    "hit": 43,
+    "blk": 32,
+    "fow": 9
+   }
+  },
+  "Brady Tkachuk": {
+   "id": "8480801",
+   "gp": 44,
+   "pts": 157.9,
+   "line": {
+    "pos": "L",
+    "gp": 44,
+    "g": 14,
+    "a": 11,
+    "pm": -12,
+    "ppg": 2,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 155,
+    "pim": 51,
+    "hit": 173,
+    "blk": 25,
+    "fow": 74
+   }
+  }
+ },
+ "2020-21|2021-02-24|Vin,Zac": {
+  "Taylor Hall": {
+   "id": "8475791",
+   "gp": 16,
+   "pts": 32.3,
+   "line": {
+    "pos": "L",
+    "gp": 16,
+    "g": 1,
+    "a": 10,
+    "pm": -8,
+    "ppg": 1,
+    "ppa": 4,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 43,
+    "pim": 6,
+    "hit": 12,
+    "blk": 6,
+    "fow": 0
+   }
+  },
+  "James van Riemsdyk": {
+   "id": "8474037",
+   "gp": 15,
+   "pts": 63.5,
+   "line": {
+    "pos": "L",
+    "gp": 15,
+    "g": 8,
+    "a": 13,
+    "pm": 5,
+    "ppg": 6,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 33,
+    "pim": 4,
+    "hit": 9,
+    "blk": 5,
+    "fow": 2
+   }
+  }
+ },
+ "2021-22|2021-12-26|Tom,Vin": {
+  "Drew Doughty": {
+   "id": "8474563",
+   "gp": 11,
+   "pts": 49.6,
+   "line": {
+    "pos": "D",
+    "gp": 11,
+    "g": 3,
+    "a": 10,
+    "pm": 4,
+    "ppg": 3,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 26,
+    "pim": 8,
+    "hit": 15,
+    "blk": 15,
+    "fow": 0
+   }
+  },
+  "Artem Zub": {
+   "id": "8482245",
+   "gp": 28,
+   "pts": 75.8,
+   "line": {
+    "pos": "D",
+    "gp": 28,
+    "g": 2,
+    "a": 7,
+    "pm": 5,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 28,
+    "pim": 22,
+    "hit": 51,
+    "blk": 57,
+    "fow": 0
+   }
+  },
+  "Alex Nedeljkovic": {
+   "id": "8477968",
+   "gp": 21,
+   "pts": 109.2,
+   "line": {
+    "pos": "G",
+    "gp": 21,
+    "w": 9,
+    "otl": 3,
+    "ga": 54,
+    "sv": 591,
+    "so": 0,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  }
+ },
+ "2021-22|2022-01-16|Vin,Zac": {
+  "Tom Wilson": {
+   "id": "8476880",
+   "gp": 34,
+   "pts": 131.5,
+   "line": {
+    "pos": "R",
+    "gp": 34,
+    "g": 10,
+    "a": 15,
+    "pm": 7,
+    "ppg": 1,
+    "ppa": 2,
+    "shg": 1,
+    "sha": 1,
+    "gwg": 2,
+    "sog": 59,
+    "pim": 54,
+    "hit": 96,
+    "blk": 25,
+    "fow": 11
+   }
+  },
+  "John Klingberg": {
+   "id": "8475906",
+   "gp": 30,
+   "pts": 59.7,
+   "line": {
+    "pos": "D",
+    "gp": 30,
+    "g": 1,
+    "a": 16,
+    "pm": -11,
+    "ppg": 1,
+    "ppa": 6,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 47,
+    "pim": 12,
+    "hit": 20,
+    "blk": 31,
+    "fow": 0
+   }
+  },
+  "Dmitry Orlov": {
+   "id": "8475200",
+   "gp": 36,
+   "pts": 99.4,
+   "line": {
+    "pos": "D",
+    "gp": 36,
+    "g": 4,
+    "a": 13,
+    "pm": 17,
+    "ppg": 1,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 54,
+    "pim": 30,
+    "hit": 61,
+    "blk": 39,
+    "fow": 0
+   }
+  },
+  "Michael Bunting": {
+   "id": "8478047",
+   "gp": 36,
+   "pts": 80.2,
+   "line": {
+    "pos": "L",
+    "gp": 36,
+    "g": 8,
+    "a": 15,
+    "pm": 4,
+    "ppg": 2,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 75,
+    "pim": 28,
+    "hit": 34,
+    "blk": 6,
+    "fow": 2
+   }
+  },
+  "Cam Talbot": {
+   "id": "8475660",
+   "gp": 24,
+   "pts": 146,
+   "line": {
+    "pos": "G",
+    "gp": 24,
+    "w": 15,
+    "otl": 1,
+    "ga": 71,
+    "sv": 710,
+    "so": 0,
+    "g": 0,
+    "a": 1,
+    "pim": 0
+   }
+  }
+ },
+ "2022-23|2023-03-04|Danny,Tim": {
+  "Alexis Lafreniere": {
+   "id": "8482109",
+   "gp": 61,
+   "pts": 150.2,
+   "line": {
+    "pos": "L",
+    "gp": 61,
+    "g": 11,
+    "a": 18,
+    "pm": 5,
+    "ppg": 1,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 108,
+    "pim": 27,
+    "hit": 121,
+    "blk": 20,
+    "fow": 24
+   }
+  },
+  "Joonas Korpisalo": {
+   "id": "8476914",
+   "gp": 28,
+   "pts": 142,
+   "line": {
+    "pos": "G",
+    "gp": 28,
+    "w": 11,
+    "otl": 3,
+    "ga": 82,
+    "sv": 845,
+    "so": 0,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  }
+ },
+ "2023-24|2023-11-12|Joe,Vin": {
+  "Victor Olofsson": {
+   "id": "8478109",
+   "gp": 9,
+   "pts": 4.2,
+   "line": {
+    "pos": "L",
+    "gp": 9,
+    "g": 0,
+    "a": 1,
+    "pm": -2,
+    "ppg": 0,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 12,
+    "pim": 4,
+    "hit": 2,
+    "blk": 1,
+    "fow": 0
+   }
+  },
+  "Matthew Tkachuk": {
+   "id": "8479314",
+   "gp": 13,
+   "pts": 40.8,
+   "line": {
+    "pos": "L",
+    "gp": 13,
+    "g": 3,
+    "a": 10,
+    "pm": 2,
+    "ppg": 0,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 57,
+    "pim": 9,
+    "hit": 13,
+    "blk": 5,
+    "fow": 1
+   }
+  },
+  "Ilya Samsonov": {
+   "id": "8478492",
+   "gp": 8,
+   "pts": 23.4,
+   "line": {
+    "pos": "G",
+    "gp": 8,
+    "w": 3,
+    "otl": 2,
+    "ga": 25,
+    "sv": 167,
+    "so": 0,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Lawson Crouse": {
+   "id": "8478474",
+   "gp": 13,
+   "pts": 45.2,
+   "line": {
+    "pos": "L",
+    "gp": 13,
+    "g": 5,
+    "a": 3,
+    "pm": 2,
+    "ppg": 2,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 22,
+    "pim": 6,
+    "hit": 29,
+    "blk": 9,
+    "fow": 5
+   }
+  },
+  "Darcy Kuemper": {
+   "id": "8475311",
+   "gp": 8,
+   "pts": 31.4,
+   "line": {
+    "pos": "G",
+    "gp": 8,
+    "w": 3,
+    "otl": 2,
+    "ga": 25,
+    "sv": 207,
+    "so": 0,
+    "g": 0,
+    "a": 1,
+    "pim": 0
+   }
+  },
+  "Bryan Rust": {
+   "id": "8475810",
+   "gp": 13,
+   "pts": 49.3,
+   "line": {
+    "pos": "R",
+    "gp": 13,
+    "g": 7,
+    "a": 5,
+    "pm": 8,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 1,
+    "sog": 43,
+    "pim": 2,
+    "hit": 10,
+    "blk": 13,
+    "fow": 0
+   }
+  }
+ },
+ "2023-24|2024-02-16|Danny,Tim": {
+  "Joey Daccord": {
+   "id": "8478916",
+   "gp": 37,
+   "pts": 202.4,
+   "line": {
+    "pos": "G",
+    "gp": 37,
+    "w": 16,
+    "otl": 9,
+    "ga": 84,
+    "sv": 1002,
+    "so": 2,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Mathew Barzal": {
+   "id": "8478445",
+   "gp": 52,
+   "pts": 176.9,
+   "line": {
+    "pos": "C",
+    "gp": 52,
+    "g": 15,
+    "a": 41,
+    "pm": 1,
+    "ppg": 4,
+    "ppa": 15,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 161,
+    "pim": 28,
+    "hit": 31,
+    "blk": 28,
+    "fow": 23
+   }
+  }
+ },
+ "2024-25|2025-01-31|Vin,Will": {
+  "Kirill Kaprizov": {
+   "id": "8478864",
+   "gp": 37,
+   "pts": 164.3,
+   "line": {
+    "pos": "L",
+    "gp": 37,
+    "g": 23,
+    "a": 29,
+    "pm": 19,
+    "ppg": 3,
+    "ppa": 9,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 4,
+    "sog": 128,
+    "pim": 14,
+    "hit": 12,
+    "blk": 15,
+    "fow": 0
+   }
+  },
+  "Alexis Lafreniere": {
+   "id": "8482109",
+   "gp": 50,
+   "pts": 120.6,
+   "line": {
+    "pos": "L",
+    "gp": 50,
+    "g": 13,
+    "a": 17,
+    "pm": -13,
+    "ppg": 2,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 3,
+    "sog": 120,
+    "pim": 24,
+    "hit": 68,
+    "blk": 17,
+    "fow": 11
+   }
+  },
+  "Matt Boldy": {
+   "id": "8481557",
+   "gp": 52,
+   "pts": 172.4,
+   "line": {
+    "pos": "L",
+    "gp": 52,
+    "g": 18,
+    "a": 27,
+    "pm": 6,
+    "ppg": 6,
+    "ppa": 7,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 8,
+    "sog": 178,
+    "pim": 35,
+    "hit": 27,
+    "blk": 37,
+    "fow": 41
+   }
+  },
+  "Bryan Rust": {
+   "id": "8475810",
+   "gp": 45,
+   "pts": 142.3,
+   "line": {
+    "pos": "R",
+    "gp": 45,
+    "g": 19,
+    "a": 20,
+    "pm": -21,
+    "ppg": 3,
+    "ppa": 6,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 4,
+    "sog": 118,
+    "pim": 14,
+    "hit": 42,
+    "blk": 39,
+    "fow": 5
+   }
+  }
+ },
+ "2026-27|2026-10-20|Danny,Tim": {
+  "Stuart Skinner": {
+   "id": "8479973",
+   "gp": 5,
+   "pts": 30,
+   "line": {
+    "pos": "G",
+    "gp": 5,
+    "w": 3,
+    "otl": 2,
+    "ga": 14,
+    "sv": 135,
+    "so": 0,
+    "g": 0,
+    "a": 0,
+    "pim": 0
+   }
+  },
+  "Andrei Svechnikov": {
+   "id": "8480830",
+   "gp": 10,
+   "pts": 51.8,
+   "line": {
+    "pos": "R",
+    "gp": 10,
+    "g": 6,
+    "a": 5,
+    "pm": 5,
+    "ppg": 3,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 2,
+    "sog": 30,
+    "pim": 6,
+    "hit": 23,
+    "blk": 2,
+    "fow": 1
+   }
+  }
+ },
+ "2026-27|2026-11-02|Danny,Vin": {
+  "Zach Werenski": {
+   "id": "8478460",
+   "gp": 12,
+   "pts": 40.4,
+   "line": {
+    "pos": "D",
+    "gp": 12,
+    "g": 0,
+    "a": 10,
+    "pm": 4,
+    "ppg": 0,
+    "ppa": 2,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 34,
+    "pim": 0,
+    "hit": 7,
+    "blk": 29,
+    "fow": 0
+   }
+  },
+  "Dylan Larkin": {
+   "id": "8477946",
+   "gp": 10,
+   "pts": 38.5,
+   "line": {
+    "pos": "C",
+    "gp": 10,
+    "g": 2,
+    "a": 4,
+    "pm": 3,
+    "ppg": 0,
+    "ppa": 3,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 32,
+    "pim": 4,
+    "hit": 5,
+    "blk": 6,
+    "fow": 125
+   }
+  },
+  "Brayden McNabb": {
+   "id": "8475188",
+   "gp": 15,
+   "pts": 40.9,
+   "line": {
+    "pos": "D",
+    "gp": 15,
+    "g": 0,
+    "a": 8,
+    "pm": 15,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 17,
+    "pim": 6,
+    "hit": 19,
+    "blk": 18,
+    "fow": 0
+   }
+  }
+ },
+ "2018-19|2018-10-21|Jefe,Vin": {
+  "Blake Wheeler": {
+   "id": "8471218",
+   "gp": 8,
+   "pts": 19.5,
+   "line": {
+    "pos": "R",
+    "gp": 8,
+    "g": 2,
+    "a": 4,
+    "pm": -4,
+    "ppg": 0,
+    "ppa": 4,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 22,
+    "pim": 17,
+    "hit": 7,
+    "blk": 7,
+    "fow": 5
+   }
+  },
+  "Erik Haula": {
+   "id": "8475287",
+   "gp": 8,
+   "pts": 9.9,
+   "line": {
+    "pos": "L",
+    "gp": 8,
+    "g": 1,
+    "a": 0,
+    "pm": -2,
+    "ppg": 0,
+    "ppa": 0,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 15,
+    "pim": 8,
+    "hit": 8,
+    "blk": 3,
+    "fow": 34
+   }
+  },
+  "Mathew Dumba": {
+   "id": "8476856",
+   "gp": 8,
+   "pts": 35,
+   "line": {
+    "pos": "D",
+    "gp": 8,
+    "g": 3,
+    "a": 2,
+    "pm": 5,
+    "ppg": 1,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 20,
+    "pim": 2,
+    "hit": 23,
+    "blk": 9,
+    "fow": 0
+   }
+  },
+  "Micheal Ferland": {
+   "id": "8475907",
+   "gp": 8,
+   "pts": 41,
+   "line": {
+    "pos": "L",
+    "gp": 8,
+    "g": 5,
+    "a": 3,
+    "pm": 7,
+    "ppg": 0,
+    "ppa": 1,
+    "shg": 0,
+    "sha": 0,
+    "gwg": 0,
+    "sog": 31,
+    "pim": 9,
+    "hit": 21,
+    "blk": 4,
+    "fow": 10
+   }
+  }
+ }
+}

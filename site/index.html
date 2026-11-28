@@ -1510,7 +1510,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const intro = panel(h("div", { class: "small" },
       h("b", null, all.length + " trades"), " since 2013-14 (2014-15 had none). Most active: ",
       top.slice(0, 3).map(([m, n], i) => h("span", null, i ? ", " : "", h("span", { class: "mgr" }, m), " " + n)),
-      ". The tracker counts the fantasy points each side's players scored for their new team after the trade",
+      ". Each card shows the deal as it stood the day it was made: the managers' records going in and each player's season so far (fantasy points from NHL games before the trade, with that season's scoring). The tracker above it counts what happened next: the fantasy points each side's players scored for their new team",
       " (Yahoo seasons, through 2025-26: only points scored in a started lineup)."));
     $("content").replaceChildren(h("div", { class: "trades-list" }, intro, list.map(t => tradeBlock(t, fmt1))),
       h("footer", null, "Trades, tracker points and drafts from the league's records (Yahoo through 2025-26, Fantrax since). Stories are written from those records."));
@@ -1530,6 +1530,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
           const lead = t.tracker.leader === sd.mgr;
           return h("div", { class: "tt-side" + (lead ? " won" : "") },
             h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0))),
+            t.tracker.final && (sd.champion || sd.finish) ? h("div", { class: "muted small" + (sd.champion ? " gold" : "") }, sd.champion ? "🏆 Won the title" : "Finished " + ord(sd.finish)) : null,
             sd.gets.map(p => h("div", { class: "tt-p" }, h("span", null, h("span", { class: "mgr" }, p.name)),
               h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt1(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
             lead ? h("span", { class: "tag won" }, (t.tracker.final ? "Won by " : "Ahead by ") + fmt1(t.tracker.by)) : null);
@@ -1540,9 +1541,9 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     // --- the card ---
     const sideEl = (sd, i) => {
       const chips = [];
+      // the card is the trade as it stood that day: record going in, each player's season so far (how it turned out is in the tracker above)
       if (sd.record) chips.push(h("span", null, ord(sd.record.rank) + " · " + sd.record.w + "-" + sd.record.l + (sd.record.t ? "-" + sd.record.t : "")));
-      if (sd.champion) chips.push(h("span", { class: "gold" }, "🏆 Won the title"));
-      else if (sd.finish) chips.push(h("span", null, "Finished " + ord(sd.finish)));
+      else chips.push(h("span", null, "Season opener"));
       return h("div", { class: "tx-side", style: "--sc:" + TCOL[i % 3] },
         h("div", { class: "tx-mh" }, avatar(sd.mgr, sd.logo, 96, "big"),
           h("div", null, h("div", { class: "tx-mname" }, sd.mgr), sd.team ? h("div", { class: "tx-tname" }, sd.team) : null, h("div", { class: "tx-chips" }, chips))),
@@ -1556,9 +1557,10 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
                 h("img", { class: "tlogo tl-dark", src: "teams/" + p.nhl + "_dark.svg", alt: "", loading: "lazy", onerror: e => e.target.remove() })) : null),
             h("div", { style: "min-width:0" }, h("div", { class: "tx-pn" }, h("small", null, first), last),
               h("div", { class: "tx-pchips" }, String(p.pos || "").split(/[\/,]/).filter(Boolean).map(x => h("span", { class: "pos" }, x)), p.nhl ? h("span", null, p.nhl) : null)),
-            h("div", { class: "tx-big" }, h("b", null, p.pts == null ? "–" : fmt1(p.pts)), h("small", null, "PTS AFTER" + (p.gp != null ? " · " + p.gp + " GP" : "")), p.left ? h("small", null, "until " + day(p.left)) : null));
+            p.asOf ? h("div", { class: "tx-big" }, h("b", null, fmt1(p.asOf.pts)), h("small", null, "FPTS · " + p.asOf.gp + " GP"),
+              h("small", null, (p.asOf.gp ? fmt1(p.asOf.pts / p.asOf.gp) : "0.0") + " FP/G")) : h("div", { class: "tx-big" }, h("b", null, "–")));
         }),
-        h("div", { class: "tx-tot" }, h("i"), sd.mgr + " got ", h("b", null, sd.total == null ? "–" : fmt1(sd.total)), " pts after the trade"));
+        h("div", { class: "tx-tot" }, h("i"), sd.mgr + " gets ", h("b", null, sd.asOfTotal ? fmt1(sd.asOfTotal.pts) : "–"), " FPts of production this season, as of the trade"));
     };
     const cols = two ? "minmax(0,1fr) 110px minmax(0,1fr)" : "repeat(" + t.sides.length + ", minmax(0,1fr))";
     const st = t.story;

@@ -11,6 +11,9 @@ const storiesFile = process.argv[3] || path.join(__dirname, 'trade_stories.json'
 const reports = JSON.parse(fs.readFileSync(path.join(site, 'reports.json'), 'utf8'));
 const drafts = JSON.parse(fs.readFileSync(path.join(site, 'drafts.json'), 'utf8'));
 const stories = fs.existsSync(storiesFile) ? JSON.parse(fs.readFileSync(storiesFile, 'utf8')) : {};
+// each player's season so far on the day of the trade (trade_asof.js: NHL games before the trade date + that season's scoring)
+const asofFile = path.join(__dirname, 'trade_asof.json');
+const asof = fs.existsSync(asofFile) ? JSON.parse(fs.readFileSync(asofFile, 'utf8')) : {};
 
 const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z]/g, '');
 const r1 = x => Math.round(x * 10) / 10;
@@ -104,10 +107,12 @@ for (const t of all) {
       const tp = trSide && trSide.gets.find(q => norm(q.name) === norm(p.name));
       const pts = tp ? (tp.pts != null ? tp.pts : Object.values(tp.byWeek || {}).reduce((a, v) => a + (v || 0), 0)) : null;
       const gp = tp && (tp.gp != null ? tp.gp : tp.gpByWeek ? Object.values(tp.gpByWeek).reduce((a, v) => a + v, 0) : null);
-      const id = pid[norm(p.name)];
+      const ao = asof[t.id] && asof[t.id][p.name];
+      const id = pid[norm(p.name)] || (ao && ao.id);
       return {
         name: p.name, nhl: p.nhl, pos: p.pos, pid: hasImg(id) ? id : null,
         pts: pts == null ? null : r1(pts), gp: gp == null ? null : gp, left: tp && tp.left || null,
+        asOf: ao ? { gp: ao.gp, pts: ao.pts } : null,
         from: giver.join(' & '), acquired: giver.length === 1 ? acquired(t, p.name, giver[0]) : null,
         past: pastOwners(p.name, t)
       };
@@ -119,7 +124,8 @@ for (const t of all) {
       record: st ? { rank: st.rank, w: st.w, l: st.l, t: st.t || 0 } : null,
       finish: fr ? fr.rank : null, champion: champ[s.id] === x.mgr,
       tradeNo: counts[x.mgr], gets,
-      total: tr ? r1(gets.reduce((a, p) => a + (p.pts || 0), 0)) : null
+      total: tr ? r1(gets.reduce((a, p) => a + (p.pts || 0), 0)) : null,
+      asOfTotal: gets.some(p => p.asOf) ? { pts: r1(gets.reduce((a, p) => a + (p.asOf ? p.asOf.pts : 0), 0)), gp: gets.reduce((a, p) => a + (p.asOf ? p.asOf.gp : 0), 0) } : null
     };
   });
   const totals = sides.map(x => x.total);
