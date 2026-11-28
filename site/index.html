@@ -628,7 +628,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 .trades-list { display: grid; gap: 40px; }
 .tx { display: grid; gap: 12px; max-width: 1080px; width: 100%; justify-self: center; }
 .tx-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.tx-top .export-btn { margin-left: auto; }
+.tx-top .tx-exports { margin-left: auto; display: flex; gap: 6px; }
+.tt-mgrs { font: 800 22px/1.05 var(--display); text-transform: uppercase; margin: 2px 0 3px; }
 .tx-track { display: grid; gap: 10px; }
 .tx-track .tt-sides { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .tx-track .tt-side { overflow-x: auto; }
@@ -1624,12 +1625,19 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   }
   function tradeBlock(t, fmt1) {
     const two = t.sides.length === 2;
-    const when = (() => { const x = d(t.date); return DOW[x.getUTCDay()] + ", " + MON[x.getUTCMonth()] + " " + x.getUTCDate() + ", " + x.getUTCFullYear(); })();
+    const longDay = iso => { const x = d(iso); return DOW[x.getUTCDay()] + ", " + MON[x.getUTCMonth()] + " " + x.getUTCDate() + ", " + x.getUTCFullYear(); };
+    const when = longDay(t.date);
     // --- trade tracker box ---
     let track = null;
     // tracker player name with his NHL team and position: "Dylan Larkin MTL · C"
     const ttName = p => h("span", null, h("span", { class: "mgr" }, p.name), h("span", { class: "muted small" }, " " + [p.nhlNow || p.nhl, String(p.pos || "").replace(/,/g, "/")].filter(Boolean).join(" · ")));
-    const boxHead = right => h("div", { class: "tt-head" }, h("div", null, h("div", { class: "subhead" }, t.final ? "Trade results" : "Trade tracker"), h("div", { class: "muted small" }, "Traded " + when)), right);
+    // header: who traded, the day it was made, and the day the players were officially on their new teams
+    // (Fantrax: day one of the period the trade took effect in; Yahoo: the day it went through)
+    const eff = t.effective || { date: t.date, week: t.week };
+    const boxHead = right => h("div", { class: "tt-head" }, h("div", null, h("div", { class: "subhead" }, t.final ? "Trade results" : "Trade tracker"),
+      h("div", { class: "tt-mgrs" }, t.sides.map(x => x.mgr).join(" ⇄ ")),
+      h("div", { class: "muted small" }, "Traded " + when + (t.week ? " (week " + t.week + ")" : ""),
+        h("span", { class: "tt-sep" }, " · "), eff.date === t.date ? "Processed the same day" : "Processed " + longDay(eff.date) + (eff.week ? " (week " + eff.week + ")" : ""))), right);
     // finished seasons: where each team stood at the trade, at the end of the regular season, and after the playoffs
     const standings = sd => t.final && (sd.record || sd.regEnd || sd.finish) ? h("div", { class: "tt-stand" },
       [[sd.record, "As of trade"], [sd.regEnd, "End of reg season"]].map(([r, lab]) => h("div", null,
@@ -1748,16 +1756,20 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       h("div", { class: "rink", "aria-hidden": "true", style: "margin:22px 0 0" }, h("i"), h("i"), h("i"), h("i"), h("i")));
     const block = h("article", { class: "tx", id: "trade-" + t.season + "-" + t.date },
       h("div", { class: "tx-top" }, h("span", { class: "subhead" }, t.label + " · trade " + t.noInSeason + " of the season · No. " + t.noAllTime + " all-time"),
-        h("button", { type: "button", class: "export-btn no-export", onclick: e => exportTrade(e.currentTarget, block, t) }, "Export image")),
+        h("span", { class: "tx-exports no-export" },
+          h("button", { type: "button", class: "export-btn", title: "Just the Trade accepted card", onclick: e => exportTrade(e.currentTarget, block, t, "card") }, "Export card"),
+          h("button", { type: "button", class: "export-btn", title: "The trade tracker and the card", onclick: e => exportTrade(e.currentTarget, block, t, "full") }, "Export full"))),
       track, card);
     return block;
   }
-  async function exportTrade(btn, block, t) {
+  async function exportTrade(btn, block, t, mode) {
+    const label = btn.textContent;
     btn.disabled = true; btn.textContent = "Building…";
     let holder = null;
     try {
       const lib = await loadExportLib();
-      const sheet = h("div", { class: "export-sheet tx-sheet" }, block.cloneNode(true));
+      // card: just the "Trade accepted" card; full: the tracker box above it too
+      const sheet = h("div", { class: "export-sheet tx-sheet" }, mode === "card" ? h("article", { class: "tx" }, block.querySelector(".tx-card").cloneNode(true)) : block.cloneNode(true));
       sheet.querySelectorAll(".no-export").forEach(x => x.remove());
       sheet.querySelectorAll("img").forEach(i => i.removeAttribute("loading"));
       sheet.firstChild.style.maxWidth = "none"; sheet.firstChild.style.padding = "24px";
@@ -1772,12 +1784,12 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       try { blob = await lib.toBlob(sheet, opts); } catch (e) { blob = null; }
       if (!blob) blob = await lib.toBlob(sheet, Object.assign({ skipFonts: true }, opts));
       if (!blob) throw new Error("empty image");
-      showExport(blob, "rrdj-trade-" + t.season + "-" + t.date + ".png");
+      showExport(blob, "rrdj-trade-" + t.season + "-" + t.date + (mode === "card" ? "-card" : "") + ".png");
     } catch (e) {
       alert("The image couldn't be made. Try again in a moment.");
     } finally {
       if (holder) holder.remove();
-      btn.disabled = false; btn.textContent = "Export image";
+      btn.disabled = false; btn.textContent = label;
     }
   }
 

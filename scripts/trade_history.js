@@ -224,6 +224,9 @@ for (const t of all) {
   done.push({ season: s.id, week: wkNo, pk, moves: sides.flatMap(sd => sd.gets.map(p => ({ name: p.name, to: sd.mgr, from: p.from }))) });
   out.push({
     id: t.id, season: s.id, label: s.label || s.id, source: s.source === 'sheet' ? 'Yahoo' : 'Fantrax', scoring: s.scoring || 'points',
+    // the day the players were officially on their new teams: Fantrax trades take effect at the start of a period
+    // (tracker countedFrom); Yahoo rosters changed when the trade was processed
+    effective: (() => { const d = (t.tracker && t.tracker.countedFrom) || t.date, w = weekOf(s, d); return { date: d, week: w ? w.week : null }; })(),
     date: t.date, week: wk ? wk.week : t.week, final: !isLive, noInSeason: seasonCounts[s.id], noAllTime: out.length + 1, pairNo: pairCounts[pk], prevPair,
     sides,
     tracker: scored ? {
