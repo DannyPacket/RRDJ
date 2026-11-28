@@ -629,6 +629,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 .tx-hero h3 span { display: block; color: var(--red); }
 .tx-when { font: 600 13px var(--mono); color: var(--muted); margin-top: 10px; }
 /* light "previously" notes: the same managers' earlier trades, a player's earlier trades */
+.tx-orig { font: 600 11px var(--mono); color: var(--muted); margin-top: 5px; line-height: 1.35; }
 .tx-prev { font: 500 11px var(--mono); color: var(--muted); opacity: .8; margin-top: 4px; line-height: 1.35; }
 .tx-stamp { flex: none; width: 120px; height: 120px; border-radius: 50%; border: 4px solid var(--red); color: var(--red); display: grid; place-items: center; text-align: center; transform: rotate(-11deg);
   font: 800 13px/1.05 var(--display); letter-spacing: .1em; text-transform: uppercase; box-shadow: inset 0 0 0 3px var(--board), inset 0 0 0 5px var(--red); }
@@ -1612,6 +1613,11 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
                 h("img", { class: "tlogo tl-dark", src: "teams/" + p.nhl + "_dark.svg", alt: "", loading: "lazy", onerror: e => e.target.remove() })) : null),
             h("div", { style: "min-width:0" }, h("div", { class: "tx-pn" }, h("small", null, first), last),
               h("div", { class: "tx-pchips" }, String(p.pos || "").split(/[\/,]/).filter(Boolean).map(x => h("span", { class: "pos" }, x)), p.nhl ? h("span", null, p.nhl) : null),
+              // how the team giving him up got him: draft pick, free-agent pickup, waiver claim or an earlier trade
+              p.acquired ? h("div", { class: "tx-orig" }, (a => a.how === "draft" ? "Drafted by " + p.from + " · Rd " + a.round + ", #" + a.pick + " overall"
+                : a.how === "waivers" ? "Waiver claim by " + p.from + (a.week ? " · wk " + a.week : "")
+                : a.how === "trade" ? "Traded to " + p.from + " by " + a.from + (a.week ? " · " + (a.season && a.season !== t.season ? a.season + " " : "") + "wk " + a.week : "")
+                : "Free-agent pickup by " + p.from + (a.week ? " · wk " + a.week : ""))(p.acquired)) : null,
               (p.prevTrades || []).length ? h("div", { class: "tx-prev" }, "Traded before: " + p.prevTrades.map(x => x.season + " wk " + x.week + " (" + x.from + " → " + x.to + ")").join(" · ")) : null),
             p.asOf ? h("div", { class: "tx-big" }, h("b", null, fmt1(p.asOf.pts)), h("small", null, "FPTS · " + p.asOf.gp + " GP"),
               h("small", null, (p.asOf.gp ? fmt1(p.asOf.pts / p.asOf.gp) : "0.0") + " FP/G")) : h("div", { class: "tx-big" }, h("b", null, "–")));

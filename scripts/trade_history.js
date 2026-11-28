@@ -76,7 +76,7 @@ function acquired(t, name, giver) {
   }
   for (const x of all) if (x.s === s && x.date < t.date) {
     const side = x.sides.find(y => y.mgr === giver && y.gets.some(p => norm(p.name) === k));
-    if (side) ev.push({ how: 'trade', at: x.date, date: x.date, from: x.sides.filter(y => y !== side).map(y => y.mgr).join(' & ') });
+    if (side) ev.push({ how: 'trade', at: x.date, date: x.date, season: x.s.id, week: (weekOf(x.s, x.date) || {}).week || null, from: x.sides.filter(y => y !== side).map(y => y.mgr).join(' & ') });
   }
   ev.sort((a, b) => a.at.localeCompare(b.at));
   const last = ev.pop();
@@ -157,7 +157,8 @@ for (const t of all) {
         byWeek: tp && tp.statsByWeek ? tp.byWeek || null : undefined, gpByWeek: tp && tp.statsByWeek ? tp.gpByWeek || null : undefined,
         statsByWeek: tp && tp.statsByWeek || undefined,
         regStats: yReg || undefined, post: yPost || undefined,
-        from: giver.join(' & '), acquired: giver.length === 1 ? acquired(t, p.name, giver[0]) : null,
+        // who gave him up and how that team got him (draft, pickup, waivers, trade); in a 3-team deal, the team whose records show him
+        ...(() => { for (const g of giver) { const a = acquired(t, p.name, g); if (a) return { from: g, acquired: a }; } return { from: giver.join(' & '), acquired: null }; })(),
         past: pastOwners(p.name, t),
         prevTrades: done.filter(d => d.moves.some(m => norm(m.name) === norm(p.name))).map(d => { const m = d.moves.find(m => norm(m.name) === norm(p.name)); return { season: d.season, week: d.week, from: m.from, to: m.to }; })
       };
