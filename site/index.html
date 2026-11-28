@@ -1755,7 +1755,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       h("div", { class: "tx-eyb" }, "Rene Rancourt's Day Job · " + t.label + " season · " + t.source),
       h("div", { class: "tx-hero" }, h("div", null, h("h3", null, "Trade", h("span", null, "accepted")),
         h("div", { class: "tx-when" }, t.sides.map(x => x.mgr).join(" ⇄ ") + " · " + when + (t.week ? " · week " + t.week : "")),
-        (t.prevPair || []).length ? h("div", { class: "tx-prev" }, "Previous trades between " + t.sides.map(x => x.mgr).join(" & ") + ": " + t.prevPair.map(x => x.season + " wk " + x.week).join(" · ")) : null),
+        (t.prevPair || []).length ? h("div", { class: "tx-prev" }, "Previous trades between " + t.sides.map(x => x.mgr).join(" & ") + ": " + t.prevPair.map(x => x.season + " wk " + x.week).join(" · ") + " (" + t.prevPair.length + ")") : null),
         h("div", { class: "tx-stamp", "aria-hidden": "true" }, h("div", null, "RRDJ", h("b", null, "Deal"), "#" + t.noAllTime))),
       h("div", { class: "rink", "aria-hidden": "true" }, h("i"), h("i"), h("i"), h("i"), h("i")),
       h("div", { class: "tx-teams", style: "grid-template-columns:" + cols },
