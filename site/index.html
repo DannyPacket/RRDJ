@@ -620,11 +620,10 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 .tx-track { display: grid; gap: 10px; }
 .tx-track .tt-sides { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
 .tx-track .tt-side { overflow-x: auto; }
-.trade-recs { margin-bottom: 12px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.trade-recs .tr-wide { grid-column: span 2; }
+.trade-recs { margin-bottom: 12px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .tr-active { display: flex; align-items: center; gap: 18px; }
 .tr-places { display: grid; gap: 2px; padding-left: 16px; border-left: 1px solid var(--line); }
-@media (max-width: 640px) { .trade-recs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .trade-recs { grid-template-columns: 1fr; } }
 .trade-recs .tr-place { color: var(--muted); }
 .trade-recs .tr-place b { color: var(--ink); font-weight: 700; margin-right: 2px; }
 @media (max-width: 640px) { .tx-track .tt-sides { grid-template-columns: 1fr !important; } }
@@ -1567,32 +1566,33 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const list = all.filter(t => (tSeason === "all" || t.season === tSeason) && hasMgr(t, tMgr));
     const leaders = {}; for (const t of all) for (const sd of t.sides) leaders[sd.mgr] = (leaders[sd.mgr] || 0) + 1;
     // the record boxes: league-wide, whatever the filters say. Most active ranks by trade count (tied managers share a place).
-    const byCount = {}; for (const [m, n] of Object.entries(leaders)) (byCount[n] = byCount[n] || []).push(m);
-    const places = Object.keys(byCount).map(Number).sort((a, b) => b - a).slice(0, 3).map(n => ({ n, mgrs: byCount[n].sort((a, b) => a.localeCompare(b)) }));
+    // ranked by count, tied entries share a place: [{ n, names }] for 1st, 2nd, 3rd
+    const rank = counts => { const by = {}; for (const [k, n] of Object.entries(counts)) (by[n] = by[n] || []).push(k);
+      return Object.keys(by).map(Number).sort((x, y) => y - x).slice(0, 3).map(n => ({ n, names: by[n].sort((x, y) => x.localeCompare(y)) })); };
     const curId = DATA.seasons[DATA.seasons.length - 1].id, thisSeason = all.filter(t => t.season === curId).length;
-    const moved = all.reduce((a, t) => a + t.sides.reduce((b, sd) => b + sd.gets.length, 0), 0);
-    const tile = (label, val, ...sub) => h("div", { class: "tile" }, h("span", { class: "pos" }, label), h("span", { class: "tile-v num" }, val), sub.flat());
     const pl = n => n + " trade" + (n === 1 ? "" : "s");
-    // the pair of managers who have traded with each other most
-    const pairs = {}; for (const t of all) { const k = t.sides.map(sd => sd.mgr).sort((a, b) => a.localeCompare(b)).join(" & "); pairs[k] = (pairs[k] || 0) + 1; }
-    const topPair = Object.entries(pairs).sort((a, b) => b[1] - a[1])[0];
-    // biggest winning margin in a finished trade (tracker points, regular season)
-    const lop = all.filter(t => t.final && t.tracker && t.tracker.leader).sort((a, b) => b.tracker.by - a.tracker.by)[0];
-    const lopLoser = lop && lop.sides.filter(sd => sd.mgr !== lop.tracker.leader).sort((a, b) => (b.total || 0) - (a.total || 0))[0];
-    const lopWin = lop && lop.sides.find(sd => sd.mgr === lop.tracker.leader);
+    const tile = (label, val, ...sub) => h("div", { class: "tile" }, h("span", { class: "pos" }, label), h("span", { class: "tile-v num" }, val), sub.flat());
+    // a box with the headline number on the left and a short list beside it
+    const sideTile = (label, val, sub, lines) => h("div", { class: "tile" }, h("span", { class: "pos" }, label),
+      h("div", { class: "tr-active" }, h("div", null, h("span", { class: "tile-v num" }, val), h("div", { class: "muted small" }, sub)),
+        lines.length ? h("div", { class: "tr-places" }, lines.map(([k, v]) => h("div", { class: "tr-place small" }, h("b", null, k), " " + v))) : null));
+    const placeLines = r => r.slice(1).map((p, i) => [["2nd", "3rd"][i], p.names.join(", ") + " · " + p.n]);
+    const seasons = {}; for (const t of all) seasons[t.season] = (seasons[t.season] || 0) + 1;
+    const busiest = rank(seasons);
+    const active = rank(leaders);
+    const pairs = {}; for (const t of all) { const k = t.sides.map(sd => sd.mgr).sort((x, y) => x.localeCompare(y)).join(" & "); pairs[k] = (pairs[k] || 0) + 1; }
+    const partners = rank(pairs);
+    // players moved, by how the team trading him away had got him: drafted, picked up (free agency or waivers), or in an earlier trade
+    const how = { Drafted: 0, Waivers: 0, Traded: 0 }; let moved = 0;
+    for (const t of all) for (const sd of t.sides) for (const p of sd.gets) { moved++; const x = p.acquired && p.acquired.how;
+      if (x === "draft") how.Drafted++; else if (x === "trade") how.Traded++; else if (x) how.Waivers++; }
     const recs = h("div", { class: "tiles trade-recs" },
       tile("Total trades", String(all.length), h("span", { class: "muted small" }, "since 2013-14")),
       tile("Trades this season", String(thisSeason), h("span", { class: "muted small" }, curId)),
-      // Most active: the leader on the left, 2nd and 3rd beside him
-      places.length ? h("div", { class: "tile tr-wide" }, h("span", { class: "pos" }, "Most active"),
-        h("div", { class: "tr-active" },
-          h("div", null, h("span", { class: "tile-v num" }, places[0].mgrs.join(" & ")), h("div", { class: "muted small" }, pl(places[0].n))),
-          places.length > 1 ? h("div", { class: "tr-places" }, places.slice(1).map((p, i) => h("div", { class: "tr-place small" }, h("b", null, ["2nd", "3rd"][i]), " " + p.mgrs.join(", ") + " · " + p.n))) : null)) : null,
-      tile("Players moved", String(moved), h("span", { class: "muted small" }, (moved / (all.length || 1)).toFixed(1) + " per trade")),
-      topPair ? tile("Favorite partners", topPair[0], h("span", { class: "muted small" }, pl(topPair[1]) + " with each other")) : null,
-      lop ? h("div", { class: "tile tr-wide" }, h("span", { class: "pos" }, "Most lopsided"),
-        h("span", { class: "tile-v num" }, lop.tracker.leader + " +" + fmt1(lop.tracker.by)),
-        h("span", { class: "muted small" }, lopWin.mgr + " " + fmt1(lopWin.total || 0) + ", " + lopLoser.mgr + " " + fmt1(lopLoser.total || 0) + " · " + lop.label + " week " + lop.week)) : null);
+      busiest.length ? sideTile("Most trades in a season", busiest[0].names.join(", "), pl(busiest[0].n), placeLines(busiest)) : null,
+      sideTile("Players moved", String(moved), (moved / (all.length || 1)).toFixed(1) + " per trade", Object.entries(how).map(([k, v]) => [k, String(v)])),
+      active.length ? sideTile("Most active", active[0].names.join(" & "), pl(active[0].n), placeLines(active)) : null,
+      partners.length ? sideTile("Favorite partners", partners[0].names.join(", "), pl(partners[0].n) + " together", placeLines(partners)) : null);
     const intro = panel(h("div", { class: "small" },
       h("b", null, all.length + " trades"), " since 2013-14 (2014-15 had none). Each card shows the deal as it stood the day it was made: the managers' records going in and each player's season so far (fantasy points from NHL games before the trade, with that season's scoring). The tracker above it counts what happened next: the fantasy points each side's players scored for their new team",
       " (Yahoo seasons, through 2025-26: only points scored in a started lineup)."));
