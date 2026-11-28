@@ -739,6 +739,19 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     for (const kid of kids.flat()) if (kid != null && kid !== false) el.append(kid instanceof Node ? kid : document.createTextNode(String(kid)));
     return el;
   }
+  // Every dropdown keeps one width: its widest option (plus any labels in data-widest, a JSON list, for options whose
+  // text changes with another filter, like the trade counts), so a filter never shrinks or grows as you pick.
+  const lockSelect = sel => {
+    const cs = getComputedStyle(sel);
+    const ctx = lockSelect.ctx || (lockSelect.ctx = document.createElement("canvas").getContext("2d"));
+    ctx.font = cs.fontWeight + " " + cs.fontSize + " " + cs.fontFamily;
+    let extra = []; try { extra = JSON.parse(sel.dataset.widest || "[]"); } catch (e) {}
+    const w = Math.max(0, ...[...sel.options].map(o => o.textContent).concat(extra).map(t => ctx.measureText(t).width));
+    sel.style.width = Math.ceil(w + parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + 30) + "px";
+  };
+  const lockAll = root => (root.matches && root.matches("select") ? [root] : [...(root.querySelectorAll ? root.querySelectorAll("select") : [])]).forEach(lockSelect);
+  new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1) lockAll(n); }).observe(document.body, { childList: true, subtree: true });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => lockAll(document));
   const panel = (...k) => h("div", { class: "panel" }, ...k);
   const avatar = (m, src, px, cls) => src
     ? h("img", { class: "logo" + (cls ? " " + cls : ""), src, alt: "", width: String(px), height: String(px), loading: "lazy", onerror: e => e.target.replaceWith(avatar(m, null, px, cls)) })
@@ -1520,12 +1533,15 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     if (tMgr !== "all" && !mgrsWith.includes(tMgr)) tMgr = "all";
     if (tSeason !== "all" && !seasonsWith.includes(tSeason)) tSeason = "all";
     // each list's counts follow the other filter (Vin picked: the seasons show Vin's trades in each)
-    const sel = h("select", { id: "trade-season", onchange: e => { tSeason = e.target.value; setHash(tradesHash()); renderTrades(); } },
+    // widest each list can get: its labels with all-time counts (no other filter)
+    const seasonWidest = ["All seasons (" + all.length + ")"].concat(seasonsWith.map(id => id + " (" + all.filter(t => t.season === id).length + ")"));
+    const mgrWidest = ["All managers"].concat(mgrsWith.map(m => m + " (" + all.filter(t => hasMgr(t, m)).length + ")"));
+    const sel = h("select", { id: "trade-season", "data-widest": JSON.stringify(seasonWidest), onchange: e => { tSeason = e.target.value; setHash(tradesHash()); renderTrades(); } },
       h("option", { value: "all" }, "All seasons (" + all.filter(t => hasMgr(t, tMgr)).length + ")"),
       seasonsWith.map(id => { const n = all.filter(t => t.season === id && hasMgr(t, tMgr)).length; return h("option", { value: id, disabled: n === 0 }, id + " (" + n + ")"); }));
     sel.value = tSeason;
     headerFilter("Season", sel, true);
-    const msel = h("select", { id: "trade-mgr", onchange: e => { tMgr = e.target.value; setHash(tradesHash()); renderTrades(); } },
+    const msel = h("select", { id: "trade-mgr", "data-widest": JSON.stringify(mgrWidest), onchange: e => { tMgr = e.target.value; setHash(tradesHash()); renderTrades(); } },
       h("option", { value: "all" }, "All managers"),
       mgrsWith.map(m => { const n = all.filter(t => hasMgr(t, m) && (tSeason === "all" || t.season === tSeason)).length; return h("option", { value: m, disabled: n === 0 }, m + " (" + n + ")"); }));
     msel.value = tMgr;
