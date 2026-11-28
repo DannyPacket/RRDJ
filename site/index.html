@@ -1627,6 +1627,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const when = (() => { const x = d(t.date); return DOW[x.getUTCDay()] + ", " + MON[x.getUTCMonth()] + " " + x.getUTCDate() + ", " + x.getUTCFullYear(); })();
     // --- trade tracker box ---
     let track = null;
+    // tracker player name with his NHL team and position: "Dylan Larkin MTL · C"
+    const ttName = p => h("span", null, h("span", { class: "mgr" }, p.name), h("span", { class: "muted small" }, " " + [p.nhlNow || p.nhl, String(p.pos || "").replace(/,/g, "/")].filter(Boolean).join(" · ")));
     const boxHead = right => h("div", { class: "tt-head" }, h("div", null, h("div", { class: "subhead" }, t.final ? "Trade results" : "Trade tracker"), h("div", { class: "muted small" }, "Traded " + when)), right);
     // finished seasons: where each team stood at the trade, at the end of the regular season, and after the playoffs
     const standings = sd => t.final && (sd.record || sd.regEnd || sd.finish) ? h("div", { class: "tt-stand" },
@@ -1679,9 +1681,9 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
               postPts(sd) != null ? h("span", { class: "tt-wk" }, "+" + fmt1(postPts(sd)) + " in the " + postType(sd)) : null)),
             standings(sd),
             sd.gets.map(p => p.statsByWeek || p.regStats
-              ? h("div", { class: "tt-p" }, h("div", { class: "tt-row" }, h("span", { class: "mgr" }, p.name),
+              ? h("div", { class: "tt-p" }, h("div", { class: "tt-row" }, ttName(p),
                   p.left ? h("span", { class: "muted small" }, "until " + day(p.left)) : p.post && p.post.type === "none" ? h("span", { class: "muted small" }, "no playoff games") : null), statTable(p))
-              : h("div", { class: "tt-p" }, h("span", null, h("span", { class: "mgr" }, p.name)),
+              : h("div", { class: "tt-p" }, ttName(p),
                 h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt1(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
             lead ? h("span", { class: "tag won" }, (t.tracker.final ? "Won by " : "Ahead by ") + fmt1(t.tracker.by)) : null);
         }))));
@@ -1691,7 +1693,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
           : t.final ? "No points scored in either team's lineup after the trade" : "Just made: points start counting at the next weekly update")),
         h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map(sd => h("div", { class: "tt-side" },
           h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, "0.0")),
-          standings(sd), sd.gets.map(p => h("div", { class: "tt-p" }, h("span", { class: "mgr" }, p.name))))))));
+          standings(sd), sd.gets.map(p => h("div", { class: "tt-p" }, ttName(p))))))));
     }
     // --- the card ---
     const sideEl = (sd, i) => {

@@ -186,7 +186,9 @@ for (const t of all) {
         }
       }
       return {
-        name: p.name, nhl: p.nhl, pos: p.pos, pid: hasImg(id) ? id : null,
+        name: p.name, nhl: p.nhl, pos: p.pos,
+        // his NHL team in the tracker data (where he plays now, if he has moved since the trade)
+        nhlNow: tp && tp.nhl && tp.nhl !== p.nhl ? tp.nhl : undefined, pid: hasImg(id) ? id : null,
         pts: pts == null ? null : r1(pts), gp: gp != null ? gp : yGP, left: tp && tp.left || null,
         asOf: ao ? { gp: ao.gp, pts: ao.pts } : null,
         // Fantrax seasons store each player's points, games and stat line week by week: the tracker shows totals and the last week
