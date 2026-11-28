@@ -181,8 +181,8 @@ window.fxPull = async function (PERIOD, LOCK, CUTOFF) {
   out.trades = Object.values(trades).filter(g => inRange(g.date));
 
   // 6. Trade tracker: every trade so far, with each moved player's fantasy points from the day the trade was
-  //    processed through the end of PERIOD, stopping early on the day the receiving team later drops or trades
-  //    him away. Pure point value (not whether he was in the starting lineup).
+  //    takes effect through the end of PERIOD, stopping early on the day the receiving team later drops him, or the
+  //    day before a later trade of him takes effect. Pure point value (not whether he was in the starting lineup).
   async function pointsFor(m, start, end) {
     const pos = m.pos && m.pos.split(',').includes('G') ? 'POS_201' : 'HOCKEY_SKATING';
     const d = await fx('getPlayerStats', { statusOrTeamFilter: 'ALL', searchName: m.player, positionOrGroup: pos, startDate: start, endDate: end, timeframeTypeCode: 'BY_DATE', pageNumber: '1', maxResultsPerPage: '50' });
@@ -191,21 +191,28 @@ window.fxPull = async function (PERIOD, LOCK, CUTOFF) {
     if (!row) return { pts: null, gp: null, note: 'not found' };
     return { pts: parseFloat(row.cells[iF].content), gp: parseInt(row.cells[iGP].content) || 0 };
   }
+  // A trade counts from the start of the period it takes effect in (Fantrax's "week" column), never before the day it
+  // was processed. When a player is traded on again, his old team keeps him through the day before that next trade
+  // takes effect (usually the end of the period), and his new team starts the day after: no overlap, no gap (the
+  // user's rule, 2026-11-28, from McNabb going Danny -> Vin -> Tom).
+  const dayBefore = iso => new Date(Date.parse(iso + 'T12:00:00Z') - 864e5).toISOString().slice(0, 10);
+  const effectiveFrom = g => { const p = isoOf(g.date), e = periodStart(g.effectivePeriod); return e && e > p ? e : p; };
   out.tradeTracker = [];
   for (const g of Object.values(trades)) {
     if (g.moves.every(m => m.executed === false)) continue;
     const trIso = isoOf(g.date);
     if (!trIso || stamp(g.date) >= out.dates.cutoff) continue; // trade made after this week's cutoff
-    const early = trIso > out.dates.end; // processed after Sunday but before the cutoff: nothing counted yet
-    const t = { id: g.id, date: g.date, effectivePeriod: g.effectivePeriod, countedFrom: trIso, through: out.dates.end, moves: [] };
+    const from = effectiveFrom(g);
+    const early = from > out.dates.end; // takes effect after this period (e.g. processed after Sunday, effective next week): nothing counted yet
+    const t = { id: g.id, date: g.date, effectivePeriod: g.effectivePeriod, countedFrom: from, through: out.dates.end, moves: [] };
     for (const m of g.moves) {
       // Did the receiving team let him go later? Earliest later drop by that team, or later trade away from it.
       const leaves = [
         ...groups.filter(x => x.mgr === m.to && x.items.some(i => i.code === 'DROP' && i.player === m.player && i.executed !== false)).map(x => isoOf(x.date)),
-        ...Object.values(trades).filter(x => x !== g && x.moves.some(mv => mv.player === m.player && mv.from === m.to && mv.executed !== false)).map(x => isoOf(x.date))
-      ].filter(x => x && x > trIso).sort();
+        ...Object.values(trades).filter(x => x !== g && isoOf(x.date) > trIso && x.moves.some(mv => mv.player === m.player && mv.from === m.to && mv.executed !== false)).map(x => dayBefore(effectiveFrom(x)))
+      ].filter(x => x && x >= from).sort();
       const end = leaves[0] && leaves[0] < out.dates.end ? leaves[0] : out.dates.end;
-      const r = early ? { pts: 0, gp: 0 } : m.scorerId ? await pointsFor(m, trIso, end) : { pts: null, gp: null, note: 'no player id' };
+      const r = early ? { pts: 0, gp: 0 } : m.scorerId ? await pointsFor(m, from, end) : { pts: null, gp: null, note: 'no player id' };
       t.moves.push(Object.assign({}, m, r, { through: end, left: leaves[0] && leaves[0] <= out.dates.end ? leaves[0] : undefined }));
     }
     out.tradeTracker.push(t);
