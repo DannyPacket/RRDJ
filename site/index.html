@@ -629,6 +629,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 .tx { display: grid; gap: 12px; max-width: 1080px; width: 100%; justify-self: center; }
 .tx-top { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .tx-top .tx-exports { margin-left: auto; display: flex; gap: 6px; }
+.tt-got { font-weight: 400; color: var(--muted); }
+.tt-div { border: 0; border-top: 1px solid var(--line); margin: 2px 0; width: 100%; }
 .tt-mgrs { font: 800 22px/1.05 var(--display); text-transform: uppercase; margin: 2px 0 3px; }
 .tx-track { display: grid; gap: 10px; }
 .tx-track .tt-sides { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -919,7 +921,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       return h("div", { class: "tt" },
         h("div", { class: "muted small" }, "Traded " + day(t.date) + (t.moved ? " · joined new teams " + day(t.moved) : "") + " · fantasy points since the trade"),
         h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
-          h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt(totals[i]),
+          h("div", { class: "tt-head" }, h("span", null, h("span", { class: "mgr" }, sd.mgr), h("span", { class: "tt-got" }, " got")), h("span", { class: "tt-total num" }, fmt(totals[i]),
             sd.gets.some(p => wkPts(p) != null) ? h("span", { class: "tt-wk" }, signed(fmt(sd.gets.reduce((a, p) => a + (wkPts(p) || 0), 0))) + " this week") : null)),
           // Per player: a small table with the running total on top and this week's share under it, so the change is explained
           sd.gets.map(p => { const st = statsOf(p), wp = wkPts(p), wst = p.statsByWeek && w.week !== 100 && p.statsByWeek[w.week], wgp = p.gpByWeek && p.gpByWeek[w.week];
@@ -1684,10 +1686,11 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
         h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map((sd, i) => {
           const lead = t.tracker.leader === sd.mgr;
           return h("div", { class: "tt-side" + (lead ? " won" : "") },
-            h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0),
+            h("div", { class: "tt-head" }, h("span", null, h("span", { class: "mgr" }, sd.mgr), h("span", { class: "tt-got" }, " got")), h("span", { class: "tt-total num" }, fmt1(sd.total || 0),
               !t.tracker.final && wkPts(sd) != null ? h("span", { class: "tt-wk" }, sg(fmt1(wkPts(sd))) + " in week " + lw) : null,
               postPts(sd) != null ? h("span", { class: "tt-wk" }, "+" + fmt1(postPts(sd)) + " in the " + postType(sd)) : null)),
             standings(sd),
+            h("hr", { class: "tt-div" }),
             sd.gets.map(p => p.statsByWeek || p.regStats
               ? h("div", { class: "tt-p" }, h("div", { class: "tt-row" }, ttName(p),
                   p.left ? h("span", { class: "muted small" }, "until " + day(p.left)) : p.post && p.post.type === "none" ? h("span", { class: "muted small" }, "no playoff games") : null), statTable(p))
@@ -1700,8 +1703,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
         boxHead(h("span", { class: "muted small" }, t.scoring === "categories" ? "Categories season: no points tracker"
           : t.final ? "No points scored in either team's lineup after the trade" : "Just made: points start counting at the next weekly update")),
         h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map(sd => h("div", { class: "tt-side" },
-          h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, "0.0")),
-          standings(sd), sd.gets.map(p => h("div", { class: "tt-p" }, ttName(p))))))));
+          h("div", { class: "tt-head" }, h("span", null, h("span", { class: "mgr" }, sd.mgr), h("span", { class: "tt-got" }, " got")), h("span", { class: "tt-total num" }, "0.0")),
+          standings(sd), h("hr", { class: "tt-div" }), sd.gets.map(p => h("div", { class: "tt-p" }, ttName(p))))))));
     }
     // --- the card ---
     const sideEl = (sd, i) => {
