@@ -64,6 +64,9 @@ const pastOwners = (name, before) => {
 };
 function weekOf(s, date) {
   const ws = (s.weeks || []).filter(w => w.start && w.week !== 100).sort((a, b) => a.week - b.week);
+  const last = ws[ws.length - 1];
+  // a trade after the last finished week belongs to the week in progress (not on the site yet): the next week number
+  if (last && last.end && date > last.end && s === live) { const n = Math.floor((Date.parse(date) - Date.parse(last.end)) / 864e5 / 7.0001); return { week: last.week + 1 + n, start: null, end: null, pending: true }; }
   const w = ws.find(x => x.start <= date && date <= x.end) || ws.filter(x => x.start <= date).pop();
   return w || null;
 }

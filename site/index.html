@@ -1687,10 +1687,11 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
         }))));
     } else {
       track = panel(h("div", { class: "tx-track" },
-        boxHead(h("span", { class: "muted small" }, t.scoring === "categories" ? "Categories season: no points tracker" : "No points scored in either team's lineup after the trade")),
-        t.final ? h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map(sd => h("div", { class: "tt-side" },
+        boxHead(h("span", { class: "muted small" }, t.scoring === "categories" ? "Categories season: no points tracker"
+          : t.final ? "No points scored in either team's lineup after the trade" : "Just made: points start counting at the next weekly update")),
+        h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map(sd => h("div", { class: "tt-side" },
           h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, "0.0")),
-          standings(sd), sd.gets.map(p => h("div", { class: "tt-p" }, h("span", { class: "mgr" }, p.name)))))) : null));
+          standings(sd), sd.gets.map(p => h("div", { class: "tt-p" }, h("span", { class: "mgr" }, p.name))))))));
     }
     // --- the card ---
     const sideEl = (sd, i) => {
