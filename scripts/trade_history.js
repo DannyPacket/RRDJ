@@ -120,17 +120,22 @@ const yts = fs.existsSync(ytsFile) ? JSON.parse(fs.readFileSync(ytsFile, 'utf8')
 const YMAP = { G: 'G', A: 'A', '+/-': '+/-', PIM: 'PIM', PPG: 'PPG', PPA: 'PPA', PPP: 'PPP', SHG: 'SHG', SHA: 'SHA', SHP: 'SHP', GWG: 'GWG', SOG: 'SOG', FW: 'FOW',
   HIT: 'Hit', BLK: 'Blk', W: 'W', GA: 'GA', SV: 'SV', SHO: 'SHO', OTL: 'OL' };
 const yCheck = { ok: 0, off: [] };
+// games played in those lineup weeks (yahoo_gp.js: the NHL games whose stats add up to Yahoo's weekly line)
+const ygpFile = path.join(__dirname, 'yahoo_trade_gp.json');
+const ygp = fs.existsSync(ygpFile) ? JSON.parse(fs.readFileSync(ygpFile, 'utf8')) : {};
 function yahooWeek(season, w, mgr, name) {
   const tw = yts[season] && yts[season].weeks[w] && yts[season].weeks[w][mgr];
   if (!tw || tw.none) return null;
   const row = tw.players.find(q => norm(q.name) === norm(name));
-  if (!row) return { pts: 0, st: {} };
+  if (!row) return { pts: 0, st: {}, gp: 0 };
+  const g = ((ygp[season] || {})[w] || {})[mgr];
+  const gp = g ? g[row.name] : undefined;
   const st = {};
   for (const [k, v] of Object.entries(row.st || {})) if (YMAP[k] && typeof v === 'number') st[YMAP[k]] = v;
   // seasons that score PPP/SHP instead of PPG/PPA: keep the site's PPG + PPA = PPP convention
   if (st.PPP != null && st.PPA == null) { st.PPA = st.PPP - (st.PPG || 0); delete st.PPP; }
   if (st.SHP != null && st.SHA == null) { st.SHA = st.SHP - (st.SHG || 0); delete st.SHP; }
-  return { pts: row.pts || 0, st };
+  return { pts: row.pts || 0, st, gp };
 }
 const addLine = (a, b) => { for (const [k, v] of Object.entries(b)) a[k] = (a[k] || 0) + v; return a; };
 const champ = (reports.history && reports.history.champions) || {};
@@ -160,26 +165,26 @@ for (const t of all) {
       const ao = asof[t.id] && asof[t.id][p.name];
       const id = pid[norm(p.name)] || (ao && ao.id);
       // Yahoo: regular-season stat line over the weeks the tracker counts, then playoff/consolation weeks if he was still there
-      let yReg = null, yPost = null;
+      let yReg = null, yPost = null, yGP = null;
       if (yts[s.id] && tp && tp.byWeek && !tp.statsByWeek) {
-        const line = {}; let sum = 0, have = 0;
-        for (const w of Object.keys(tp.byWeek)) { const r = yahooWeek(s.id, w, x.mgr, p.name); if (r) { have++; sum += r.pts; addLine(line, r.st); } }
+        const line = {}; let sum = 0, have = 0, g = 0, gOk = true;
+        for (const w of Object.keys(tp.byWeek)) { const r = yahooWeek(s.id, w, x.mgr, p.name); if (r) { have++; sum += r.pts; addLine(line, r.st); if (r.gp == null) gOk = false; else g += r.gp; } }
         if (have) {
-          yReg = line;
+          yReg = line; if (gOk) yGP = g;
           const want = Object.values(tp.byWeek).reduce((a, v) => a + (v || 0), 0);
           if (Math.abs(sum - want) <= 0.05) yCheck.ok++; else yCheck.off.push(s.id + ' ' + x.mgr + ' ' + p.name + ' yahoo ' + r1(sum) + ' vs tracker ' + r1(want));
         }
         const br = fin && fin.bracket;
         if (br && !tp.left) {
           const games = br.games.filter(g => g.a === x.mgr || g.b === x.mgr);
-          const pl = { pts: 0, st: {}, weeks: 0, type: games.some(g => g.type === 'Playoffs') ? 'Playoffs' : 'Consolation' };
-          for (const g of games) { const r = yahooWeek(s.id, g.w, x.mgr, p.name); if (r) { pl.weeks++; pl.pts += r.pts; addLine(pl.st, r.st); } }
-          yPost = games.length ? (pl.weeks ? { type: pl.type, pts: r1(pl.pts), stats: pl.st, weeks: pl.weeks } : null) : { type: 'none' };
+          const pl = { pts: 0, st: {}, weeks: 0, gp: 0, type: games.some(g => g.type === 'Playoffs') ? 'Playoffs' : 'Consolation' };
+          for (const g of games) { const r = yahooWeek(s.id, g.w, x.mgr, p.name); if (r) { pl.weeks++; pl.pts += r.pts; addLine(pl.st, r.st); pl.gp = pl.gp == null || r.gp == null ? null : pl.gp + r.gp; } }
+          yPost = games.length ? (pl.weeks ? { type: pl.type, pts: r1(pl.pts), gp: pl.gp, stats: pl.st, weeks: pl.weeks } : null) : { type: 'none' };
         }
       }
       return {
         name: p.name, nhl: p.nhl, pos: p.pos, pid: hasImg(id) ? id : null,
-        pts: pts == null ? null : r1(pts), gp: gp == null ? null : gp, left: tp && tp.left || null,
+        pts: pts == null ? null : r1(pts), gp: gp != null ? gp : yGP, left: tp && tp.left || null,
         asOf: ao ? { gp: ao.gp, pts: ao.pts } : null,
         // Fantrax seasons store each player's points, games and stat line week by week: the tracker shows totals and the last week
         byWeek: tp && tp.statsByWeek ? tp.byWeek || null : undefined, gpByWeek: tp && tp.statsByWeek ? tp.gpByWeek || null : undefined,

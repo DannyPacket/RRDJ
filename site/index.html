@@ -619,6 +619,11 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 .tx-top .export-btn { margin-left: auto; }
 .tx-track { display: grid; gap: 10px; }
 .tx-track .tt-sides { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.tx-track .tt-side { overflow-x: auto; }
+.trade-recs { margin-bottom: 12px; }
+.trade-recs .tr-place { color: var(--muted); }
+.trade-recs .tr-place b { color: var(--ink); font-weight: 700; margin-right: 2px; }
+@media (max-width: 640px) { .tx-track .tt-sides { grid-template-columns: 1fr !important; } }
 .tx-track .tt-total { font-size: 30px; }
 .tx-track .tt-side.won { border-color: var(--win); box-shadow: inset 0 3px 0 var(--win); }
 .tx-track .tag.won { background: var(--win); color: var(--board); }
@@ -1552,15 +1557,25 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     row.append(h("label", { for: "trade-mgr" }, "Manager"), msel, reset);
     const list = all.filter(t => (tSeason === "all" || t.season === tSeason) && hasMgr(t, tMgr));
     const leaders = {}; for (const t of all) for (const sd of t.sides) leaders[sd.mgr] = (leaders[sd.mgr] || 0) + 1;
-    const top = Object.entries(leaders).sort((a, b) => b[1] - a[1]);
+    // the record boxes: league-wide, whatever the filters say. Most active ranks by trade count (tied managers share a place).
+    const byCount = {}; for (const [m, n] of Object.entries(leaders)) (byCount[n] = byCount[n] || []).push(m);
+    const places = Object.keys(byCount).map(Number).sort((a, b) => b - a).slice(0, 3).map(n => ({ n, mgrs: byCount[n].sort((a, b) => a.localeCompare(b)) }));
+    const curId = DATA.seasons[DATA.seasons.length - 1].id, thisSeason = all.filter(t => t.season === curId).length;
+    const moved = all.reduce((a, t) => a + t.sides.reduce((b, sd) => b + sd.gets.length, 0), 0);
+    const tile = (label, val, ...sub) => h("div", { class: "tile" }, h("span", { class: "pos" }, label), h("span", { class: "tile-v num" }, val), sub.flat());
+    const pl = n => n + " trade" + (n === 1 ? "" : "s");
+    const recs = h("div", { class: "tiles trade-recs" },
+      tile("Total trades", String(all.length), h("span", { class: "muted small" }, "since 2013-14")),
+      tile("Trades this season", String(thisSeason), h("span", { class: "muted small" }, curId)),
+      places.length ? tile("Most active", places[0].mgrs.join(" & "), h("span", { class: "muted small" }, pl(places[0].n)),
+        places.slice(1).map((p, i) => h("span", { class: "tr-place small" }, h("b", null, ["2nd", "3rd"][i]), " " + p.mgrs.join(", ") + " · " + p.n))) : null,
+      tile("Players moved", String(moved), h("span", { class: "muted small" }, (moved / (all.length || 1)).toFixed(1) + " per trade")));
     const intro = panel(h("div", { class: "small" },
-      h("b", null, all.length + " trades"), " since 2013-14 (2014-15 had none). Most active: ",
-      top.slice(0, 3).map(([m, n], i) => h("span", null, i ? ", " : "", h("span", { class: "mgr" }, m), " " + n)),
-      ". Each card shows the deal as it stood the day it was made: the managers' records going in and each player's season so far (fantasy points from NHL games before the trade, with that season's scoring). The tracker above it counts what happened next: the fantasy points each side's players scored for their new team",
+      h("b", null, all.length + " trades"), " since 2013-14 (2014-15 had none). Each card shows the deal as it stood the day it was made: the managers' records going in and each player's season so far (fantasy points from NHL games before the trade, with that season's scoring). The tracker above it counts what happened next: the fantasy points each side's players scored for their new team",
       " (Yahoo seasons, through 2025-26: only points scored in a started lineup)."));
     const showing = tSeason === "all" && tMgr === "all" ? null : h("div", { class: "subhead" }, "Showing " + list.length + " trade" + (list.length === 1 ? "" : "s")
       + (tMgr !== "all" ? " involving " + tMgr : "") + (tSeason !== "all" ? " in " + tSeason : ""));
-    $("content").replaceChildren(h("div", { class: "trades-list" }, intro, showing, list.length ? list.map(t => tradeBlock(t, fmt1)) : h("div", { class: "empty" }, "No trades match these filters.")),
+    $("content").replaceChildren(h("div", { class: "trades-list" }, recs, intro, showing, list.length ? list.map(t => tradeBlock(t, fmt1)) : h("div", { class: "empty" }, "No trades match these filters.")),
       h("footer", null, "Trades, tracker points and drafts from the league's records (Yahoo through 2025-26, Fantrax since). Stories are written from those records."));
   }
   function tradeBlock(t, fmt1) {
@@ -1573,7 +1588,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const standings = sd => t.final && (sd.record || sd.regEnd || sd.finish) ? h("div", { class: "tt-stand" },
       [[sd.record, "As of trade"], [sd.regEnd, "End of reg season"]].map(([r, lab]) => h("div", null,
         h("b", { class: "num" }, r ? ord(r.rank) + " · " + r.w + "-" + r.l + (r.t ? "-" + r.t : "") : "–"), h("small", null, lab))),
-      h("div", { class: sd.champion ? "gold" : null }, h("b", { class: "num" }, sd.champion ? "🏆 Champion" : sd.finish ? ord(sd.finish) : "–"), h("small", null, "Final standing"))) : null;
+      h("div", { class: sd.champion ? "gold" : null }, h("b", { class: "num" }, sd.finish || sd.champion ? ([, "🥇 ", "🥈 ", "🥉 "][sd.champion ? 1 : sd.finish] || "") + ord(sd.champion ? 1 : sd.finish) : "–"), h("small", null, "Final standing"))) : null;
     if (t.tracker) {
       const tot = t.sides.map(sd => sd.total || 0), sum = tot.reduce((a, b) => a + b, 0) || 1;
       const head = t.tracker.final ? "Final result · " + t.label + " regular season" + (t.sides.some(sd => sd.gets.some(p => p.regStats)) ? " (playoffs shown separately)" : "") : "Season to date · through " + day(t.tracker.through);
@@ -1604,15 +1619,15 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       const statTable = p => p.statsByWeek
         ? table([{ label: "Total", pts: p.pts, gp: p.gp, st: sumStats(p.statsByWeek) },
             ...(p.byWeek && p.byWeek[lw] != null ? [{ label: "Wk " + lw, pts: p.byWeek[lw], gp: p.gpByWeek && p.gpByWeek[lw], st: p.statsByWeek[lw], sub: true, signed: true }] : [])])
-        : table([{ label: "Reg season", pts: p.pts, st: p.regStats },
-            ...(p.post && p.post.type !== "none" ? [{ label: p.post.type === "Playoffs" ? "Playoffs" : "Consol.", pts: p.post.pts, st: p.post.stats, sub: true }] : [])]);
+        : table([{ label: "Reg season", pts: p.pts, gp: p.gp, st: p.regStats },
+            ...(p.post && p.post.type !== "none" ? [{ label: p.post.type === "Playoffs" ? "Playoffs" : "Consol.", pts: p.post.pts, gp: p.post.gp, st: p.post.stats, sub: true }] : [])]);
       // playoff points per side (Yahoo seasons): shown under the regular-season total, never added to it
       const postPts = sd => sd.gets.some(p => p.post && p.post.type !== "none") ? sd.gets.reduce((a, p) => a + (p.post && p.post.pts || 0), 0) : null;
       const postType = sd => sd.gets.some(p => p.post && p.post.type === "Playoffs") ? "playoffs" : "consolation";
       track = panel(h("div", { class: "tx-track" },
         boxHead(h("span", { class: "muted small" }, head)),
         h("div", { class: "tx-bar", "aria-hidden": "true" }, t.sides.map((sd, i) => h("i", { style: "width:" + (tot[i] / sum * 100).toFixed(1) + "%;background:" + TCOL[i % 3] }))),
-        h("div", { class: "tt-sides" }, t.sides.map((sd, i) => {
+        h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map((sd, i) => {
           const lead = t.tracker.leader === sd.mgr;
           return h("div", { class: "tt-side" + (lead ? " won" : "") },
             h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0),
@@ -1629,7 +1644,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     } else {
       track = panel(h("div", { class: "tx-track" },
         boxHead(h("span", { class: "muted small" }, t.scoring === "categories" ? "Categories season: no points tracker" : "No points scored in either team's lineup after the trade")),
-        t.final ? h("div", { class: "tt-sides" }, t.sides.map(sd => h("div", { class: "tt-side" },
+        t.final ? h("div", { class: "tt-sides", style: "grid-template-columns:repeat(" + t.sides.length + ", minmax(0, 1fr))" }, t.sides.map(sd => h("div", { class: "tt-side" },
           h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, "0.0")),
           standings(sd), sd.gets.map(p => h("div", { class: "tt-p" }, h("span", { class: "mgr" }, p.name)))))) : null));
     }
