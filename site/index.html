@@ -919,12 +919,16 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     const tracker = t => {
       const totals = t.sides.map(sd => sd.gets.reduce((a, p) => a + (ptsOf(p) || 0), 0));
       const best = Math.max(...totals), lead = totals.filter(x => x === best).length === 1 && best > 0 ? totals.indexOf(best) : -1;
-      return h("div", { class: "tt" },
+      // same look as the Trade history tab's tracker: points bar with each side's share, the leader's box outlined
+      const sum = totals.reduce((a, b) => a + Math.max(0, b), 0) || 1;
+      return h("div", { class: "tt tx-track" },
         // same header as the Trade history tracker: the managers, the day it was made, the day the players were on their new teams
         h("div", null, h("div", { class: "tt-mgrs" }, [...new Set(t.sides.map(sd => sd.mgr))].join(" ⇄ ")),
           h("div", { class: "muted small" }, "Traded " + day(t.date) + wkOf(t.date) + " · "
             + (t.countedFrom && t.countedFrom !== t.date ? "Processed " + day(t.countedFrom) + wkOf(t.countedFrom) : "Processed the same day") + " · fantasy points since then")),
-        h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
+        h("div", { class: "tx-bar" }, t.sides.map((sd, i) => h("i", { style: "width:" + (Math.max(0, totals[i]) / sum * 100).toFixed(1) + "%;background:" + TCOL[i % 3], title: sd.mgr },
+          totals[i] > 0 ? [h("span", { class: "n" }, fmt(totals[i])), h("span", { class: "pct" }, " (" + (totals[i] / sum * 100).toFixed(2) + "%)")] : null))),
+        h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " won" : "") },
           h("div", { class: "tt-head" }, h("span", null, h("span", { class: "mgr" }, sd.mgr), h("span", { class: "tt-got" }, " got")), h("span", { class: "tt-total num" }, fmt(totals[i]),
             sd.gets.some(p => wkPts(p) != null) ? h("span", { class: "tt-wk" }, signed(fmt(sd.gets.reduce((a, p) => a + (wkPts(p) || 0), 0))) + " this week") : null)),
           h("hr", { class: "tt-div" }),
@@ -937,8 +941,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
                 h("thead", null, h("tr", null, h("th", null, ""), h("th", null, "PTS"), hasGP ? h("th", null, "GP") : null, cols.map(c => h("th", null, c[0])))),
                 h("tbody", null,
                   h("tr", null, h("th", { scope: "row" }, "Total"), h("td", { class: "b" }, ptsOf(p) == null ? "–" : fmt(ptsOf(p))), hasGP ? h("td", null, gpOf(p)) : null, cols.map(c => h("td", null, c[1](st)))),
-                  wp != null ? h("tr", { class: "wk" }, h("th", { scope: "row" }, "This wk"), h("td", { class: "b" }, signed(fmt(wp))), hasGP ? h("td", null, wgp != null ? wgp : "–") : null, cols.map(c => h("td", null, wst ? c[1](wst) : "–"))) : null))); }),
-          i === lead ? h("span", { class: "tag hs" }, "Ahead by " + fmt(best - Math.min(...totals))) : null))));
+                  wp != null ? h("tr", { class: "wk" }, h("th", { scope: "row" }, "Wk " + w.week), h("td", { class: "b" }, signed(fmt(wp))), hasGP ? h("td", null, wgp != null ? wgp : "–") : null, cols.map(c => h("td", null, wst ? c[1](wst) : "–"))) : null))); }),
+          i === lead ? h("span", { class: "tag won" }, (w.week === 100 ? "Won by " : "Ahead by ") + fmt(best - Math.min(...totals))) : null))));
     };
     // A finished season's final page shows the outcome, so it's "Trade results"; any other week is still a tracker
     const trackerSec = sec(w.week === 100 ? "Trade results" : "Trade tracker", panel(tt.length
