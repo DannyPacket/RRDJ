@@ -787,7 +787,11 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     sel.style.width = Math.ceil(w + parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) + 30) + "px";
   };
   const lockAll = root => (root.matches && root.matches("select") ? [root] : [...(root.querySelectorAll ? root.querySelectorAll("select") : [])]).forEach(lockSelect);
-  new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1) lockAll(n); }).observe(document.body, { childList: true, subtree: true });
+  // re-lock when a select appears, or when options are added to one already on the page (the weekly Season picker fills in later)
+  new MutationObserver(ms => { const todo = new Set();
+    for (const m of ms) { const host = m.target.closest && m.target.closest("select"); if (host) todo.add(host);
+      for (const n of m.addedNodes) if (n.nodeType === 1) (n.matches("select") ? [n] : [...n.querySelectorAll("select")]).forEach(x => todo.add(x)); }
+    todo.forEach(lockSelect); }).observe(document.body, { childList: true, subtree: true });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => lockAll(document));
   const panel = (...k) => h("div", { class: "panel" }, ...k);
   const avatar = (m, src, px, cls) => src
@@ -1257,7 +1261,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
 
     // ---- season picker
     const sel = h("select", { id: "draft-season", onchange: e => { dSeason = e.target.value; setHash("drafts-" + dSeason); renderDrafts(); } },
-      ...ids.slice().reverse().map(id => { const x = all.find(y => y.id === id); return h("option", { value: id, selected: id === dSeason ? "selected" : null }, id + (x.live ? " (in progress)" : "") + (x.scoring === "categories" ? " (categories)" : "") + " · " + x.src); }));
+      ...ids.slice().reverse().map(id => { const x = all.find(y => y.id === id); return h("option", { value: id, selected: id === dSeason ? "selected" : null }, id + (x.live ? " (in progress)" : "") + (x.scoring === "categories" ? " (categories)" : "")); }));
 
     // ---- draft board: rounds down, round-1 order across
     const board = h("table", { class: "dboard" },
