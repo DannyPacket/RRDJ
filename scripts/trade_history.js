@@ -113,6 +113,9 @@ for (const t of all) {
         name: p.name, nhl: p.nhl, pos: p.pos, pid: hasImg(id) ? id : null,
         pts: pts == null ? null : r1(pts), gp: gp == null ? null : gp, left: tp && tp.left || null,
         asOf: ao ? { gp: ao.gp, pts: ao.pts } : null,
+        // Fantrax seasons store each player's points, games and stat line week by week: the tracker shows totals and the last week
+        byWeek: tp && tp.statsByWeek ? tp.byWeek || null : undefined, gpByWeek: tp && tp.statsByWeek ? tp.gpByWeek || null : undefined,
+        statsByWeek: tp && tp.statsByWeek || undefined,
         from: giver.join(' & '), acquired: giver.length === 1 ? acquired(t, p.name, giver[0]) : null,
         past: pastOwners(p.name, t)
       };
@@ -136,7 +139,7 @@ for (const t of all) {
     date: t.date, week: wk ? wk.week : t.week, noInSeason: seasonCounts[s.id], noAllTime: out.length + 1, pairNo: pairCounts[pk],
     sides,
     tracker: scored ? {
-      through: (s.tradeTracker && s.tradeTracker.through) || null, final: !isLive,
+      through: (s.tradeTracker && s.tradeTracker.through) || null, final: !isLive, week: (s.tradeTracker && s.tradeTracker.asOfWeek) || null,
       leader: totals.filter(v => v === best).length === 1 ? sides[totals.indexOf(best)].mgr : null,
       by: r1(best - Math.min(...totals))
     } : null,

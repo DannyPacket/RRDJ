@@ -871,7 +871,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
                   wp != null ? h("tr", { class: "wk" }, h("th", { scope: "row" }, "This wk"), h("td", { class: "b" }, signed(fmt(wp))), hasGP ? h("td", null, wgp != null ? wgp : "–") : null, cols.map(c => h("td", null, wst ? c[1](wst) : "–"))) : null))); }),
           i === lead ? h("span", { class: "tag hs" }, "Ahead by " + fmt(best - Math.min(...totals))) : null))));
     };
-    const trackerSec = sec("Trade tracker", panel(tt.length
+    // A finished season's final page shows the outcome, so it's "Trade results"; any other week is still a tracker
+    const trackerSec = sec(w.week === 100 ? "Trade results" : "Trade tracker", panel(tt.length
       ? h("div", { style: "display:grid;gap:12px" }, h("div", { class: "subhead" }, "Every trade this season · through " + day(ttThrough)), tt.map(tracker))
       : h("div", { class: "empty" }, "No trades yet this season")));
     const movementSec = sec("Movement", panel(h("div", { style: "display:grid;gap:18px" },
@@ -1523,16 +1524,40 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
     if (t.tracker) {
       const tot = t.sides.map(sd => sd.total || 0), sum = tot.reduce((a, b) => a + b, 0) || 1;
       const head = t.tracker.final ? "Final result · " + t.label + " regular season" : "Season to date · through " + day(t.tracker.through);
+      // Fantrax seasons keep each player's stat line week by week: show a small table like the weekly page's tracker,
+      // the total since the trade on top and the latest week under it.
+      const lw = t.tracker.week, n0 = v => v || 0, sg = v => (+v > 0 ? "+" : "") + v;
+      const DEFS = {
+        skater: [["G", s => n0(s.G)], ["A", s => n0(s.A)], ["+/-", s => n0(s["+/-"]), sg], ["SOG", s => n0(s.SOG)], ["PPP", s => n0(s.PPG) + n0(s.PPA)],
+          ["SHG", s => n0(s.SHG)], ["SHA", s => n0(s.SHA)], ["GWG", s => n0(s.GWG)], ["FOW", s => n0(s.FOW)], ["HIT", s => n0(s.Hit)], ["BLK", s => n0(s.Blk)], ["PIM", s => n0(s.PIM)]],
+        goalie: [["W", s => n0(s.W)], ["OTL", s => n0(s.OL)], ["GA", s => n0(s.GA)], ["SV", s => n0(s.SV)],
+          ["SV%", s => n0(s.SV), (v, s) => s.SV + s.GA ? (s.SV / (s.SV + s.GA)).toFixed(3).replace(/^0/, "") : "–"], ["SO", s => n0(s.SHO)],
+          ["G", s => n0(s.G)], ["A", s => n0(s.A)], ["PPP", s => n0(s.PPG) + n0(s.PPA)], ["PIM", s => n0(s.PIM)]]
+      };
+      const sumStats = o => { const r = {}; for (const st of Object.values(o || {})) for (const [k, v] of Object.entries(st)) r[k] = (r[k] || 0) + v; return Object.keys(r).length ? r : null; };
+      const wkPts = sd => sd.gets.some(p => p.byWeek && p.byWeek[lw] != null) ? sd.gets.reduce((a, p) => a + n0(p.byWeek && p.byWeek[lw]), 0) : null;
+      const statTable = p => {
+        const st = sumStats(p.statsByWeek), wst = p.statsByWeek[lw], wp = p.byWeek && p.byWeek[lw], wgp = p.gpByWeek && p.gpByWeek[lw];
+        const cols = st ? DEFS["W" in st ? "goalie" : "skater"].filter(([, g]) => [st, wst].some(x => x && g(x) !== 0)).map(([l, g, show]) => [l, x => show ? show(g(x), x) : g(x)]) : [];
+        return h("table", { class: "tt-stat num" },
+          h("thead", null, h("tr", null, h("th", null, ""), h("th", null, "PTS"), h("th", null, "GP"), cols.map(c => h("th", null, c[0])))),
+          h("tbody", null,
+            h("tr", null, h("th", { scope: "row" }, "Total"), h("td", { class: "b" }, p.pts == null ? "–" : fmt1(p.pts)), h("td", null, p.gp != null ? p.gp : "–"), cols.map(c => h("td", null, c[1](st)))),
+            wp != null ? h("tr", { class: "wk" }, h("th", { scope: "row" }, "Wk " + lw), h("td", { class: "b" }, sg(fmt1(wp))), h("td", null, wgp != null ? wgp : "–"), cols.map(c => h("td", null, wst ? c[1](wst) : "–"))) : null));
+      };
       track = panel(h("div", { class: "tx-track" },
-        h("div", { class: "tt-head" }, h("span", { class: "subhead" }, "Trade tracker"), h("span", { class: "muted small" }, head)),
+        h("div", { class: "tt-head" }, h("span", { class: "subhead" }, t.tracker.final ? "Trade results" : "Trade tracker"), h("span", { class: "muted small" }, head)),
         h("div", { class: "tx-bar", "aria-hidden": "true" }, t.sides.map((sd, i) => h("i", { style: "width:" + (tot[i] / sum * 100).toFixed(1) + "%;background:" + TCOL[i % 3] }))),
         h("div", { class: "tt-sides" }, t.sides.map((sd, i) => {
           const lead = t.tracker.leader === sd.mgr;
           return h("div", { class: "tt-side" + (lead ? " won" : "") },
-            h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0))),
+            h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0),
+              !t.tracker.final && wkPts(sd) != null ? h("span", { class: "tt-wk" }, sg(fmt1(wkPts(sd))) + " in week " + lw) : null)),
             t.tracker.final && (sd.champion || sd.finish) ? h("div", { class: "muted small" + (sd.champion ? " gold" : "") }, sd.champion ? "🏆 Won the title" : "Finished " + ord(sd.finish)) : null,
-            sd.gets.map(p => h("div", { class: "tt-p" }, h("span", null, h("span", { class: "mgr" }, p.name)),
-              h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt1(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
+            sd.gets.map(p => p.statsByWeek
+              ? h("div", { class: "tt-p" }, h("div", { class: "tt-row" }, h("span", { class: "mgr" }, p.name), p.left ? h("span", { class: "muted small" }, "until " + day(p.left)) : null), statTable(p))
+              : h("div", { class: "tt-p" }, h("span", null, h("span", { class: "mgr" }, p.name)),
+                h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt1(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
             lead ? h("span", { class: "tag won" }, (t.tracker.final ? "Won by " : "Ahead by ") + fmt1(t.tracker.by)) : null);
         }))));
     } else {
