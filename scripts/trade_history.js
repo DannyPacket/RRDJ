@@ -84,6 +84,34 @@ function acquired(t, name, giver) {
   delete last.at;
   return last;
 }
+// A player's path this season up to the trade: drafted, dropped, picked up / claimed, traded (any manager), in order,
+// ending with the event that put him on the giving team. Earlier seasons are left out on purpose (the user's rule).
+function journey(t, name, giver) {
+  const s = t.s, k = norm(name), ev = [];
+  const d = draftOf[s.id + '|' + k];
+  if (d) ev.push({ how: 'draft', mgr: d.mgr, round: d.round, pick: d.pick, at: '0', owner: d.mgr });
+  for (const w of s.weeks || []) if (w.start && w.week !== 100 && w.start <= t.date) (w.moves || []).forEach((m, i) => { // moves are stored in the order they happened
+    const at = w.start + '#' + String(i).padStart(4, '0');
+    if (m.drop && norm(m.drop.name) === k) ev.push({ how: 'drop', mgr: m.mgr, week: w.week, at, owner: null });
+    if (m.add && norm(m.add.name) === k) ev.push({ how: m.add.note === 'waivers' ? 'waivers' : 'add', mgr: m.mgr, week: w.week, at, owner: m.mgr });
+  });
+  for (const x of all) if (x.s === s && x.date < t.date) for (const sd of x.sides) if (sd.gets.some(p => norm(p.name) === k)) {
+    const wk = weekOf(s, x.date), from = x.sides.filter(y => y !== sd).map(y => y.mgr);
+    ev.push({ how: 'trade', mgr: sd.mgr, from: from.join(' & '), week: wk ? wk.week : null, date: x.date, at: x.date + '2', owner: sd.mgr });
+  }
+  ev.sort((a, b) => a.at.localeCompare(b.at));
+  // a pickup by someone else while he is still on a roster: the drop that freed him (same week, listed later) goes first
+  for (let i = 0, owner = null; i < ev.length; i++) {
+    const e = ev[i];
+    if ((e.how === 'add' || e.how === 'waivers') && owner && owner !== e.mgr) {
+      const j = ev.findIndex((x, n) => n > i && x.how === 'drop' && x.mgr === owner && x.week === e.week);
+      if (j > i) { ev.splice(i, 0, ev.splice(j, 1)[0]); i--; continue; }
+    }
+    owner = e.owner;
+  }
+  let end = -1; ev.forEach((e, i) => { if (e.owner === giver) end = i; });
+  return ev.slice(0, end + 1).map(e => { const o = Object.assign({}, e); delete o.at; delete o.owner; return o; });
+}
 
 // Yahoo seasons: each traded player's weekly stat line in his new team's lineup, regular season and playoffs, read off
 // Yahoo's matchup pages (yahoo_trade_stats.json: { season: { tid, weeks: { week: { mgr: { opp, total, players: [{ slot, name, pts, st }] } | { none } } } } }).
@@ -159,6 +187,7 @@ for (const t of all) {
         regStats: yReg || undefined, post: yPost || undefined,
         // who gave him up and how that team got him (draft, pickup, waivers, trade); in a 3-team deal, the team whose records show him
         ...(() => { for (const g of giver) { const a = acquired(t, p.name, g); if (a) return { from: g, acquired: a }; } return { from: giver.join(' & '), acquired: null }; })(),
+        path: (() => { for (const g of giver) { const j = journey(t, p.name, g); if (j.length) return j; } return []; })(),
         past: pastOwners(p.name, t),
         prevTrades: done.filter(d => d.moves.some(m => norm(m.name) === norm(p.name))).map(d => { const m = d.moves.find(m => norm(m.name) === norm(p.name)); return { season: d.season, week: d.week, from: m.from, to: m.to }; })
       };

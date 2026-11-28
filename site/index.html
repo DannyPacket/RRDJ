@@ -1613,12 +1613,16 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
                 h("img", { class: "tlogo tl-dark", src: "teams/" + p.nhl + "_dark.svg", alt: "", loading: "lazy", onerror: e => e.target.remove() })) : null),
             h("div", { style: "min-width:0" }, h("div", { class: "tx-pn" }, h("small", null, first), last),
               h("div", { class: "tx-pchips" }, String(p.pos || "").split(/[\/,]/).filter(Boolean).map(x => h("span", { class: "pos" }, x)), p.nhl ? h("span", null, p.nhl) : null),
-              // how the team giving him up got him: draft pick, free-agent pickup, waiver claim or an earlier trade
-              p.acquired ? h("div", { class: "tx-orig" }, (a => a.how === "draft" ? "Drafted by " + p.from + " · Rd " + a.round + ", #" + a.pick + " overall"
-                : a.how === "waivers" ? "Waiver claim by " + p.from + (a.week ? " · wk " + a.week : "")
-                : a.how === "trade" ? "Traded to " + p.from + " by " + a.from + (a.week ? " · " + (a.season && a.season !== t.season ? a.season + " " : "") + "wk " + a.week : "")
-                : "Free-agent pickup by " + p.from + (a.week ? " · wk " + a.week : ""))(p.acquired)) : null,
-              (p.prevTrades || []).length ? h("div", { class: "tx-prev" }, "Traded before: " + p.prevTrades.map(x => x.season + " wk " + x.week + " (" + x.from + " → " + x.to + ")").join(" · ")) : null),
+              // his path this season up to this trade (that season only): drafted, dropped, picked up, claimed, traded
+              (p.path || []).length ? h("div", { class: "tx-orig" }, p.path.map((e, i) => {
+                const wk = e.week ? " wk " + e.week : "";
+                const txt = e.how === "draft" ? "drafted by " + e.mgr + " (Rd " + e.round + ", #" + e.pick + ")"
+                  : e.how === "drop" ? "dropped by " + e.mgr + wk
+                  : e.how === "waivers" ? "claimed off waivers by " + e.mgr + wk
+                  : e.how === "trade" ? "traded to " + e.mgr + " by " + e.from + wk
+                  : "picked up by " + e.mgr + wk;
+                return (i ? " → " : "") + (i ? txt : txt.charAt(0).toUpperCase() + txt.slice(1));
+              }).join("")) : null),
             p.asOf ? h("div", { class: "tx-big" }, h("b", null, fmt1(p.asOf.pts)), h("small", null, "FPTS · " + p.asOf.gp + " GP"),
               h("small", null, (p.asOf.gp ? fmt1(p.asOf.pts / p.asOf.gp) : "0.0") + " FP/G")) : h("div", { class: "tx-big" }, h("b", null, "–")));
         }),
