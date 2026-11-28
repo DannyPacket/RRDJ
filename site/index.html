@@ -1534,7 +1534,7 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       h("div", { class: sd.champion ? "gold" : null }, h("b", { class: "num" }, sd.champion ? "🏆 Champion" : sd.finish ? ord(sd.finish) : "–"), h("small", null, "Final standing"))) : null;
     if (t.tracker) {
       const tot = t.sides.map(sd => sd.total || 0), sum = tot.reduce((a, b) => a + b, 0) || 1;
-      const head = t.tracker.final ? "Final result · " + t.label + " regular season" : "Season to date · through " + day(t.tracker.through);
+      const head = t.tracker.final ? "Final result · " + t.label + " regular season" + (t.sides.some(sd => sd.gets.some(p => p.regStats)) ? " (playoffs shown separately)" : "") : "Season to date · through " + day(t.tracker.through);
       // Fantrax seasons keep each player's stat line week by week: show a small table like the weekly page's tracker,
       // the total since the trade on top and the latest week under it.
       const lw = t.tracker.week, n0 = v => v || 0, sg = v => (+v > 0 ? "+" : "") + v;
@@ -1547,15 +1547,26 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       };
       const sumStats = o => { const r = {}; for (const st of Object.values(o || {})) for (const [k, v] of Object.entries(st)) r[k] = (r[k] || 0) + v; return Object.keys(r).length ? r : null; };
       const wkPts = sd => sd.gets.some(p => p.byWeek && p.byWeek[lw] != null) ? sd.gets.reduce((a, p) => a + n0(p.byWeek && p.byWeek[lw]), 0) : null;
-      const statTable = p => {
-        const st = sumStats(p.statsByWeek), wst = p.statsByWeek[lw], wp = p.byWeek && p.byWeek[lw], wgp = p.gpByWeek && p.gpByWeek[lw];
-        const cols = st ? DEFS["W" in st ? "goalie" : "skater"].filter(([, g]) => [st, wst].some(x => x && g(x) !== 0)).map(([l, g, show]) => [l, x => show ? show(g(x), x) : g(x)]) : [];
+      // rows: [{ label, pts, gp, st, sub }] (sub = the dashed second row: the latest week, or the playoffs)
+      const table = rows => {
+        const lines = rows.map(r => r.st).filter(Boolean), goalie = lines.some(x => "W" in x || "SV" in x);
+        const cols = DEFS[goalie ? "goalie" : "skater"].filter(([, g]) => lines.some(x => g(x) !== 0)).map(([l, g, show]) => [l, x => x ? (show ? show(g(x), x) : g(x)) : "–"]);
+        const hasGP = rows.some(r => r.gp != null);
         return h("table", { class: "tt-stat num" },
-          h("thead", null, h("tr", null, h("th", null, ""), h("th", null, "PTS"), h("th", null, "GP"), cols.map(c => h("th", null, c[0])))),
-          h("tbody", null,
-            h("tr", null, h("th", { scope: "row" }, "Total"), h("td", { class: "b" }, p.pts == null ? "–" : fmt1(p.pts)), h("td", null, p.gp != null ? p.gp : "–"), cols.map(c => h("td", null, c[1](st)))),
-            wp != null ? h("tr", { class: "wk" }, h("th", { scope: "row" }, "Wk " + lw), h("td", { class: "b" }, sg(fmt1(wp))), h("td", null, wgp != null ? wgp : "–"), cols.map(c => h("td", null, wst ? c[1](wst) : "–"))) : null));
+          h("thead", null, h("tr", null, h("th", null, ""), h("th", null, "PTS"), hasGP ? h("th", null, "GP") : null, cols.map(c => h("th", null, c[0])))),
+          h("tbody", null, rows.map(r => h("tr", { class: r.sub ? "wk" : null }, h("th", { scope: "row" }, r.label),
+            h("td", { class: "b" }, r.pts == null ? "–" : (r.sub && r.signed ? sg(fmt1(r.pts)) : fmt1(r.pts))), hasGP ? h("td", null, r.gp != null ? r.gp : "–") : null,
+            cols.map(c => h("td", null, c[1](r.st)))))));
       };
+      // Fantrax: total since the trade + the latest week. Yahoo: regular season since the trade + playoff (or consolation) weeks.
+      const statTable = p => p.statsByWeek
+        ? table([{ label: "Total", pts: p.pts, gp: p.gp, st: sumStats(p.statsByWeek) },
+            ...(p.byWeek && p.byWeek[lw] != null ? [{ label: "Wk " + lw, pts: p.byWeek[lw], gp: p.gpByWeek && p.gpByWeek[lw], st: p.statsByWeek[lw], sub: true, signed: true }] : [])])
+        : table([{ label: "Reg season", pts: p.pts, st: p.regStats },
+            ...(p.post && p.post.type !== "none" ? [{ label: p.post.type === "Playoffs" ? "Playoffs" : "Consol.", pts: p.post.pts, st: p.post.stats, sub: true }] : [])]);
+      // playoff points per side (Yahoo seasons): shown under the regular-season total, never added to it
+      const postPts = sd => sd.gets.some(p => p.post && p.post.type !== "none") ? sd.gets.reduce((a, p) => a + (p.post && p.post.pts || 0), 0) : null;
+      const postType = sd => sd.gets.some(p => p.post && p.post.type === "Playoffs") ? "playoffs" : "consolation";
       track = panel(h("div", { class: "tx-track" },
         boxHead(h("span", { class: "muted small" }, head)),
         h("div", { class: "tx-bar", "aria-hidden": "true" }, t.sides.map((sd, i) => h("i", { style: "width:" + (tot[i] / sum * 100).toFixed(1) + "%;background:" + TCOL[i % 3] }))),
@@ -1563,10 +1574,12 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
           const lead = t.tracker.leader === sd.mgr;
           return h("div", { class: "tt-side" + (lead ? " won" : "") },
             h("div", { class: "tt-head" }, h("span", { class: "mgr" }, sd.mgr + " got"), h("span", { class: "tt-total num" }, fmt1(sd.total || 0),
-              !t.tracker.final && wkPts(sd) != null ? h("span", { class: "tt-wk" }, sg(fmt1(wkPts(sd))) + " in week " + lw) : null)),
+              !t.tracker.final && wkPts(sd) != null ? h("span", { class: "tt-wk" }, sg(fmt1(wkPts(sd))) + " in week " + lw) : null,
+              postPts(sd) != null ? h("span", { class: "tt-wk" }, "+" + fmt1(postPts(sd)) + " in the " + postType(sd)) : null)),
             standings(sd),
-            sd.gets.map(p => p.statsByWeek
-              ? h("div", { class: "tt-p" }, h("div", { class: "tt-row" }, h("span", { class: "mgr" }, p.name), p.left ? h("span", { class: "muted small" }, "until " + day(p.left)) : null), statTable(p))
+            sd.gets.map(p => p.statsByWeek || p.regStats
+              ? h("div", { class: "tt-p" }, h("div", { class: "tt-row" }, h("span", { class: "mgr" }, p.name),
+                  p.left ? h("span", { class: "muted small" }, "until " + day(p.left)) : p.post && p.post.type === "none" ? h("span", { class: "muted small" }, "no playoff games") : null), statTable(p))
               : h("div", { class: "tt-p" }, h("span", null, h("span", { class: "mgr" }, p.name)),
                 h("span", { class: "num muted small" }, (p.pts == null ? "–" : fmt1(p.pts)) + " pts" + (p.gp != null ? " · " + p.gp + " GP" : "") + (p.left ? " · until " + day(p.left) : "")))),
             lead ? h("span", { class: "tag won" }, (t.tracker.final ? "Won by " : "Ahead by ") + fmt1(t.tracker.by)) : null);
