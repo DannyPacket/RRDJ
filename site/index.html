@@ -58,6 +58,12 @@ header .picker { display: grid; gap: 10px; }
 .pick-row { display: flex; align-items: center; gap: 10px 16px; min-width: 0; }
 .pick-row .export-btn { margin-left: auto; }
 .pick-row > label { flex: none; min-width: 4.2em; }
+/* Trade history: season, manager and reset on one row, wrapping on narrow screens */
+.pick-row.trade-filters { flex-wrap: wrap; }
+.pick-row.trade-filters .wk-nav { flex: 0 1 auto; }
+.pick-row.trade-filters > label[for="trade-mgr"] { min-width: 0; }
+.pick-row.trade-filters .trade-reset { margin-left: 0; }
+.pick-row.trade-filters .trade-reset:disabled { opacity: .4; cursor: default; }
 .wk-nav { display: flex; align-items: center; gap: 6px; flex: 1 1 auto; min-width: 0; }
 .wk-nav .weeks { min-width: 0; flex: 0 1 auto; }
 .wk-nav .weeks button { flex: none; }
@@ -1483,11 +1489,13 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   // Each trade: the trade tracker result (fantasy points each side's players scored for their new team), then a
   // "Trade accepted" card (managers, their record at the time and where they finished, the players with their points
   // since the trade) and a story. Newest first; a season picker narrows it down. #trades, #trades-2018-19.
-  let TRADES = null, tSeason = "all";
-  function showTrades(push, arg) {
+  // Filters: season and manager. Hash: #trades, #trades-2018-19, #trades~Vin, #trades-2018-19~Vin.
+  let TRADES = null, tSeason = "all", tMgr = "all";
+  const tradesHash = () => "trades" + (tSeason !== "all" ? "-" + tSeason : "") + (tMgr !== "all" ? "~" + encodeURIComponent(tMgr) : "");
+  function showTrades(push, arg, mgr) {
     setTab("trades");
-    if (arg) tSeason = arg;
-    if (push) setHash(tSeason && tSeason !== "all" ? "trades-" + tSeason : "trades");
+    if (arg || mgr) { tSeason = arg || "all"; tMgr = mgr || "all"; }
+    if (push) setHash(tradesHash());
     $("wk").textContent = "Trade history";
     $("season-eyebrow").textContent = "Every trade since 2013-14";
     $("dates").textContent = "";
@@ -1507,13 +1515,26 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
   function renderTrades() {
     const all = TRADES.trades, fmt1 = n => (Math.round(n * 10) / 10).toFixed(1);
     const seasonsWith = [...new Set(all.map(t => t.season))];
-    const sel = h("select", { id: "trade-season", onchange: e => { tSeason = e.target.value; setHash(tSeason === "all" ? "trades" : "trades-" + tSeason); renderTrades(); } },
-      h("option", { value: "all" }, "All seasons (" + all.length + ")"),
-      seasonsWith.map(id => { const n = all.filter(t => t.season === id).length; return h("option", { value: id }, id + " (" + n + ")"); }));
+    const hasMgr = (t, m) => m === "all" || t.sides.some(sd => sd.mgr === m);
+    const mgrsWith = [...new Set(all.flatMap(t => t.sides.map(sd => sd.mgr)))].sort((a, b) => a.localeCompare(b));
+    if (tMgr !== "all" && !mgrsWith.includes(tMgr)) tMgr = "all";
     if (tSeason !== "all" && !seasonsWith.includes(tSeason)) tSeason = "all";
+    // each list's counts follow the other filter (Vin picked: the seasons show Vin's trades in each)
+    const sel = h("select", { id: "trade-season", onchange: e => { tSeason = e.target.value; setHash(tradesHash()); renderTrades(); } },
+      h("option", { value: "all" }, "All seasons (" + all.filter(t => hasMgr(t, tMgr)).length + ")"),
+      seasonsWith.map(id => { const n = all.filter(t => t.season === id && hasMgr(t, tMgr)).length; return h("option", { value: id, disabled: n === 0 }, id + " (" + n + ")"); }));
     sel.value = tSeason;
     headerFilter("Season", sel, true);
-    const list = all.filter(t => tSeason === "all" || t.season === tSeason);
+    const msel = h("select", { id: "trade-mgr", onchange: e => { tMgr = e.target.value; setHash(tradesHash()); renderTrades(); } },
+      h("option", { value: "all" }, "All managers"),
+      mgrsWith.map(m => { const n = all.filter(t => hasMgr(t, m) && (tSeason === "all" || t.season === tSeason)).length; return h("option", { value: m, disabled: n === 0 }, m + " (" + n + ")"); }));
+    msel.value = tMgr;
+    const reset = h("button", { type: "button", class: "export-btn trade-reset", disabled: tSeason === "all" && tMgr === "all",
+      onclick: () => { tSeason = "all"; tMgr = "all"; setHash(tradesHash()); renderTrades(); } }, "Reset");
+    const row = $("hpicker").querySelector(".pick-row");
+    row.classList.add("trade-filters");
+    row.append(h("label", { for: "trade-mgr" }, "Manager"), msel, reset);
+    const list = all.filter(t => (tSeason === "all" || t.season === tSeason) && hasMgr(t, tMgr));
     const leaders = {}; for (const t of all) for (const sd of t.sides) leaders[sd.mgr] = (leaders[sd.mgr] || 0) + 1;
     const top = Object.entries(leaders).sort((a, b) => b[1] - a[1]);
     const intro = panel(h("div", { class: "small" },
@@ -1521,7 +1542,9 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       top.slice(0, 3).map(([m, n], i) => h("span", null, i ? ", " : "", h("span", { class: "mgr" }, m), " " + n)),
       ". Each card shows the deal as it stood the day it was made: the managers' records going in and each player's season so far (fantasy points from NHL games before the trade, with that season's scoring). The tracker above it counts what happened next: the fantasy points each side's players scored for their new team",
       " (Yahoo seasons, through 2025-26: only points scored in a started lineup)."));
-    $("content").replaceChildren(h("div", { class: "trades-list" }, intro, list.map(t => tradeBlock(t, fmt1))),
+    const showing = tSeason === "all" && tMgr === "all" ? null : h("div", { class: "subhead" }, "Showing " + list.length + " trade" + (list.length === 1 ? "" : "s")
+      + (tMgr !== "all" ? " involving " + tMgr : "") + (tSeason !== "all" ? " in " + tSeason : ""));
+    $("content").replaceChildren(h("div", { class: "trades-list" }, intro, showing, list.length ? list.map(t => tradeBlock(t, fmt1)) : h("div", { class: "empty" }, "No trades match these filters.")),
       h("footer", null, "Trades, tracker points and drafts from the league's records (Yahoo through 2025-26, Fantrax since). Stories are written from those records."));
   }
   function tradeBlock(t, fmt1) {
@@ -2782,8 +2805,8 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       if (/^#league$/.test(location.hash || "")) return showLeague(false);
       const iv = (location.hash || "").match(/^#insights(?:-(.+))?$/);
       if (iv) return showInsights(false, iv[1] && decodeURIComponent(iv[1]));
-      const tv = (location.hash || "").match(/^#trades(?:-(.+))?$/);
-      if (tv) return showTrades(false, tv[1] && decodeURIComponent(tv[1]));
+      const tv = (location.hash || "").match(/^#trades(?:-([^~]+))?(?:~(.+))?$/);
+      if (tv) return showTrades(false, tv[1] ? decodeURIComponent(tv[1]) : "all", tv[2] ? decodeURIComponent(tv[2]) : "all");
       const dv = (location.hash || "").match(/^#drafts(?:-(.+))?$/);
       if (dv) return showDrafts(false, dv[1] && decodeURIComponent(dv[1]));
       const v = (location.hash || "").match(/^#(history|seasons|manager|playoffs)(?:-(.+))?$/);
