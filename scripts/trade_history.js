@@ -108,6 +108,8 @@ const addLine = (a, b) => { for (const [k, v] of Object.entries(b)) a[k] = (a[k]
 const champ = (reports.history && reports.history.champions) || {};
 const counts = {}, pairCounts = {}, seasonCounts = {};
 const out = [];
+// earlier trades, for the light "previously" notes: the same managers dealing again, a player traded again
+const done = [];
 for (const t of all) {
   const s = t.s, mgrs = t.sides.map(x => x.mgr);
   for (const m of mgrs) counts[m] = (counts[m] || 0) + 1;
@@ -156,7 +158,8 @@ for (const t of all) {
         statsByWeek: tp && tp.statsByWeek || undefined,
         regStats: yReg || undefined, post: yPost || undefined,
         from: giver.join(' & '), acquired: giver.length === 1 ? acquired(t, p.name, giver[0]) : null,
-        past: pastOwners(p.name, t)
+        past: pastOwners(p.name, t),
+        prevTrades: done.filter(d => d.moves.some(m => norm(m.name) === norm(p.name))).map(d => { const m = d.moves.find(m => norm(m.name) === norm(p.name)); return { season: d.season, week: d.week, from: m.from, to: m.to }; })
       };
     });
     const st = before && before.standings.find(r => r.mgr === x.mgr);
@@ -176,9 +179,12 @@ for (const t of all) {
   const totals = sides.map(x => x.total);
   const scored = tr && s.scoring !== 'categories' && totals.some(v => v);
   const best = scored ? Math.max(...totals) : null;
+  const wkNo = wk ? wk.week : t.week;
+  const prevPair = done.filter(d => d.pk === pk).map(d => ({ season: d.season, week: d.week }));
+  done.push({ season: s.id, week: wkNo, pk, moves: sides.flatMap(sd => sd.gets.map(p => ({ name: p.name, to: sd.mgr, from: p.from }))) });
   out.push({
     id: t.id, season: s.id, label: s.label || s.id, source: s.source === 'sheet' ? 'Yahoo' : 'Fantrax', scoring: s.scoring || 'points',
-    date: t.date, week: wk ? wk.week : t.week, final: !isLive, noInSeason: seasonCounts[s.id], noAllTime: out.length + 1, pairNo: pairCounts[pk],
+    date: t.date, week: wk ? wk.week : t.week, final: !isLive, noInSeason: seasonCounts[s.id], noAllTime: out.length + 1, pairNo: pairCounts[pk], prevPair,
     sides,
     tracker: scored ? {
       through: (s.tradeTracker && s.tradeTracker.through) || null, final: !isLive, week: (s.tradeTracker && s.tradeTracker.asOfWeek) || null,
