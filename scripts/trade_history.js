@@ -122,9 +122,12 @@ for (const t of all) {
     });
     const st = before && before.standings.find(r => r.mgr === x.mgr);
     const fr = fin && fin.standings && fin.standings.find(r => r.mgr === x.mgr);
+    // end of the regular season: the last regular week's standings (only once the season is over)
+    const re = fin && ws.length ? ws[ws.length - 1].standings.find(r => r.mgr === x.mgr) : null;
     return {
       mgr: x.mgr, team: s.teams && s.teams[x.mgr] || null, logo: s.logos && s.logos[x.mgr] || null,
       record: st ? { rank: st.rank, w: st.w, l: st.l, t: st.t || 0 } : null,
+      regEnd: re ? { rank: re.rank, w: re.w, l: re.l, t: re.t || 0 } : null,
       finish: fr ? fr.rank : null, champion: champ[s.id] === x.mgr,
       tradeNo: counts[x.mgr], gets,
       total: tr ? r1(gets.reduce((a, p) => a + (p.pts || 0), 0)) : null,
@@ -136,7 +139,7 @@ for (const t of all) {
   const best = scored ? Math.max(...totals) : null;
   out.push({
     id: t.id, season: s.id, label: s.label || s.id, source: s.source === 'sheet' ? 'Yahoo' : 'Fantrax', scoring: s.scoring || 'points',
-    date: t.date, week: wk ? wk.week : t.week, noInSeason: seasonCounts[s.id], noAllTime: out.length + 1, pairNo: pairCounts[pk],
+    date: t.date, week: wk ? wk.week : t.week, final: !isLive, noInSeason: seasonCounts[s.id], noAllTime: out.length + 1, pairNo: pairCounts[pk],
     sides,
     tracker: scored ? {
       through: (s.tradeTracker && s.tradeTracker.through) || null, final: !isLive, week: (s.tradeTracker && s.tradeTracker.asOfWeek) || null,
