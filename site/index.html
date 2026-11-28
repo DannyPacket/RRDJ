@@ -915,14 +915,19 @@ table.dfirsts td.empty { background: repeating-linear-gradient(135deg, var(--chi
       .map(([label, get, show]) => [label, t => show ? show(get(t), t) : get(t)]);
     const wkPts = p => p.byWeek && w.week !== 100 && p.byWeek[w.week] != null ? p.byWeek[w.week] : null;
     const ttThrough = s.tradeTracker && s.tradeTracker.byWeek ? (w.week === 100 ? s.tradeTracker.through : w.end) : s.tradeTracker && s.tradeTracker.through;
+    const wkOf = iso => { const x = (s.weeks || []).find(y => y.start && y.week !== 100 && y.start <= iso && iso <= y.end); return x ? " (week " + x.week + ")" : ""; };
     const tracker = t => {
       const totals = t.sides.map(sd => sd.gets.reduce((a, p) => a + (ptsOf(p) || 0), 0));
       const best = Math.max(...totals), lead = totals.filter(x => x === best).length === 1 && best > 0 ? totals.indexOf(best) : -1;
       return h("div", { class: "tt" },
-        h("div", { class: "muted small" }, "Traded " + day(t.date) + (t.moved ? " · joined new teams " + day(t.moved) : "") + " · fantasy points since the trade"),
+        // same header as the Trade history tracker: the managers, the day it was made, the day the players were on their new teams
+        h("div", null, h("div", { class: "tt-mgrs" }, [...new Set(t.sides.map(sd => sd.mgr))].join(" ⇄ ")),
+          h("div", { class: "muted small" }, "Traded " + day(t.date) + wkOf(t.date) + " · "
+            + (t.countedFrom && t.countedFrom !== t.date ? "Processed " + day(t.countedFrom) + wkOf(t.countedFrom) : "Processed the same day") + " · fantasy points since then")),
         h("div", { class: "tt-sides" }, t.sides.map((sd, i) => h("div", { class: "tt-side" + (i === lead ? " lead" : "") },
           h("div", { class: "tt-head" }, h("span", null, h("span", { class: "mgr" }, sd.mgr), h("span", { class: "tt-got" }, " got")), h("span", { class: "tt-total num" }, fmt(totals[i]),
             sd.gets.some(p => wkPts(p) != null) ? h("span", { class: "tt-wk" }, signed(fmt(sd.gets.reduce((a, p) => a + (wkPts(p) || 0), 0))) + " this week") : null)),
+          h("hr", { class: "tt-div" }),
           // Per player: a small table with the running total on top and this week's share under it, so the change is explained
           sd.gets.map(p => { const st = statsOf(p), wp = wkPts(p), wst = p.statsByWeek && w.week !== 100 && p.statsByWeek[w.week], wgp = p.gpByWeek && p.gpByWeek[w.week];
             const cols = st ? statCols("W" in st, [st, wst]) : [], hasGP = gpOf(p) != null;
